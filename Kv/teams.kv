@@ -1,0 +1,24 @@
+#:import TeamsLabelGrid Widgets.grid_for_teams
+
+<Teams>:
+    name: 'teams'
+    grid_teams: grid_teams
+    idx: root.grid_teams._idx
+    Image:
+        source: 'Images/Court.jpg'
+        allow_stretch: True
+        keep_ratio: False
+    ScrollView:
+        pos_hint: {'center_x': .5, 'y': -.01}
+        size_hint: .98, 1
+        do_scroll_x: False
+        bar_color: 0, 0, 0, 1
+        bar_pos_y: 'right'
+        bar_margin: -dp(1)
+        bar_width: dp(2)
+        TeamsLabelGrid:
+            id: grid_teams
+            cols: 2
+            size_hint: 1, 1.1
+            spacing: 20
+            padding: 15

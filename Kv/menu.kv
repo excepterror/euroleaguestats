@@ -1,0 +1,81 @@
+#:import RoundedRectLabelBtn Widgets.widgets
+
+<Menu>:
+    name: 'menu'
+    current: current
+    standings: standings
+    about: about
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: 1, .4, 0, 1
+        Rectangle:
+            size: self.width, self.height * .3
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            size: self.width, self.height
+            pos: 0, self.height * .3
+    RoundedRectLabelBtn:
+        id: current
+        text: 'Current Season'
+        font_name: 'OpenSans'
+        font_size: '21sp'
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .85, .1
+        color: 0, 0, 0, 1
+        pos_hint: {'center_x': .5, 'center_y': .8}
+        canvas.before:
+            Color:
+                rgba: 1 ,1 ,1, 1
+            RoundedRectangle:
+                segments: 70
+                radius: 7, 7, 7, 7
+                pos: self.pos
+                size: self.size
+        on_press: root.animate_on_push(self)
+    RoundedRectLabelBtn:
+        id: standings
+        text: 'Standings'
+        font_name: 'OpenSans'
+        font_size: '21sp'
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .85, .1
+        color: 0, 0, 0, 1
+        pos_hint: {'center_x': .5, 'center_y': .55}
+        canvas.before:
+            Color:
+                rgba: 1 ,1 ,1, 1
+            RoundedRectangle:
+                segments: 70
+                radius: 7, 7, 7, 7
+                pos: self.pos
+                size: self.size
+        on_press: root.animate_on_push(self)
+    RoundedRectLabelBtn:
+        id: about
+        text: 'About'
+        font_name: 'OpenSans'
+        font_size: '21sp'
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .85, .1
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .15}
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            RoundedRectangle:
+                segments: 70
+                radius: 7, 7, 7, 7
+                pos: self.pos
+                size: self.size
+        on_press: root.animate_on_push(self)

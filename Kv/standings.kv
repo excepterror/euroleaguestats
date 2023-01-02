@@ -1,0 +1,16 @@
+#:import RVSt Widgets.rv_standings
+
+<Standings>:
+    name: 'standings'
+    recycle_view: recycle_view
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, .9
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        orientation: 'vertical'
+        RVSt:
+            id: recycle_view
+            on_team_to_visit: pass

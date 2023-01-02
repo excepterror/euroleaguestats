@@ -1,0 +1,28 @@
+#:import SlidingLabelGrid Widgets.grid_for_roster
+
+<Roster>:
+    name: 'roster'
+    grid_roster: grid_roster
+    player_name: root.grid_roster.name
+    repeated_selection_flag: root.grid_roster.repeated_selection_flag
+    scroll_roster: scroll_roster
+    ScrollView:
+        id: scroll_roster
+        pos_hint: {'center_x': .5, 'y': .03}
+        size_hint: .98, .95
+        do_scroll_x: False
+        bar_pos_y: 'right'
+        bar_color: 1, 1, 1, 1
+        bar_margin: -dp(3)
+        bar_width: dp(2)
+        SlidingLabelGrid:
+            id: grid_roster
+            cols: 1
+            row_force_default: True
+            row_default_height: dp(60)
+            size_hint: 1, None
+            height: self.minimum_height
+            spacing: 8
+            padding: 5
+            on_stats_option: root.call_stats()
+            on_stats_by_game_option: root.call_stats_by_game()

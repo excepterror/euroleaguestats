@@ -1,0 +1,47 @@
+#:import RVMod Widgets.rv_stats_by_game
+
+<StatsByGame>:
+    name: 'stats_by_game'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+    RoundedRectLabelBtn:
+        text: 'Menu'
+        font_name: 'OpenSans'
+        font_size: '21sp'
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .43, .097
+        color: 1, 1, 1, 1
+        pos_hint: {'x': .06, 'center_y': .065}
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            RoundedRectangle:
+                segments: 70
+                radius: 60, 0, 0, 60
+                pos: self.pos
+                size: self.size
+        on_press: root.call_menu_screen()
+    RoundedRectLabelBtn:
+        text: 'All done'
+        font_name: 'OpenSans'
+        font_size: '21sp'
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .43, .097
+        color: 1, 1, 1, 1
+        pos_hint: {'x': .51, 'center_y': .065}
+        canvas.before:
+            Color:
+                rgba: 1, .4, 0, 1
+            RoundedRectangle:
+                segments: 70
+                radius: 0, 60, 60, 0
+                pos: self.pos
+                size: self.size
+        on_press: root.parent.exit_app()

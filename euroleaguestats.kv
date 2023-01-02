@@ -1,0 +1,51 @@
+#:kivy 1.0
+
+#:include Kv/home.kv
+#:include Kv/changelog.kv
+#:include Kv/menu.kv
+#:include Kv/standings.kv
+#:include Kv/teams.kv
+#:include Kv/roster.kv
+#:include Kv/stats.kv
+#:include Kv/stats_by_game.kv
+
+#:import clock kivy.clock.Clock
+#:import orientation plyer.orientation
+
+<ELSScreenManager>:
+    home_screen: home_screen
+    standings_screen: standings_screen
+    teams_screen: teams_screen
+    roster_screen: roster_screen
+    stats_screen: stats_screen
+
+    Home:
+        id: home_screen
+        on_rosters_reg: root.teams_screen.grid_teams.rosters = self.rosters_reg
+        on_standings: root.standings_screen.standings = self.standings
+    Menu:
+        on_enter: root.check_in_names(self.name)
+    Changelog:
+        on_enter: root.check_in_names(self.name)
+    Standings:
+        id: standings_screen
+        on_pre_enter:orientation.set_sensor(mode='landscape')
+        on_enter: root.check_in_names(self.name)
+        on_pre_leave: orientation.set_sensor(mode='portrait')
+    Teams:
+        id: teams_screen
+        on_enter: root.check_in_names(self.name)
+        on_idx: root.roster_screen.grid_roster.roster = self.grid_teams.selected_roster; self.call_roster_screen()
+    Roster:
+        id: roster_screen
+        on_enter: if root.screens_visited[-2] != 'teams': self.message.open(); clock.schedule_once(self.fetch_trees, 0.1); root.check_in_names(self.name)
+        on_trees: self.message.dismiss()
+        on_player_name: self.assert_tree(); root.stats_screen.player_name = self.player_name
+        on_leave: if len(root.screens_visited) == 2: self.grid_roster.clear_widgets()
+    Stats:
+        id: stats_screen
+        on_pre_enter: self.extract_players_data()
+        on_enter: root.check_in_names(self.name)
+    StatsByGame:
+        on_pre_enter: self.extract_player_games()
+        on_enter: root.check_in_names(self.name)
