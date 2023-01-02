@@ -22,7 +22,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideT
 from Py.connectivity import connectivity_status
 from Py.standings import fetch_standings
 from Py.stats import update_dict, access_per_game_stats
-# from Py.webview import WebViewInModal
+from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
