@@ -27,7 +27,7 @@ from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 from Widgets.rv_stats_by_game import RVMod
 
-__version__ = '23.02.0'
+__version__ = '23.01.1'
 
 
 class StatsByGame(Screen):
