@@ -8,7 +8,6 @@ from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-from PIL import Image
 
 from kivy.utils import platform
 from kivy.app import App
@@ -28,7 +27,7 @@ from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 from Widgets.rv_stats_by_game import RVMod
 
-__version__ = '23.01.0'
+__version__ = '23.02.0'
 
 
 class StatsByGame(Screen):
@@ -109,13 +108,10 @@ class Stats(Screen):
                     session.mount('http://', adapter)
                     session.mount('https://', adapter)
                     response = session.get(self.player_url)
-                    player_photo = self.player_name + ".webp"
+                    player_photo = self.player_name + '.png'
                     with open(player_photo, 'wb') as f:
                         f.write(response.content)
-                    im = Image.open(player_photo).convert("RGBA")
-                    player_photo = self.player_name + ".png"
-                    im.save(player_photo, "png")
-                    self.player_photo = self.player_name + ".png"
+                    self.player_photo = self.player_name + '.png'
                 except requests.exceptions.ConnectTimeout as conn_timeout:
                     logging.warning('Connection timed-out: {}'.format(conn_timeout))
                 except Exception as e:
@@ -418,9 +414,8 @@ class EuroLeagueStatsApp(App):
         return ELSScreenManager()
 
     def on_stop(self):
-        exclude = ('.png', '.webp')
         for file_name in os.listdir(os.getcwd()):
-            if any(file_name.endswith(e) for e in exclude) and file_name not in ('Court.jpg', 'NoImage.jpg'):
+            if file_name.endswith('.png') and file_name not in ('Court.jpg', 'NoImage.jpg'):
                 try:
                     os.remove(file_name)
                 except OSError as os_error:
