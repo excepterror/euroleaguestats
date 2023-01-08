@@ -13,11 +13,12 @@ template_2 = {'Minutes:': [3], 'Points:': [4], '2-Point Field Goals:': [5], '3-P
               'Point Index Rating:': [18]}
 
 teams_codes = {'BER': 'ALBA Berlin', 'EFS': 'Anadolu Efes Istanbul', 'ASM': 'AS Monaco',
-               'MIL': 'EA7 Emporio Armani Milan', 'BKN': 'Cazoo Baskonia Vitoria-Gasteiz',
+               'EA7': 'EA7 Emporio Armani Milan', 'BKN': 'Cazoo Baskonia Vitoria-Gasteiz',
                'CZV': 'Crvena Zvezda mts Belgrade', 'PAR': 'Partizan Mozzart Bet Belgrade', 'BAR': 'FC Barcelona',
                'BAY': 'FC Bayern Munich', 'FBB': 'Fenerbahce Beko Istanbul', 'ASV': 'LDLC ASVEL Villeurbanne',
                'MTA': 'Maccabi Playtika Tel Aviv', 'OLY': 'Olympiacos Piraeus', 'PAO': 'Panathinaikos Athens',
-               'RMB': 'Real Madrid', 'VBC': 'Valencia Basket', 'ZAL': 'Zalgiris Kaunas', 'VIR': 'Virtus Segafredo Bologna'}
+               'RMB': 'Real Madrid', 'VBC': 'Valencia Basket', 'ZAL': 'Zalgiris Kaunas',
+               'VIR': 'Virtus Segafredo Bologna'}
 
 
 def update_dict(stats, j=0, dict_with_stats=None):
@@ -44,9 +45,13 @@ def access_per_game_stats(tree, name):
         '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
         '//div[@class="stats-table_cell__RKRoT"][1]/text()')
 
-    opponents = tree.xpath('//div[@class="stats-table_table__2BoHU"]//div[@class="stats-table_colGroup__3C7rz"]'
-                           '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
-                           '//div[@class="stats-table_cell__RKRoT"][2]/text()')
+    opponents_code = tree.xpath('//div[@class="stats-table_table__2BoHU"]//div[@class="stats-table_colGroup__3C7rz"]'
+                                '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
+                                '//div[@class="stats-table_cell__RKRoT"][2]/text()')
+
+    at_vs = tree.xpath('//div[@class="stats-table_table__2BoHU"]//div[@class="stats-table_colGroup__3C7rz"]'
+                       '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
+                       '//span[@class="stats-table_vs__5fppI"]/text()')
 
     stats_by_game_min_ft = tree.xpath(
         '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
@@ -85,13 +90,14 @@ def access_per_game_stats(tree, name):
         '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
 
     opponents_by_round_dict = dict()
-    for item in opponents:
+    for item in opponents_code:
         if item == ' ':
-            opponents.remove(item)
+            opponents_code.remove(item)
     for k, v in teams_codes.items():
-        for i, item in enumerate(opponents):
+        for i, item in enumerate(opponents_code):
             if item == k:
-                opponents[i] = v
+                opponents_code[i] = v
+    opponents = [text_1.lower() + ' ' + text_2 for text_1, text_2 in zip(at_vs, opponents_code)]
     for i, k in enumerate(rounds_played_by_player):
         opponents_by_round_dict[k] = opponents[i]
     stats_by_game = [stats_by_game_min_ft, stats_by_game_odt, stats_by_game_as_to, stats_by_game_fv_ag,
