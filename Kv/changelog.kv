@@ -1,4 +1,5 @@
 #:import LabelBtn Widgets.widgets
+#:import BoxShadow kivy.graphics.boxshadow.BoxShadow
 
 <Changelog>:
     name: 'changelog'
@@ -19,10 +20,19 @@
         pos_hint: {'center_x': .5, 'center_y': .1}
         canvas.before:
             Color:
+                rgba: 0, 0, 0, 1
+            BoxShadow:
+                pos: self.pos
+                size: self.size
+                offset: 0, 0
+                border_radius: 60, 60, 60, 60
+                blur_radius: 60
+                spread_radius: -25
+            Color:
                 rgba: 1, .4, 0, 1
             RoundedRectangle:
                 segments: 70
-                radius: 60, 0
+                radius: 60, 60, 60, 60
                 pos: self.pos
                 size: self.size
         on_press: root.call_menu_screen()
