@@ -102,6 +102,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/omercan-ilyasoglu/008282/",
             "https://media-cdn.incrowdsports.com/0fd33ecf-bd57-4284-87f8-4716903bf07e.png?width=320&resizeType=fill&format=png"
         ],
+        "Shane Larkin": [
+            "https://www.euroleaguebasketball.net/euroleague/players/shane-larkin/007200/",
+            "https://media-cdn.incrowdsports.com/9c92ff86-bcbe-430a-a647-d193396fe5e9.png?width=320&resizeType=fill&format=png"
+        ],
         "Amath M Baye": [
             "https://www.euroleaguebasketball.net/euroleague/players/amath-m-baye/007993/",
             "https://media-cdn.incrowdsports.com/b1c5a105-61d0-4de3-860d-55368f5f5c6a.png?width=320&resizeType=fill&format=png"
@@ -114,13 +118,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/tibor-pleiss/LHK/",
             "https://media-cdn.incrowdsports.com/64cfe88a-2be4-4626-a1ad-d370c78aeee3.png?width=320&resizeType=fill&format=png"
         ],
-        "Achille Polonara": [
-            "https://www.euroleaguebasketball.net/euroleague/players/achille-polonara/002084/",
-            "https://media-cdn.incrowdsports.com/c6c5eb98-4507-478c-be9f-471ea17b24f1.png?width=320&resizeType=fill&format=png"
-        ],
-        "Isaiah Taylor": [
-            "https://www.euroleaguebasketball.net/euroleague/players/isaiah-taylor/012068/",
-            "https://media-cdn.incrowdsports.com/ad6e61c4-29e9-411d-9668-08a7ef23d19e.png?width=320&resizeType=fill&format=png"
+        "Chris Singleton": [
+            "https://www.euroleaguebasketball.net/euroleague/players/chris-singleton/006614/",
+            "https://media-cdn.incrowdsports.com/02dfdeac-8cf8-4698-b707-419a7a4c66b4.png?width=320&resizeType=fill&format=png"
         ],
         "Bugrahan Tuncer": [
             "https://www.euroleaguebasketball.net/euroleague/players/bugrahan-tuncer/002925/",
@@ -301,7 +301,7 @@
             "https://media-cdn.incrowdsports.com/366a1d24-83bc-45dc-9936-54b6bac4166c.png?width=320&resizeType=fill&format=png"
         ]
     },
-    "Crvena Zvezda mts Belgrade": {
+    "Crvena Zvezda Meridianbet Belgrade": {
         "Jaylen Adams": [
             "https://www.euroleaguebasketball.net/euroleague/players/jaylen-adams/011963/",
             "https://media-cdn.incrowdsports.com/33b3679b-1a5a-4808-a813-ee9b6e0984b1.png?width=320&resizeType=fill&format=png"
@@ -317,6 +317,10 @@
         "John Holland": [
             "https://www.euroleaguebasketball.net/euroleague/players/john-holland/004267/",
             "https://media-cdn.incrowdsports.com/53fae7f3-ef96-4635-8037-c705876c7215.png?width=320&resizeType=fill&format=png"
+        ],
+        "Dalibor Ilic": [
+            "https://www.euroleaguebasketball.net/euroleague/players/dalibor-ilic/011964/",
+            "https://media-cdn.incrowdsports.com/bea7dce1-3e5c-45a1-850d-d977f16ab99f.png?width=320&resizeType=fill&format=png"
         ],
         "Nikola Ivanovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/nikola-ivanovic/003332/",
@@ -561,6 +565,10 @@
         "Ismet Akpinar": [
             "https://www.euroleaguebasketball.net/euroleague/players/ismet-akpinar/004056/",
             "https://media-cdn.incrowdsports.com/fd1cf34d-e28b-43ab-806a-16cd9b99d801.png?width=320&resizeType=fill&format=png"
+        ],
+        "Kostas Antetokounmpo": [
+            "https://www.euroleaguebasketball.net/euroleague/players/kostas-antetokounmpo/011221/",
+            "https://media-cdn.incrowdsports.com/07354706-0feb-47d0-8492-305c75f9917b.png?width=320&resizeType=fill&format=png"
         ],
         "Tarik Biberovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/tarik-biberovic/006961/",
@@ -922,6 +930,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/victor-claver/000556/",
             "https://media-cdn.incrowdsports.com/f5f9cfc2-641d-4815-8fd7-d0de7d4e45a9.png?width=320&resizeType=fill&format=png"
         ],
+        "Sergio De Larrea": [
+            "https://www.euroleaguebasketball.net/euroleague/players/sergio-de-larrea/010750/",
+            "https://media-cdn.incrowdsports.com/d77d0127-6244-4f0c-963d-9125f89c6969.png?width=320&resizeType=fill&format=png"
+        ],
         "Bojan Dubljevic": [
             "https://www.euroleaguebasketball.net/euroleague/players/bojan-dubljevic/002742/",
             "https://media-cdn.incrowdsports.com/f494c610-248f-4b53-9fe9-d9a81940e23a.png?width=320&resizeType=fill&format=png"
@@ -945,6 +957,10 @@
         "Xabi Lopez Arostegui": [
             "https://www.euroleaguebasketball.net/euroleague/players/xabi-lopez-arostegui/005356/",
             "https://media-cdn.incrowdsports.com/9ee4acba-8f76-40d2-9b7e-2c1f47b124b9.png?width=320&resizeType=fill&format=png"
+        ],
+        "Lucas Mar\u00ed": [
+            "https://www.euroleaguebasketball.net/euroleague/players/lucas-mar\u00ed/011974/",
+            "https://media-cdn.incrowdsports.com/96ab480f-9d62-4037-a0c7-280fa95ed7e8.png?width=320&resizeType=fill&format=png"
         ],
         "Jaime Pradilla": [
             "https://www.euroleaguebasketball.net/euroleague/players/jaime-pradilla/010393/",
@@ -1032,9 +1048,17 @@
             "https://www.euroleaguebasketball.net/euroleague/players/karolis-lukosiunas/006158/",
             "https://media-cdn.incrowdsports.com/737f1b85-9425-4f4a-a1c8-cd5b228d7afb.png?width=320&resizeType=fill&format=png"
         ],
+        "Achille Polonara": [
+            "https://www.euroleaguebasketball.net/euroleague/players/achille-polonara/002084/",
+            "https://media-cdn.incrowdsports.com/7a4667c7-c050-47ef-bb3c-f83ca8a88077.png?width=320&resizeType=fill&format=png"
+        ],
         "Rolands Smits": [
             "https://www.euroleaguebasketball.net/euroleague/players/rolands-smits/007109/",
             "https://media-cdn.incrowdsports.com/94dce191-acc7-4766-8c54-c87b1bc15e8d.png?width=320&resizeType=fill&format=png"
+        ],
+        "Isaiah Taylor": [
+            "https://www.euroleaguebasketball.net/euroleague/players/isaiah-taylor/012068/",
+            "https://media-cdn.incrowdsports.com/0af7fd50-4e6c-4db5-9a96-fa5ab1bf13dc.png?width=320&resizeType=fill&format=png"
         ],
         "Edgaras Ulanovas": [
             "https://www.euroleaguebasketball.net/euroleague/players/edgaras-ulanovas/002329/",
