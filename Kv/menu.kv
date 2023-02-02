@@ -5,37 +5,27 @@
     current: current
     standings: standings
     about: about
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            size: self.size
-        Color:
-            rgba: 1, .4, 0, 1
-        Rectangle:
-            size: self.width, self.height * .3
-        Color:
-            rgba: 0, 0, 0, 1
-        Rectangle:
-            size: self.width, self.height
-            pos: 0, self.height * .3
+    Image:
+        source: 'Images/Cross-Screen.jpg'
+        keep_ratio: False
+        allow_stretch: True
     RoundedRectLabelBtn:
         id: current
         text: 'Current Season'
         font_name: 'OpenSans'
-        font_size: '21sp'
+        font_size: dp(22)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
         size_hint: .85, .1
         color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .8}
+        pos_hint: {'center_x': .5, 'center_y': .65}
         canvas.before:
             Color:
-                rgba: 1 ,1 ,1, 1
+                rgba: 1 ,1 ,1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 7, 7, 7, 7
+                radius: dp(7), dp(7), dp(7), dp(7)
                 pos: self.pos
                 size: self.size
         on_press: root.animate_on_push(self)
@@ -43,19 +33,19 @@
         id: standings
         text: 'Standings'
         font_name: 'OpenSans'
-        font_size: '21sp'
+        font_size: dp(22)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
         size_hint: .85, .1
         color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .55}
+        pos_hint: {'center_x': .5, 'center_y': .45}
         canvas.before:
             Color:
-                rgba: 1 ,1 ,1, 1
+                rgba: 1 ,1 ,1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 7, 7, 7, 7
+                radius: dp(7), dp(7), dp(7), dp(7)
                 pos: self.pos
                 size: self.size
         on_press: root.animate_on_push(self)
@@ -63,19 +53,19 @@
         id: about
         text: 'About'
         font_name: 'OpenSans'
-        font_size: '21sp'
+        font_size: dp(22)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
         size_hint: .85, .1
-        color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .15}
+        color: 0, 0, 0, 1
+        pos_hint: {'center_x': .5, 'center_y': .25}
         canvas.before:
             Color:
-                rgba: 0, 0, 0, 1
+                rgba: 1, 1, 1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 7, 7, 7, 7
+                radius: dp(7), dp(7), dp(7), dp(7)
                 pos: self.pos
                 size: self.size
         on_press: root.animate_on_push(self)
