@@ -10,13 +10,13 @@ Builder.load_string("""
     title_font: 'OpenSans'
     title_color: 1, .4, 0, 1
     separator_color: 1, .4, 0, 0
-    size_hint: .6, .3   
+    size_hint: .4, .2
     pos_hint: {'center_x': .5, 'center_y': .5}
     overlay_color: 0, 0, 0, .85
-    auto_dismiss: False    
+    auto_dismiss: False
     Label:
         id: notification
-        text_size: self.size          
+        text_size: self.size
         halign: 'center'
         valign: 'middle'
         font_size: '18sp'
