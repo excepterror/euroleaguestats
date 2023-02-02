@@ -10,7 +10,6 @@
 #:include Kv/stats_by_game.kv
 
 #:import clock kivy.clock.Clock
-#:import orientation plyer.orientation
 
 <ELSScreenManager>:
     home_screen: home_screen
@@ -29,9 +28,7 @@
         on_enter: root.check_in_names(self.name)
     Standings:
         id: standings_screen
-        on_pre_enter:orientation.set_sensor(mode='landscape')
         on_enter: root.check_in_names(self.name)
-        on_pre_leave: orientation.set_sensor(mode='portrait')
     Teams:
         id: teams_screen
         on_enter: root.check_in_names(self.name)
