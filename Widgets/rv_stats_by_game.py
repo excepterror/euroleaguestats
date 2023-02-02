@@ -1,6 +1,5 @@
 """RecycleView Widget. Called by :cls:. Used for the presentation of per game stats."""
 
-from kivy.lang import Builder
 from kivy.properties import BooleanProperty, StringProperty, ListProperty
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.label import Label
@@ -12,47 +11,6 @@ from kivy.uix.popup import Popup
 
 from Py.stats import update_dict
 from Widgets.rv_stats import RV
-
-Builder.load_string('''
-<SelectableLabel>:
-    # Draw a background to indicate selection.
-    text_size: self.width, None
-    font_size: dp(16)
-    font_name: 'OpenSans'         
-    halign: 'center'
-    valign: 'middle'
-    color: 1, .4, 0, 1
-    canvas.before:
-        Color:
-            rgba: (0, 0, 0, .5) if self.selected else (0, 0, 0, 1)
-        RoundedRectangle:
-            segments: 70
-            radius: 7,0
-            pos: self.pos
-            size: self.size
-            
-<RVMod>:
-    viewclass: 'SelectableLabel'
-    size_hint: .95, .85
-    pos_hint: {'center_x': .5, 'y': .13}
-    bar_pos_y: 'right'
-    bar_width: dp(2)
-    bar_margin: -dp(1)
-    bar_color: 1, .4, 0, 1
-    
-    SelectableRecycleBoxLayout:
-        default_size: None, dp(56)
-        default_size_hint: 1, None
-        size_hint_y: None
-        height: self.minimum_height
-        size_hint_x: None
-        width: root.width
-        orientation: 'vertical'
-        spacing: 5
-        padding: 5
-        multiselect: False
-        touch_multiselect: False
-''')
 
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout):
