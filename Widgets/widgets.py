@@ -10,5 +10,5 @@ class NullLabel(Label):
     pass
 
 
-class LabelBtn(ButtonBehavior, Label):
+class StandingsLabel(Label):
     pass
