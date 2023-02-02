@@ -8,7 +8,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 def fetch_standings():
     url = 'https://www.euroleaguebasketball.net/euroleague/standings/'
-    standings = {'[color=FF6600]' + 'Standings' + '[/color]': ['Games Played', 'W', 'L', 'Win%', 'PTS+', 'PTS-', '+/-']}
+    standings = dict()
     try:
         response = requests.get(url)
     except requests.exceptions.HTTPError as http_error:
@@ -18,8 +18,8 @@ def fetch_standings():
     except Exception as e:
         logging.warning(e)
     else:
-        qualified = '[color=FF6600]' + ' (Q)' + '[/color]'
         listing = list()
+        rankings = list()
         tree = etree.HTML(response.content)
 
         teams_and_ranking = tree.xpath(
@@ -48,10 +48,13 @@ def fetch_standings():
                 m = k + 1
                 try:
                     if qualified_index[i] == '*':
-                        listing.append(teams_and_ranking[k] + '. ' + teams_and_ranking[m] + qualified)
+                        logging.warning('Team {} qualified'.format(teams_and_ranking[m]))
+                        listing.append(teams_and_ranking[m])
+                        rankings.append(('[color=FF6600]' + teams_and_ranking[k] + '[/color]'))
                 except IndexError as idx_err:
                     logging.warning('Team not qualified: {}'.format(idx_err))
-                    listing.append(teams_and_ranking[k] + '. ' + teams_and_ranking[m])
+                    listing.append(teams_and_ranking[m])
+                    rankings.append((teams_and_ranking[k]))
                 i += 1
         except IndexError as idx_err:
             logging.warning('Index error 1 occurred: {}'.format(idx_err))
@@ -62,9 +65,9 @@ def fetch_standings():
             num_of_total_stat_cats = 11
             while i <= num_of_teams * num_of_total_stat_cats - 4:
                 if listing[j] in standings:
-                    standings[listing[j]] = listing[j]
+                    standings['Images/' + listing[j] + '.png'] = listing[j]
                 else:
-                    standings[listing[j]] = raw_data[i:i + 7]  # we only want the first seven statistical categories for each team
+                    standings['Images/' + listing[j] + '.png'] = rankings[j], raw_data[i:i + 7]  # we only want the first seven statistical categories for each team
                 i += num_of_total_stat_cats
                 j += 1
         except IndexError as idx_err:
