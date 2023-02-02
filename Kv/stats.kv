@@ -15,9 +15,9 @@
     RoundedRectLabelBtn:
         text: root.player_name
         font_name: 'OpenSans'
-        size_hint: .537, .086
+        size_hint: .54, .086
         pos_hint: {'center_x': .5, 'center_y': .91}
-        font_size: '22dp'
+        font_size: dp(24)
         color: 1, 1, 1, 1
         text_size: self.size
         halign: 'center'
@@ -32,8 +32,8 @@
                 size: self.size
     Image:
         source: root.player_photo
-        size_hint: None, .35
-        width: '160dp'
+        size_hint: None, .3
+        width: dp(160)
         allow_stretch: True
         keep_ratio: False
         pos_hint: {'center_x': .5, 'center_y': .71}
@@ -41,7 +41,7 @@
         text: root.text_1 + '[color=FF6600]' + '  |  ' + '[/color]' + root.text_2
         font_name: 'OpenSans'
         pos_hint: {'center_x': .5, 'center_y': .46}
-        font_size: '17sp'
+        font_size: dp(19)
         color: 1, 1, 1, 1
         size_hint: .9, None
         text_size: self.width, None
@@ -52,38 +52,67 @@
     RoundedRectLabelBtn:
         text: 'Average Stats'
         font_name: 'OpenSans'
-        font_size: '22sp'
+        font_size: dp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .7, .13
+        size_hint: .7, None
+        height: dp(80)
         pos_hint: {'center_x': .5, 'center_y': .3}
         color: 0, 0, 0, 1
+        ripple_color: 0, 0, 0, 1
+        ripple_scale: 2
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .9
+                rgba: 1, 1, 1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 80, 0
+                radius: 40, 40, 40, 40
                 pos: self.pos
                 size: self.size
         on_press: root.select_stats(self)
     RoundedRectLabelBtn:
         text: 'Total Stats'
         font_name: 'OpenSans'
-        font_size: '22sp'
+        font_size: dp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .7, .13
+        size_hint: .7, None
+        height: dp(80)
         pos_hint: {'center_x': .5, 'center_y': .12}
         color: 0, 0, 0, 1
+        ripple_color: 0, 0, 0, 1
+        ripple_scale: 2
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .9
+                rgba: 1, 1, 1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 80, 0
+                radius: dp(40), dp(40), dp(40), dp(40)
                 pos: self.pos
                 size: self.size
         on_press: root.select_stats(self)
+
+<RV>:
+    viewclass: 'StatisticsLabel'
+    RecycleBoxLayout:
+        default_size: None, dp(46)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        size_hint_x: None
+        width: root.width
+        orientation: 'vertical'
+        bar_pos_y: 'right'
+        bar_color: .2, .6, .8, 1
+        bar_margin: -dp(6)
+        bar_width: dp(2)
+
+<StatisticsLabel@Label>:
+    text_size: self.width, None
+    font_name: 'OpenSans'
+    font_size: dp(16)
+    halign: 'center'
+    valign: 'middle'
+    markup: True
