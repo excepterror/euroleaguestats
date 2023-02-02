@@ -14,7 +14,7 @@ template_2 = {'Minutes:': [3], 'Points:': [4], '2-Point Field Goals:': [5], '3-P
 
 teams_codes = {'BER': 'ALBA Berlin', 'EFS': 'Anadolu Efes Istanbul', 'ASM': 'AS Monaco',
                'EA7': 'EA7 Emporio Armani Milan', 'BKN': 'Cazoo Baskonia Vitoria-Gasteiz',
-               'CZV': 'Crvena Zvezda mts Belgrade', 'PAR': 'Partizan Mozzart Bet Belgrade', 'BAR': 'FC Barcelona',
+               'CZV': 'Crvena Zvezda Meridianbet Belgrade', 'PAR': 'Partizan Mozzart Bet Belgrade', 'BAR': 'FC Barcelona',
                'BAY': 'FC Bayern Munich', 'FBB': 'Fenerbahce Beko Istanbul', 'ASV': 'LDLC ASVEL Villeurbanne',
                'MTA': 'Maccabi Playtika Tel Aviv', 'OLY': 'Olympiacos Piraeus', 'PAO': 'Panathinaikos Athens',
                'RMB': 'Real Madrid', 'VBC': 'Valencia Basket', 'ZAL': 'Zalgiris Kaunas',
