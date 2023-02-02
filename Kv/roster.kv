@@ -6,13 +6,18 @@
     player_name: root.grid_roster.name
     repeated_selection_flag: root.grid_roster.repeated_selection_flag
     scroll_roster: scroll_roster
+    Image:
+        source: 'Images/Rosters.jpg'
+        keep_ratio: False
+        allow_stretch: True
     ScrollView:
         id: scroll_roster
-        pos_hint: {'center_x': .5, 'y': .03}
-        size_hint: .98, .95
+        pos_hint: {'center_x': .5, 'center_y': .35}
+        size_hint: .98, .68
         do_scroll_x: False
         bar_pos_y: 'right'
-        bar_color: 1, 1, 1, 1
+        bar_color: 1, 1, 1, .8
+        bar_inactive_color: 1, 1, 1, 0
         bar_margin: -dp(3)
         bar_width: dp(2)
         SlidingLabelGrid:
@@ -26,3 +31,47 @@
             padding: 5
             on_stats_option: root.call_stats()
             on_stats_by_game_option: root.call_stats_by_game()
+
+<SlidingLabel>:
+    pos: self.pos
+    scatter_: scatter_
+    label: label
+    canvas_alpha: 0
+    canvas.before:
+        Color:
+            rgba: .2, .4, .6, self.canvas_alpha
+        RoundedRectangle:
+            size: self.width / 2, dp(60)
+            segments: 70
+            radius: 7, 0, 0, 7
+        Color:
+            rgba: .8, .2, .2, self.canvas_alpha
+        RoundedRectangle:
+            size: self.width / 2, dp(60)
+            pos: self.width / 2, 0
+            segments: 70
+            radius: 0, 7, 7, 0
+    Scatter:
+        id: scatter_
+        do_translation_y: False
+        do_scale: False
+        do_rotation: False
+        Label:
+            id: label
+            color_canvas: 1, 1, 1, .8
+            text: root.name
+            font_name: 'OpenSans'
+            font_size: dp(20)
+            color: 0, 0, 0, 1
+            size_hint: None, None
+            size: self.parent.width, dp(60)
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'middle'
+            canvas.before:
+                Color:
+                    rgba: self.color_canvas
+                RoundedRectangle:
+                    size: self.size
+                    segments: 70
+                    radius: 7, 7, 7, 7
