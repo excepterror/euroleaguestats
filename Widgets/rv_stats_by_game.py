@@ -8,6 +8,7 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.popup import Popup
+from kivy.uix.behaviors import TouchRippleBehavior
 
 from Py.stats import update_dict
 from Widgets.rv_stats import RV
@@ -19,7 +20,7 @@ class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior, Recycle
     pass
 
 
-class SelectableLabel(RecycleDataViewBehavior, Label):
+class SelectableLabel(RecycleDataViewBehavior, TouchRippleBehavior, Label):
     """Adds selection support to the Label."""
 
     index = None
@@ -42,6 +43,19 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
 
         if self.collide_point(*touch.pos) and self.selectable:
             return self.parent.select_with_touch(self.index, touch)
+
+        if self.collide_point(*touch.pos):
+            touch.grab(self)
+            self.ripple_show(touch)
+            return True
+        return False
+
+    def on_touch_up(self, touch):
+        if touch.grab_current is self:
+            touch.ungrab(self)
+            self.ripple_fade()
+            return True
+        return False
 
     def apply_selection(self, rv, index, is_selected):
 
@@ -83,10 +97,6 @@ class RVMod(RecycleView):
 
     perf_data = ListProperty([])
     player_name = StringProperty()
-
-    def __init__(self, perf_data):
-        super().__init__()
-        self.perf_data = perf_data
 
     def on_perf_data(self, *args):
         data_rs = [{'text': 'Round ' + num + ':' + ' ' + opp} for num, opp in self.perf_data[0].items()]
