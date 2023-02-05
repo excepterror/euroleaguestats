@@ -1,42 +1,28 @@
 <Stats>:
     name: 'stats'
-    NullLabel:
-        text: ' '
-        size_hint: .54, .09
-        pos_hint: {'center_x': .5, 'center_y': .91}
-        canvas.before:
-            Color:
-                rgba: 1, .2, 0, .9
-            RoundedRectangle:
-                segments: 70
-                radius: 60, 0
-                pos: self.pos
-                size: self.size
-    RoundedRectLabelBtn:
-        text: root.player_name
-        font_name: 'OpenSans'
-        size_hint: .54, .086
-        pos_hint: {'center_x': .5, 'center_y': .91}
-        font_size: dp(24)
-        color: 1, 1, 1, 1
-        text_size: self.size
+    Image:
+        source: 'Images/Cross-Screen.jpg'
+        keep_ratio: False
+        allow_stretch: True
+    Label:
+        text: '[i]' + root.player_name + '[/i]'
+        font_name: 'MyriadPro'
+        font_size: dp(40)
+        size_hint_y: None
+        text_size: self.width, None
+        height: self.texture_size[1]
         halign: 'center'
         valign: 'middle'
-        canvas.before:
-            Color:
-                rgba: 0, 0, 0, 1
-            RoundedRectangle:
-                segments: 70
-                radius: 60, 0
-                pos: self.pos
-                size: self.size
+        pos_hint: {'center_x': .7, 'center_y': .7}
+        markup: True
     Image:
         source: root.player_photo
-        size_hint: None, .3
+        size_hint: None, None
         width: dp(160)
+        height: dp(200)
         allow_stretch: True
         keep_ratio: False
-        pos_hint: {'center_x': .5, 'center_y': .71}
+        pos_hint: {'center_x': .25, 'center_y': .7}
     Label:
         text: root.text_1 + '[color=FF6600]' + '  |  ' + '[/color]' + root.text_2
         font_name: 'OpenSans'
