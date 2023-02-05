@@ -25,15 +25,15 @@ from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
-from Widgets.rv_stats_by_game import RVMod
 
-__version__ = '23.01.2'
+__version__ = '23.02.1'
 
 
 class StatsByGame(Screen):
     player_name = StringProperty('')
     player_tree = DictProperty({})
-    rv_mod = ObjectProperty(None)
+    recycle_view_mod = ObjectProperty(None)
+    data = ListProperty([])
     opponents = ObjectProperty(None)
 
     def __init__(self, **kwargs):
@@ -45,21 +45,19 @@ class StatsByGame(Screen):
         self.opponents = self.player_tree.xpath('//div[@class="stats-table_table__2BoHU"]')
         if len(self.opponents) != 0:
             data = access_per_game_stats(self.player_tree, self.player_name)
-            self.rv_mod = RVMod(perf_data=data)
-            self.add_widget(self.rv_mod)
+            self.data = data
         else:
             self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
             self.message.open()
+
+    def on_data(self, *args):
+        self.recycle_view_mod.perf_data = self.data
 
     @staticmethod
     def call_menu_screen(*args):
         del App.get_running_app().root.screens_visited[1:]
         App.get_running_app().root.transition = FadeTransition(duration=.5)
         App.get_running_app().root.current = 'menu'
-
-    def on_leave(self, *args):
-        if len(self.opponents) != 0:
-            self.remove_widget(self.rv_mod)
 
 
 class Stats(Screen):
@@ -216,12 +214,12 @@ class Roster(Screen):
         self.grid_roster.roster = dict()
 
     def call_stats(self):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'stats'
         self.grid_roster.stats_option = False
 
     def call_stats_by_game(self):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'stats_by_game'
         self.grid_roster.stats_by_game_option = False
 
@@ -234,7 +232,7 @@ class Teams(Screen):
         conn = connectivity_status()
         if conn is True:
             if len(self.grid_teams.selected_roster) != 0:
-                App.get_running_app().root.transition = FadeTransition(duration=.5)
+                App.get_running_app().root.transition = SlideTransition(direction='left')
                 App.get_running_app().root.current = 'roster'
             else:
                 message = MessagePopup()
@@ -243,6 +241,7 @@ class Teams(Screen):
                 Clock.schedule_once(message.dismiss, 2)
         else:
             App.get_running_app().root.show_popup(conn)
+            Clock.schedule_once(App.get_running_app().stop, 5)
 
 
 class Standings(Screen):
@@ -285,7 +284,7 @@ class Menu(Screen):
     def call_standings_screen(*args):
         conn = connectivity_status()
         if conn is True:
-            App.get_running_app().root.transition = FadeTransition(duration=.5)
+            App.get_running_app().root.transition = SlideTransition(direction='left')
             App.get_running_app().root.current = 'standings'
         else:
             App.get_running_app().root.show_popup(conn)
@@ -297,7 +296,6 @@ class Menu(Screen):
 
 
 class Changelog(Screen):
-    text_1 = StringProperty('[i]View performance data for all players in the competition. Enjoy![/i]')
 
     @staticmethod
     def view_notes():
@@ -318,24 +316,11 @@ class Changelog(Screen):
 
 class Home(Screen):
     welcome = ObjectProperty(None)
-    wait = ObjectProperty(None)
     rosters_reg = DictProperty({})
     standings = DictProperty({})
 
     def on_enter(self, *args):
-        Clock.schedule_once(self.fade_in_label, .5)
-
-    def fade_in_label(self, *args):
-        self.welcome.color = (1, .4, 0, 0)
-        anim = Animation(color=(1, .4, 0, 1), duration=2)
-        anim.start(self.welcome)
-        anim.on_complete(self.show_wait_message())
-
-    def show_wait_message(self, *args):
-        self.wait.color = (1, 1, 1, 0)
-        anim = Animation(color=(1, 1, 1, 0), duration=.5) + Animation(color=(1, 1, 1, 1), duration=.5)
-        anim.start(self.wait)
-        Clock.schedule_once(self.create_dict_with_rosters, 3.55)
+        Clock.schedule_once(self.create_dict_with_rosters, 3)
 
     def create_dict_with_rosters(self, *args):
         conn = connectivity_status()
@@ -345,7 +330,7 @@ class Home(Screen):
             self.rosters_reg = data
         else:
             App.get_running_app().root.show_popup(conn)
-            Clock.schedule_once(App.get_running_app().stop, 3)
+            Clock.schedule_once(App.get_running_app().stop, 6)
 
     def on_rosters_reg(self, *args):
         self.standings = fetch_standings()
@@ -355,7 +340,7 @@ class Home(Screen):
 
     @staticmethod
     def call_menu_screen():
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'menu'
 
 
@@ -430,4 +415,6 @@ if __name__ == '__main__':
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
     LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
                        fn_italic='Fonts/OpenSans-Italic.ttf')
+    LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
+                       fn_bold='Fonts/MyriadPro-SemiBold.ttf', fn_italic='Fonts/MyriadPro-SemiBoldItalic.ttf')
     EuroLeagueStatsApp().run()
