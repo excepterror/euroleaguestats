@@ -18,15 +18,16 @@
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .43, .097
+        size_hint: .43, None
+        height: dp(60)
         color: 1, 1, 1, 1
-        pos_hint: {'x': .06, 'center_y': .065}
+        pos_hint: {'x': .07, 'center_y': .065}
         canvas.before:
             Color:
                 rgba: 0, 0, 0, 1
             RoundedRectangle:
                 segments: 70
-                radius: 60, 0, 0, 60
+                radius: 30, 0, 0, 30
                 pos: self.pos
                 size: self.size
         on_press: root.call_menu_screen()
@@ -37,15 +38,16 @@
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .43, .097
+        size_hint: .43, None
+        height: dp(60)
         color: 1, 1, 1, 1
-        pos_hint: {'x': .51, 'center_y': .065}
+        pos_hint: {'x': .5, 'center_y': .065}
         canvas.before:
             Color:
                 rgba: 1, .4, 0, 1
             RoundedRectangle:
                 segments: 70
-                radius: 0, 60, 60, 0
+                radius: 0, 30, 30, 0
                 pos: self.pos
                 size: self.size
         on_press: root.parent.exit_app()
