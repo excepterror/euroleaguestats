@@ -288,6 +288,7 @@ class Menu(Screen):
             App.get_running_app().root.current = 'standings'
         else:
             App.get_running_app().root.show_popup(conn)
+            Clock.schedule_once(App.get_running_app().stop, 3)
 
     @staticmethod
     def call_changelog_screen(*args):
