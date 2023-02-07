@@ -27,7 +27,7 @@
                 rgba: 0, 0, 0, 1
             RoundedRectangle:
                 segments: 70
-                radius: 30, 0, 0, 30
+                radius: dp(30), 0, 0, dp(30)
                 pos: self.pos
                 size: self.size
         on_press: root.call_menu_screen()
@@ -47,7 +47,7 @@
                 rgba: 1, .4, 0, 1
             RoundedRectangle:
                 segments: 70
-                radius: 0, 30, 30, 0
+                radius: 0, dp(30), dp(30), 0
                 pos: self.pos
                 size: self.size
         on_press: root.parent.exit_app()
