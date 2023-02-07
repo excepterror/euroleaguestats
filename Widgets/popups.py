@@ -19,7 +19,7 @@ Builder.load_string("""
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        font_size: '18sp'
+        font_size: '20dp'
         color: 1, .4, 0, 1
         pos_hint: {'center_x': .5, 'center_y': .6}
 """)
@@ -39,7 +39,7 @@ Builder.load_string("""
 Builder.load_string("""
 <NotesPopup>:
     title: 'A few reminders'
-    title_size: '18sp'
+    title_size: '18dp'
     title_font: 'OpenSans'
     title_color: 1, .4, 0, 1
     separator_color: 1, 1, 1, .5
@@ -50,7 +50,7 @@ Builder.load_string("""
     FloatLayout:
         Label:
             text: root.text_1
-            font_size: '18sp'
+            font_size: '18dp'
             color: 1, 1, 1, 1
             size_hint: .95, None
             text_size: self.width, None
@@ -60,7 +60,7 @@ Builder.load_string("""
             pos_hint: {'center_x': .5, 'center_y': .75}
         Label:
             text: root.text_2
-            font_size: '18sp'
+            font_size: '18dp'
             color: 1, 1, 1, 1
             size_hint: .95, None
             text_size: self.width, None
