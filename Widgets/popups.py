@@ -10,7 +10,7 @@ Builder.load_string("""
     title_font: 'OpenSans'
     title_color: 1, .4, 0, 1
     separator_color: 1, .4, 0, 0
-    size_hint: .4, .2
+    size_hint: .6, .3
     pos_hint: {'center_x': .5, 'center_y': .5}
     overlay_color: 0, 0, 0, .85
     auto_dismiss: False
