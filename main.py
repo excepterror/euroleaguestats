@@ -8,6 +8,9 @@ from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
+from jnius import autoclass
+from android import mActivity
+from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
 from kivy.app import App
@@ -410,12 +413,14 @@ class EuroLeagueStatsApp(App):
 
 if __name__ == '__main__':
     if platform == "android":
-        from android.permissions import request_permissions, Permission
-
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
+        window_insets_controller = autoclass('androidx.core.view.WindowInsetsCompat')
+        mActivity.getWindow().getDecorView().hide('WindowInsetsCompat.Type.systemBars()')
+
     LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
                        fn_italic='Fonts/OpenSans-Italic.ttf')
     LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
                        fn_bold='Fonts/MyriadPro-SemiBold.ttf', fn_italic='Fonts/MyriadPro-SemiBoldItalic.ttf')
+    # Window.fullscreen = True
     EuroLeagueStatsApp().run()
