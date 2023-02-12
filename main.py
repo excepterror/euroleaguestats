@@ -9,7 +9,6 @@ from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 from jnius import autoclass
-from android import mActivity
 from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
@@ -415,8 +414,12 @@ if __name__ == '__main__':
     if platform == "android":
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
+        python_activity = autoclass('org.kivy.android.PythonActivity')
         window_insets_controller = autoclass('androidx.core.view.WindowInsetsCompat')
-        mActivity.getWindow().getDecorView().hide('WindowInsetsCompat.Type.systemBars()')
+        activity = python_activity.mActivity
+        _type = window_insets_controller.Type
+        system_bars = _type.systemBars()
+        activity.getWindow().getDecorView().hide(_type)
 
     LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
                        fn_italic='Fonts/OpenSans-Italic.ttf')
