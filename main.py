@@ -415,11 +415,11 @@ if __name__ == '__main__':
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
         python_activity = autoclass('org.kivy.android.PythonActivity')
-        window_insets_controller = autoclass('androidx.core.view.WindowInsetsCompat')
+        window_insets_controller = autoclass('androidx.core.view.WindowInsetsControllerCompat')
+        window_insets_compat = autoclass('androidx.core.view.WindowInsetsCompat.Type')
         activity = python_activity.mActivity
-        _type = window_insets_controller.Type
-        system_bars = _type.systemBars()
-        activity.getWindow().getDecorView().hide(_type)
+        system_bars = window_insets_compat.systemBars()
+        activity.getWindow().getDecorView().window_insets_controller.hide(system_bars)
 
     LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
                        fn_italic='Fonts/OpenSans-Italic.ttf')
