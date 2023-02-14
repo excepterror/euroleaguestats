@@ -416,7 +416,7 @@ if __name__ == '__main__':
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
         python_activity = autoclass('org.kivy.android.PythonActivity')
         window_insets_controller = autoclass('androidx.core.view.WindowInsetsControllerCompat')
-        window_insets = autoclass('androidx.core.view.WindowInsetsCompat.Type')
+        window_insets = autoclass('androidx.core.view.WindowInsetsCompat')
         activity = python_activity.mActivity
         system_bars = window_insets.systemBars()
         activity.getWindow().getDecorView().window_insets_controller.hide(system_bars)
