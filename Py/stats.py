@@ -1,4 +1,5 @@
 """Template for Total Statistics"""
+
 template_1 = {'Games:': [1], 'Games Started:': [2], 'Minutes:': [3], 'Points:': [4], '2-Point Field Goals:': [5],
               '3-Point Field Goals:': [6], 'Free Throws:': [7], 'Offensive Rebounds:': [8], 'Defensive Rebounds:': [9],
               'Total Rebounds:': [10], 'Assists:': [11], 'Steals:': [12], 'Turnovers:': [13],
@@ -12,12 +13,23 @@ template_2 = {'Minutes:': [3], 'Points:': [4], '2-Point Field Goals:': [5], '3-P
               'Blocks in Favour:': [14], 'Blocks Against:': [15], 'Fouls Committed:': [16], 'Fouls Drawn:': [17],
               'Point Index Rating:': [18]}
 
-teams_codes = {'BER': 'ALBA Berlin', 'EFS': 'Anadolu Efes Istanbul', 'ASM': 'AS Monaco',
-               'EA7': 'EA7 Emporio Armani Milan', 'BKN': 'Cazoo Baskonia Vitoria-Gasteiz',
-               'CZV': 'Crvena Zvezda Meridianbet Belgrade', 'PAR': 'Partizan Mozzart Bet Belgrade', 'BAR': 'FC Barcelona',
-               'BAY': 'FC Bayern Munich', 'FBB': 'Fenerbahce Beko Istanbul', 'ASV': 'LDLC ASVEL Villeurbanne',
-               'MTA': 'Maccabi Playtika Tel Aviv', 'OLY': 'Olympiacos Piraeus', 'PAO': 'Panathinaikos Athens',
-               'RMB': 'Real Madrid', 'VBC': 'Valencia Basket', 'ZAL': 'Zalgiris Kaunas',
+teams_codes = {'BER': 'ALBA Berlin',
+               'EFS': 'Anadolu Efes Istanbul',
+               'ASM': 'AS Monaco',
+               'EA7': 'EA7 Emporio Armani Milan',
+               'BKN': 'Cazoo Baskonia Vitoria-Gasteiz',
+               'CZV': 'Crvena Zvezda Meridianbet Belgrade',
+               'PAR': 'Partizan Mozzart Bet Belgrade',
+               'BAR': 'FC Barcelona',
+               'BAY': 'FC Bayern Munich',
+               'FBB': 'Fenerbahce Beko Istanbul',
+               'ASV': 'LDLC ASVEL Villeurbanne',
+               'MTA': 'Maccabi Playtika Tel Aviv',
+               'OLY': 'Olympiacos Piraeus',
+               'PAO': 'Panathinaikos Athens',
+               'RMB': 'Real Madrid',
+               'VBC': 'Valencia Basket',
+               'ZAL': 'Zalgiris Kaunas',
                'VIR': 'Virtus Segafredo Bologna'}
 
 
