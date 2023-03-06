@@ -5,30 +5,10 @@
         keep_ratio: False
         allow_stretch: True
     RoundedRectLabelBtn:
-        text: 'Back to Menu'
-        font_size: dp(32)
-        font_name: 'OpenSans'
-        text_size: self.size
-        halign: 'center'
-        valign: 'center'
-        size_hint: .85, None
-        height: dp(60)
-        color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .1}
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, .6
-            RoundedRectangle:
-                segments: 70
-                radius: dp(30), dp(30), dp(30), dp(30)
-                pos: self.pos
-                size: self.size
-        on_press: root.call_menu_screen()
-    RoundedRectLabelBtn:
         text: '[i]' + 'VIEW NOTES' + '[/i]'
         markup: True
         font_name: 'MyriadPro'
-        font_size: dp(44)
+        font_size: sp(44)
         text_size: self.size
         halign: 'center'
         valign: 'center'
@@ -40,7 +20,7 @@
                 rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: 7, 7, 7, 7
+                radius: dp(7), dp(7), dp(7), dp(7)
                 pos: self.pos
                 size: self.size
         on_press: root.view_notes()
@@ -48,7 +28,7 @@
         text: '[i]' + 'PRIVACY POLICY' + '[/i]'
         markup: True
         font_name: 'MyriadPro'
-        font_size: dp(44)
+        font_size: sp(44)
         text_size: self.size
         halign: 'center'
         valign: 'center'
@@ -60,7 +40,7 @@
                 rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: 7, 7, 7, 7
+                radius: dp(7), dp(7), dp(7), dp(7)
                 pos: self.pos
                 size: self.size
         on_press: root.view_privacy_policy()
