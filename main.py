@@ -8,7 +8,6 @@ from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-from jnius import autoclass
 from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
@@ -65,6 +64,7 @@ class StatsByGame(Screen):
 class Stats(Screen):
     player_tree = DictProperty({})
     player_name = StringProperty('')
+    _size = NumericProperty()
     player_url = StringProperty()
     player_photo = StringProperty('Images/NoImage.jpg')
     text_1 = StringProperty('')
@@ -123,8 +123,7 @@ class Stats(Screen):
 
         try:
             self.text_1 = pos[0]
-            self.text_2 = info[0] + '[color=FF6600]' + '  |  ' '[/color]' + info[1] + '[color=FF6600]' + '  |  ' + \
-                                    '[/color]' + info[2]
+            self.text_2 = '\n' + info[0] + '\n\n' + info[1] + '\n\n' + info[2]
         except IndexError as index_error:
             logging.warning('Index error occurred: {}'.format(index_error))
 
@@ -306,12 +305,6 @@ class Changelog(Screen):
         notes.open()
 
     @staticmethod
-    def call_menu_screen(*args):
-        del App.get_running_app().root.screens_visited[-1]
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
-        App.get_running_app().root.current = 'menu'
-
-    @staticmethod
     def view_privacy_policy(*args):
         view = WebViewInModal()
         view.open_web_view()
@@ -365,20 +358,15 @@ class ELSScreenManager(ScreenManager):
                                     ('roster', 'teams'), ('stats', 'roster'), ('stats_by_game', 'roster'))
 
         if key in (27, 1001):
-            if self.screens_visited[-1] not in ('menu', 'changelog'):
+            if self.screens_visited[-1] not in ('menu'):
                 for scr_name, instance in screens_resolution_order:
                     if self.screens_visited[-1] == scr_name:
                         App.get_running_app().root.current = instance
                         del self.screens_visited[-1]
                         return True
             else:
-                if self.screens_visited[-1] == 'changelog':
-                    ''' "changelog" entry in :list: screens_visited is deleted, whenever the user presses
-                    the 'Back to Menu' button'''
-                    return True
-                else:
-                    Clock.schedule_once(self.exit_app, .5)
-                    return True
+                Clock.schedule_once(self.exit_app, .5)
+                return True
 
     def check_in_names(self, screen_name):
         if screen_name in self.screens_visited:
@@ -414,16 +402,8 @@ if __name__ == '__main__':
     if platform == "android":
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
-        python_activity = autoclass('org.kivy.android.PythonActivity')
-        window_insets_controller = autoclass('androidx.core.view.WindowInsetsControllerCompat')
-        window_insets = autoclass('androidx.core.view.WindowInsetsCompat')
-        activity = python_activity.mActivity
-        system_bars = window_insets.systemBars()
-        activity.getWindow().getDecorView().window_insets_controller.hide(system_bars)
-
     LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
                        fn_italic='Fonts/OpenSans-Italic.ttf')
     LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
                        fn_bold='Fonts/MyriadPro-SemiBold.ttf', fn_italic='Fonts/MyriadPro-SemiBoldItalic.ttf')
-    # Window.fullscreen = True
     EuroLeagueStatsApp().run()
