@@ -4,81 +4,82 @@
         source: 'Images/Cross-Screen.jpg'
         keep_ratio: False
         allow_stretch: True
-    Label:
-        text: '[i]' + root.player_name + '[/i]'
-        font_name: 'MyriadPro'
-        font_size: dp(40)
-        size_hint_y: None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        pos_hint: {'center_x': .7, 'center_y': .7}
-        markup: True
-    Image:
-        source: root.player_photo
-        size_hint: None, None
-        width: dp(160)
-        height: dp(200)
-        allow_stretch: True
-        keep_ratio: False
-        pos_hint: {'center_x': .25, 'center_y': .7}
-    Label:
-        text: root.text_1 + '[color=FF6600]' + '  |  ' + '[/color]' + root.text_2
-        font_name: 'OpenSans'
-        pos_hint: {'center_x': .5, 'center_y': .46}
-        font_size: dp(19)
-        color: 1, 1, 1, 1
-        size_hint: .9, None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        markup: True
-    RoundedRectLabelBtn:
-        text: 'Average Stats'
-        font_name: 'OpenSans'
-        font_size: dp(24)
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .7, None
-        height: dp(80)
-        pos_hint: {'center_x': .5, 'center_y': .3}
-        color: 0, 0, 0, 1
-        ripple_color: 0, 0, 0, 1
-        ripple_scale: 2
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, .8
-            RoundedRectangle:
-                segments: 70
-                radius: dp(40), dp(40), dp(40), dp(40)
-                pos: self.pos
-                size: self.size
-        on_press: root.select_stats(self)
-    RoundedRectLabelBtn:
-        text: 'Total Stats'
-        font_name: 'OpenSans'
-        font_size: dp(24)
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .7, None
-        height: dp(80)
-        pos_hint: {'center_x': .5, 'center_y': .12}
-        color: 0, 0, 0, 1
-        ripple_color: 0, 0, 0, 1
-        ripple_scale: 2
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, .8
-            RoundedRectangle:
-                segments: 70
-                radius: dp(40), dp(40), dp(40), dp(40)
-                pos: self.pos
-                size: self.size
-        on_press: root.select_stats(self)
+    FloatLayout:
+        Label:
+            text: '[i]' + root.player_name + '[/i]'
+            font_name: 'MyriadPro'
+            font_size: sp(root.width * .1)
+            size_hint: 1, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            valign: 'middle'
+            pos_hint: {'center_x': .5, 'center_y': .76}
+            markup: True
+        Image:
+            source: root.player_photo
+            size_hint: None, None
+            width: dp(160)
+            height: dp(200)
+            allow_stretch: True
+            keep_ratio: False
+            pos_hint: {'center_x': .25, 'center_y': .57}
+        Label:
+            text: root.text_1 + '\n' + root.text_2
+            font_name: 'MyriadPro'
+            pos_hint: {'center_x': .72, 'center_y': .55}
+            font_size: sp(root.height * .03)
+            color: 1, 1, 1, 1
+            size_hint: .5, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+        RoundedRectLabelBtn:
+            text: 'Average Stats'
+            font_name: 'OpenSans'
+            font_size: sp(24)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            size_hint: .7, None
+            height: dp(60)
+            pos_hint: {'center_x': .5, 'center_y': .28}
+            color: 0, 0, 0, 1
+            ripple_color: 0, 0, 0, 1
+            ripple_scale: 2
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .8
+                RoundedRectangle:
+                    segments: 70
+                    radius: dp(30), dp(30), dp(30), dp(30)
+                    pos: self.pos
+                    size: self.size
+            on_press: root.select_stats(self)
+        RoundedRectLabelBtn:
+            text: 'Total Stats'
+            font_name: 'OpenSans'
+            font_size: sp(24)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            size_hint: .7, None
+            height: dp(60)
+            pos_hint: {'center_x': .5, 'center_y': .12}
+            color: 0, 0, 0, 1
+            ripple_color: 0, 0, 0, 1
+            ripple_scale: 2
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .8
+                RoundedRectangle:
+                    segments: 70
+                    radius: dp(30), dp(30), dp(30), dp(30)
+                    pos: self.pos
+                    size: self.size
+            on_press: root.select_stats(self)
 
 <RV>:
     viewclass: 'StatisticsLabel'
@@ -98,7 +99,7 @@
 <StatisticsLabel@Label>:
     text_size: self.width, None
     font_name: 'OpenSans'
-    font_size: dp(16)
+    font_size: sp(16)
     halign: 'center'
     valign: 'middle'
     markup: True
