@@ -10,14 +10,15 @@
         allow_stretch: True
     Template:
         alpha: 0
-        pos_hint: {'center_x': .5, 'center_y': .79}
+        font_size: sp(18)
+        pos_hint: {'center_x': .5, 'center_y': .8}
         size_hint: .95, None
         height: dp(40)
         on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
     RVSt:
         id: recycle_view
         pos_hint: {'center_x': .5, 'center_y': .38}
-        size_hint: .95, .68
+        size_hint: .95, .77
 
 <RVSt>:
     viewclass: 'Template'
@@ -37,7 +38,7 @@
 <StandingsLabel>:
     color: 1, 1, 1, 1
     font_name: 'OpenSans'
-    font_size: dp(14)
+    font_size: sp(14)
     size_hint: .1, None
     text_size: self.width, None
     height: dp(25)
