@@ -14,7 +14,7 @@
     RoundedRectLabelBtn:
         text: 'Menu'
         font_name: 'OpenSans'
-        font_size: dp(28)
+        font_size: sp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
@@ -34,7 +34,7 @@
     RoundedRectLabelBtn:
         text: 'All done'
         font_name: 'OpenSans'
-        font_size: dp(28)
+        font_size: sp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
@@ -62,7 +62,7 @@
     bar_inactive_color: 1, 1, 1, 0
     smooth_scroll_end: 10
     SelectableRecycleBoxLayout:
-        default_size: None, dp(56)
+        default_size: None, dp(60)
         default_size_hint: 1, None
         size_hint_y: None
         height: self.minimum_height
@@ -75,7 +75,7 @@
 <SelectableLabel>:
     # Draw a background to indicate selection.
     text_size: self.width, None
-    font_size: dp(17)
+    font_size: sp(20)
     font_name: 'OpenSans'
     halign: 'center'
     valign: 'middle'
@@ -85,6 +85,6 @@
             rgba: (1, 1, 1, .8) if self.selected else (1, 1, 1, .2)
         RoundedRectangle:
             segments: 70
-            radius: 7,0
+            radius: [dp(30), dp(30), dp(30), dp(30)]
             pos: self.pos
             size: self.size
