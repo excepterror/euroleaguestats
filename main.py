@@ -64,7 +64,6 @@ class StatsByGame(Screen):
 class Stats(Screen):
     player_tree = DictProperty({})
     player_name = StringProperty('')
-    _size = NumericProperty()
     player_url = StringProperty()
     player_photo = StringProperty('Images/NoImage.jpg')
     text_1 = StringProperty('')
