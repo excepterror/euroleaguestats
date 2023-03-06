@@ -50,7 +50,7 @@ Builder.load_string("""
     FloatLayout:
         Label:
             text: root.text_1
-            font_size: '18dp'
+            font_size: '18sp'
             color: 1, 1, 1, 1
             size_hint: .95, None
             text_size: self.width, None
@@ -60,7 +60,7 @@ Builder.load_string("""
             pos_hint: {'center_x': .5, 'center_y': .75}
         Label:
             text: root.text_2
-            font_size: '18dp'
+            font_size: '18sp'
             color: 1, 1, 1, 1
             size_hint: .95, None
             text_size: self.width, None
