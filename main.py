@@ -27,7 +27,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.03.01'
+__version__ = '23.03.0'
 
 
 class StatsByGame(Screen):
