@@ -27,8 +27,8 @@
             row_default_height: dp(60)
             size_hint: 1, None
             height: self.minimum_height
-            spacing: 8
-            padding: 5
+            spacing: dp(8)
+            padding: dp(5)
             on_stats_option: root.call_stats()
             on_stats_by_game_option: root.call_stats_by_game()
 
@@ -61,7 +61,7 @@
             color_canvas: 1, 1, 1, .8
             text: root.name
             font_name: 'OpenSans'
-            font_size: sp(26)
+            font_size: sp(22)
             color: 0, 0, 0, 1
             size_hint: None, None
             size: self.parent.width, dp(60)
