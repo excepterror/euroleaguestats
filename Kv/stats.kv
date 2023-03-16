@@ -1,3 +1,5 @@
+#:import MyLabel Widgets.widgets
+
 <Stats>:
     name: 'stats'
     Image:
@@ -8,13 +10,12 @@
         Label:
             text: '[i]' + root.player_name + '[/i]'
             font_name: 'MyriadPro'
-            font_size: sp(root.width * .1)
+            font_size: sp(self.height / 2)
             size_hint: 1, None
             text_size: self.width, None
-            height: self.texture_size[1]
             halign: 'center'
             valign: 'middle'
-            pos_hint: {'center_x': .5, 'center_y': .76}
+            pos_hint: {'center_x': .5, 'center_y': .75}
             markup: True
         Image:
             source: root.player_photo
@@ -23,16 +24,15 @@
             height: dp(200)
             allow_stretch: True
             keep_ratio: False
-            pos_hint: {'center_x': .25, 'center_y': .57}
+            pos_hint: {'center_x': .25, 'center_y': .54}
         Label:
             text: root.text_1 + '\n' + root.text_2
             font_name: 'MyriadPro'
-            pos_hint: {'center_x': .72, 'center_y': .55}
-            font_size: sp(root.height * .03)
+            pos_hint: {'center_x': .72, 'center_y': .52}
+            font_size: sp(self.height / 5)
             color: 1, 1, 1, 1
             size_hint: .5, None
             text_size: self.width, None
-            height: self.texture_size[1]
             halign: 'center'
             valign: 'middle'
             markup: True
@@ -44,8 +44,8 @@
             halign: 'center'
             valign: 'middle'
             size_hint: .7, None
-            height: dp(60)
-            pos_hint: {'center_x': .5, 'center_y': .28}
+            height: dp(80)
+            pos_hint: {'center_x': .5, 'center_y': .27}
             color: 0, 0, 0, 1
             ripple_color: 0, 0, 0, 1
             ripple_scale: 2
@@ -54,7 +54,7 @@
                     rgba: 1, 1, 1, .8
                 RoundedRectangle:
                     segments: 70
-                    radius: dp(30), dp(30), dp(30), dp(30)
+                    radius: dp(40), dp(40), dp(40), dp(40)
                     pos: self.pos
                     size: self.size
             on_press: root.select_stats(self)
@@ -66,8 +66,8 @@
             halign: 'center'
             valign: 'middle'
             size_hint: .7, None
-            height: dp(60)
-            pos_hint: {'center_x': .5, 'center_y': .12}
+            height: dp(80)
+            pos_hint: {'center_x': .5, 'center_y': .1}
             color: 0, 0, 0, 1
             ripple_color: 0, 0, 0, 1
             ripple_scale: 2
@@ -76,7 +76,7 @@
                     rgba: 1, 1, 1, .8
                 RoundedRectangle:
                     segments: 70
-                    radius: dp(30), dp(30), dp(30), dp(30)
+                    radius: dp(40), dp(40), dp(40), dp(40)
                     pos: self.pos
                     size: self.size
             on_press: root.select_stats(self)
