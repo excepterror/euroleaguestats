@@ -47,11 +47,11 @@ def fetch_standings():
                 m = k + 1
                 try:
                     if qualified_index[i] == '*':
-                        logging.warning('Team {} is qualified'.format(teams_and_ranking[m]))
+                        logging.warning('Team is qualified: {}'.format(teams_and_ranking[m]))
                         listing.append(teams_and_ranking[m])
                         rankings.append(('[color=FF6600]' + teams_and_ranking[k] + '[/color]'))
                 except IndexError as idx_err:
-                    logging.warning('Team not qualified: {}'.format(idx_err))
+                    logging.warning('Team is not qualified: {}'.format(idx_err))
                     listing.append(teams_and_ranking[m])
                     rankings.append((teams_and_ranking[k]))
                 i += 1
