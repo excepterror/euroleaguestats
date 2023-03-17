@@ -27,7 +27,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.03.0'
+__version__ = '23.03.1'
 
 
 class StatsByGame(Screen):
@@ -292,7 +292,7 @@ class Menu(Screen):
 
     @staticmethod
     def call_changelog_screen(*args):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'changelog'
 
 
@@ -357,7 +357,7 @@ class ELSScreenManager(ScreenManager):
                                     ('roster', 'teams'), ('stats', 'roster'), ('stats_by_game', 'roster'))
 
         if key in (27, 1001):
-            if self.screens_visited[-1] not in ('menu'):
+            if self.screens_visited[-1] not in 'menu':
                 for scr_name, instance in screens_resolution_order:
                     if self.screens_visited[-1] == scr_name:
                         App.get_running_app().root.current = instance
