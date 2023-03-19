@@ -6,66 +6,68 @@
     standings: standings
     about: about
     Image:
-        source: 'Images/Cross-Screen.jpg'
+        source: 'Images/Menu.jpg'
         keep_ratio: False
         allow_stretch: True
     RoundedRectLabelBtn:
         id: current
-        text: 'Current Season'
-        font_name: 'OpenSans'
-        font_size: sp(22)
+        text: '[i]' + 'CURRENT SEASON' + '[/i]'
+        font_name: 'MyriadPro'
+        font_size: sp(48)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .85, .1
-        color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .65}
+        size_hint: .88, .08
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .45}
+        markup: True
         canvas.before:
             Color:
-                rgba: 1 ,1 ,1, .8
+                rgba: 1 ,1 ,1, .2
             RoundedRectangle:
                 segments: 70
-                radius: dp(7), dp(7), dp(7), dp(7)
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
         on_press: root.animate_on_push(self)
     RoundedRectLabelBtn:
         id: standings
-        text: 'Standings'
-        font_name: 'OpenSans'
-        font_size: sp(22)
+        text: '[i]' + 'STANDINGS' + '[/i]'
+        font_name: 'MyriadPro'
+        font_size: sp(48)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .85, .1
-        color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .45}
+        size_hint: .88, .08
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .35}
+        markup: True
         canvas.before:
             Color:
-                rgba: 1 ,1 ,1, .8
+                rgba: 1 ,1 ,1, .2
             RoundedRectangle:
                 segments: 70
-                radius: dp(7), dp(7), dp(7), dp(7)
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
         on_press: root.animate_on_push(self)
     RoundedRectLabelBtn:
         id: about
-        text: 'About'
-        font_name: 'OpenSans'
-        font_size: sp(22)
+        text: 'About the app'
+        font_name: 'MyriadPro'
+        font_size: sp(15)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .85, .1
-        color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .25}
+        size_hint: .4, .06
+        color: 1 ,1 ,1, 1
+        pos_hint: {'center_x': .5, 'center_y': .1}
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .8
+                rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: dp(7), dp(7), dp(7), dp(7)
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.animate_on_push(self)
+        on_press: root.selection(self)
