@@ -8,7 +8,6 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.popup import Popup
-from kivy.uix.behaviors import TouchRippleBehavior
 
 from Py.stats import update_dict
 from Widgets.rv_stats import RV
@@ -16,11 +15,10 @@ from Widgets.rv_stats import RV
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout):
     """Adds selection and focus behaviour to the view."""
+    touch_deselect_last = BooleanProperty(True)
 
-    pass
 
-
-class SelectableLabel(RecycleDataViewBehavior, TouchRippleBehavior, Label):
+class SelectableLabel(RecycleDataViewBehavior, Label):
     """Adds selection support to the Label."""
 
     index = None
@@ -28,14 +26,12 @@ class SelectableLabel(RecycleDataViewBehavior, TouchRippleBehavior, Label):
     selectable = BooleanProperty(True)
 
     def refresh_view_attrs(self, rv, index, data):
-
         """Catch and handle the view changes."""
 
         self.index = index
         return super().refresh_view_attrs(rv, index, data)
 
     def on_touch_down(self, touch):
-
         """Adds selection on touch down."""
 
         if super().on_touch_down(touch):
@@ -44,21 +40,7 @@ class SelectableLabel(RecycleDataViewBehavior, TouchRippleBehavior, Label):
         if self.collide_point(*touch.pos) and self.selectable:
             return self.parent.select_with_touch(self.index, touch)
 
-        if self.collide_point(*touch.pos):
-            touch.grab(self)
-            self.ripple_show(touch)
-            return True
-        return False
-
-    def on_touch_up(self, touch):
-        if touch.grab_current is self:
-            touch.ungrab(self)
-            self.ripple_fade()
-            return True
-        return False
-
     def apply_selection(self, rv, index, is_selected):
-
         """Respond to the selection of items in the view."""
 
         self.selected = is_selected
@@ -85,9 +67,9 @@ class SelectableLabel(RecycleDataViewBehavior, TouchRippleBehavior, Label):
             rv_view = RV(update_dict(stats_per_game))
 
             display_data_popup = Popup(content=rv_view, size_hint=[.8, .95],
-                                       separator_color=(1, 1, 1, .5), separator_height='.5dp',
+                                       separator_color=(1, 1, 1, .5), separator_height='.5sp',
                                        title=rv.perf_data[2] + ' in ' + self.text, title_align='center',
-                                       title_size='18dp', title_font='OpenSans',
+                                       title_size='18sp', title_font='MyriadPro',
                                        title_color=[.2, .6, .8, 1], auto_dismiss=True)
             display_data_popup.open()
 
