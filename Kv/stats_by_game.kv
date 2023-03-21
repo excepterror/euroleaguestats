@@ -12,45 +12,26 @@
         pos_hint: {'center_x': .5, 'center_y': .47}
         size_hint: .95, .68
     RoundedRectLabelBtn:
-        text: 'Menu'
+        text: '[i]' + 'TEAMS' + '[/i]'
         font_name: 'MyriadPro'
-        font_size: sp(24)
+        font_size: sp(38)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .43, None
-        height: dp(60)
+        markup: True
+        size_hint: .95, .08
+#        height: dp(24)
         color: 1, 1, 1, 1
-        pos_hint: {'x': .07, 'center_y': .065}
+        pos_hint: {'center_x': .5, 'center_y': .065}
         canvas.before:
             Color:
-                rgba: 0, 0, 0, 1
+                rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: dp(30), 0, 0, dp(30)
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.call_menu_screen()
-    RoundedRectLabelBtn:
-        text: 'Leave ELS'
-        font_name: 'MyriadPro'
-        font_size: sp(24)
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .43, None
-        height: dp(60)
-        color: 1, 1, 1, 1
-        pos_hint: {'x': .5, 'center_y': .065}
-        canvas.before:
-            Color:
-                rgba: 1, .4, 0, 1
-            RoundedRectangle:
-                segments: 70
-                radius: 0, dp(30), dp(30), 0
-                pos: self.pos
-                size: self.size
-        on_press: root.parent.exit_app()
+        on_press: root.call_teams_screen()
 
 <RVMod>:
     viewclass: 'SelectableLabel'
@@ -67,7 +48,7 @@
         size_hint_y: None
         height: self.minimum_height
         orientation: 'vertical'
-        spacing: dp(5)
+        spacing: dp(10)
         padding: dp(5)
         multiselect: False
         touch_multiselect: False
@@ -75,7 +56,7 @@
 <SelectableLabel>:
     # Draw a background to indicate selection.
     text_size: self.width, None
-    font_size: sp(19)
+    font_size: sp(17)
     font_name: 'MyriadPro'
     halign: 'center'
     valign: 'middle'
@@ -85,6 +66,6 @@
             rgba: (1, 1, 1, .8) if self.selected else (1, 1, 1, .2)
         RoundedRectangle:
             segments: 70
-            radius: [dp(30), dp(30), dp(30), dp(30)]
+            radius: [dp(15), dp(15), dp(15), dp(15)]
             pos: self.pos
             size: self.size
