@@ -50,7 +50,7 @@
                 radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.animate_on_push(self)
+        on_press: root.stats_animate_on_push(self)
     RoundedRectLabelBtn:
         id: about
         text: 'About the app'
@@ -70,4 +70,4 @@
                 radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.selection(self)
+        on_press: root.about_animate_on_push(self)
