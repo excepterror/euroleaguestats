@@ -50,7 +50,7 @@ class SlidingLabel(RelativeLayout):
             self.parent.repeated_selection_flag += 1
             if touch.x <= self.width * .5:
                 self.l_arrow.opacity = 1
-                anim_1 = Animation(x=self.width * .1, opacity=0, transition='in_out_quad', duration=.8) \
+                anim_1 = Animation(x=self.width * .15, opacity=0, transition='in_out_quad', duration=.8) \
                     + Animation(x=0, transition='in_out_quad', duration=.05)
                 anim_1.start(self.l_arrow)
             elif touch.x >= self.width * .5:
