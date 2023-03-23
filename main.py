@@ -432,8 +432,6 @@ if __name__ == '__main__':
     if platform == "android":
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
-    LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
-                       fn_italic='Fonts/OpenSans-Italic.ttf')
     LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
                        fn_bold='Fonts/MyriadPro-BoldCondensedItalic.ttf',
                        fn_italic='Fonts/MyriadPro-BlackCondensedItalic.ttf')
