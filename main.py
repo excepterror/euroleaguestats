@@ -27,7 +27,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.03.1'
+__version__ = '23.03.2'
 
 
 class StatsByGame(Screen):
@@ -54,11 +54,21 @@ class StatsByGame(Screen):
     def on_data(self, *args):
         self.recycle_view_mod.perf_data = self.data
 
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.86, .06], duration=.2)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.88, .08], duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.call_teams_screen, instance), .2))
+
     @staticmethod
-    def call_menu_screen(*args):
+    def call_teams_screen(*args):
         del App.get_running_app().root.screens_visited[1:]
         App.get_running_app().root.transition = FadeTransition(duration=.5)
-        App.get_running_app().root.current = 'menu'
+        App.get_running_app().root.current = 'teams'
 
 
 class Stats(Screen):
@@ -144,7 +154,6 @@ class Stats(Screen):
             if len(total_stats) != 0:
                 self.show_stats.title = 'Total Stats for ' + self.player_name
                 self.rv = RV(update_dict(total_stats))
-                self.show_stats.title = 'Total Stats for ' + self.player_name
             else:
                 self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
                 self.message.open()
@@ -152,6 +161,12 @@ class Stats(Screen):
     def on_rv(self, *args):
         self.show_stats.content = self.rv
         self.show_stats.open()
+
+    @staticmethod
+    def call_teams_screen(*args):
+        del App.get_running_app().root.screens_visited[1:]
+        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.current = 'teams'
 
 
 class Roster(Screen):
@@ -223,6 +238,12 @@ class Roster(Screen):
         App.get_running_app().root.current = 'stats_by_game'
         self.grid_roster.stats_by_game_option = False
 
+    @staticmethod
+    def call_teams_screen(*args):
+        del App.get_running_app().root.screens_visited[1:]
+        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.current = 'teams'
+
 
 class Teams(Screen):
     idx = NumericProperty()
@@ -257,13 +278,23 @@ class Menu(Screen):
     standings = ObjectProperty(None)
     about = ObjectProperty(None)
 
-    def animate_on_push(self, instance):
-        anim = Animation(size_hint=[.8, .05], duration=.2)
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.86, .06], duration=.2)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.reverse_animate, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
 
-    def reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.85, .1], duration=.1)
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.88, .08], duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
+
+    def about_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.38, .04], duration=.2)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.about_reverse_animate, instance), .2))
+
+    def about_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.4, .06], duration=.1)
         anim.start(instance)
         anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
 
@@ -404,5 +435,6 @@ if __name__ == '__main__':
     LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
                        fn_italic='Fonts/OpenSans-Italic.ttf')
     LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
-                       fn_bold='Fonts/MyriadPro-SemiBold.ttf', fn_italic='Fonts/MyriadPro-SemiBoldItalic.ttf')
+                       fn_bold='Fonts/MyriadPro-BoldCondensedItalic.ttf',
+                       fn_italic='Fonts/MyriadPro-BlackCondensedItalic.ttf')
     EuroLeagueStatsApp().run()
