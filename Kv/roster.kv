@@ -56,16 +56,24 @@
         font_name: 'MyriadPro'
         font_size: sp(14)
         color: 1, 1, 1, 1
-        size_hint: 1, None
-        text_size: self.size
+        size_hint: None, None
+        text_size: None, None
+        width: self.texture_size[0]
+        height: self.texture_size[1]
+        halign: 'center'
+        valign: 'middle'
         pos: root.x + dp(20), root.y + root.scroll_roster.height + dp(10)
     Label:
         text: '< per game stats'
         font_name: 'MyriadPro'
         font_size: sp(14)
-        color: 1, 1, 1, 1
+        color: 1, 0, 0, 1
         size_hint: None, None
-        text_size: self.size
+        text_size: None, None
+        width: self.texture_size[0]
+        height: self.texture_size[1]
+        halign: 'center'
+        valign: 'middle'
         pos: root.x + root.width - self.width - dp(20), root.y + root.scroll_roster.height + dp(10)
 
 
