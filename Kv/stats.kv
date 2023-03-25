@@ -74,7 +74,7 @@
                 radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.select_stats(self)
+        on_press: root.stats_animate_on_push(self)
     RoundedRectLabelBtn:
         text: 'Total Stats'
         font_name: 'MyriadPro'
@@ -94,7 +94,7 @@
                 radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.select_stats(self)
+        on_press: root.stats_animate_on_push(self)
 
 <RV>:
     viewclass: 'StatisticsLabel'
