@@ -18,6 +18,7 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, DictProperty, ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
+from kivy.metrics import sp
 
 from Py.connectivity import connectivity_status
 from Py.standings import fetch_standings
@@ -136,7 +137,7 @@ class Stats(Screen):
         except IndexError as index_error:
             logging.warning('Index error occurred: {}'.format(index_error))
 
-    def select_stats(self, instance):
+    def select_stats(self, instance, *args):
         if instance.text == 'Average Stats':
             average_stats = self.player_tree.xpath(
                 '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
@@ -161,6 +162,18 @@ class Stats(Screen):
     def on_rv(self, *args):
         self.show_stats.content = self.rv
         self.show_stats.open()
+
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint_x=.68, duration=.2)
+        anim &= Animation(height=sp(70), duration=.2)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint_x=.7, duration=.1)
+        anim &= Animation(height=sp(80), duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.select_stats, instance), .2))
 
     @staticmethod
     def call_teams_screen(*args):
