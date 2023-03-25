@@ -44,7 +44,7 @@ Builder.load_string("""
     title_color: 1, .4, 0, 1
     separator_color: 1, 1, 1, .5
     separator_height: '.5dp'
-    size_hint: .95, .6
+    size_hint: .95, .85
     pos_hint: {'center_x': .5, 'center_y': .5}
     auto_dismiss: True
     FloatLayout:
@@ -57,7 +57,7 @@ Builder.load_string("""
             height: self.texture_size[1]
             halign: 'justify'
             valign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': .75}
+            pos_hint: {'center_x': .5, 'center_y': .8}
         Label:
             text: root.text_2
             font_size: '18sp'
@@ -67,7 +67,17 @@ Builder.load_string("""
             height: self.texture_size[1]
             halign: 'justify'
             valign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': .3}
+            pos_hint: {'center_x': .5, 'center_y': .5}
+        Label:
+            text: root.text_3
+            font_size: '18sp'
+            color: 1, 1, 1, 1
+            size_hint: .95, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'justify'
+            valign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .2}
 """)
 
 
@@ -82,6 +92,9 @@ class MessagePopup(Popup):
 class NotesPopup(Popup):
     text_1 = StringProperty(
         'Slide a player\'s label to the right to access average and total statistics. Slide it to '
-        'the left to access statistics for each game he played.')
+        'the left to access statistics for each game he played.' + '\n\n')
     text_2 = StringProperty(
-        'Just press a player\'s label to access his statistics when you are viewing past competitions.')
+        'Press a player\'s label to access his statistics when you are viewing past competitions.' + '\n\n')
+    text_3 = StringProperty(
+        'Press the logo on top of the screen to go back to Screen Teams. This feature is available in Screens '
+        '"Roster & Statistics" and "Player Stats".')
