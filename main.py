@@ -376,8 +376,12 @@ class Home(Screen):
                 data = json.load(json_file)
             self.rosters_reg = data
         else:
-            App.get_running_app().root.show_popup(conn)
-            Clock.schedule_once(App.get_running_app().stop, 3)
+            Clock.schedule_once(partial(self.hold, conn), 1)
+
+    @staticmethod
+    def hold(conn, *args):
+        App.get_running_app().root.show_popup(conn)
+        Clock.schedule_once(App.get_running_app().stop, 4)
 
     def on_rosters_reg(self, *args):
         self.standings = fetch_standings()
