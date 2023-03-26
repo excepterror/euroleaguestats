@@ -97,4 +97,4 @@ class NotesPopup(Popup):
         'Press a player\'s label to access his statistics when you are viewing past competitions.' + '\n\n')
     text_3 = StringProperty(
         'Press the logo on top of the screen to go back to Screen Teams. This feature is available in Screens '
-        '"Roster & Statistics" and "Player Stats".')
+        '"Roster & Statistics", "Average and Total Stats" and "Per game stats".')
