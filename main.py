@@ -376,10 +376,10 @@ class Home(Screen):
                 data = json.load(json_file)
             self.rosters_reg = data
         else:
-            Clock.schedule_once(partial(self.hold, conn), 1)
+            Clock.schedule_once(partial(self.time_out_popup, conn), 1)
 
     @staticmethod
-    def hold(conn, *args):
+    def time_out_popup(conn, *args):
         App.get_running_app().root.show_popup(conn)
         Clock.schedule_once(App.get_running_app().stop, 4)
 
