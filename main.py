@@ -28,7 +28,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.03.3'
+__version__ = '23.03.4'
 
 
 class StatsByGame(Screen):
@@ -54,16 +54,6 @@ class StatsByGame(Screen):
 
     def on_data(self, *args):
         self.recycle_view_mod.perf_data = self.data
-
-    def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.86, .06], duration=.2)
-        anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
-
-    def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.88, .08], duration=.1)
-        anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.call_teams_screen, instance), .2))
 
     @staticmethod
     def call_teams_screen(*args):
@@ -341,6 +331,24 @@ class Menu(Screen):
 
 
 class Changelog(Screen):
+    notes = ObjectProperty(None)
+    privacy_policy = ObjectProperty(None)
+
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.86, .06], duration=.2)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.88, .08], duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
+
+    def selection(self, instance, *args):
+        if instance is self.notes:
+            self.view_notes()
+        elif instance is self.privacy_policy:
+            self.view_privacy_policy()
 
     @staticmethod
     def view_notes():
