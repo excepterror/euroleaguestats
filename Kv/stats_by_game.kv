@@ -7,30 +7,30 @@
         source: 'Images/Cross-Screen.jpg'
         keep_ratio: False
         allow_stretch: True
-    RVMod:
-        id: recycle_view_mod
-        pos_hint: {'center_x': .5, 'center_y': .47}
-        size_hint: .95, .7
     RoundedRectLabelBtn:
-        text: '[i]' + 'TEAMS' + '[/i]'
+        text: 'Click me'
         font_name: 'MyriadPro'
-        font_size: sp(48)
+        font_size: sp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        markup: True
-        size_hint: .88, .08
-        color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .06}
+        size_hint: .7, None
+        height: dp(80)
+        pos_hint: {'center_x': .5, 'center_y': .92}
+        color: 0, 0, 0, 0
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .2
+                rgba: 1, 0, 0, 0
             RoundedRectangle:
                 segments: 70
                 radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.stats_animate_on_push(self)
+        on_press: root.call_teams_screen()
+    RVMod:
+        id: recycle_view_mod
+        pos_hint: {'center_x': .5, 'center_y': .38}
+        size_hint: .95, .8
 
 <RVMod>:
     viewclass: 'SelectableLabel'
