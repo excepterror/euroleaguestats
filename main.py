@@ -8,7 +8,7 @@ from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-# from android.permissions import request_permissions, Permission
+from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
 from kivy.app import App
@@ -23,7 +23,7 @@ from kivy.metrics import sp
 from Py.connectivity import connectivity_status
 from Py.standings import fetch_standings
 from Py.stats import update_dict, access_per_game_stats
-# from Py.webview import WebViewInModal
+from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
