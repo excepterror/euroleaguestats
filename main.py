@@ -4,7 +4,7 @@ import concurrent.futures
 import logging
 import json
 
-from functools import partias
+from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
