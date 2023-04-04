@@ -37,11 +37,8 @@ class StatsByGame(Screen):
     recycle_view_mod = ObjectProperty(None)
     data = ListProperty([])
     opponents = ObjectProperty(None)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.message = MessagePopup()
-        self.message.auto_dismiss = True
+    message = ObjectProperty(None)
+    notification = StringProperty('')
 
     def extract_player_games(self):
         self.opponents = self.player_tree.xpath('//div[@class="stats-table_table__2BoHU"]')
@@ -49,11 +46,24 @@ class StatsByGame(Screen):
             data = access_per_game_stats(self.player_tree, self.player_name)
             self.data = data
         else:
-            self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
-            self.message.open()
+            text = 'No games played by ' + self.player_name + ' yet!'
+            self.notification = text
 
     def on_data(self, *args):
         self.recycle_view_mod.perf_data = self.data
+
+    def on_notification(self, *args):
+        if self.notification != '':
+            self.message = MessagePopup(on_open=self.dismiss_text)
+            self.message.notification.text = self.notification
+            self.message.open()
+
+    def dismiss_text(self, *args):
+        Clock.schedule_once(self.message.dismiss, 1.5)
+        Clock.schedule_once(self.reset_text, 1.6)
+
+    def reset_text(self, *args):
+        self.notification = ''
 
     @staticmethod
     def call_teams_screen(*args):
@@ -71,12 +81,9 @@ class Stats(Screen):
     text_2 = StringProperty('')
     stats = ListProperty([])
     rv = ObjectProperty(None)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.show_stats = DisplayStats()
-        self.message = MessagePopup()
-        self.message.auto_dismiss = True
+    show_stats = ObjectProperty(None)
+    message = ObjectProperty(None)
+    notification = StringProperty('')
 
     def extract_players_data(self):
         pos = self.player_tree.xpath(
@@ -133,25 +140,40 @@ class Stats(Screen):
                 '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
                 '//div[@class="stats-table_row__ymPKW"][3]//div[@class="stats-table_cell__RKRoT"]/text()')
             if len(average_stats) != 0:
+                self.show_stats = DisplayStats()
                 self.show_stats.title = 'Average Stats for ' + self.player_name
                 self.rv = RV(update_dict(average_stats))
             else:
-                self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
-                self.message.open()
+                text = 'No games played by ' + self.player_name + ' yet!'
+                self.notification = text
         elif instance.text == 'Total Stats':
             total_stats = self.player_tree.xpath(
                 '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
                 '//div[@class="stats-table_row__ymPKW"][2]//div[@class="stats-table_cell__RKRoT"]/text()')
             if len(total_stats) != 0:
+                self.show_stats = DisplayStats()
                 self.show_stats.title = 'Total Stats for ' + self.player_name
                 self.rv = RV(update_dict(total_stats))
             else:
-                self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
-                self.message.open()
+                text = 'No games played by ' + self.player_name + ' yet!'
+                self.notification = text
 
     def on_rv(self, *args):
         self.show_stats.content = self.rv
         self.show_stats.open()
+
+    def on_notification(self, *args):
+        if self.notification != '':
+            self.message = MessagePopup(on_open=self.dismiss_text)
+            self.message.notification.text = self.notification
+            self.message.open()
+
+    def dismiss_text(self, *args):
+        Clock.schedule_once(self.message.dismiss, 1.5)
+        Clock.schedule_once(self.reset_text, 1.6)
+
+    def reset_text(self, *args):
+        self.notification = ''
 
     def stats_animate_on_push(self, instance):
         anim = Animation(size_hint_x=.68, duration=.2)
@@ -177,11 +199,7 @@ class Roster(Screen):
     trees = DictProperty({})
     player_name = StringProperty()
     repeated_selection_flag = NumericProperty(0)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.message = MessagePopup()
-        self.message.notification.text = 'Almost there...'
+    canvas_opacity = NumericProperty(0)
 
     def assert_tree(self, *args):
         for name, t in self.trees.items():
@@ -366,8 +384,8 @@ class Home(Screen):
     rosters_reg = DictProperty({})
     standings = DictProperty({})
 
-    def on_enter(self, *args):
-        Clock.schedule_once(self.create_dict_with_rosters, 3)
+    def allow_image_display(self, *args):
+        Clock.schedule_once(self.create_dict_with_rosters, .3)
 
     def create_dict_with_rosters(self, *args):
         conn = connectivity_status()
