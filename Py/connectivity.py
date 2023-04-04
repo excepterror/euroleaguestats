@@ -58,20 +58,17 @@ def is_connected(hostname):
         a DNS listening
         '''
 
-        host = socket.gethostbyname(hostname)
+        host = socket.getaddrinfo(hostname, 80)
 
         '''connect to the host -- tells us if the host is actually
         reachable -- Port: 80 = HTTP, 53 = DNS, 10 sec = timeout
         :meth: gethostbyname returns an IPv4 address (numeric)
         '''
-
-        s = socket.create_connection((host, 80), 10)
-
-        '''2 = SHUT_RDWR'''
-
-        s.shutdown(2)
-        s.close()
-
+        for i in range(0, len(host)):
+            s = socket.create_connection(host[i][4])
+            '''2 = SHUT_RDWR'''
+            s.shutdown(2)
+            s.close()
         return True
 
     except OSError as os_error:
