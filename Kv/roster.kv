@@ -6,6 +6,12 @@
     player_name: root.grid_roster.name
     repeated_selection_flag: root.grid_roster.repeated_selection_flag
     scroll_roster: scroll_roster
+    canvas.after:
+        Color:
+            rgba: 0 ,0 ,0, root.canvas_opacity
+        Rectangle:
+            pos: self.pos
+            size: self.size
     Image:
         source: 'Images/Rosters.jpg'
         keep_ratio: False
