@@ -64,10 +64,10 @@ def fetch_standings():
                     if item[0][1] in standings:
                         standings['Images/' + item[0][1] + '.png'] = teams_ranking_q[0][1]
                     elif item[1] == '*':
-                        standings['Images/' + item[0][1] + '.png'] = '[color=FF6600]' + item[0][0] + '[/color]', raw_data[i:i + 7]
+                        standings['Images/' + item[0][1] + '.png'] = '[color=FF6600]' + item[0][0] + '(Q)' + '[/color]', raw_data[i:i + 7]
                     else:
                         standings['Images/' + item[0][1] + '.png'] = item[0][0], raw_data[i:i + 7]  # we only want the first seven statistical categories for each team
-                i += num_of_total_stat_cats
+                    i += num_of_total_stat_cats
         except IndexError as idx_err:
             logging.warning('Index i error occurred: {}'.format(idx_err))
     return standings
