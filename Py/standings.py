@@ -1,6 +1,7 @@
 import logging
 import requests
 from lxml import etree
+from itertools import zip_longest
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -17,8 +18,9 @@ def fetch_standings():
     except Exception as e:
         logging.warning(e)
     else:
+        a = 0
         listing = list()
-        rankings = list()
+        q_stars = list()
         tree = etree.HTML(response.content)
 
         teams_and_ranking = tree.xpath(
@@ -27,49 +29,45 @@ def fetch_standings():
             '//div[@class="complex-stat-table_sticky__2I3pT"]'
             '//span[@class="complex-stat-table_mainClubName__3IMZJ" or "complex-stat-table_mainClubName__3IMZJ complex-stat-table__long__MGBQU"]'
             '/text()')
+        while a < len(teams_and_ranking) - 3:
+            b = a + 1
+            listing.append((teams_and_ranking[a], teams_and_ranking[b]))
+            a = a + 5
 
         qualified_index = tree.xpath(
             '//div[@class="complex-stat-table_body__yaXeJ"]'
             '//div[@class="complex-stat-table_row__1P6us complex-stat-table__standingRow__1cfez"]'
             '//div[@class="complex-stat-table_sticky__2I3pT"]'
-            '//span[@class="complex-stat-table_mainClubName__3IMZJ"]//sup/text()')
+            '//span[@class="complex-stat-table_mainClubName__3IMZJ"]')
+        for q in qualified_index:
+            if len(q.findall("sup")) != 0:
+                q_stars.append('*')
+            else:
+                q_stars.append('')
+        teams_ranking_q = list(zip_longest(listing, q_stars, fillvalue=''))
 
         raw_data = tree.xpath(
             '//div[@class="complex-stat-table_body__yaXeJ"]'
             '//div[@class="complex-stat-table_row__1P6us complex-stat-table__standingRow__1cfez"]'
             '//div[@class="complex-stat-table_cell__1lxC7"]/text()')
 
-        '''Concatenate ranking and name.'''
-        try:
-            i, m, k = 0, 0, 0
-            while k < len(teams_and_ranking) - 5:
-                k = 5 * i
-                m = k + 1
-                try:
-                    if qualified_index[i] == '*':
-                        logging.warning('Team is qualified: {}'.format(teams_and_ranking[m]))
-                        listing.append(teams_and_ranking[m])
-                        rankings.append(('[color=FF6600]' + teams_and_ranking[k] + '[/color]'))
-                except IndexError as idx_err:
-                    logging.warning('Team is not qualified: {}'.format(idx_err))
-                    listing.append(teams_and_ranking[m])
-                    rankings.append((teams_and_ranking[k]))
-                i += 1
-        except IndexError as idx_err:
-            logging.warning('Index error 1 occurred: {}'.format(idx_err))
+        for item in teams_ranking_q:
+            if item[1] == '*':
+                logging.info('Team qualified: {}. {}'.format(item[0][0], item[0][1]))
 
         try:
-            i, j = 0, 0
+            i = 0
             num_of_teams = len(teams_and_ranking) / 5  # 5: team name occurrence every five items in :list: teams_and_ranking
             num_of_total_stat_cats = 11
             while i <= num_of_teams * num_of_total_stat_cats - 4:
-                if listing[j] in standings:
-                    standings['Images/' + listing[j] + '.png'] = listing[j]
-                else:
-                    standings['Images/' + listing[j] + '.png'] = rankings[j], raw_data[i:i + 7]  # we only want the first seven statistical categories for each team
+                for item in teams_ranking_q:
+                    if item[0][1] in standings:
+                        standings['Images/' + item[0][1] + '.png'] = teams_ranking_q[0][1]
+                    elif item[1] == '*':
+                        standings['Images/' + item[0][1] + '.png'] = '[color=FF6600]' + item[0][0] + '[/color]', raw_data[i:i + 7]
+                    else:
+                        standings['Images/' + item[0][1] + '.png'] = item[0][0], raw_data[i:i + 7]  # we only want the first seven statistical categories for each team
                 i += num_of_total_stat_cats
-                j += 1
         except IndexError as idx_err:
-            logging.warning('Index error 2 occurred: {}'.format(idx_err))
-
+            logging.warning('Index i error occurred: {}'.format(idx_err))
     return standings
