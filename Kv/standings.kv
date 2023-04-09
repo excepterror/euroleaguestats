@@ -6,8 +6,7 @@
     recycle_view: recycle_view
     Image:
         source: 'Images/Cross-Screen.jpg'
-        keep_ratio: False
-        allow_stretch: True
+        fit_mode: 'fill'
     Template:
         alpha: 0
         font_size: sp(18)
@@ -82,8 +81,6 @@
         id: logo
         source: root.team_image
         size_hint: None, None
-        allow_stretch: True
-        keep_ratio: False
         size: dp(25), dp(25)
         pos: self.pos
     StandingsLabel:

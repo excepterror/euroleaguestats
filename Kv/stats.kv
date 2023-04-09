@@ -4,8 +4,7 @@
     name: 'stats'
     Image:
         source: 'Images/Cross-Screen.jpg'
-        keep_ratio: False
-        allow_stretch: True
+        fit_mode: 'fill'
     RoundedRectLabelBtn:
         text: 'Click me'
         font_name: 'MyriadPro'
@@ -41,8 +40,6 @@
         size_hint: None, None
         width: dp(160)
         height: dp(200)
-        allow_stretch: True
-        keep_ratio: False
         pos_hint: {'center_x': .25, 'center_y': .54}
     Label:
         text: root.text_1 + '\n' + root.text_2

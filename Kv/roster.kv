@@ -14,8 +14,7 @@
             size: self.size
     Image:
         source: 'Images/Rosters.jpg'
-        keep_ratio: False
-        allow_stretch: True
+        fit_mode: 'fill'
     RoundedRectLabelBtn:
         text: 'Click me'
         font_name: 'MyriadPro'
@@ -118,7 +117,6 @@
             opacity: 0
             size_hint: None, None
             size: root.height * .3, root.height * .3
-            allow_stretch: True
             pos: 0, root.height / 2 - self.height * .52
         Image:
             id: r_arrow
@@ -126,5 +124,4 @@
             source: 'Images/R_Arrow.png'
             size_hint: None, None
             size: root.height * .3, root.height * .3
-            allow_stretch: True
             pos: root.width - self.width, root.height / 2 - self.height * .52

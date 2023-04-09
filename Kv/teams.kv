@@ -6,8 +6,7 @@
     idx: root.grid_teams._idx
     Image:
         source: 'Images/Teams.jpg'
-        allow_stretch: True
-        keep_ratio: False
+        fit_mode: 'fill'
     ScrollView:
         pos_hint: {'center_x': .5, 'center_y': .36}
         size_hint: .98, .72
@@ -58,5 +57,4 @@
         id: im
         size_hint: None, None
         size: root.width * .65, root.height * .65
-        allow_stretch: True
         pos: root.x + root.width / 2 - self.width / 2, root.y + root.height / 2  - self.height / 2
