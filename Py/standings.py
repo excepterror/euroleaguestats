@@ -38,7 +38,7 @@ def fetch_standings():
             '//div[@class="complex-stat-table_body__yaXeJ"]'
             '//div[@class="complex-stat-table_row__1P6us complex-stat-table__standingRow__1cfez"]'
             '//div[@class="complex-stat-table_sticky__2I3pT"]'
-            '//span[@class="complex-stat-table_mainClubName__3IMZJ"]')
+            '//span[@class="complex-stat-table_shortClubName__2hlp4"]')
         for q in qualified_index:
             if len(q.findall("sup")) != 0:
                 q_stars.append('*')
