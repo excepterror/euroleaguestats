@@ -101,6 +101,36 @@ def access_per_game_stats(tree, name):
         '//div[@data-key="PIR"]'
         '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
 
+    games_played_reg_season = len(rounds_played_by_player)
+    playoff_games_count = 0
+    for item in rounds_played_by_player:
+        if item.startswith('G'):
+            games_played_reg_season += - 1
+            playoff_games_count += 1
+
+    if playoff_games_count != 0:
+        stats_by_game_min_ft = stats_by_game_min_ft[:-5]
+        stats_by_game_odt = stats_by_game_odt[:-3]
+        stats_by_game_as_to = stats_by_game_as_to[:-3]
+        stats_by_game_fv_ag = stats_by_game_fv_ag[:-2]
+        stats_by_game_cm_rv = stats_by_game_cm_rv[:-2]
+        stats_by_game_pir = stats_by_game_pir[:-1]
+
+        slice_index_1 = games_played_reg_season * 5
+        slice_index_2 = games_played_reg_season * 3
+        slice_index_3 = games_played_reg_season * 2
+        slice_index_4 = games_played_reg_season
+
+        del stats_by_game_min_ft[slice_index_1: slice_index_1 + playoff_games_count * 5]
+        del stats_by_game_odt[slice_index_2: slice_index_2 + playoff_games_count * 3]
+        del stats_by_game_as_to[slice_index_2: slice_index_2 + playoff_games_count * 3]
+        del stats_by_game_fv_ag[slice_index_3: slice_index_3 + playoff_games_count * 2]
+        del stats_by_game_cm_rv[slice_index_3: slice_index_3 + playoff_games_count * 2]
+        del stats_by_game_pir[slice_index_4: slice_index_4 + playoff_games_count]
+
+    stats_by_game = [stats_by_game_min_ft, stats_by_game_odt, stats_by_game_as_to, stats_by_game_fv_ag,
+                     stats_by_game_cm_rv, stats_by_game_pir]
+
     opponents_by_round_dict = dict()
     for item in opponents_code:
         if item == ' ':
@@ -112,6 +142,4 @@ def access_per_game_stats(tree, name):
     opponents = [text_1.lower() + ' ' + text_2 for text_1, text_2 in zip(at_vs, opponents_code)]
     for i, k in enumerate(rounds_played_by_player):
         opponents_by_round_dict[k] = opponents[i]
-    stats_by_game = [stats_by_game_min_ft, stats_by_game_odt, stats_by_game_as_to, stats_by_game_fv_ag,
-                     stats_by_game_cm_rv, stats_by_game_pir]
     return [opponents_by_round_dict, stats_by_game, name]
