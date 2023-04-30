@@ -81,5 +81,6 @@ class RVMod(RecycleView):
     player_name = StringProperty()
 
     def on_perf_data(self, *args):
-        data_rs = [{'text': 'Round ' + num + ':' + ' ' + opp} for num, opp in self.perf_data[0].items()]
+        data_rs = [{'text': 'Play-Off Series ' + num + ':' + ' ' + opp} if num.startswith('G') else
+                   {'text': 'Round ' + num + ':' + ' ' + opp} for num, opp in self.perf_data[0].items()]
         self.data = data_rs
