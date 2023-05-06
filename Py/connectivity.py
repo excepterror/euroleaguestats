@@ -7,19 +7,21 @@ from jnius import autoclass
 def connectivity_status():
 
     available_net = check_network_availability()
+    return available_net
 
-    if available_net:
-        available_site = is_connected('www.euroleaguebasketball.net')
-
-        if available_site:
-            return True
-        else:
-            message = 'euroleague.net could not be reached. Please, check your network connection.'
-            return message
-
-    else:
-        message = 'Could not detect any network. Please, connect to a network first.'
-        return message
+    # if available_net:
+    #     return True
+    #     available_site = is_connected('www.euroleaguebasketball.net')
+    #
+    #     if available_site:
+    #         return True
+    #     else:
+    #         message = 'euroleague.net could not be reached. Please, check your network connection.'
+    #         return message
+    #
+    # else:
+    #     message = 'Could not detect any network. Please, connect to a network first.'
+    #     return message
 
 
 def check_network_availability():
