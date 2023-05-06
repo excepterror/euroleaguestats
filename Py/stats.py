@@ -109,24 +109,24 @@ def access_per_game_stats(tree, name):
             playoff_games_count += 1
 
     if playoff_games_count != 0:
-        stats_by_game_min_ft = stats_by_game_min_ft[:-5]
-        stats_by_game_odt = stats_by_game_odt[:-3]
-        stats_by_game_as_to = stats_by_game_as_to[:-3]
-        stats_by_game_fv_ag = stats_by_game_fv_ag[:-2]
-        stats_by_game_cm_rv = stats_by_game_cm_rv[:-2]
-        stats_by_game_pir = stats_by_game_pir[:-1]
+        stats_by_game_min_ft = stats_by_game_min_ft[:-10]
+        stats_by_game_odt = stats_by_game_odt[:-6]
+        stats_by_game_as_to = stats_by_game_as_to[:-6]
+        stats_by_game_fv_ag = stats_by_game_fv_ag[:-4]
+        stats_by_game_cm_rv = stats_by_game_cm_rv[:-4]
+        stats_by_game_pir = stats_by_game_pir[:-2]
 
         slice_index_1 = games_played_reg_season * 5
         slice_index_2 = games_played_reg_season * 3
         slice_index_3 = games_played_reg_season * 2
         slice_index_4 = games_played_reg_season
 
-        del stats_by_game_min_ft[slice_index_1: slice_index_1 + playoff_games_count * 5]
-        del stats_by_game_odt[slice_index_2: slice_index_2 + playoff_games_count * 3]
-        del stats_by_game_as_to[slice_index_2: slice_index_2 + playoff_games_count * 3]
-        del stats_by_game_fv_ag[slice_index_3: slice_index_3 + playoff_games_count * 2]
-        del stats_by_game_cm_rv[slice_index_3: slice_index_3 + playoff_games_count * 2]
-        del stats_by_game_pir[slice_index_4: slice_index_4 + playoff_games_count]
+        del stats_by_game_min_ft[slice_index_1: slice_index_1 + 10]
+        del stats_by_game_odt[slice_index_2: slice_index_2 + 6]
+        del stats_by_game_as_to[slice_index_2: slice_index_2 + 6]
+        del stats_by_game_fv_ag[slice_index_3: slice_index_3 + 4]
+        del stats_by_game_cm_rv[slice_index_3: slice_index_3 + 4]
+        del stats_by_game_pir[slice_index_4: slice_index_4 + 2]
 
     stats_by_game = [stats_by_game_min_ft, stats_by_game_odt, stats_by_game_as_to, stats_by_game_fv_ag,
                      stats_by_game_cm_rv, stats_by_game_pir]
