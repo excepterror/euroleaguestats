@@ -112,9 +112,7 @@ def access_per_game_stats(tree, name):
     for item in rounds_played_by_player:
         if item.startswith('G'):
             playoff_games_count += 1
-        if item.startswith('S'):
-            semifinal_games_count += 1
-        if item.startswith('C'):
+        if item.startswith('S') or item.startswith('C') or item.startswith('3P'):
             semifinal_games_count += 1
 
     if semifinal_games_count != 0:
