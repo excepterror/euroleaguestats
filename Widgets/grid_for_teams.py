@@ -12,28 +12,11 @@ class TeamsLabelGrid(GridLayout):
     _idx = NumericProperty()
     selected_roster = DictProperty({})
 
-    current_teams = ListProperty(
-        ['ALBA Berlin', 'Anadolu Efes Istanbul', 'AS Monaco', 'EA7 Emporio Armani Milan',
-         'Cazoo Baskonia Vitoria-Gasteiz', 'Crvena Zvezda Meridianbet Belgrade', 'FC Barcelona', 'FC Bayern Munich',
-         'Fenerbahce Beko Istanbul', 'LDLC ASVEL Villeurbanne', 'Maccabi Playtika Tel Aviv', 'Olympiacos Piraeus',
-         'Panathinaikos Athens', 'Partizan Mozzart Bet Belgrade', 'Real Madrid', 'Valencia Basket',
-         'Virtus Segafredo Bologna', 'Zalgiris Kaunas'])
-
     def on_rosters(self, *args):
-        if list(self.rosters.keys()).sort() == self.current_teams.sort():
-            for team, urls in self.rosters.items():
-                team_label = TeamsLabel()
-                team_label.text = team
-                team_label.im.source = 'Images/' + team + '.png'
-                self.add_widget(team_label)
-        else:
-            for team, urls in self.rosters.items():
-                team_label = TeamsLabel()
-                team_label.text = team
-                team_label.color = (0, 0, 0, 1)
-
-                self.add_widget(team_label)
-                team_label.remove_widget(team_label.ids.im)
+        for team, urls in self.rosters.items():
+            team_label = TeamsLabel()
+            team_label.im.source = 'Images/' + team + '.png'
+            self.add_widget(team_label)
 
     def push_selected_roster(self, *args):
         self._idx += 1
