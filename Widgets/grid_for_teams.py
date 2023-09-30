@@ -9,12 +9,13 @@ from kivy.uix.behaviors import TouchRippleButtonBehavior
 
 class TeamsLabelGrid(GridLayout):
     rosters = DictProperty({})
-    _idx = NumericProperty()
+    _idx = NumericProperty(0)
     selected_roster = DictProperty({})
 
     def on_rosters(self, *args):
         for team, urls in self.rosters.items():
             team_label = TeamsLabel()
+            team_label.text = team
             team_label.im.source = 'Images/' + team + '.png'
             self.add_widget(team_label)
 
