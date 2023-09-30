@@ -28,7 +28,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.09.0'
+__version__ = '23.09.2'
 
 
 class StatsByGame(Screen):
@@ -307,7 +307,7 @@ class Menu(Screen):
     def stats_reverse_animate(self, instance, *args):
         anim = Animation(size_hint=[.88, .08], duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .1))
 
     def about_animate_on_push(self, instance):
         anim = Animation(size_hint=[.38, .04], duration=.2)
@@ -385,14 +385,26 @@ class Home(Screen):
     standings = DictProperty({})
 
     def allow_image_display(self, *args):
-        Clock.schedule_once(self.create_dict_with_rosters, .3)
+        Clock.schedule_once(self.download_json_file, .1)
 
     def create_dict_with_rosters(self, *args):
+        with open('roster.json') as json_file:
+            data = json.load(json_file)
+        self.rosters_reg = data
+
+    def download_json_file(self, *args):
         conn = connectivity_status()
         if conn is True:
-            with open('roster.json') as json_file:
-                data = json.load(json_file)
-            self.rosters_reg = data
+            url = 'https://drive.google.com/uc?export=download&id=1MZ4VyH2IKROUiBqpAhiD4qCN9PpZJDHz'
+            response = requests.get(url)
+            try:
+                if response.status_code == 200:
+                    with open('roster.json', mode='wb') as file:
+                        file.write(response.content)
+                    self.create_dict_with_rosters()
+            except ValueError as value_error:
+                logging.warning('Value error occurred: {}'.format(value_error))
+                Clock.schedule_once(partial(self.time_out_popup, conn='Error while downloading data.'), 1)
         else:
             Clock.schedule_once(partial(self.time_out_popup, conn), 1)
 
@@ -463,8 +475,9 @@ class EuroLeagueStatsApp(App):
         return ELSScreenManager()
 
     def on_stop(self):
+        suffixes = ('.png', 'json')
         for file_name in os.listdir(os.getcwd()):
-            if file_name.endswith('.png') and file_name not in ('Court.jpg', 'NoImage.jpg'):
+            if file_name.endswith(suffixes) and file_name not in ('Court.jpg', 'NoImage.jpg'):
                 try:
                     os.remove(file_name)
                 except OSError as os_error:
