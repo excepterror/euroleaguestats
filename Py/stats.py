@@ -16,7 +16,7 @@ teams_codes = {'BER': 'ALBA Berlin',
                'EFS': 'Anadolu Efes Istanbul',
                'ASM': 'AS Monaco',
                'EA7': 'EA7 Emporio Armani Milan',
-               'BKN': 'Cazoo Baskonia Vitoria-Gasteiz',
+               'BKN': 'Baskonia Vitoria-Gasteiz',
                'CZV': 'Crvena Zvezda Meridianbet Belgrade',
                'PAR': 'Partizan Mozzart Bet Belgrade',
                'BAR': 'FC Barcelona',
@@ -188,7 +188,7 @@ def access_per_game_stats(tree, name):
     for item in opponents_code:
         if item == ' ':
             opponents_code.remove(item)
-    for k, v in teams_codes.items():
+    for k, v in teams_code.items():
         for i, item in enumerate(opponents_code):
             if item == k:
                 opponents_code[i] = v
