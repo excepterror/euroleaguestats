@@ -300,9 +300,9 @@ class Menu(Screen):
     about = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.86, .06], duration=.2)
+        anim = Animation(size_hint=[.86, .06], duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .1))
 
     def stats_reverse_animate(self, instance, *args):
         anim = Animation(size_hint=[.88, .08], duration=.1)
@@ -310,14 +310,14 @@ class Menu(Screen):
         anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .1))
 
     def about_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.38, .04], duration=.2)
+        anim = Animation(size_hint=[.38, .04], duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.about_reverse_animate, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.about_reverse_animate, instance), .1))
 
     def about_reverse_animate(self, instance, *args):
         anim = Animation(size_hint=[.4, .06], duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .1))
 
     def selection(self, instance, *args):
         if instance is self.current:
