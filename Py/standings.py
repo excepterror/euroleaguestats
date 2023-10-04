@@ -23,7 +23,7 @@ def fetch_standings():
 
         teams_and_ranking = tree.xpath(
             '//div[@class="complex-stat-table_body__UI0Lj"]'
-            '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV"]'
+            '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV complex-stat-table__bottom8__h6iNh"]'
             '//div[@class="complex-stat-table_sticky__TsX4D"]'
             '//span[@class="complex-stat-table_mainClubName__1CeH5"]'
             '/text()')
@@ -33,7 +33,7 @@ def fetch_standings():
 
         ranking = tree.xpath(
             '//div[@class="complex-stat-table_body__UI0Lj"]'
-            '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV"]'
+            '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV complex-stat-table__bottom8__h6iNh"]'
             '//div[@class="complex-stat-table_sticky__TsX4D"]'
             '//div[@class="complex-stat-table_cell__yQmD8 complex-stat-table__right__7D_Wn"]'
             '//span/text()')
@@ -43,7 +43,7 @@ def fetch_standings():
 
         raw_data = tree.xpath(
             '//div[@class="complex-stat-table_body__UI0Lj"]'
-            '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV"]'
+            '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV complex-stat-table__bottom8__h6iNh"]'
             '//div[@class="complex-stat-table_cell__yQmD8"]/text()')
 
         for item in listing:
