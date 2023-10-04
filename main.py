@@ -28,7 +28,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-# __version__ = '23.09.2'
+__version__ = '23.10.0'
 
 
 class StatsByGame(Screen):
@@ -290,9 +290,6 @@ class Standings(Screen):
     standings = DictProperty({})
     recycle_view = ObjectProperty(None)
 
-    def on_standings(self, *args):
-        self.recycle_view.current_standings = self.standings
-
 
 class Menu(Screen):
     current = ObjectProperty(None)
@@ -395,7 +392,7 @@ class Home(Screen):
     def download_json_file(self, *args):
         conn = connectivity_status()
         if conn is True:
-            url = 'https://drive.google.com/uc?id=1lvPpDEraO0uRqBqVIgzEHIw228zc-5D5&export=download'
+            url = 'https://drive.google.com/uc?export=download&id=1i4E6Zwb4tYRZKI5x7cs3byDFcWkkEA3m'
             response = requests.get(url)
             try:
                 if response.status_code == 200:
