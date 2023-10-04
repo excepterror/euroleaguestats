@@ -20,7 +20,7 @@
     Home:
         id: home_screen
         on_rosters_reg: root.teams_screen.grid_teams.rosters = self.rosters_reg
-        on_standings: root.standings_screen.standings = self.standings
+        on_standings: root.standings_screen.standings = self.standings; root.standings_screen.recycle_view.current_standings = root.standings_screen.standings
     Menu:
         on_enter: root.check_in_names(self.name)
     Changelog:
