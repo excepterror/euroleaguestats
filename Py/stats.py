@@ -59,53 +59,53 @@ def access_per_game_stats(tree, name):
     pir = list()
 
     rounds_played_by_player = tree.xpath(
-        '//div[@class="stats-table_table__2BoHU"]//div[@class="stats-table_colGroup__3C7rz"]'
-        '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
-        '//div[@class="stats-table_cell__RKRoT"][1]/text()')
+        '//div[@class="stats-table_table__dpgY7"]//div[@class="stats-table_colGroup__hJ_6t"]'
+        '//div[@class="stats-table_row__ttfiG stats-table__hasLink__N5MQe"]'
+        '//div[@class="stats-table_cell__hdmqc"][1]/text()')
 
-    opponents_code = tree.xpath('//div[@class="stats-table_table__2BoHU"]//div[@class="stats-table_colGroup__3C7rz"]'
-                                '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
-                                '//div[@class="stats-table_cell__RKRoT"][2]/text()')
+    opponents_code = tree.xpath('//div[@class="stats-table_table__dpgY7"]//div[@class="stats-table_colGroup__hJ_6t"]'
+                                '//div[@class="stats-table_row__ttfiG stats-table__hasLink__N5MQe"]'
+                                '//div[@class="stats-table_cell__hdmqc"][2]/text()')
 
-    at_vs = tree.xpath('//div[@class="stats-table_table__2BoHU"]//div[@class="stats-table_colGroup__3C7rz"]'
-                       '//div[@class="stats-table_row__ymPKW stats-table__hasLink__3bBwV"]'
-                       '//span[@class="stats-table_vs__5fppI"]/text()')
+    at_vs = tree.xpath('//div[@class="stats-table_table__dpgY7"]//div[@class="stats-table_colGroup__hJ_6t"]'
+                       '//div[@class="stats-table_row__ttfiG stats-table__hasLink__N5MQe"]'
+                       '//span[@class="stats-table_vs__jx4I1"]/text()')
 
     stats_by_game_min_ft = tree.xpath(
-        '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
-        '//div[@class="stats-table_main__1zwGv"]'
+        '//div[@class="tab-season_phaseTablesWrap__CijM6"]//div[@class="stats-table_table__dpgY7"]'
+        '//div[@class="stats-table_main__zob_I"]'
         '//div[@data-key="Min-Pts-2FG-3FG-FT"]'
-        '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
+        '//div[@class="stats-table_row__ttfiG"]//div[@class="stats-table_cell__hdmqc"]/text()')
 
     stats_by_game_odt = tree.xpath(
-        '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
-        '//div[@class="stats-table_main__1zwGv"]'
+        '//div[@class="tab-season_phaseTablesWrap__CijM6"]//div[@class="stats-table_table__dpgY7"]'
+        '//div[@class="stats-table_main__zob_I"]'
         '//div[@data-key="O-D-T"]'
-        '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
+        '//div[@class="stats-table_row__ttfiG"]//div[@class="stats-table_cell__hdmqc"]/text()')
 
     stats_by_game_as_to = tree.xpath(
-        '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
-        '//div[@class="stats-table_main__1zwGv"]'
+        '//div[@class="tab-season_phaseTablesWrap__CijM6"]//div[@class="stats-table_table__dpgY7"]'
+        '//div[@class="stats-table_main__zob_I"]'
         '//div[@data-key="As-St-To"]'
-        '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
+        '//div[@class="stats-table_row__ttfiG"]//div[@class="stats-table_cell__hdmqc"]/text()')
 
     stats_by_game_fv_ag = tree.xpath(
-        '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
-        '//div[@class="stats-table_main__1zwGv"]'
+        '//div[@class="tab-season_phaseTablesWrap__CijM6"]//div[@class="stats-table_table__dpgY7"]'
+        '//div[@class="stats-table_main__zob_I"]'
         '//div[@data-key="Fv-Ag"]'
-        '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
+        '//div[@class="stats-table_row__ttfiG"]//div[@class="stats-table_cell__hdmqc"]/text()')
 
     stats_by_game_cm_rv = tree.xpath(
-        '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
-        '//div[@class="stats-table_main__1zwGv"]'
+        '//div[@class="tab-season_phaseTablesWrap__CijM6"]//div[@class="stats-table_table__dpgY7"]'
+        '//div[@class="stats-table_main__zob_I"]'
         '//div[@data-key="Cm-Rv"]'
-        '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
+        '//div[@class="stats-table_row__ttfiG"]//div[@class="stats-table_cell__hdmqc"]/text()')
 
     stats_by_game_pir = tree.xpath(
-        '//div[@class="tab-season_phaseTablesWrap__39dBP"]//div[@class="stats-table_table__2BoHU"]'
-        '//div[@class="stats-table_main__1zwGv"]'
-        '//div[@data-key="PIR"]'
-        '//div[@class="stats-table_row__ymPKW"]//div[@class="stats-table_cell__RKRoT"]/text()')
+         '//div[@class="tab-season_phaseTablesWrap__CijM6"]//div[@class="stats-table_table__dpgY7"]'
+         '//div[@class="stats-table_main__zob_I"]'
+         '//div[@data-key="PIR"]'
+         '//div[@class="stats-table_row__ttfiG"]//div[@class="stats-table_cell__hdmqc"]/text()')
 
     playoff_games_count = 0
     semifinal_games_count = 0
@@ -188,7 +188,7 @@ def access_per_game_stats(tree, name):
     for item in opponents_code:
         if item == ' ':
             opponents_code.remove(item)
-    for k, v in teams_code.items():
+    for k, v in teams_codes.items():
         for i, item in enumerate(opponents_code):
             if item == k:
                 opponents_code[i] = v
