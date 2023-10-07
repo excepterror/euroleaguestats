@@ -41,7 +41,7 @@ class StatsByGame(Screen):
     notification = StringProperty('')
 
     def extract_player_games(self):
-        self.opponents = self.player_tree.xpath('//div[@class="stats-table_table__2BoHU"]')
+        self.opponents = self.player_tree.xpath('//div[@class="stats-table_table__dpgY7"]')
         if len(self.opponents) != 0:
             data = access_per_game_stats(self.player_tree, self.player_name)
             self.data = data
@@ -87,16 +87,16 @@ class Stats(Screen):
 
     def extract_players_data(self):
         pos = self.player_tree.xpath(
-            '//div[@class="player-hero_inner__1-bR2 side-gaps_sectionSideGaps__1ylL0"]'
-            '//div[@class="hero-info_position__1uHKl"]/text()')
+            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
+            '//div[@class="hero-info_position__GDXbP"]/text()')
         info_1 = self.player_tree.xpath(
-            '//div[@class="player-hero_inner__1-bR2 side-gaps_sectionSideGaps__1ylL0"]'
-            '//ul[@class="hero-info_dataList__2BmgP"]//li[@class="hero-info_dataItem__cOtmj"]'
-            '//span[@class="hero-info_key__1nddj"]/text()')
+            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
+            '//ul[@class="hero-info_dataList__kKi0z"]//li[@class="hero-info_dataItem__UbJZU"]'
+            '//span[@class="hero-info_key__Pcrzp"]/text()')
         info_2 = self.player_tree.xpath(
-            '//div[@class="player-hero_inner__1-bR2 side-gaps_sectionSideGaps__1ylL0"]'
-            '//ul[@class="hero-info_dataList__2BmgP"]//li[@class="hero-info_dataItem__cOtmj"]'
-            '//b[@class="hero-info_value__2U8j_"]/text()')
+            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
+            '//ul[@class="hero-info_dataList__kKi0z"]//li[@class="hero-info_dataItem__UbJZU"]'
+            '//b[@class="hero-info_value__XFJeE"]/text()')
 
         info = list()
         for i, j, in zip(info_1, info_2):
@@ -137,8 +137,8 @@ class Stats(Screen):
     def select_stats(self, instance, *args):
         if instance.text == 'Average Stats':
             average_stats = self.player_tree.xpath(
-                '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
-                '//div[@class="stats-table_row__ymPKW"][3]//div[@class="stats-table_cell__RKRoT"]/text()')
+                '//div[@class="tab-season_seasonTableWrap__I0CUd"]//div[@class="stats-table_table__dpgY7"]'
+                '//div[@class="stats-table_row__ttfiG"][3]//div[@class="stats-table_cell__hdmqc"]/text()')
             if len(average_stats) != 0:
                 self.show_stats = DisplayStats()
                 self.show_stats.title = 'Average Stats for ' + self.player_name
@@ -148,8 +148,8 @@ class Stats(Screen):
                 self.notification = text
         elif instance.text == 'Total Stats':
             total_stats = self.player_tree.xpath(
-                '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
-                '//div[@class="stats-table_row__ymPKW"][2]//div[@class="stats-table_cell__RKRoT"]/text()')
+                '//div[@class="tab-season_seasonTableWrap__I0CUd"]//div[@class="stats-table_table__dpgY7"]'
+                '//div[@class="stats-table_row__ttfiG"][2]//div[@class="stats-table_cell__hdmqc"]/text()')
             if len(total_stats) != 0:
                 self.show_stats = DisplayStats()
                 self.show_stats.title = 'Total Stats for ' + self.player_name
