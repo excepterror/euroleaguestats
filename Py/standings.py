@@ -19,17 +19,19 @@ def fetch_standings():
     else:
         a = 0
         listing = list()
+        i = 0
+        num_of_total_stat_cats = 11
         tree = etree.HTML(response.content)
 
         teams_and_ranking = tree.xpath(
             '//div[@class="complex-stat-table_body__UI0Lj"]'
             '//div[@class="complex-stat-table_row__Jiu1w complex-stat-table__standingRow__KJaSV complex-stat-table__bottom8__h6iNh"]'
             '//div[@class="complex-stat-table_sticky__TsX4D"]'
-            '//span[@class="complex-stat-table_mainClubName__1CeH5"]'
+            '//span[@class="complex-stat-table_mainClubName__1CeH5" or @class="complex-stat-table_mainClubName__1CeH5 complex-stat-table__long__YuBt_"]'
             '/text()')
-        for i in teams_and_ranking:
-            if len(i) == 1:
-                teams_and_ranking.remove(i)
+        for item in teams_and_ranking:
+            if len(item) == 1:
+                teams_and_ranking.remove(item)
 
         ranking = tree.xpath(
             '//div[@class="complex-stat-table_body__UI0Lj"]'
@@ -50,5 +52,6 @@ def fetch_standings():
             if item[0] in standings:
                 standings['Images/' + item[1] + '.png'] = item[1]
             else:
-                standings['Images/' + item[1] + '.png'] = item[0], raw_data[0:7]
+                standings['Images/' + item[1] + '.png'] = item[0], raw_data[i: i + 7]
+                i += num_of_total_stat_cats
     return standings
