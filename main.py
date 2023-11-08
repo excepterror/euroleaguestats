@@ -28,7 +28,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.10.1'
+__version__ = '23.11.0'
 
 
 class StatsByGame(Screen):
@@ -392,7 +392,7 @@ class Home(Screen):
     def download_json_file(self, *args):
         conn = connectivity_status()
         if conn is True:
-            url = 'https://drive.google.com/uc?export=download&id=1i4E6Zwb4tYRZKI5x7cs3byDFcWkkEA3m'
+            url = 'https://drive.google.com/uc?export=download&id=1pSgDTnwo3W8_FLE2lOD3V0mtOuk6FqmV'
             response = requests.get(url)
             try:
                 if response.status_code == 200:
