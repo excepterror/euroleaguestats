@@ -392,12 +392,12 @@ class Home(Screen):
     def download_json_file(self, *args):
         _conn = connectivity_status()
         if _conn is True:
-            _url = 'https://drive.google.com/uc?export=download&id=1P91a0cB7GS5qTsKLLu3H8y2edTofbvf1'
-            response = requests.get(_url)
+            _url = 'https://drive.google.com/uc?export=download&id=1DrXiAdRBimqXs2s3AvDneqiBFVYrXjak'
+            _response = requests.get(_url)
             try:
-                if response.status_code == 200:
+                if _response.status_code == 200:
                     with open('retrieve_url.txt', mode='wb') as file:
-                        file.write(response.content)
+                        file.write(_response.content)
                     with open('retrieve_url.txt', mode='r') as file:
                         url = file.read()
                 response = requests.get(url.replace("'", ""))
