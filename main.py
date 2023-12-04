@@ -390,20 +390,26 @@ class Home(Screen):
         self.rosters_reg = data
 
     def download_json_file(self, *args):
-        conn = connectivity_status()
-        if conn is True:
-            url = 'https://drive.google.com/uc?export=download&id=1lECHiOJHLVCoozTIMKGTRkNcw9JysQ_F'
-            response = requests.get(url)
+        _conn = connectivity_status()
+        if _conn is True:
+            _url = 'https://drive.google.com/uc?export=download&id=1P91a0cB7GS5qTsKLLu3H8y2edTofbvf1'
+            response = requests.get(_url)
             try:
+                if response.status_code == 200:
+                    with open('retrieve_url.txt', mode='wb') as file:
+                        file.write(response.content)
+                    with open('retrieve_url.txt', mode='r') as file:
+                        url = file.read()
+                response = requests.get(url.replace("'", ""))
                 if response.status_code == 200:
                     with open('roster.json', mode='wb') as file:
                         file.write(response.content)
-                    self.create_dict_with_rosters()
+                self.create_dict_with_rosters()
             except ValueError as value_error:
                 logging.warning('Value error occurred: {}'.format(value_error))
                 Clock.schedule_once(partial(self.time_out_popup, conn='Error while downloading data.'), 1)
         else:
-            Clock.schedule_once(partial(self.time_out_popup, conn), 1)
+            Clock.schedule_once(partial(self.time_out_popup, _conn), 1)
 
     @staticmethod
     def time_out_popup(conn, *args):
@@ -472,7 +478,7 @@ class EuroLeagueStatsApp(App):
         return ELSScreenManager()
 
     def on_stop(self):
-        suffixes = ('.png', 'json')
+        suffixes = ('.png', 'json', 'txt')
         for file_name in os.listdir(os.getcwd()):
             if file_name.endswith(suffixes) and file_name not in ('Court.jpg', 'NoImage.jpg'):
                 try:
