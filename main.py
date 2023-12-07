@@ -28,7 +28,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.12.0'
+__version__ = '23.12.1'
 
 
 class StatsByGame(Screen):
@@ -390,26 +390,21 @@ class Home(Screen):
         self.rosters_reg = data
 
     def download_json_file(self, *args):
-        _conn = connectivity_status()
-        if _conn is True:
-            _url = 'https://drive.google.com/uc?export=download&id=1DrXiAdRBimqXs2s3AvDneqiBFVYrXjak'
-            _response = requests.get(_url)
+        conn = connectivity_status()
+        if conn is True:
+            url = 'https://drive.google.com/uc?export=download&id=17GNgonM2VVtnNEOF2G8id26QDPREsb3g'
+            response = requests.get(url)
             try:
-                if _response.status_code == 200:
-                    with open('retrieve_url.txt', mode='wb') as file:
-                        file.write(_response.content)
-                    with open('retrieve_url.txt', mode='r') as file:
-                        url = file.read()
-                response = requests.get(url.replace("'", ""))
+                # response = requests.get(url.replace("'", ""))
                 if response.status_code == 200:
                     with open('roster.json', mode='wb') as file:
                         file.write(response.content)
-                self.create_dict_with_rosters()
+                    self.create_dict_with_rosters()
             except ValueError as value_error:
                 logging.warning('Value error occurred: {}'.format(value_error))
                 Clock.schedule_once(partial(self.time_out_popup, conn='Error while downloading data.'), 1)
         else:
-            Clock.schedule_once(partial(self.time_out_popup, _conn), 1)
+            Clock.schedule_once(partial(self.time_out_popup, conn), 1)
 
     @staticmethod
     def time_out_popup(conn, *args):
