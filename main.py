@@ -473,7 +473,7 @@ class EuroLeagueStatsApp(App):
         return ELSScreenManager()
 
     def on_stop(self):
-        suffixes = ('.png', 'json', 'txt')
+        suffixes = ('.png', 'json')
         for file_name in os.listdir(os.getcwd()):
             if file_name.endswith(suffixes) and file_name not in ('Court.jpg', 'NoImage.jpg'):
                 try:
