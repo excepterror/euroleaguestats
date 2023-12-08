@@ -54,19 +54,10 @@ def update_dict(stats, j=0, dict_with_stats=None):
 
 def access_per_game_stats(tree, name):
     """Fetch stats for all games in each phase."""
-
     try:
         import global_values
     except ModuleNotFoundError as error:
         logging.warning('globals.py is missing: {}'.format(error))
-
-    min_ft = list()
-    odt = list()
-    as_to = list()
-    fv_ag = list()
-    cm_rv = list()
-    pir = list()
-
     try:
         s1 = global_values.S1
         s2 = global_values.S2
@@ -80,6 +71,12 @@ def access_per_game_stats(tree, name):
     except NameError as error:
         logging.warning('s1, s2, s3, v1, v2, v3, v4, v5, v6 values are not defined: {}'.format(error))
     else:
+        min_ft = list()
+        odt = list()
+        as_to = list()
+        fv_ag = list()
+        cm_rv = list()
+        pir = list()
 
         rounds_played_by_player = tree.xpath(s1)
         opponents_code = tree.xpath(s2)
