@@ -8,6 +8,7 @@ from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
+from pathlib import Path
 from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
@@ -28,7 +29,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
 
-__version__ = '23.12.2'
+__version__ = '23.12.3'
 
 
 class StatsByGame(Screen):
@@ -382,20 +383,32 @@ class Home(Screen):
     standings = DictProperty({})
 
     def allow_image_display(self, *args):
-        Clock.schedule_once(self.download_json_file, .1)
+        Clock.schedule_once(self.download_global_values_file, .1)
 
     def create_dict_with_rosters(self, *args):
         with open('roster.json') as json_file:
             data = json.load(json_file)
         self.rosters_reg = data
 
-    def download_json_file(self, *args):
+    def download_global_values_file(self, *args):
         conn = connectivity_status()
         if conn is True:
-            url = 'https://drive.google.com/uc?export=download&id=17GNgonM2VVtnNEOF2G8id26QDPREsb3g'
-            response = requests.get(url)
+            global_url = 'https://drive.google.com/uc?export=download&id=1_hiu_G8jm7LABNZevYMzJef4UfFM5H0L'
+            response = requests.get(global_url, params={"downloadformat": "txt"})
+            if response.status_code == 200:
+                with open('global_values.txt', mode='wb') as file:
+                    file.write(response.content)
+                path = Path('global_values.txt')
+                path.rename(path.with_suffix('.py'))
             try:
-                # response = requests.get(url.replace("'", ""))
+                import global_values
+            except ModuleNotFoundError as error:
+                logging.warning('globals.py is missing: {}'.format(error))
+            else:
+                pass
+            try:
+                json_url = global_values.JSON_URL
+                response = requests.get(json_url)
                 if response.status_code == 200:
                     with open('roster.json', mode='wb') as file:
                         file.write(response.content)
@@ -478,6 +491,7 @@ class EuroLeagueStatsApp(App):
             if file_name.endswith(suffixes) and file_name not in ('Court.jpg', 'NoImage.jpg'):
                 try:
                     os.remove(file_name)
+                    os.remove('global_values.py')
                 except OSError as os_error:
                     logging.warning('OS error occurred: {}'.format(os_error))
 
