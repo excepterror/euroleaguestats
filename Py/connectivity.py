@@ -1,4 +1,4 @@
-import socket
+import requests
 import logging
 
 from jnius import autoclass
@@ -9,16 +9,16 @@ def connectivity_status():
     available_net = check_network_availability()
 
     if available_net:
-        available_site = is_connected('www.euroleaguebasketball.net')
+        available_site = is_connected('https://www.euroleaguebasketball.net')
 
         if available_site:
             return True
         else:
-            message = 'euroleague.net could not be reached. Please, check your network connection.'
+            message = 'euroleague.net cannot be reached.'
             return message
 
     else:
-        message = 'Could not detect any network. Please, connect to a network first.'
+        message = 'ELS cannot detect a network. Please, connect to a network first.'
         return message
 
 
@@ -54,27 +54,15 @@ def check_network_availability():
 def is_connected(hostname):
 
     try:
-        '''see if we can resolve the host name -- tells us if there is
-        a DNS listening
-        '''
-
-        host = socket.gethostbyname(hostname)
-
-        '''connect to the host -- tells us if the host is actually
-        reachable -- Port: 80 = HTTP, 53 = DNS, 10 sec = timeout
-        :meth: gethostbyname returns an IPv4 address (numeric)
-        '''
-
-        s = socket.create_connection((host, 80), 10)
-
-        '''2 = SHUT_RDWR'''
-
-        s.shutdown(2)
-        s.close()
-
-        return True
+        try:
+            web_response = requests.get(hostname)
+            if web_response.status_code != 200:
+                raise ValueError('Website status code {}'.format(web_response.status_code))
+            return True
+        except ValueError as value_error:
+            logging.warning('Value error occurred: {}'.format(value_error))
+            return False
 
     except OSError as os_error:
         logging.warning('OS error occurred: {}'.format(os_error))
-
-    return False
+        return False

@@ -1,146 +1,58 @@
-#:import LabelBtn Widgets.widgets
-#:import BoxShadow kivy.graphics.boxshadow.BoxShadow
-
 <Changelog>:
     name: 'changelog'
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            size: self.size
+    notes: notes
+    privacy_policy: privacy_policy
+    Image:
+        source: 'Images/About.jpg'
+        fit_mode: 'fill'
     RoundedRectLabelBtn:
-        text: 'Back to Menu'
-        font_size: '21sp'
-        font_name: 'OpenSans'
+        id: notes
+        text: '[i]' + 'VIEW NOTES' + '[/i]'
+        markup: True
+        font_name: 'MyriadPro'
+        font_size: sp(48)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .85, .1
+        size_hint: .88, .08
         color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .1}
+        pos_hint: {'center_x': .5, 'center_y': .45}
         canvas.before:
             Color:
-                rgba: 0, 0, 0, 1
-            BoxShadow:
-                pos: self.pos
-                size: self.size
-                offset: 0, 0
-                border_radius: 60, 60, 60, 60
-                blur_radius: 60
-                spread_radius: -25
-            Color:
-                rgba: 1, .4, 0, 1
+                rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: 60, 60, 60, 60
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.call_menu_screen()
-    Label:
-        text: 'ELS'
-        font_name: 'OpenSans'
-        font_size: '50sp'
-        pos_hint: {'center_x': .5, 'center_y': .93}
-        color: 0, 0, 0, 1
-        size_hint: 1, None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-    Label:
-        text: '23.01.2'
-        font_name: 'OpenSans'
-        font_size: '17sp'
-        pos_hint: {'center_x': .5, 'center_y': .88}
-        color: 0, 0, 0, 1
-        size_hint: 1, None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-    Label:
-        text: root.text_1
-        font_name: 'OpenSans'
-        font_size: '20sp'
-        pos_hint: {'center_x': .5, 'center_y': .7}
-        color: 0, 0, 0, 1
-        size_hint: .9, None
-        text_size: self.width, None
-        height: self.texture_size[1]
+        on_press: root.stats_animate_on_push(self)
+    RoundedRectLabelBtn:
+        id: privacy_policy
+        text: '[i]' + 'PRIVACY POLICY' + '[/i]'
+        markup: True
+        font_name: 'MyriadPro'
+        font_size: sp(48)
+        text_size: self.size
         halign: 'center'
         valign: 'center'
-        markup: True
-    RoundedRectLabelBtn:
-        text: ''
-        font_name: 'OpenSans'
-        font_size: '16sp'
+        size_hint: .88, .08
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .35}
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, .2
+            RoundedRectangle:
+                segments: 70
+                radius: dp(15), dp(15), dp(15), dp(15)
+                pos: self.pos
+                size: self.size
+        on_press: root.stats_animate_on_push(self)
+    Label:
+        text: 'ELS v23.12.3'
+        font_name: 'MyriadPro'
+        font_size: sp(14)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .5, .12
-        color: 1, 1, 1, 0
-        pos_hint: {'center_x': .5, 'center_y': .48}
-        canvas.before:
-            Color:
-                rgba: 1, .4, 0, 1
-            RoundedRectangle:
-                segments: 70
-                radius: 7, 7, 7, 7
-                pos: self.pos
-                size: self.size
-    RoundedRectLabelBtn:
-        text: 'View Notes'
-        font_name: 'OpenSans'
-        font_size: '20sp'
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .495, .115
-        color: 1, .4, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .48}
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, 1
-            RoundedRectangle:
-                segments: 70
-                radius: 7, 7, 7, 7
-                pos: self.pos
-                size: self.size
-        on_press: root.view_notes()
-    RoundedRectLabelBtn:
-        text: ''
-        font_name: 'OpenSans'
-        font_size: '16sp'
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .5, .12
-        color: 1, 1, 1, 0
-        pos_hint: {'center_x': .5, 'center_y': .3}
-        canvas.before:
-            Color:
-                rgba: 0, 0, 0, 1
-            RoundedRectangle:
-                segments: 70
-                radius: 7, 7, 7, 7
-                pos: self.pos
-                size: self.size
-    RoundedRectLabelBtn:
-        text: 'Privacy Policy'
-        font_name: 'OpenSans'
-        font_size: '20sp'
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .495, .115
-        color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .3}
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, 1
-            RoundedRectangle:
-                segments: 70
-                radius: 7, 7, 7, 7
-                pos: self.pos
-                size: self.size
-        on_press: root.view_privacy_policy()
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .02}

@@ -5,20 +5,57 @@
     grid_teams: grid_teams
     idx: root.grid_teams._idx
     Image:
-        source: 'Images/Court.jpg'
-        allow_stretch: True
-        keep_ratio: False
+        source: 'Images/Teams.jpg'
+        fit_mode: 'fill'
     ScrollView:
-        pos_hint: {'center_x': .5, 'y': -.01}
-        size_hint: .98, 1
+        pos_hint: {'center_x': .5, 'center_y': .36}
+        size_hint: .98, .72
         do_scroll_x: False
-        bar_color: 0, 0, 0, 1
+        bar_color: 1, 1, 1, .8
+        bar_inactive_color: 1, 1, 1, 0
         bar_pos_y: 'right'
-        bar_margin: -dp(1)
+        bar_margin: -dp(3)
         bar_width: dp(2)
+        bar_inactive_color: 1, 1, 1, 0
         TeamsLabelGrid:
             id: grid_teams
             cols: 2
-            size_hint: 1, 1.1
-            spacing: 20
-            padding: 15
+            row_force_default: True
+            row_default_height: dp(92)
+            size_hint: 1, None
+            height: self.minimum_height
+            spacing: dp(10)
+            padding: dp(7)
+
+<TeamsLabel>:
+    im: im
+    font_name: 'MyriadPro'
+    font_size: sp(17)
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    color: 0, 0, 0, 0
+    ripple_color: 0, 0, 0, 1
+    ripple_scale: 2
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, .9
+        RoundedRectangle:
+            size: root.shadow_size
+            pos: root.shadow_pos
+            texture: root.shadow_texture
+            segments: 70
+            radius: dp(10), dp(10), dp(10), dp(10)
+        Color:
+            rgba: 1, 1, 1, .9
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            segments: 70
+            radius: dp(15), dp(15), dp(15), dp(15)
+    Image:
+        id: im
+        fit_mode: 'contain'
+        size_hint: None, None
+        size: root.width * .65, root.height * .65
+        pos: root.x + root.width / 2 - self.width / 2, root.y + root.height / 2  - self.height / 2

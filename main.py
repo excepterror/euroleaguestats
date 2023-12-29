@@ -8,6 +8,8 @@ from functools import partial
 from lxml import etree
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
+from pathlib import Path
+from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
 from kivy.app import App
@@ -17,6 +19,7 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, DictProperty, ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
+from kivy.metrics import sp
 
 from Py.connectivity import connectivity_status
 from Py.standings import fetch_standings
@@ -25,41 +28,49 @@ from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, DisplayStats, NotesPopup
 from Widgets.rv_stats import RV
-from Widgets.rv_stats_by_game import RVMod
 
-__version__ = '23.01.2'
+__version__ = '23.12.3'
 
 
 class StatsByGame(Screen):
     player_name = StringProperty('')
     player_tree = DictProperty({})
-    rv_mod = ObjectProperty(None)
+    recycle_view_mod = ObjectProperty(None)
+    data = ListProperty([])
     opponents = ObjectProperty(None)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.message = MessagePopup()
-        self.message.auto_dismiss = True
+    message = ObjectProperty(None)
+    notification = StringProperty('')
 
     def extract_player_games(self):
-        self.opponents = self.player_tree.xpath('//div[@class="stats-table_table__2BoHU"]')
+        self.opponents = self.player_tree.xpath('//div[@class="stats-table_table__dpgY7"]')
         if len(self.opponents) != 0:
             data = access_per_game_stats(self.player_tree, self.player_name)
-            self.rv_mod = RVMod(perf_data=data)
-            self.add_widget(self.rv_mod)
+            self.data = data
         else:
-            self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
+            text = 'No games played by ' + self.player_name + ' yet!'
+            self.notification = text
+
+    def on_data(self, *args):
+        self.recycle_view_mod.perf_data = self.data
+
+    def on_notification(self, *args):
+        if self.notification != '':
+            self.message = MessagePopup(on_open=self.dismiss_text)
+            self.message.notification.text = self.notification
             self.message.open()
 
+    def dismiss_text(self, *args):
+        Clock.schedule_once(self.message.dismiss, 1.5)
+        Clock.schedule_once(self.reset_text, 1.6)
+
+    def reset_text(self, *args):
+        self.notification = ''
+
     @staticmethod
-    def call_menu_screen(*args):
+    def call_teams_screen(*args):
         del App.get_running_app().root.screens_visited[1:]
         App.get_running_app().root.transition = FadeTransition(duration=.5)
-        App.get_running_app().root.current = 'menu'
-
-    def on_leave(self, *args):
-        if len(self.opponents) != 0:
-            self.remove_widget(self.rv_mod)
+        App.get_running_app().root.current = 'teams'
 
 
 class Stats(Screen):
@@ -71,25 +82,22 @@ class Stats(Screen):
     text_2 = StringProperty('')
     stats = ListProperty([])
     rv = ObjectProperty(None)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.show_stats = DisplayStats()
-        self.message = MessagePopup()
-        self.message.auto_dismiss = True
+    show_stats = ObjectProperty(None)
+    message = ObjectProperty(None)
+    notification = StringProperty('')
 
     def extract_players_data(self):
         pos = self.player_tree.xpath(
-            '//div[@class="player-hero_inner__1-bR2 side-gaps_sectionSideGaps__1ylL0"]'
-            '//div[@class="hero-info_position__1uHKl"]/text()')
+            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
+            '//div[@class="hero-info_position__GDXbP"]/text()')
         info_1 = self.player_tree.xpath(
-            '//div[@class="player-hero_inner__1-bR2 side-gaps_sectionSideGaps__1ylL0"]'
-            '//ul[@class="hero-info_dataList__2BmgP"]//li[@class="hero-info_dataItem__cOtmj"]'
-            '//span[@class="hero-info_key__1nddj"]/text()')
+            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
+            '//ul[@class="hero-info_dataList__kKi0z"]//li[@class="hero-info_dataItem__UbJZU"]'
+            '//span[@class="hero-info_key__Pcrzp"]/text()')
         info_2 = self.player_tree.xpath(
-            '//div[@class="player-hero_inner__1-bR2 side-gaps_sectionSideGaps__1ylL0"]'
-            '//ul[@class="hero-info_dataList__2BmgP"]//li[@class="hero-info_dataItem__cOtmj"]'
-            '//b[@class="hero-info_value__2U8j_"]/text()')
+            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
+            '//ul[@class="hero-info_dataList__kKi0z"]//li[@class="hero-info_dataItem__UbJZU"]'
+            '//b[@class="hero-info_value__XFJeE"]/text()')
 
         info = list()
         for i, j, in zip(info_1, info_2):
@@ -123,37 +131,68 @@ class Stats(Screen):
 
         try:
             self.text_1 = pos[0]
-            self.text_2 = info[0] + '[color=FF6600]' + '  |  ' '[/color]' + info[1] + '[color=FF6600]' + '  |  ' + \
-                                    '[/color]' + info[2]
+            self.text_2 = '\n' + info[0] + '\n\n' + info[1] + '\n\n' + info[2]
         except IndexError as index_error:
             logging.warning('Index error occurred: {}'.format(index_error))
 
-    def select_stats(self, instance):
+    def select_stats(self, instance, *args):
         if instance.text == 'Average Stats':
             average_stats = self.player_tree.xpath(
-                '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
-                '//div[@class="stats-table_row__ymPKW"][3]//div[@class="stats-table_cell__RKRoT"]/text()')
+                '//div[@class="tab-season_seasonTableWrap__I0CUd"]//div[@class="stats-table_table__dpgY7"]'
+                '//div[@class="stats-table_row__ttfiG"][3]//div[@class="stats-table_cell__hdmqc"]/text()')
             if len(average_stats) != 0:
+                self.show_stats = DisplayStats()
                 self.show_stats.title = 'Average Stats for ' + self.player_name
                 self.rv = RV(update_dict(average_stats))
             else:
-                self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
-                self.message.open()
+                text = 'No games played by ' + self.player_name + ' yet!'
+                self.notification = text
         elif instance.text == 'Total Stats':
             total_stats = self.player_tree.xpath(
-                '//div[@class="tab-season_seasonTableWrap__2BvIN"]//div[@class="stats-table_table__2BoHU"]'
-                '//div[@class="stats-table_row__ymPKW"][2]//div[@class="stats-table_cell__RKRoT"]/text()')
+                '//div[@class="tab-season_seasonTableWrap__I0CUd"]//div[@class="stats-table_table__dpgY7"]'
+                '//div[@class="stats-table_row__ttfiG"][2]//div[@class="stats-table_cell__hdmqc"]/text()')
             if len(total_stats) != 0:
+                self.show_stats = DisplayStats()
                 self.show_stats.title = 'Total Stats for ' + self.player_name
                 self.rv = RV(update_dict(total_stats))
-                self.show_stats.title = 'Total Stats for ' + self.player_name
             else:
-                self.message.notification.text = 'No games played by ' + self.player_name + ' yet!'
-                self.message.open()
+                text = 'No games played by ' + self.player_name + ' yet!'
+                self.notification = text
 
     def on_rv(self, *args):
         self.show_stats.content = self.rv
         self.show_stats.open()
+
+    def on_notification(self, *args):
+        if self.notification != '':
+            self.message = MessagePopup(on_open=self.dismiss_text)
+            self.message.notification.text = self.notification
+            self.message.open()
+
+    def dismiss_text(self, *args):
+        Clock.schedule_once(self.message.dismiss, 1.5)
+        Clock.schedule_once(self.reset_text, 1.6)
+
+    def reset_text(self, *args):
+        self.notification = ''
+
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint_x=.68, duration=.2)
+        anim &= Animation(height=sp(70), duration=.2)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint_x=.7, duration=.1)
+        anim &= Animation(height=sp(80), duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.select_stats, instance), .2))
+
+    @staticmethod
+    def call_teams_screen(*args):
+        del App.get_running_app().root.screens_visited[1:]
+        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.current = 'teams'
 
 
 class Roster(Screen):
@@ -161,11 +200,7 @@ class Roster(Screen):
     trees = DictProperty({})
     player_name = StringProperty()
     repeated_selection_flag = NumericProperty(0)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.message = MessagePopup()
-        self.message.notification.text = 'Almost there...'
+    canvas_opacity = NumericProperty(0)
 
     def assert_tree(self, *args):
         for name, t in self.trees.items():
@@ -216,14 +251,20 @@ class Roster(Screen):
         self.grid_roster.roster = dict()
 
     def call_stats(self):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'stats'
         self.grid_roster.stats_option = False
 
     def call_stats_by_game(self):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'stats_by_game'
         self.grid_roster.stats_by_game_option = False
+
+    @staticmethod
+    def call_teams_screen(*args):
+        del App.get_running_app().root.screens_visited[1:]
+        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.current = 'teams'
 
 
 class Teams(Screen):
@@ -234,7 +275,7 @@ class Teams(Screen):
         conn = connectivity_status()
         if conn is True:
             if len(self.grid_teams.selected_roster) != 0:
-                App.get_running_app().root.transition = FadeTransition(duration=.5)
+                App.get_running_app().root.transition = SlideTransition(direction='left')
                 App.get_running_app().root.current = 'roster'
             else:
                 message = MessagePopup()
@@ -243,14 +284,12 @@ class Teams(Screen):
                 Clock.schedule_once(message.dismiss, 2)
         else:
             App.get_running_app().root.show_popup(conn)
+            Clock.schedule_once(App.get_running_app().stop, 5)
 
 
 class Standings(Screen):
     standings = DictProperty({})
     recycle_view = ObjectProperty(None)
-
-    def on_standings(self, *args):
-        self.recycle_view.current_standings = self.standings
 
 
 class Menu(Screen):
@@ -258,15 +297,25 @@ class Menu(Screen):
     standings = ObjectProperty(None)
     about = ObjectProperty(None)
 
-    def animate_on_push(self, instance):
-        anim = Animation(size_hint=[.8, .05], duration=.2)
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.86, .06], duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.reverse_animate, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .1))
 
-    def reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.85, .1], duration=.1)
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.88, .08], duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .1))
+
+    def about_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.38, .04], duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.about_reverse_animate, instance), .1))
+
+    def about_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.4, .06], duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .1))
 
     def selection(self, instance, *args):
         if instance is self.current:
@@ -285,30 +334,42 @@ class Menu(Screen):
     def call_standings_screen(*args):
         conn = connectivity_status()
         if conn is True:
-            App.get_running_app().root.transition = FadeTransition(duration=.5)
+            App.get_running_app().root.transition = SlideTransition(direction='left')
             App.get_running_app().root.current = 'standings'
         else:
             App.get_running_app().root.show_popup(conn)
+            Clock.schedule_once(App.get_running_app().stop, 3)
 
     @staticmethod
     def call_changelog_screen(*args):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'changelog'
 
 
 class Changelog(Screen):
-    text_1 = StringProperty('[i]View performance data for all players in the competition. Enjoy![/i]')
+    notes = ObjectProperty(None)
+    privacy_policy = ObjectProperty(None)
+
+    def stats_animate_on_push(self, instance):
+        anim = Animation(size_hint=[.86, .06], duration=.2)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+
+    def stats_reverse_animate(self, instance, *args):
+        anim = Animation(size_hint=[.88, .08], duration=.1)
+        anim.start(instance)
+        anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
+
+    def selection(self, instance, *args):
+        if instance is self.notes:
+            self.view_notes()
+        elif instance is self.privacy_policy:
+            self.view_privacy_policy()
 
     @staticmethod
     def view_notes():
         notes = NotesPopup()
         notes.open()
-
-    @staticmethod
-    def call_menu_screen(*args):
-        del App.get_running_app().root.screens_visited[-1]
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
-        App.get_running_app().root.current = 'menu'
 
     @staticmethod
     def view_privacy_policy(*args):
@@ -318,34 +379,50 @@ class Changelog(Screen):
 
 class Home(Screen):
     welcome = ObjectProperty(None)
-    wait = ObjectProperty(None)
     rosters_reg = DictProperty({})
     standings = DictProperty({})
 
-    def on_enter(self, *args):
-        Clock.schedule_once(self.fade_in_label, .5)
-
-    def fade_in_label(self, *args):
-        self.welcome.color = (1, .4, 0, 0)
-        anim = Animation(color=(1, .4, 0, 1), duration=2)
-        anim.start(self.welcome)
-        anim.on_complete(self.show_wait_message())
-
-    def show_wait_message(self, *args):
-        self.wait.color = (1, 1, 1, 0)
-        anim = Animation(color=(1, 1, 1, 0), duration=.5) + Animation(color=(1, 1, 1, 1), duration=.5)
-        anim.start(self.wait)
-        Clock.schedule_once(self.create_dict_with_rosters, 3.55)
+    def allow_image_display(self, *args):
+        Clock.schedule_once(self.download_global_values_file, .1)
 
     def create_dict_with_rosters(self, *args):
+        with open('roster.json') as json_file:
+            data = json.load(json_file)
+        self.rosters_reg = data
+
+    def download_global_values_file(self, *args):
         conn = connectivity_status()
         if conn is True:
-            with open('roster.json') as json_file:
-                data = json.load(json_file)
-            self.rosters_reg = data
+            global_url = 'https://drive.google.com/uc?export=download&id=1_hiu_G8jm7LABNZevYMzJef4UfFM5H0L'
+            response = requests.get(global_url, params={"downloadformat": "txt"})
+            if response.status_code == 200:
+                with open('global_values.txt', mode='wb') as file:
+                    file.write(response.content)
+                path = Path('global_values.txt')
+                path.rename(path.with_suffix('.py'))
+            try:
+                import global_values
+            except ModuleNotFoundError as error:
+                logging.warning('globals.py is missing: {}'.format(error))
+            else:
+                pass
+            try:
+                json_url = global_values.JSON_URL
+                response = requests.get(json_url)
+                if response.status_code == 200:
+                    with open('roster.json', mode='wb') as file:
+                        file.write(response.content)
+                    self.create_dict_with_rosters()
+            except ValueError as value_error:
+                logging.warning('Value error occurred: {}'.format(value_error))
+                Clock.schedule_once(partial(self.time_out_popup, conn='Error while downloading data.'), 1)
         else:
-            App.get_running_app().root.show_popup(conn)
-            Clock.schedule_once(App.get_running_app().stop, 3)
+            Clock.schedule_once(partial(self.time_out_popup, conn), 1)
+
+    @staticmethod
+    def time_out_popup(conn, *args):
+        App.get_running_app().root.show_popup(conn)
+        Clock.schedule_once(App.get_running_app().stop, 4)
 
     def on_rosters_reg(self, *args):
         self.standings = fetch_standings()
@@ -355,7 +432,7 @@ class Home(Screen):
 
     @staticmethod
     def call_menu_screen():
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'menu'
 
 
@@ -377,20 +454,15 @@ class ELSScreenManager(ScreenManager):
                                     ('roster', 'teams'), ('stats', 'roster'), ('stats_by_game', 'roster'))
 
         if key in (27, 1001):
-            if self.screens_visited[-1] not in ('menu', 'changelog'):
+            if self.screens_visited[-1] not in 'menu':
                 for scr_name, instance in screens_resolution_order:
                     if self.screens_visited[-1] == scr_name:
                         App.get_running_app().root.current = instance
                         del self.screens_visited[-1]
                         return True
             else:
-                if self.screens_visited[-1] == 'changelog':
-                    ''' "changelog" entry in :list: screens_visited is deleted, whenever the user presses
-                    the 'Back to Menu' button'''
-                    return True
-                else:
-                    Clock.schedule_once(self.exit_app, .5)
-                    return True
+                Clock.schedule_once(self.exit_app, .5)
+                return True
 
     def check_in_names(self, screen_name):
         if screen_name in self.screens_visited:
@@ -414,20 +486,21 @@ class EuroLeagueStatsApp(App):
         return ELSScreenManager()
 
     def on_stop(self):
+        suffixes = ('.png', 'json')
         for file_name in os.listdir(os.getcwd()):
-            if file_name.endswith('.png') and file_name not in ('Court.jpg', 'NoImage.jpg'):
+            if file_name.endswith(suffixes) and file_name not in ('Court.jpg', 'NoImage.jpg'):
                 try:
                     os.remove(file_name)
+                    os.remove('global_values.py')
                 except OSError as os_error:
                     logging.warning('OS error occurred: {}'.format(os_error))
 
 
 if __name__ == '__main__':
     if platform == "android":
-        from android.permissions import request_permissions, Permission
-
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
-    LabelBase.register(name='OpenSans', fn_regular='Fonts/OpenSans-Regular.ttf', fn_bold='Fonts/OpenSans-Bold.ttf',
-                       fn_italic='Fonts/OpenSans-Italic.ttf')
+    LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
+                       fn_bold='Fonts/MyriadPro-BoldCondensedItalic.ttf',
+                       fn_italic='Fonts/MyriadPro-BlackCondensedItalic.ttf')
     EuroLeagueStatsApp().run()

@@ -6,13 +6,43 @@
     player_name: root.grid_roster.name
     repeated_selection_flag: root.grid_roster.repeated_selection_flag
     scroll_roster: scroll_roster
+    canvas.after:
+        Color:
+            rgba: 0 ,0 ,0, root.canvas_opacity
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Image:
+        source: 'Images/Rosters.jpg'
+        fit_mode: 'fill'
+    RoundedRectLabelBtn:
+        text: 'Click me'
+        font_name: 'MyriadPro'
+        font_size: sp(24)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .7, None
+        height: dp(80)
+        pos_hint: {'center_x': .5, 'center_y': .92}
+        color: 0, 0, 0, 0
+        canvas.before:
+            Color:
+                rgba: 1, 0, 0, 0
+            RoundedRectangle:
+                segments: 70
+                radius: dp(15), dp(15), dp(15), dp(15)
+                pos: self.pos
+                size: self.size
+        on_press: root.call_teams_screen()
     ScrollView:
         id: scroll_roster
-        pos_hint: {'center_x': .5, 'y': .03}
-        size_hint: .98, .95
+        pos_hint: {'center_x': .5, 'center_y': .35}
+        size_hint: .98, .68
         do_scroll_x: False
         bar_pos_y: 'right'
-        bar_color: 1, 1, 1, 1
+        bar_color: 1, 1, 1, .8
+        bar_inactive_color: 1, 1, 1, 0
         bar_margin: -dp(3)
         bar_width: dp(2)
         SlidingLabelGrid:
@@ -22,7 +52,76 @@
             row_default_height: dp(60)
             size_hint: 1, None
             height: self.minimum_height
-            spacing: 8
-            padding: 5
+            spacing: dp(10)
+            padding: dp(7)
             on_stats_option: root.call_stats()
             on_stats_by_game_option: root.call_stats_by_game()
+    Label:
+        text: 'average & total stats >'
+        font_name: 'MyriadPro'
+        font_size: sp(14)
+        color: 1, 1, 1, 1
+        size_hint: None, None
+        text_size: None, None
+        width: self.texture_size[0]
+        height: self.texture_size[1]
+        halign: 'center'
+        valign: 'middle'
+        pos: root.x + dp(20), root.y + root.scroll_roster.height + dp(10)
+    Label:
+        text: '< per game stats'
+        font_name: 'MyriadPro'
+        font_size: sp(14)
+        color: 1, 1, 1, 1
+        size_hint: None, None
+        text_size: None, None
+        width: self.texture_size[0]
+        height: self.texture_size[1]
+        halign: 'center'
+        valign: 'middle'
+        pos: root.x + root.width - self.width - dp(20), root.y + root.scroll_roster.height + dp(10)
+
+
+<SlidingLabel>:
+    pos: self.pos
+    scatter_: scatter_
+    label: label
+    r_arrow: r_arrow
+    l_arrow: l_arrow
+    Scatter:
+        id: scatter_
+        do_translation_y: False
+        do_scale: False
+        do_rotation: False
+        Label:
+            id: label
+            text: root.name
+            font_name: 'MyriadPro'
+            font_size: sp(22)
+            color: 0, 0, 0, 1
+            size_hint: None, None
+            size: self.parent.width, dp(60)
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'middle'
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .9
+                RoundedRectangle:
+                    size: self.size
+                    segments: 70
+                    radius: dp(10), dp(10), dp(10), dp(10)
+        Image:
+            id: l_arrow
+            source: 'Images/L_Arrow.png'
+            opacity: 0
+            size_hint: None, None
+            size: root.height * .3, root.height * .3
+            pos: 0, root.height / 2 - self.height * .52
+        Image:
+            id: r_arrow
+            opacity: 0
+            source: 'Images/R_Arrow.png'
+            size_hint: None, None
+            size: root.height * .3, root.height * .3
+            pos: root.width - self.width, root.height / 2 - self.height * .52

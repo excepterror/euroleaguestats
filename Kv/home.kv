@@ -1,37 +1,6 @@
 <Home>:
     name: 'home'
-    welcome: welcome
-    wait: wait
-    Label:
-        id: welcome
-        text: 'Welcome'
-        font_name: 'OpenSans'
-        color: 1, .4, 0, 0
-        font_size: root.width * .2
-        pos_hint: {'center_x': .5, 'center_y': .75}
-    Label:
-        text: 'e l ' + '[color=#FF6600]' + 's' + '[/color]'
-        font_name: 'OpenSans'
-        font_size: dp(45)
-        pos_hint: {'center_x': .5, 'center_y': .15}
-        size_hint: None, None
-        height: self.texture_size[1]
-        width: self.texture_size[0] * 1.2
-        halign: 'center'
-        valign: 'center'
-        markup: True
-        canvas.before:
-            Color:
-                rgba: .2, .6, 1, 1
-            RoundedRectangle:
-                radius: 10, 0, 10, 0
-                segments: 70
-                size: self.size
-                pos: self.pos
-    Label:
-        id: wait
-        text: 'Please wait'
-        font_name: 'OpenSans'
-        color: 1, 1, 1, 0
-        font_size: '17dp'
-        pos_hint: {'center_x': .5, 'center_y': .43}
+    Image:
+        source: 'Images/Loading.jpg'
+        fit_mode: 'fill'
+        on_size: root.allow_image_display()

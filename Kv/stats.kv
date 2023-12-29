@@ -1,89 +1,118 @@
+#:import MyLabel Widgets.widgets
+
 <Stats>:
     name: 'stats'
-    NullLabel:
-        text: ' '
-        size_hint: .54, .09
-        pos_hint: {'center_x': .5, 'center_y': .91}
-        canvas.before:
-            Color:
-                rgba: 1, .2, 0, .9
-            RoundedRectangle:
-                segments: 70
-                radius: 60, 0
-                pos: self.pos
-                size: self.size
+    Image:
+        source: 'Images/Cross-Screen.jpg'
+        fit_mode: 'fill'
     RoundedRectLabelBtn:
-        text: root.player_name
-        font_name: 'OpenSans'
-        size_hint: .537, .086
-        pos_hint: {'center_x': .5, 'center_y': .91}
-        font_size: '22dp'
-        color: 1, 1, 1, 1
+        text: 'Click me'
+        font_name: 'MyriadPro'
+        font_size: sp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
+        size_hint: .7, None
+        height: dp(80)
+        pos_hint: {'center_x': .5, 'center_y': .92}
+        color: 0, 0, 0, 0
         canvas.before:
             Color:
-                rgba: 0, 0, 0, 1
+                rgba: 1, 0, 0, 0
             RoundedRectangle:
                 segments: 70
-                radius: 60, 0
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
+        on_press: root.call_teams_screen()
+    Label:
+        text: '[i]' + root.player_name + '[/i]'
+        font_name: 'MyriadPro'
+        font_size: sp(self.height / 2)
+        size_hint: 1, None
+        text_size: self.width, None
+        halign: 'center'
+        valign: 'middle'
+        pos_hint: {'center_x': .5, 'center_y': .75}
+        markup: True
     Image:
         source: root.player_photo
-        size_hint: None, .35
-        width: '160dp'
-        allow_stretch: True
-        keep_ratio: False
-        pos_hint: {'center_x': .5, 'center_y': .71}
+        fit_mode: 'fill'
+        size_hint: None, None
+        width: dp(160)
+        height: dp(200)
+        pos_hint: {'center_x': .25, 'center_y': .54}
     Label:
-        text: root.text_1 + '[color=FF6600]' + '  |  ' + '[/color]' + root.text_2
-        font_name: 'OpenSans'
-        pos_hint: {'center_x': .5, 'center_y': .46}
-        font_size: '17sp'
+        text: root.text_1 + '\n' + root.text_2
+        font_name: 'MyriadPro'
+        pos_hint: {'center_x': .72, 'center_y': .52}
+        font_size: sp(self.height / 5)
         color: 1, 1, 1, 1
-        size_hint: .9, None
+        size_hint: .5, None
         text_size: self.width, None
-        height: self.texture_size[1]
         halign: 'center'
         valign: 'middle'
         markup: True
     RoundedRectLabelBtn:
         text: 'Average Stats'
-        font_name: 'OpenSans'
-        font_size: '22sp'
+        font_name: 'MyriadPro'
+        font_size: sp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .7, .13
-        pos_hint: {'center_x': .5, 'center_y': .3}
+        size_hint: .7, None
+        height: dp(80)
+        pos_hint: {'center_x': .5, 'center_y': .27}
         color: 0, 0, 0, 1
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .9
+                rgba: 1, 1, 1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 80, 0
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.select_stats(self)
+        on_press: root.stats_animate_on_push(self)
     RoundedRectLabelBtn:
         text: 'Total Stats'
-        font_name: 'OpenSans'
-        font_size: '22sp'
+        font_name: 'MyriadPro'
+        font_size: sp(24)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .7, .13
-        pos_hint: {'center_x': .5, 'center_y': .12}
+        size_hint: .7, None
+        height: dp(80)
+        pos_hint: {'center_x': .5, 'center_y': .1}
         color: 0, 0, 0, 1
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .9
+                rgba: 1, 1, 1, .8
             RoundedRectangle:
                 segments: 70
-                radius: 80, 0
+                radius: dp(15), dp(15), dp(15), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.select_stats(self)
+        on_press: root.stats_animate_on_push(self)
+
+<RV>:
+    viewclass: 'StatisticsLabel'
+    RecycleBoxLayout:
+        default_size: None, dp(46)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        size_hint_x: None
+        width: root.width
+        orientation: 'vertical'
+        bar_pos_y: 'right'
+        bar_color: .2, .6, .8, 1
+        bar_margin: -dp(6)
+        bar_width: dp(2)
+
+<StatisticsLabel@Label>:
+    text_size: self.width, None
+    font_name: 'MyriadPro'
+    font_size: sp(16)
+    halign: 'center'
+    valign: 'middle'
+    markup: True

@@ -1,5 +1,4 @@
 import logging
-
 import requests
 from lxml import etree
 
@@ -7,10 +6,20 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 def fetch_standings():
-    url = 'https://www.euroleaguebasketball.net/euroleague/standings/'
-    standings = {'[color=FF6600]' + 'Standings' + '[/color]': ['Games Played', 'W', 'L', 'Win%', 'PTS+', 'PTS-', '+/-']}
     try:
+        import global_values
+    except ModuleNotFoundError as error:
+        logging.warning('globals.py is missing: {}'.format(error))
+
+    url = 'https://www.euroleaguebasketball.net/euroleague/standings/'
+    standings = dict()
+    try:
+        g1 = global_values.G1
+        g2 = global_values.G2
+        g3 = global_values.G3
         response = requests.get(url)
+    except NameError as error:
+        logging.warning('g1, g2, 33 values are not defined: {}'.format(error))
     except requests.exceptions.HTTPError as http_error:
         logging.warning('HTTP error occurred: {}'.format(http_error))
     except requests.exceptions.Timeout as timeout:
@@ -18,56 +27,28 @@ def fetch_standings():
     except Exception as e:
         logging.warning(e)
     else:
-        qualified = '[color=FF6600]' + ' (Q)' + '[/color]'
+        a = 0
         listing = list()
+        i = 0
+        num_of_total_stat_cats = 11
         tree = etree.HTML(response.content)
 
-        teams_and_ranking = tree.xpath(
-            '//div[@class="complex-stat-table_body__yaXeJ"]'
-            '//div[@class="complex-stat-table_row__1P6us complex-stat-table__standingRow__1cfez"]'
-            '//div[@class="complex-stat-table_sticky__2I3pT"]'
-            '//span[@class="complex-stat-table_mainClubName__3IMZJ" or "complex-stat-table_mainClubName__3IMZJ complex-stat-table__long__MGBQU"]'
-            '/text()')
+        teams_and_ranking = tree.xpath(g1)
+        for item in teams_and_ranking:
+            if len(item) == 1:
+                teams_and_ranking.remove(item)
 
-        qualified_index = tree.xpath(
-            '//div[@class="complex-stat-table_body__yaXeJ"]'
-            '//div[@class="complex-stat-table_row__1P6us complex-stat-table__standingRow__1cfez"]'
-            '//div[@class="complex-stat-table_sticky__2I3pT"]'
-            '//span[@class="complex-stat-table_mainClubName__3IMZJ"]//sup/text()')
+        ranking = tree.xpath(g2)
+        while a < len(teams_and_ranking):
+            listing.append((ranking[a], teams_and_ranking[a]))
+            a += 1
 
-        raw_data = tree.xpath(
-            '//div[@class="complex-stat-table_body__yaXeJ"]'
-            '//div[@class="complex-stat-table_row__1P6us complex-stat-table__standingRow__1cfez"]'
-            '//div[@class="complex-stat-table_cell__1lxC7"]/text()')
+        raw_data = tree.xpath(g3)
 
-        '''Concatenate ranking and name.'''
-        try:
-            i, m, k = 0, 0, 0
-            while k < len(teams_and_ranking) - 5:
-                k = 5 * i
-                m = k + 1
-                try:
-                    if qualified_index[i] == '*':
-                        listing.append(teams_and_ranking[k] + '. ' + teams_and_ranking[m] + qualified)
-                except IndexError as idx_err:
-                    logging.warning('Team not qualified: {}'.format(idx_err))
-                    listing.append(teams_and_ranking[k] + '. ' + teams_and_ranking[m])
-                i += 1
-        except IndexError as idx_err:
-            logging.warning('Index error 1 occurred: {}'.format(idx_err))
-
-        try:
-            i, j = 0, 0
-            num_of_teams = len(teams_and_ranking) / 5  # 5: team name occurrence every five items in :list: teams_and_ranking
-            num_of_total_stat_cats = 11
-            while i <= num_of_teams * num_of_total_stat_cats - 4:
-                if listing[j] in standings:
-                    standings[listing[j]] = listing[j]
-                else:
-                    standings[listing[j]] = raw_data[i:i + 7]  # we only want the first seven statistical categories for each team
+        for item in listing:
+            if item[0] in standings:
+                standings['Images/' + item[1] + '.png'] = item[1]
+            else:
+                standings['Images/' + item[1] + '.png'] = item[0], raw_data[i: i + 7]
                 i += num_of_total_stat_cats
-                j += 1
-        except IndexError as idx_err:
-            logging.warning('Index error 2 occurred: {}'.format(idx_err))
-
     return standings

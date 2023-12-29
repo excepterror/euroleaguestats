@@ -63,6 +63,24 @@ class WebViewInModal(ModalView):
             self.dismiss()
 
     @run_on_ui_thread
+    def on_size(self, instance, size):
+        if self.webview:
+            params = self.webview.getLayoutParams()
+            params.width = self.width
+            params.height = self.height
+            self.webview.setLayoutParams(params)
+
+    def pause(self):
+        if self.webview:
+            self.webview.pauseTimers()
+            self.webview.onPause()
+
+    def resume(self):
+        if self.webview:
+            self.webview.onResume()
+            self.webview.resumeTimers()
+
+    @run_on_ui_thread
     def on_dismiss(self):
         view_group = autoclass('android.view.ViewGroup')
         if self.enable_dismiss:
