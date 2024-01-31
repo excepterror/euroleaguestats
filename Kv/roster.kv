@@ -54,74 +54,25 @@
             height: self.minimum_height
             spacing: dp(10)
             padding: dp(7)
-            on_stats_option: root.call_stats()
-            on_stats_by_game_option: root.call_stats_by_game()
-    Label:
-        text: 'average & total stats >'
-        font_name: 'MyriadPro'
-        font_size: sp(14)
-        color: 1, 1, 1, 1
-        size_hint: None, None
-        text_size: None, None
-        width: self.texture_size[0]
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        pos: root.x + dp(20), root.y + root.scroll_roster.height + dp(10)
-    Label:
-        text: '< per game stats'
-        font_name: 'MyriadPro'
-        font_size: sp(14)
-        color: 1, 1, 1, 1
-        size_hint: None, None
-        text_size: None, None
-        width: self.texture_size[0]
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        pos: root.x + root.width - self.width - dp(20), root.y + root.scroll_roster.height + dp(10)
-
 
 <SlidingLabel>:
     pos: self.pos
-    scatter_: scatter_
     label: label
-    r_arrow: r_arrow
-    l_arrow: l_arrow
-    Scatter:
-        id: scatter_
-        do_translation_y: False
-        do_scale: False
-        do_rotation: False
-        Label:
-            id: label
-            text: root.name
-            font_name: 'MyriadPro'
-            font_size: sp(22)
-            color: 0, 0, 0, 1
-            size_hint: None, None
-            size: self.parent.width, dp(60)
-            text_size: self.width, None
-            halign: 'center'
-            valign: 'middle'
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, .9
-                RoundedRectangle:
-                    size: self.size
-                    segments: 70
-                    radius: dp(10), dp(10), dp(10), dp(10)
-        Image:
-            id: l_arrow
-            source: 'Images/L_Arrow.png'
-            opacity: 0
-            size_hint: None, None
-            size: root.height * .3, root.height * .3
-            pos: 0, root.height / 2 - self.height * .52
-        Image:
-            id: r_arrow
-            opacity: 0
-            source: 'Images/R_Arrow.png'
-            size_hint: None, None
-            size: root.height * .3, root.height * .3
-            pos: root.width - self.width, root.height / 2 - self.height * .52
+    Label:
+        id: label
+        text: root.name
+        font_name: 'MyriadPro'
+        font_size: sp(22)
+        color: 0, 0, 0, 1
+        size_hint: None, None
+        size: self.parent.width, dp(60)
+        text_size: self.width, None
+        halign: 'center'
+        valign: 'middle'
+        canvas.before:
+            Color:
+                rgba: root.r, root.g, root.b, root.a
+            RoundedRectangle:
+                size: self.size
+                segments: 70
+                radius: dp(10), dp(10), dp(10), dp(10)
