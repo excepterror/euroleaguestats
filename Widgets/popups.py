@@ -81,12 +81,12 @@ Builder.load_string("""
 """)
 
 
-class DisplayStats(Popup):
-    pass
-
-
 class MessagePopup(Popup):
     notification = ObjectProperty(None)
+
+
+class DisplayStats(Popup):
+    pass
 
 
 class NotesPopup(Popup):
