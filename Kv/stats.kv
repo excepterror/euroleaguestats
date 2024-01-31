@@ -1,7 +1,8 @@
-#:import MyLabel Widgets.widgets
+#:import RVMod Widgets.rv_stats_by_game
 
 <Stats>:
     name: 'stats'
+    recycle_view_mod: recycle_view_mod
     Image:
         source: 'Images/Cross-Screen.jpg'
         fit_mode: 'fill'
@@ -33,7 +34,7 @@
         text_size: self.width, None
         halign: 'center'
         valign: 'middle'
-        pos_hint: {'center_x': .5, 'center_y': .75}
+        pos_hint: {'center_x': .5, 'center_y': .77}
         markup: True
     Image:
         source: root.player_photo
@@ -41,11 +42,11 @@
         size_hint: None, None
         width: dp(160)
         height: dp(200)
-        pos_hint: {'center_x': .25, 'center_y': .54}
+        pos_hint: {'center_x': .25, 'center_y': .61}
     Label:
         text: root.text_1 + '\n' + root.text_2
         font_name: 'MyriadPro'
-        pos_hint: {'center_x': .72, 'center_y': .52}
+        pos_hint: {'center_x': .72, 'center_y': .58}
         font_size: sp(self.height / 5)
         color: 1, 1, 1, 1
         size_hint: .5, None
@@ -56,43 +57,82 @@
     RoundedRectLabelBtn:
         text: 'Average Stats'
         font_name: 'MyriadPro'
-        font_size: sp(24)
+        font_size: sp(20)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .7, None
-        height: dp(80)
-        pos_hint: {'center_x': .5, 'center_y': .27}
-        color: 0, 0, 0, 1
+        size_hint: .47, None
+        height: dp(50)
+        pos_hint: {'center_x': .26, 'center_y': .4}
+        color: 1, 1, 1, 1
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .8
+                rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: dp(15), dp(15), dp(15), dp(15)
+                radius: dp(15), dp(0), dp(0), dp(15)
                 pos: self.pos
                 size: self.size
-        on_press: root.stats_animate_on_push(self)
+        on_press: root.animate_on_push(self)
     RoundedRectLabelBtn:
         text: 'Total Stats'
         font_name: 'MyriadPro'
-        font_size: sp(24)
+        font_size: sp(20)
         text_size: self.size
         halign: 'center'
         valign: 'middle'
-        size_hint: .7, None
-        height: dp(80)
-        pos_hint: {'center_x': .5, 'center_y': .1}
-        color: 0, 0, 0, 1
+        size_hint: .47, None
+        height: dp(50)
+        pos_hint: {'center_x': .74, 'center_y': .4}
+        color: 1, 1, 1, 1
         canvas.before:
             Color:
-                rgba: 1, 1, 1, .8
+                rgba: 1, 1, 1, .2
             RoundedRectangle:
                 segments: 70
-                radius: dp(15), dp(15), dp(15), dp(15)
+                radius: dp(0), dp(15), dp(15), dp(0)
                 pos: self.pos
                 size: self.size
-        on_press: root.stats_animate_on_push(self)
+        on_press: root.animate_on_push(self)
+    RVMod:
+        id: recycle_view_mod
+        pos_hint: {'center_x': .5, 'center_y': .17}
+        size_hint: .98, .35
+
+<RVMod>:
+    viewclass: 'SelectableLabel'
+    bar_pos_y: 'right'
+    bar_color: 1, 1, 1, .8
+    bar_margin: -dp(8)
+    bar_inactive_color: 1, 1, 1, 0
+    smooth_scroll_end: 10
+    SelectableRecycleBoxLayout:
+        default_size: None, dp(45)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(5)
+        multiselect: False
+        touch_multiselect: False
+
+<SelectableLabel>:
+    # Draw a background to indicate selection.
+    text_size: self.width, None
+    font_size: sp(17)
+    font_name: 'MyriadPro'
+    halign: 'center'
+    valign: 'middle'
+    color: (0, 0, 0, 1) if self.selected else (1, 1, 1, 1)
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, .8) if self.selected else (1, 1, 1, .2)
+        RoundedRectangle:
+            segments: 70
+            radius: [dp(15), dp(15), dp(15), dp(15)]
+            pos: self.pos
+            size: self.size
 
 <RV>:
     viewclass: 'StatisticsLabel'
