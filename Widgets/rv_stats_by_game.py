@@ -9,7 +9,7 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.popup import Popup
 
-from Py.stats import update_dict
+from Py.extract_game_stats import update_dict
 from Widgets.rv_stats import RV
 
 
