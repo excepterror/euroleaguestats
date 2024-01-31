@@ -1,14 +1,12 @@
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.relativelayout import RelativeLayout
-from kivy.properties import StringProperty, ObjectProperty, BooleanProperty, DictProperty, NumericProperty
-from kivy.animation import Animation
+from kivy.properties import StringProperty, ObjectProperty, DictProperty, NumericProperty
+from kivy.clock import Clock
 
 
 class SlidingLabelGrid(GridLayout):
-    stats_option = BooleanProperty(False)
-    stats_by_game_option = BooleanProperty(False)
     roster = DictProperty()
-    name = StringProperty()
+    name = StringProperty('')
     repeated_selection_flag = NumericProperty(0)
 
     def on_roster(self, *args):
@@ -18,44 +16,26 @@ class SlidingLabelGrid(GridLayout):
 
 
 class SlidingLabel(RelativeLayout):
-    name = StringProperty()
-    scatter_ = ObjectProperty(None)
+    name = StringProperty('')
     label = ObjectProperty(None)
-    r_arrow = ObjectProperty(None)
-    l_arrow = ObjectProperty(None)
+    r = NumericProperty(1)
+    g = NumericProperty(1)
+    b = NumericProperty(1)
+    a = NumericProperty(.9)
 
     def on_touch_up(self, touch):
-        anim = Animation(x=0, duration=.5)
-        if self.collide_point(*touch.pos):
-            self.scatter_.do_translation_x = True
-            if self.scatter_.pos[0] >= self.width / 4:
-                self.parent.stats_option = True
-                anim.start(self.scatter_)
-            if self.scatter_.pos[0] <= - self.width / 4:
-                self.parent.stats_by_game_option = True
-                anim.start(self.scatter_)
-            if self.scatter_.pos[0] < self.width / 4:
-                anim.start(self.scatter_)
-            return super().on_touch_up(touch)
-
-    def on_touch_move(self, touch):
-        if self.collide_point(*touch.pos) and (self.scatter_.pos[0] >= self.width / 4
-                                               or self.scatter_.pos[0] <= - self.width / 4):
-            self.scatter_.do_translation_x = False
-            return super().on_touch_move(touch)
+        return super().on_touch_up(touch)
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            self.parent.name = self.label.text
-            self.parent.repeated_selection_flag += 1
-            if touch.x <= self.width * .5:
-                self.l_arrow.opacity = 1
-                anim_1 = Animation(x=self.width * .15, opacity=0, transition='in_out_quad', duration=.8) \
-                    + Animation(x=0, transition='in_out_quad', duration=.05)
-                anim_1.start(self.l_arrow)
-            elif touch.x >= self.width * .5:
-                self.r_arrow.opacity = 1
-                anim_2 = Animation(x=self.width * .8, opacity=0, transition='in_out_quad', duration=.8) \
-                    + Animation(x=self.width - self.r_arrow.width, transition='in_out_quad', duration=.05)
-                anim_2.start(self.r_arrow)
+            self.r, self.g, self.b, self.a = 1, .4, .0, 1
+            Clock.schedule_once(self.select_player, 0)
             return super().on_touch_down(touch)
+
+    def select_player(self, *args):
+        self.parent.name = self.label.text
+        self.parent.repeated_selection_flag += 1
+        Clock.schedule_once(self.restore_background_color, .5)
+
+    def restore_background_color(self, *args):
+        self.r, self.g, self.b, self.a = 1, 1, 1, .9
