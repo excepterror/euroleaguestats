@@ -53,7 +53,7 @@ class Stats(Screen):
 
     @staticmethod
     def call_this_screen(*args):
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(duration=.5)
         App.get_running_app().root.current = 'stats'
 
     def open_popup(self, *args):
