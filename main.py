@@ -95,10 +95,6 @@ class Stats(Screen):
         self.display_stats.title = self.display_stats_title
         self.display_stats.open()
 
-    def reset_rv(self, *args):
-        print('ok')
-        self.clear_widgets()
-
     @staticmethod
     def call_teams_screen(*args):
         del App.get_running_app().root.screens_visited[1:]
@@ -248,22 +244,21 @@ class Home(Screen):
     rosters_reg = DictProperty({})
     standings = DictProperty({})
 
-    def allow_image_display(self, *args):
-        Clock.schedule_once(self.download_global_values_file, .1)
+    def allow_intro_image_display(self, *args):
+        Clock.schedule_once(self.import_global_values_file, .1)
 
     def create_dict_with_rosters(self, *args):
         with open('roster.json') as json_file:
             data = json.load(json_file)
         self.rosters_reg = data
 
-    def download_global_values_file(self, *args):
+    def import_global_values_file(self, *args):
         try:
             import global_values
         except ModuleNotFoundError as error:
             logging.warning('globals.py is missing: {}'.format(error))
         else:
-            pass
-        self.create_dict_with_rosters()
+            self.create_dict_with_rosters()
 
     @staticmethod
     def time_out_popup(conn, *args):
