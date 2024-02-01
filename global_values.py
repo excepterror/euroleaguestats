@@ -1,7 +1,3 @@
-"""roster.json Google Drive URL"""
-
-JSON_URL = 'https://drive.google.com/uc?export=download&id=17GNgonM2VVtnNEOF2G8id26QDPREsb3g'
-
 """Constant Variables in standings.py"""
 
 G1 = '//div[@class="complex-stat-table_body__UI0Lj"]' \
