@@ -43,13 +43,17 @@ class Stats(Screen):
     display_stats_title = StringProperty('')
 
     def on_player_tree_data(self, *args):
-        self.notification = self.player_tree_data[6]
-        if self.notification != '':
-            self.open_popup()
+        try:
+            self.notification = self.player_tree_data[6]
+        except IndexError:
+            pass
         else:
-            self.recycle_view_mod.perf_data = self.player_tree_data[5]
-            self.text_1, self.text_2, self.player_photo = [self.player_tree_data[i] for i in range(3)]
-            self.call_this_screen()
+            if self.notification != '':
+                self.open_popup()
+            else:
+                self.recycle_view_mod.perf_data = self.player_tree_data[5]
+                self.text_1, self.text_2, self.player_photo = [self.player_tree_data[i] for i in range(3)]
+                self.call_this_screen()
 
     @staticmethod
     def call_this_screen(*args):
@@ -106,7 +110,7 @@ class Roster(Screen):
     grid_roster = ObjectProperty(None)
     trees = DictProperty({})
     player_name = StringProperty('')
-    repeated_selection_flag = NumericProperty(0)
+    selection_flag = NumericProperty(0)
     canvas_opacity = NumericProperty(0)
     assert_tree_return = ListProperty([])
     notification = StringProperty('')
@@ -292,7 +296,7 @@ class ELSScreenManager(ScreenManager):
 
     def android_back_click(self, window, key, *largs):
         screens_resolution_order = (('teams', 'menu'), ('standings', 'menu'), ('changelog', 'menu'),
-                                    ('roster', 'teams'), ('stats', 'roster'), ('stats_by_game', 'roster'))
+                                    ('roster', 'teams'), ('stats', 'roster'))
 
         if key in (27, 1001):
             if self.screens_visited[-1] not in 'menu':
