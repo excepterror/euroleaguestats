@@ -7,7 +7,7 @@ from kivy.clock import Clock
 class SlidingLabelGrid(GridLayout):
     roster = DictProperty()
     name = StringProperty('')
-    repeated_selection_flag = NumericProperty(0)
+    selection_flag = NumericProperty(0)
 
     def on_roster(self, *args):
         for name, link in self.roster.items():
@@ -34,7 +34,8 @@ class SlidingLabel(RelativeLayout):
 
     def select_player(self, *args):
         self.parent.name = self.label.text
-        self.parent.repeated_selection_flag += 1
+        self.parent.parent.parent.assert_tree()
+        self.parent.selection_flag += 1
         Clock.schedule_once(self.restore_background_color, .5)
 
     def restore_background_color(self, *args):
