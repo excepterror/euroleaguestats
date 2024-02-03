@@ -61,9 +61,9 @@ def extract_players_data(player_tree, player_name, player_url):
 
     try:
         text_1 = pos[0]
-        text_2 = info[0][12:] + '\n' + info[1][7:] + 'cm' + '\n' + info[2][5:]
+        text_2 = info[0][12:] + '\n' + info[1][7:] + ' cm' + '\n' + info[2][5:]
     except IndexError as index_error:
-        logging.warning('Index error occurred: {}'.format(index_error))
+        logging.warning('Index error occurred [extract_bio_stats.py]: {}'.format(index_error))
 
     "Extract average, total stats. Extract stats by game."
 
