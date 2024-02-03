@@ -26,7 +26,7 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup, NotesPopup, DisplayStats
 from Widgets.rv_stats import RV
 
-__version__ = '24.01.1'
+__version__ = '24.01.2'
 
 
 class Stats(Screen):
@@ -52,7 +52,20 @@ class Stats(Screen):
                 self.open_popup()
             else:
                 self.recycle_view_mod.perf_data = self.player_tree_data[5]
-                self.text_1, self.text_2, self.player_photo = [self.player_tree_data[i] for i in range(3)]
+                try:
+                    self.player_photo = self.player_tree_data[2]
+                except ValueError as value_error:
+                    logging.warning('Value error occurred [main.py]: {}'.format(value_error))
+                try:
+                    self.text_1 = self.player_tree_data[0]
+                except ValueError as value_error:
+                    self.text_1 = '{Missing data}'
+                    logging.warning('Value error occurred [main.py]: {}'.format(value_error))
+                try:
+                    self.text_2 = self.player_tree_data[1]
+                except ValueError as value_error:
+                    self.text_2 = '{Missing data}'
+                    logging.warning('Value error occurred [main.py]: {}'.format(value_error))
                 self.call_this_screen()
 
     @staticmethod
