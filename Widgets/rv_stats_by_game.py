@@ -1,4 +1,5 @@
 """RecycleView Widget. Called by :cls:. Used for the presentation of per game stats."""
+import logging
 
 from kivy.properties import BooleanProperty, StringProperty, ListProperty
 from kivy.uix.behaviors import FocusBehavior
@@ -81,9 +82,12 @@ class RVMod(RecycleView):
     player_name = StringProperty()
 
     def on_perf_data(self, *args):
-        data_rs = [{'text': 'Finals - Game 1' + ': ' + ' ' + opp} if num.startswith('C') else
-                   {'text': 'Finals - Game 2' + ': ' + ' ' + opp} if num.startswith('3P') else
-                   {'text': 'Semi-finals' + ': ' + ' ' + opp} if num.startswith('S') else
-                   {'text': 'Play-off Series ' + num + ': ' + ' ' + opp} if num.startswith('G') else
-                   {'text': 'Round ' + num + ': ' + ' ' + opp} for num, opp in self.perf_data[0].items()]
-        self.data = data_rs
+        try:
+            data_rs = [{'text': 'Finals - Game 1' + ': ' + ' ' + opp} if num.startswith('C') else
+                       {'text': 'Finals - Game 2' + ': ' + ' ' + opp} if num.startswith('3P') else
+                       {'text': 'Semi-finals' + ': ' + ' ' + opp} if num.startswith('S') else
+                       {'text': 'Play-off Series ' + num + ': ' + ' ' + opp} if num.startswith('G') else
+                       {'text': 'Round ' + num + ': ' + ' ' + opp} for num, opp in self.perf_data[0].items()]
+            self.data = data_rs
+        except IndexError as idx_error:
+            logging.warning('Index error [perf_data] occurred [rv_stats_by_game.py]: {}'.format(idx_error))
