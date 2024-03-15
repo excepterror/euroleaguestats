@@ -12,21 +12,28 @@ def fetch_standings():
         logging.warning('globals.py is missing: {}'.format(error))
 
     url = 'https://www.euroleaguebasketball.net/euroleague/standings/'
-    standings = dict()
     try:
         g1 = global_values.G1
         g2 = global_values.G2
         g3 = global_values.G3
-        response = requests.get(url)
+        response = requests.get(url, timeout=(30, 30))
+        logging.info('[standings.py status_code] ' + str(response.status_code))
     except NameError as error:
-        logging.warning('g1, g2, 33 values are not defined: {}'.format(error))
+        logging.warning('g1, g2, g3 values are not defined: {}'.format(error))
     except requests.exceptions.HTTPError as http_error:
-        logging.warning('HTTP error occurred: {}'.format(http_error))
+        logging.warning('[standings.py] HTTP error occurred: {}'.format(http_error))
+        conn = 'Response from server failed!'
+        return conn
     except requests.exceptions.Timeout as timeout:
-        logging.warning('Timeout error occurred: {}'.format(timeout))
-    except Exception as e:
-        logging.warning(e)
+        logging.warning('[standings.py] Timeout error occurred: {}'.format(timeout))
+        conn = 'Response is taking too long!'
+        return conn
+    except requests.exceptions.ConnectionError as conn_error:
+        logging.warning('[standings.py] Connection error occurred: {}'.format(conn_error))
+        conn = 'No internet connection!'
+        return conn
     else:
+        standings = dict()
         a = 0
         listing = list()
         i = 0
@@ -51,4 +58,4 @@ def fetch_standings():
             else:
                 standings['Images/' + item[1] + '.png'] = item[0], raw_data[i: i + 7]
                 i += num_of_total_stat_cats
-    return standings
+        return standings
