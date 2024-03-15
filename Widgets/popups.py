@@ -13,7 +13,7 @@ Builder.load_string("""
     size_hint: .6, .3
     pos_hint: {'center_x': .5, 'center_y': .5}
     overlay_color: 0, 0, 0, .85
-    auto_dismiss: False
+    auto_dismiss: True
     Label:
         id: notification
         text_size: self.size
