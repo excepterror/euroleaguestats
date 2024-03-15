@@ -1,5 +1,7 @@
 #:import TeamsLabelGrid Widgets.grid_for_teams
 
+#:import clock kivy.clock.Clock
+
 <Teams>:
     name: 'teams'
     grid_teams: grid_teams
@@ -11,7 +13,7 @@
         pos_hint: {'center_x': .5, 'center_y': .36}
         size_hint: .98, .72
         do_scroll_x: False
-        bar_color: 1, 1, 1, .8
+        bar_color: 1, 1, 1, 0
         bar_inactive_color: 1, 1, 1, 0
         bar_pos_y: 'right'
         bar_margin: -dp(3)
@@ -26,6 +28,7 @@
             height: self.minimum_height
             spacing: dp(10)
             padding: dp(7)
+            on_touch_down: clock.schedule_once(root.call_please_wait_screen, .05)
 
 <TeamsLabel>:
     im: im
@@ -38,14 +41,6 @@
     ripple_color: 0, 0, 0, 1
     ripple_scale: 2
     canvas.before:
-        Color:
-            rgba: 1, 1, 1, .9
-        RoundedRectangle:
-            size: root.shadow_size
-            pos: root.shadow_pos
-            texture: root.shadow_texture
-            segments: 70
-            radius: dp(10), dp(10), dp(10), dp(10)
         Color:
             rgba: 1, 1, 1, .9
         RoundedRectangle:
