@@ -16,17 +16,17 @@ from kivy.properties import StringProperty, ObjectProperty, NumericProperty, Dic
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
 from kivy.metrics import sp
 
-from Py.connectivity import connectivity_status
 from Py.standings import fetch_standings
-from Py.extract_bio_stats import extract_players_data
+from Py.extract_bio_stats import extract_players_data, download_photos
 from Py.fetch_trees import fetch_trees
 from Py.extract_game_stats import update_dict
 from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, NotesPopup, DisplayStats
 from Widgets.rv_stats import RV
+from Widgets.widgets import PlayerImage
 
-__version__ = '24.01.2'
+__version__ = '24.03.0'
 
 
 class Stats(Screen):
@@ -44,34 +44,47 @@ class Stats(Screen):
 
     def on_player_tree_data(self, *args):
         try:
-            self.notification = self.player_tree_data[6]
+            self.notification = self.player_tree_data[5]
         except IndexError:
             pass
         else:
-            if self.notification != '':
-                self.open_popup()
-            else:
-                self.recycle_view_mod.perf_data = self.player_tree_data[5]
-                try:
-                    self.player_photo = self.player_tree_data[2]
-                except ValueError as value_error:
-                    logging.warning('Value error occurred [main.py]: {}'.format(value_error))
-                try:
-                    self.text_1 = self.player_tree_data[0]
-                except ValueError as value_error:
-                    self.text_1 = '{Missing data}'
-                    logging.warning('Value error occurred [main.py]: {}'.format(value_error))
-                try:
-                    self.text_2 = self.player_tree_data[1]
-                except ValueError as value_error:
-                    self.text_2 = '{Missing data}'
-                    logging.warning('Value error occurred [main.py]: {}'.format(value_error))
-                self.call_this_screen()
+            try:
+                self.recycle_view_mod.perf_data = self.player_tree_data[4]
+            except TypeError as value_error:
+                self.remove_widget(self.recycle_view_mod)
+                logging.warning('Type error [performance data] occurred [main.py]: {}'.format(value_error))
+            try:
+                self.text_1 = self.player_tree_data[3]
+            except ValueError as value_error:
+                self.text_1 = '{Missing data}'
+                logging.warning('Value error occurred [missing data] [main.py]: {}'.format(value_error))
+            try:
+                self.text_2 = self.player_tree_data[2]
+            except ValueError as value_error:
+                self.text_2 = '{Missing data}'
+                logging.warning('Value error occurred [missing data] [main.py]: {}'.format(value_error))
+            self.call_this_screen()
 
     @staticmethod
     def call_this_screen(*args):
         App.get_running_app().root.transition = SlideTransition(duration=.5)
         App.get_running_app().root.current = 'stats'
+
+    def show_stats(self, instance, *args):
+        self.display_stats = DisplayStats()
+        self.display_stats_title = instance.text + ' for ' + self.player_name
+        if instance.text == 'Average Stats':
+            try:
+                self.rv = RV(update_dict(self.player_tree_data[1]))
+            except AttributeError as attribute_error:
+                logging.warning('Attribute error [performance data] occurred [main.py]: {}'.format(attribute_error))
+                self.open_popup()
+        elif instance.text == 'Total Stats':
+            try:
+                self.rv = RV(update_dict(self.player_tree_data[0]))
+            except AttributeError as attribute_error:
+                logging.warning('Attribute error [performance data] occurred [main.py]: {}'.format(attribute_error))
+                self.open_popup()
 
     def open_popup(self, *args):
         self.message = MessagePopup(on_open=self.dismiss_text)
@@ -80,10 +93,6 @@ class Stats(Screen):
 
     def dismiss_text(self, *args):
         Clock.schedule_once(self.message.dismiss, 1.5)
-        Clock.schedule_once(self.reset_text, 1.6)
-
-    def reset_text(self, *args):
-        self.notification = ''
 
     def animate_on_push(self, instance, *args):
         anim = Animation(size_hint_x=.45, font_size=sp(17), duration=.2)
@@ -97,20 +106,15 @@ class Stats(Screen):
         anim.start(instance)
         anim.on_complete(Clock.schedule_once(partial(self.show_stats, instance), .2))
 
-    def show_stats(self, instance, *args):
-        if instance.text == 'Average Stats':
-            self.display_stats = DisplayStats()
-            self.display_stats_title = instance.text + ' for ' + self.player_name
-            self.rv = RV(update_dict(self.player_tree_data[3]))
-        elif instance.text == 'Total Stats':
-            self.display_stats = DisplayStats()
-            self.display_stats_title = instance.text + ' for ' + self.player_name
-            self.rv = RV(update_dict(self.player_tree_data[4]))
-
     def on_rv(self, *args):
         self.display_stats.content = self.rv
         self.display_stats.title = self.display_stats_title
         self.display_stats.open()
+
+    def restore_recycle_view(self):
+        children = self.children
+        if self.recycle_view_mod not in children:
+            self.add_widget(self.recycle_view_mod)
 
     @staticmethod
     def call_teams_screen(*args):
@@ -119,25 +123,66 @@ class Stats(Screen):
         App.get_running_app().root.current = 'teams'
 
 
+class Wait(Screen):
+    pass
+
+
 class Roster(Screen):
-    grid_roster = ObjectProperty(None)
     trees = DictProperty({})
+    roster = DictProperty({})
     player_name = StringProperty('')
     selection_flag = NumericProperty(0)
-    canvas_opacity = NumericProperty(0)
     assert_tree_return = ListProperty([])
     notification = StringProperty('')
     message = ObjectProperty(None)
+    list_of_players = ListProperty([])
+    grid = ObjectProperty(None)
+    idx = NumericProperty(0)
 
     def extract_trees(self, *args):
-        self.trees = fetch_trees(self.grid_roster)
+        t = fetch_trees(self.roster)
+        self.trees = t
+        count = 0
+        '''Check if ThreadPool executor [fetch_trees.py] has thrown a timeout error.'''
+        if isinstance(t, str):
+            self.time_out_popup(str(t))
+        else:
+            '''Download photos, if not present. :def: fetch_a_photo [extract_bio_stats] checks if photos are present'''
+            self.list_of_players = download_photos(self.roster)
+            for player in self.list_of_players:
+                source = player + '.png'
+                if not os.path.isfile('./' + player + '.png'):
+                    source = 'Images/NoImage.png'
+                    count += 1
+                player_image = PlayerImage(player=player, source=source)
+                self.grid.add_widget(player_image)
+            '''Check if NoImage.png has been used instead of the actual player image, thus :def: fetch_tree [
+            fetch_trees.py] and :def: fetch_a_photo [extract_bio_stats.py] have thrown errors.'''
+            if count == len(self.roster):
+                self.time_out_popup('Error while fetching data!')
+                App.get_running_app().root.transition = FadeTransition(duration=.5)
+                App.get_running_app().root.current = 'teams'
+            else:
+                self.call_this_screen()
 
-    def assert_tree(self, *args):
+    @staticmethod
+    def call_this_screen(*args):
+        App.get_running_app().root.transition = SlideTransition(direction='left')
+        App.get_running_app().root.current = 'roster'
+
+    def assert_tree(self, player_name, *args):
         for name, t in self.trees.items():
-            if name == self.player_name:
+            if name == player_name:
                 player_tree = self.trees[name][0]
-                player_url = self.trees[name][1]
-                self.assert_tree_return = extract_players_data(player_tree, name, player_url)
+                self.assert_tree_return = extract_players_data(player_tree, name)
+        if len(self.assert_tree_return) == 0:
+            self.time_out_popup('Error while fetching data!')
+        else:
+            self.selection_flag += 1
+
+    @staticmethod
+    def time_out_popup(conn, *args):
+        App.get_running_app().root.show_popup(conn)
 
     @staticmethod
     def call_teams_screen(*args):
@@ -150,20 +195,10 @@ class Teams(Screen):
     idx = NumericProperty()
     grid_teams = ObjectProperty(None)
 
-    def call_roster_screen(self, *args):
-        conn = connectivity_status()
-        if conn is True:
-            if len(self.grid_teams.selected_roster) != 0:
-                App.get_running_app().root.transition = SlideTransition(direction='left')
-                App.get_running_app().root.current = 'roster'
-            else:
-                message = MessagePopup()
-                message.notification.text = 'Roster\'s announcement is pending!'
-                message.open()
-                Clock.schedule_once(message.dismiss, 2)
-        else:
-            App.get_running_app().root.show_popup(conn)
-            Clock.schedule_once(App.get_running_app().stop, 5)
+    @staticmethod
+    def call_please_wait_screen(*args):
+        App.get_running_app().root.transition = SlideTransition(direction='left')
+        App.get_running_app().root.current = 'wait'
 
 
 class Standings(Screen):
@@ -211,13 +246,8 @@ class Menu(Screen):
 
     @staticmethod
     def call_standings_screen(*args):
-        conn = connectivity_status()
-        if conn is True:
-            App.get_running_app().root.transition = SlideTransition(direction='left')
-            App.get_running_app().root.current = 'standings'
-        else:
-            App.get_running_app().root.show_popup(conn)
-            Clock.schedule_once(App.get_running_app().stop, 3)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
+        App.get_running_app().root.current = 'standings'
 
     @staticmethod
     def call_changelog_screen(*args):
@@ -264,11 +294,6 @@ class Home(Screen):
     def allow_intro_image_display(self, *args):
         Clock.schedule_once(self.import_global_values_file, .1)
 
-    def create_dict_with_rosters(self, *args):
-        with open('roster.json') as json_file:
-            data = json.load(json_file)
-        self.rosters_reg = data
-
     def import_global_values_file(self, *args):
         try:
             import global_values
@@ -277,16 +302,25 @@ class Home(Screen):
         else:
             self.create_dict_with_rosters()
 
+    def create_dict_with_rosters(self, *args):
+        with open('roster.json') as json_file:
+            data = json.load(json_file)
+        self.rosters_reg = data
+
+    def on_rosters_reg(self, *args):
+        _standings = fetch_standings()
+        if isinstance(_standings, str):
+            self.time_out_popup(_standings)
+        else:
+            self.standings = _standings
+
+    def on_standings(self, *args):
+        self.call_menu_screen()
+
     @staticmethod
     def time_out_popup(conn, *args):
         App.get_running_app().root.show_popup(conn)
         Clock.schedule_once(App.get_running_app().stop, 4)
-
-    def on_rosters_reg(self, *args):
-        self.standings = fetch_standings()
-
-    def on_standings(self, *args):
-        self.call_menu_screen()
 
     @staticmethod
     def call_menu_screen():
@@ -315,6 +349,7 @@ class ELSScreenManager(ScreenManager):
             if self.screens_visited[-1] not in 'menu':
                 for scr_name, instance in screens_resolution_order:
                     if self.screens_visited[-1] == scr_name:
+                        App.get_running_app().root.transition = SlideTransition(direction='right')
                         App.get_running_app().root.current = instance
                         del self.screens_visited[-1]
                         return True
@@ -341,6 +376,7 @@ class ELSScreenManager(ScreenManager):
 
 class EuroLeagueStatsApp(App):
     def build(self):
+        Window.clearcolor = (1, 1, 1, 1)
         return ELSScreenManager()
 
     def on_stop(self):
