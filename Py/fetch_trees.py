@@ -3,25 +3,25 @@ import concurrent.futures
 import logging
 
 from lxml import etree
-from requests.adapters import HTTPAdapter
-from urllib3.util import Retry
 
 
 def fetch_tree(url):
-    session = requests.Session()
-    retry = Retry(connect=3, backoff_factor=0.5)
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('http://', adapter)
-    session.mount('https://', adapter)
-    response = session.get(url)
-    t = etree.HTML(response.content)
-    return t
+    try:
+        response = requests.get(url, timeout=(30, 30))
+        t = etree.HTML(response.content)
+        logging.info('[fetch_trees.py status_code] ' + str(response.status_code))
+    except requests.exceptions.Timeout as timeout_error:
+        logging.warning('[fetch_trees.py] The request timed out: {}'.format(timeout_error))
+    except requests.exceptions.ConnectionError as conn_error:
+        logging.warning('[fetch_trees.py] Connection error occurred: {}'.format(conn_error))
+    else:
+        return t
 
 
-def fetch_trees(grid_roster):
+def fetch_trees(roster):
     temp_dict = dict()
-    roster_keys = grid_roster.roster.keys()
-    roster_values = grid_roster.roster.values()
+    roster_keys = roster.keys()
+    roster_values = roster.values()
 
     names = list(roster_keys)
     roster_values = list(roster_values)
@@ -34,17 +34,16 @@ def fetch_trees(grid_roster):
 
     try:
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            trees = executor.map(fetch_tree, players_urls)
-    except TimeoutError as timeout_error:
+            trees = executor.map(fetch_tree, players_urls, timeout=30)
+    except concurrent.futures.TimeoutError as timeout_error:
         logging.warning('Timeout error occurred: {}'.format(timeout_error))
-
-    for name, tree, url in zip(names, trees, photo_urls):
-        if name in temp_dict:
-            temp_dict[name] = name
-        else:
-            temp_dict[name] = tree, url
-
-    trees = temp_dict
-    grid_roster.roster = dict()
-
-    return trees
+        conn = 'Error while fetching data!'
+        return conn
+    else:
+        for name, tree, url in zip(names, trees, photo_urls):
+            if name in temp_dict:
+                temp_dict[name] = name
+            else:
+                temp_dict[name] = tree, url
+        trees = temp_dict
+        return trees
