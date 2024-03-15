@@ -1,19 +1,10 @@
-#:import SlidingLabelGrid Widgets.grid_for_roster
-
 <Roster>:
     name: 'roster'
-    grid_roster: grid_roster
-    player_name: root.grid_roster.name
+    num_players: self.num_players
+    grid: grid
     scroll_roster: scroll_roster
-    selection_flag: root.grid_roster.selection_flag
-    canvas.after:
-        Color:
-            rgba: 0 ,0 ,0, root.canvas_opacity
-        Rectangle:
-            pos: self.pos
-            size: self.size
     Image:
-        source: 'Images/Rosters.jpg'
+        source: 'Images/Cross-Screen.jpg'
         fit_mode: 'fill'
     RoundedRectLabelBtn:
         text: 'Click me'
@@ -37,42 +28,49 @@
         on_press: root.call_teams_screen()
     ScrollView:
         id: scroll_roster
-        pos_hint: {'center_x': .5, 'center_y': .35}
-        size_hint: .98, .68
+        pos_hint: {'center_x': .5, 'center_y': .43}
+        size_hint: .98, .82
         do_scroll_x: False
         bar_pos_y: 'right'
-        bar_color: 1, 1, 1, .8
+        bar_color: 1, 1, 1, 0
         bar_inactive_color: 1, 1, 1, 0
         bar_margin: -dp(3)
         bar_width: dp(2)
-        SlidingLabelGrid:
-            id: grid_roster
-            cols: 1
-            row_force_default: True
-            row_default_height: dp(60)
+        GridLayout:
+            id: grid
+            cols: 2
             size_hint: 1, None
             height: self.minimum_height
-            spacing: dp(10)
-            padding: dp(7)
+            row_force_default: True
+            row_default_height: dp(200)
+            spacing: 0, dp(5)
 
-<SlidingLabel>:
-    pos: self.pos
+<PlayerImage>:
+    fit_mode: 'contain'
     label: label
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.2
+        BoxShadow:
+            pos: self.pos
+            size: self.width - dp(5), self.height - dp(5)
+            blur_radius: 0
+            border_radius: dp(15), dp(15), dp(15), dp(15)
     Label:
         id: label
-        text: root.name
+        text: root.player
         font_name: 'MyriadPro'
-        font_size: sp(22)
-        color: 0, 0, 0, 1
-        size_hint: None, None
-        size: self.parent.width, dp(60)
-        text_size: self.width, None
+        font_size: sp(14)
+        pos: root.x + root.width * .5 - self.width * .5, root.y - self.width * .32
+        size_hint: 1, 1
+        text_size: self.size
         halign: 'center'
         valign: 'middle'
         canvas.before:
             Color:
-                rgba: root.r, root.g, root.b, root.a
+                rgba: 0, 0, 0, .8
             RoundedRectangle:
-                size: self.size
+                pos: root.x, root.y
+                size: root.width - dp(7), dp(40)
                 segments: 70
-                radius: dp(10), dp(10), dp(10), dp(10)
+                radius: dp(0), dp(0), dp(15), dp(15)
