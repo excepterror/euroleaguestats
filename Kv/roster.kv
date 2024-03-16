@@ -42,11 +42,11 @@
             size_hint: 1, None
             height: self.minimum_height
             row_force_default: True
-            row_default_height: dp(200)
+            row_default_height: dp(240)
             spacing: 0, dp(5)
 
-<PlayerImage>:
-    fit_mode: 'contain'
+<PlayersImageWithLabel>:
+    orientation: 'vertical'
     label: label
     canvas.before:
         Color:
@@ -56,12 +56,16 @@
             size: self.width - dp(5), self.height - dp(5)
             blur_radius: 0
             border_radius: dp(15), dp(15), dp(15), dp(15)
+    Image:
+        fit_mode: 'contain'
+        source: root.source
+        size_hint: 1, None
+        height: dp(200)
     Label:
         id: label
         text: root.player
         font_name: 'MyriadPro'
         font_size: sp(16)
-        pos: root.x + root.width * .5 - dp(52), root.y - dp(30)
         canvas.before:
             Color:
                 rgba: 0, 0, 0, .8
