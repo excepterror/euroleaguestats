@@ -24,7 +24,7 @@ from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, NotesPopup, DisplayStats
 from Widgets.rv_stats import RV
-from Widgets.widgets import PlayerImage
+from Widgets.widgets import PlayersImageWithLabel
 
 __version__ = '24.03.0'
 
@@ -154,7 +154,7 @@ class Roster(Screen):
                 if not os.path.isfile('./' + player + '.png'):
                     source = 'Images/NoImage.png'
                     count += 1
-                player_image = PlayerImage(player=player, source=source)
+                player_image = PlayersImageWithLabel(player=player, source=source)
                 self.grid.add_widget(player_image)
             '''Check if NoImage.png has been used instead of the actual player image, thus :def: fetch_tree [
             fetch_trees.py] and :def: fetch_a_photo [extract_bio_stats.py] have thrown errors.'''
