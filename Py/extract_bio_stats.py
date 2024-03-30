@@ -16,11 +16,11 @@ def fetch_a_photo(url, player_name):
     else:
         try:
             response = requests.get(url)
-            logging.info('[extract_bio_stats.py status_code] ' + str(response.status_code))
+            logging.info('extract_bio_stats.py status_code | player_name | url: {} | {} | {}'.format(response.status_code, player_name, url))
         except requests.exceptions.Timeout as timeout_error:
-            logging.warning('[extract_bio_stats.py] The request timed out: {}'.format(timeout_error))
+            logging.warning('extract_bio_stats.py The request timed out: {}'.format(timeout_error))
         except requests.exceptions.ConnectionError as conn_error:
-            logging.warning('[extract_bio_stats.py] Connection error occurred: {}'.format(conn_error))
+            logging.warning('extract_bio_stats.py Connection error occurred: {}'.format(conn_error))
         else:
             player_photo = player_name + '.png'
             with open(player_photo, 'wb') as f:

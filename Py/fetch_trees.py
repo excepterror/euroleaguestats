@@ -9,11 +9,11 @@ def fetch_tree(url):
     try:
         response = requests.get(url, timeout=(30, 30))
         t = etree.HTML(response.content)
-        logging.info('[fetch_trees.py status_code] ' + str(response.status_code))
+        logging.info('fetch_trees.py status_code | url: {} | {}'.format(response.status_code, url))
     except requests.exceptions.Timeout as timeout_error:
-        logging.warning('[fetch_trees.py] The request timed out: {}'.format(timeout_error))
+        logging.warning('fetch_trees.py The request timed out: {}'.format(timeout_error))
     except requests.exceptions.ConnectionError as conn_error:
-        logging.warning('[fetch_trees.py] Connection error occurred: {}'.format(conn_error))
+        logging.warning('fetch_trees.py Connection error occurred: {}'.format(conn_error))
     else:
         return t
 
