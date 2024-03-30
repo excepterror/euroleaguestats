@@ -57,20 +57,10 @@ def access_per_game_stats(tree, name):
     try:
         import global_values
     except ModuleNotFoundError as error:
-        logging.warning('globals.py is missing: {}'.format(error))
-    try:
-        s1 = global_values.S1
-        s2 = global_values.S2
-        s3 = global_values.S3
-        v1 = global_values.V1
-        v2 = global_values.V2
-        v3 = global_values.V3
-        v4 = global_values.V4
-        v5 = global_values.V5
-        v6 = global_values.V6
-    except NameError as error:
-        logging.warning('s1, s2, s3, v1, v2, v3, v4, v5, v6 values are not defined: {}'.format(error))
+        logging.warning('global_values.py is missing: {}'.format(error))
     else:
+        from global_values import S1, S2, S3, V1, V2, V3, V4, V5, V6
+
         min_ft = list()
         odt = list()
         as_to = list()
@@ -78,15 +68,15 @@ def access_per_game_stats(tree, name):
         cm_rv = list()
         pir = list()
 
-        rounds_played_by_player = tree.xpath(s1)
-        opponents_code = tree.xpath(s2)
-        at_vs = tree.xpath(s3)
-        stats_by_game_min_ft = tree.xpath(v1)
-        stats_by_game_odt = tree.xpath(v2)
-        stats_by_game_as_to = tree.xpath(v3)
-        stats_by_game_fv_ag = tree.xpath(v4)
-        stats_by_game_cm_rv = tree.xpath(v5)
-        stats_by_game_pir = tree.xpath(v6)
+        rounds_played_by_player = tree.xpath(S1)
+        opponents_code = tree.xpath(S2)
+        at_vs = tree.xpath(S3)
+        stats_by_game_min_ft = tree.xpath(V1)
+        stats_by_game_odt = tree.xpath(V2)
+        stats_by_game_as_to = tree.xpath(V3)
+        stats_by_game_fv_ag = tree.xpath(V4)
+        stats_by_game_cm_rv = tree.xpath(V5)
+        stats_by_game_pir = tree.xpath(V6)
 
         playoff_games_count = 0
         semifinal_games_count = 0
@@ -96,13 +86,14 @@ def access_per_game_stats(tree, name):
             if item.startswith('S') or item.startswith('C') or item.startswith('3P'):
                 semifinal_games_count += 1
 
+        stats_by_game_min_ft = stats_by_game_min_ft[:-10]
+        stats_by_game_odt = stats_by_game_odt[:-6]
+        stats_by_game_as_to = stats_by_game_as_to[:-6]
+        stats_by_game_fv_ag = stats_by_game_fv_ag[:-4]
+        stats_by_game_cm_rv = stats_by_game_cm_rv[:-4]
+        stats_by_game_pir = stats_by_game_pir[:-2]
+
         if semifinal_games_count != 0:
-            stats_by_game_min_ft = stats_by_game_min_ft[:-10]
-            stats_by_game_odt = stats_by_game_odt[:-6]
-            stats_by_game_as_to = stats_by_game_as_to[:-6]
-            stats_by_game_fv_ag = stats_by_game_fv_ag[:-4]
-            stats_by_game_cm_rv = stats_by_game_cm_rv[:-4]
-            stats_by_game_pir = stats_by_game_pir[:-2]
 
             min_ft = stats_by_game_min_ft[-5 * semifinal_games_count:]
             del stats_by_game_min_ft[-5 * semifinal_games_count:]
@@ -123,12 +114,6 @@ def access_per_game_stats(tree, name):
             del stats_by_game_pir[-1 * semifinal_games_count:]
 
         if playoff_games_count != 0:
-            stats_by_game_min_ft = stats_by_game_min_ft[:-10]
-            stats_by_game_odt = stats_by_game_odt[:-6]
-            stats_by_game_as_to = stats_by_game_as_to[:-6]
-            stats_by_game_fv_ag = stats_by_game_fv_ag[:-4]
-            stats_by_game_cm_rv = stats_by_game_cm_rv[:-4]
-            stats_by_game_pir = stats_by_game_pir[:-2]
 
             min_ft = stats_by_game_min_ft[-5 * playoff_games_count:] + min_ft
             del stats_by_game_min_ft[-5 * playoff_games_count - 10:]
@@ -154,13 +139,6 @@ def access_per_game_stats(tree, name):
             stats_by_game_fv_ag = stats_by_game_fv_ag + fv_ag
             stats_by_game_cm_rv = stats_by_game_cm_rv + cm_rv
             stats_by_game_pir = stats_by_game_pir + pir
-        else:
-            stats_by_game_min_ft = stats_by_game_min_ft[:-10]
-            stats_by_game_odt = stats_by_game_odt[:-6]
-            stats_by_game_as_to = stats_by_game_as_to[:-6]
-            stats_by_game_fv_ag = stats_by_game_fv_ag[:-4]
-            stats_by_game_cm_rv = stats_by_game_cm_rv[:-4]
-            stats_by_game_pir = stats_by_game_pir[:-2]
 
         stats_by_game = [stats_by_game_min_ft, stats_by_game_odt, stats_by_game_as_to, stats_by_game_fv_ag,
                          stats_by_game_cm_rv, stats_by_game_pir]
@@ -177,4 +155,3 @@ def access_per_game_stats(tree, name):
         for i, k in enumerate(rounds_played_by_player):
             opponents_by_round_dict[k] = opponents[i]
         return [opponents_by_round_dict, stats_by_game, name]
-    return
