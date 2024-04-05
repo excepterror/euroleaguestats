@@ -27,7 +27,7 @@ from Widgets.popups import MessagePopup, NotesPopup, DisplayStats
 from Widgets.rv_stats import RV
 from Widgets.widgets import PlayersImageWithLabel
 
-__version__ = '24.04.0'
+__version__ = '24.04.1'
 
 
 class Stats(Screen):
