@@ -1,14 +1,14 @@
 <Wait>:
     name: 'wait'
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            size: self.size
-            pos: self.pos
+    please_wait: please_wait
+    Image:
+        source: 'Images/Logo.png'
+        fit_mode: 'scale-down'
+        pos_hint: {'center_x': .5, 'center_y': .5}
     Label:
-        text: 'Please wait...'
+        id: please_wait
+        text: 'Waiting for {}'.format(root.team)
         font_name: 'MyriadPro'
-        font_size: dp(48)
-        color: 0, 0, 0, 1
-        pos_hint: {'center_x': .5, 'center_y': .4}
+        font_size: dp(20)
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .2}
