@@ -9,6 +9,7 @@ class TeamsLabelGrid(GridLayout):
     rosters = DictProperty({})
     _idx = NumericProperty(0)
     selected_roster = DictProperty({})
+    selected_team = StringProperty('')
 
     def on_rosters(self, *args):
         for team, urls in self.rosters.items():
@@ -42,7 +43,10 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
             try:
                 for team, dict_with_urls in self.parent.rosters.items():
                     if self.text == team:
+                        '''Pass selected roster to the :gridlayout: TeamsLabelGrid.'''
                         self.parent.selected_roster = dict_with_urls
+                        '''Pass selected team to the :gridlayout: TeamsLabelGrid.'''
+                        self.parent.selected_team = team
             except ValueError:
                 pass
             Clock.schedule_once(self.parent.push_selected_roster, .8)
