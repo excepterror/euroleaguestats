@@ -1,6 +1,7 @@
 import os
 import logging
 import json
+import threading
 
 from functools import partial
 
@@ -9,7 +10,7 @@ from android.permissions import request_permissions, Permission
 from kivy.utils import platform
 from kivy.app import App
 from kivy.animation import Animation
-from kivy.clock import Clock
+from kivy.clock import Clock, mainthread
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, DictProperty, ListProperty
@@ -26,7 +27,7 @@ from Widgets.popups import MessagePopup, NotesPopup, DisplayStats
 from Widgets.rv_stats import RV
 from Widgets.widgets import PlayersImageWithLabel
 
-__version__ = '24.03.1'
+__version__ = '24.04.0'
 
 
 class Stats(Screen):
@@ -123,11 +124,8 @@ class Stats(Screen):
         App.get_running_app().root.current = 'teams'
 
 
-class Wait(Screen):
-    pass
-
-
 class Roster(Screen):
+
     trees = DictProperty({})
     roster = DictProperty({})
     player_name = StringProperty('')
@@ -139,31 +137,39 @@ class Roster(Screen):
     grid = ObjectProperty(None)
     idx = NumericProperty(0)
 
+    def start_second_thread(self, *args):
+        threading.Thread(target=self.extract_trees).start()
+
     def extract_trees(self, *args):
         t = fetch_trees(self.roster)
         self.trees = t
-        count = 0
         '''Check if ThreadPool executor [fetch_trees.py] has thrown a timeout error.'''
         if isinstance(t, str):
             self.time_out_popup(str(t))
         else:
-            '''Download photos, if not present. :def: fetch_a_photo [extract_bio_stats] checks if photos are present'''
+            '''Download photos, if not present. :def: fetch_a_photo [extract_bio_stats] checks if photos are present.'''
             self.list_of_players = download_photos(self.roster)
-            for player in self.list_of_players:
-                source = player + '.png'
-                if not os.path.isfile('./' + player + '.png'):
-                    source = 'Images/NoImage.png'
-                    count += 1
-                player_image = PlayersImageWithLabel(player=player, source=source)
-                self.grid.add_widget(player_image)
-            '''Check if NoImage.png has been used instead of the actual player image, thus :def: fetch_tree [
-            fetch_trees.py] and :def: fetch_a_photo [extract_bio_stats.py] have thrown errors.'''
-            if count == len(self.roster):
-                self.time_out_popup('Error while fetching data!')
-                App.get_running_app().root.transition = FadeTransition(duration=.5)
-                App.get_running_app().root.current = 'teams'
-            else:
-                self.call_this_screen()
+            self.populate_photos()
+
+    @mainthread
+    def populate_photos(self):
+        count = 0
+        for player in self.list_of_players:
+            source = player + '.png'
+            if not os.path.isfile('./' + player + '.png'):
+                source = 'Images/NoImage.png'
+                count += 1
+            player_image = PlayersImageWithLabel(player=player, source=source)
+            self.grid.add_widget(player_image)
+        '''Check if NoImage.png has been used instead of the actual player image, thus :def: fetch_tree [
+        fetch_trees.py] and :def: fetch_a_photo [extract_bio_stats.py] have thrown errors.'''
+        if count == len(self.roster):
+            self.time_out_popup('Error while fetching data!')
+            App.get_running_app().root.transition = FadeTransition(duration=.5)
+            App.get_running_app().root.current = 'teams'
+        else:
+            self.call_this_screen()
+            self.list_of_players = []
 
     @staticmethod
     def call_this_screen(*args):
@@ -189,6 +195,18 @@ class Roster(Screen):
         del App.get_running_app().root.screens_visited[1:]
         App.get_running_app().root.transition = FadeTransition(duration=.5)
         App.get_running_app().root.current = 'teams'
+
+
+class Wait(Screen):
+    please_wait = ObjectProperty(None)
+    anim = ObjectProperty(None)
+    team = StringProperty('')
+
+    def animate_please_wait(self, *args):
+        self.anim = Animation(opacity=0, duration=1)
+        self.anim += Animation(opacity=1, duration=1)
+        self.anim.repeat = True
+        self.anim.start(self.please_wait)
 
 
 class Teams(Screen):
@@ -331,6 +349,7 @@ class Home(Screen):
 class ELSScreenManager(ScreenManager):
     home_screen = ObjectProperty(None)
     teams_screen = ObjectProperty(None)
+    wait_screen = ObjectProperty(None)
     roster_screen = ObjectProperty(None)
     standing_screen = ObjectProperty(None)
     stats_screen = ObjectProperty(None)
@@ -376,7 +395,7 @@ class ELSScreenManager(ScreenManager):
 
 class EuroLeagueStatsApp(App):
     def build(self):
-        Window.clearcolor = (1, 1, 1, 1)
+        Window.clearcolor = (0, 0, 0, 1)
         return ELSScreenManager()
 
     def on_stop(self):
