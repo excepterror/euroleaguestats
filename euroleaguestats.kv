@@ -15,6 +15,7 @@
     home_screen: home_screen
     standings_screen: standings_screen
     teams_screen: teams_screen
+    wait_screen: wait_screen
     roster_screen: roster_screen
     stats_screen: stats_screen
     Home:
@@ -32,13 +33,16 @@
         id: teams_screen
         on_enter: root.check_in_names(self.name)
         on_idx: root.roster_screen.idx += 1
+    Wait:
+        id: wait_screen
+        on_enter: self.team = root.teams_screen.grid_teams.selected_team; clock.schedule_once(self.animate_please_wait, 0)
+        on_leave: self.anim.stop(self.please_wait)
     Roster:
         id: roster_screen
         on_enter: root.check_in_names(self.name)
-        on_idx: self.roster = root.teams_screen.grid_teams.selected_roster; clock.schedule_once(self.extract_trees, .1)
+        on_idx: self.roster = root.teams_screen.grid_teams.selected_roster; clock.schedule_once(self.start_second_thread, 0)
         on_selection_flag: root.stats_screen.player_tree_data = self.assert_tree_return; root.stats_screen.player_name = self.assert_tree_return[6]
         on_leave: if len(root.screens_visited) == 2: self.grid.clear_widgets()
-    Wait:
     Stats:
         id: stats_screen
         on_enter: root.check_in_names(self.name)
