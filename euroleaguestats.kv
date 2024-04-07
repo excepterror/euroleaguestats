@@ -36,7 +36,7 @@
     Wait:
         id: wait_screen
         on_enter: self.team = root.teams_screen.grid_teams.selected_team; clock.schedule_once(self.animate_please_wait, 0)
-        on_leave: self.anim.stop(self.please_wait)
+        on_leave: self.anim.stop(self.please_wait); self.please_wait.opacity = 1
     Roster:
         id: roster_screen
         on_enter: root.check_in_names(self.name)
