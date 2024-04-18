@@ -6,29 +6,45 @@
     name: 'teams'
     grid_teams: grid_teams
     idx: root.grid_teams._idx
-    Image:
-        source: 'Images/Teams.jpg'
-        fit_mode: 'fill'
-    ScrollView:
-        pos_hint: {'center_x': .5, 'center_y': .36}
-        size_hint: .98, .72
-        do_scroll_x: False
-        bar_color: 1, 1, 1, 0
-        bar_inactive_color: 1, 1, 1, 0
-        bar_pos_y: 'right'
-        bar_margin: -dp(3)
-        bar_width: dp(2)
-        bar_inactive_color: 1, 1, 1, 0
-        TeamsLabelGrid:
-            id: grid_teams
-            cols: 2
-            row_force_default: True
-            row_default_height: dp(92)
-            size_hint: 1, None
-            height: self.minimum_height
-            spacing: dp(10)
-            padding: dp(7)
-            on_touch_down: clock.schedule_once(root.call_please_wait_screen, .05)
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/004.jpg'
+            ScrollView:
+                pos_hint: {'center_x': .5, 'center_y': .49}
+                size_hint: .98, .95
+                do_scroll_x: False
+                bar_color: 1, 1, 1, 0
+                bar_inactive_color: 1, 1, 1, 0
+                bar_pos_y: 'right'
+                bar_margin: -dp(3)
+                bar_width: dp(2)
+                bar_inactive_color: 1, 1, 1, 0
+                TeamsLabelGrid:
+                    id: grid_teams
+                    cols: 2
+                    row_force_default: True
+                    row_default_height: dp(92)
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    spacing: dp(10)
+                    padding: dp(7)
 
 <TeamsLabel>:
     im: im
