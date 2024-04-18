@@ -33,6 +33,8 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
         if self.collide_point(*touch.pos):
             touch.grab(self)
             self.ripple_show(touch)
+            """Call :cls: Wait."""
+            Clock.schedule_once(self.parent.parent.parent.parent.parent.call_please_wait_screen, 0)
             return True
         return False
 
