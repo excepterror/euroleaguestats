@@ -1,17 +1,15 @@
 """RecycleView Widget. Called by :cls:. Used for the presentation of per game stats."""
 import logging
 
-from kivy.properties import BooleanProperty, StringProperty, ListProperty
+from kivy.properties import BooleanProperty, StringProperty, ListProperty, DictProperty
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.label import Label
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
-from kivy.uix.popup import Popup
 
 from Py.extract_game_stats import update_dict
-from Widgets.rv_stats import RV
 
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout):
@@ -65,14 +63,12 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
             for s in [s1, s2, s3, s4, s5, s6]:
                 stats_per_game.extend(s)
 
-            rv_view = RV(update_dict(stats_per_game))
+            stats_by_game = update_dict(stats_per_game)
 
-            display_data_popup = Popup(content=rv_view, size_hint=[.8, .95],
-                                       separator_color=(1, 1, 1, .5), separator_height='.5sp',
-                                       title=rv.perf_data[2] + ' in ' + self.text, title_align='center',
-                                       title_size='18sp', title_font='MyriadPro',
-                                       title_color=[.2, .6, .8, 1], auto_dismiss=True)
-            display_data_popup.open()
+            game_info = self.text
+            player_name = rv.perf_data[2]
+            stats_by_game = stats_by_game
+            self.parent.parent.call_display_by_game(player_name, game_info, stats_by_game)
 
 
 class RVMod(RecycleView):
@@ -80,6 +76,7 @@ class RVMod(RecycleView):
 
     perf_data = ListProperty([])
     player_name = StringProperty()
+    stats_by_game = DictProperty({})
 
     def on_perf_data(self, *args):
         try:
@@ -91,3 +88,6 @@ class RVMod(RecycleView):
             self.data = data_rs
         except IndexError as idx_error:
             logging.warning('Index error [perf_data] occurred [rv_stats_by_game.py]: {}'.format(idx_error))
+
+    def call_display_by_game(self, player_name, game_info, stats_by_game):
+        self.parent.parent.parent.call_display_by_game_screen(player_name, game_info, stats_by_game)
