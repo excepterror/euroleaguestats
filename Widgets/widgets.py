@@ -22,5 +22,13 @@ class PlayersImageWithLabel(BoxLayout):
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            self.parent.parent.parent.assert_tree(self.player)
+            self.parent.parent.parent.parent.parent.assert_tree(self.player)
             return super().on_touch_down(touch)
+
+
+class StatsLabel(Label):
+    pass
+
+
+class StatsByGameLabel(Label):
+    pass
