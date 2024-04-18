@@ -4,23 +4,34 @@
 <Standings>:
     name: 'standings'
     recycle_view: recycle_view
-    Image:
-        source: 'Images/Cross-Screen.jpg'
-        fit_mode: 'fill'
-    Template:
-        alpha: 0
-        font_size: sp(18)
-        pos_hint: {'center_x': .5, 'center_y': .8}
-        size_hint: .95, None
-        height: dp(40)
-        on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
-    RVSt:
-        id: recycle_view
-        pos_hint: {'center_x': .5, 'center_y': .39}
-        size_hint: .95, .74
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/003.jpg'
+            StandingsTemplate:
+                alpha: 0
+                font_size: sp(18)
+                pos_hint: {'center_x': .5, 'center_y': .95}
+                size_hint: .95, None
+                height: dp(40)
+                on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
+            RVStandings:
+                id: recycle_view
+                pos_hint: {'center_x': .5, 'center_y': .46}
+                size_hint: .95, .89
 
-<RVSt>:
-    viewclass: 'Template'
+<RVStandings>:
+    viewclass: 'StandingsTemplate'
     bar_color: 1, 1, 1, 0
     bar_margin: -dp(10)
     bar_inactive_color: 1, 1, 1, 0
@@ -44,7 +55,7 @@
     halign: 'center'
     markup: True
 
-<Template>:
+<StandingsTemplate>:
     team_image: ''
     ranking: 'None'
     games_played: 'None'
@@ -76,10 +87,8 @@
     StandingsLabel:
         id: rank
         text: root.ranking
-        size_hint_x: .08
     Image:
         id: logo
-        fit_mode: 'fill'
         source: root.team_image
         size_hint: None, None
         size: dp(23), dp(23)
@@ -87,15 +96,12 @@
     StandingsLabel:
         id: gp
         text: root.games_played
-        size_hint_x: .09
     StandingsLabel:
         id: w
         text: root.wins
-        size_hint_x: .08
     StandingsLabel:
         id: los
         text: root.losses
-        size_hint_x: .08
     StandingsLabel:
         id: wp
         text: root.wins_percentage

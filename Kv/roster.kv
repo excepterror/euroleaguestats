@@ -3,9 +3,12 @@
     num_players: self.num_players
     grid: grid
     scroll_roster: scroll_roster
-    Image:
-        source: 'Images/Cross-Screen.jpg'
-        fit_mode: 'fill'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     RoundedRectLabelBtn:
         text: 'Click me'
         font_name: 'MyriadPro'
@@ -26,24 +29,38 @@
                 pos: self.pos
                 size: self.size
         on_press: root.call_teams_screen()
-    ScrollView:
-        id: scroll_roster
-        pos_hint: {'center_x': .5, 'center_y': .43}
-        size_hint: .98, .82
-        do_scroll_x: False
-        bar_pos_y: 'right'
-        bar_color: 1, 1, 1, 0
-        bar_inactive_color: 1, 1, 1, 0
-        bar_margin: -dp(3)
-        bar_width: dp(2)
-        GridLayout:
-            id: grid
-            cols: 2
-            size_hint: 1, None
-            height: self.minimum_height
-            row_force_default: True
-            row_default_height: dp(240)
-            spacing: 0, dp(5)
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/004.jpg'
+            ScrollView:
+                id: scroll_roster
+                pos_hint: {'center_x': .5, 'center_y': .49}
+                size_hint: .98, .95
+                do_scroll_x: False
+                bar_pos_y: 'right'
+                bar_color: 1, 1, 1, 0
+                bar_inactive_color: 1, 1, 1, 0
+                bar_margin: -dp(3)
+                bar_width: dp(2)
+                GridLayout:
+                    id: grid
+                    cols: 2
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    row_force_default: True
+                    row_default_height: dp(240)
+                    spacing: 0, dp(5)
 
 <PlayersImageWithLabel>:
     orientation: 'vertical'
