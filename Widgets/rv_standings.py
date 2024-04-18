@@ -6,7 +6,7 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 
 
-class Template(RecycleDataViewBehavior, BoxLayout):
+class StandingsTemplate(RecycleDataViewBehavior, BoxLayout):
     index = 0
     selected_team = ListProperty([])
     rv = ObjectProperty(None)
@@ -17,7 +17,7 @@ class Template(RecycleDataViewBehavior, BoxLayout):
         super().refresh_view_attrs(rv, index, data)
 
 
-class RVSt(RecycleView):
+class RVStandings(RecycleView):
     current_standings = DictProperty({})
 
     def on_current_standings(self, *args):
