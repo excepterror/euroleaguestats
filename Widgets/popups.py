@@ -25,18 +25,6 @@ Builder.load_string("""
 """)
 
 Builder.load_string("""
-<DisplayStats>:
-    size_hint: .8, .95
-    title_size: '18dp'
-    title_font: 'MyriadPro'
-    title_color: .2, .6, .8, 1
-    title_align: 'center'
-    separator_color: 1, 1, 1, .5
-    separator_height: '.5dp'
-    auto_dismiss: True
-""")
-
-Builder.load_string("""
 <NotesPopup>:
     title: 'A few reminders'
     title_size: '18dp'
@@ -63,10 +51,6 @@ Builder.load_string("""
 
 class MessagePopup(Popup):
     notification = ObjectProperty(None)
-
-
-class DisplayStats(Popup):
-    pass
 
 
 class NotesPopup(Popup):
