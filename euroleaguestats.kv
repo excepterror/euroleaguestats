@@ -8,6 +8,8 @@
 #:include Kv/roster.kv
 #:include Kv/stats.kv
 #:include Kv/wait.kv
+#:include Kv/displaystats.kv
+#:include Kv/displaybygame.kv
 
 #:import clock kivy.clock.Clock
 
@@ -18,10 +20,12 @@
     wait_screen: wait_screen
     roster_screen: roster_screen
     stats_screen: stats_screen
+    displaystats_screen: displaystats_screen
+    displaybygame_screen: displaybygame_screen
     Home:
         id: home_screen
         on_rosters_reg: root.teams_screen.grid_teams.rosters = self.rosters_reg
-        on_standings: root.standings_screen.standings = self.standings; root.standings_screen.recycle_view.current_standings = root.standings_screen.standings
+        on_standings: root.standings_screen.recycle_view.current_standings = self.standings
     Menu:
         on_enter: root.check_in_names(self.name)
     Changelog:
@@ -35,15 +39,24 @@
         on_idx: root.roster_screen.idx += 1
     Wait:
         id: wait_screen
-        on_enter: self.team = root.teams_screen.grid_teams.selected_team; clock.schedule_once(self.animate_please_wait, 0)
+        on_enter: clock.schedule_once(self.animate_please_wait, .6)
         on_leave: self.anim.stop(self.please_wait); self.please_wait.opacity = 1
     Roster:
         id: roster_screen
         on_enter: root.check_in_names(self.name)
         on_idx: self.roster = root.teams_screen.grid_teams.selected_roster; clock.schedule_once(self.start_second_thread, 0)
-        on_selection_flag: root.stats_screen.player_tree_data = self.assert_tree_return; root.stats_screen.player_name = self.assert_tree_return[6]
+        on_selection_flag: root.stats_screen.player_tree_data = self.assert_tree_return; root.stats_screen.player_name = self.assert_tree_return[6]; root.displaystats_screen.player_name = self.assert_tree_return[6]
         on_leave: if len(root.screens_visited) == 2: self.grid.clear_widgets()
     Stats:
         id: stats_screen
         on_enter: root.check_in_names(self.name)
+        on_games_started: root.displaystats_screen.games = self.games; root.displaystats_screen.games_started = self.games_started
+        on_combined_dicts: root.displaystats_screen.recycle_view.combined_dicts = self.combined_dicts
+        on_stats_by_game: root.displaybygame_screen.player = self.player; root.displaybygame_screen.game_info = self.game_info; root.displaybygame_screen.recycle_view.stats_by_game_dict = self.stats_by_game
         on_leave: self.player_tree_data=[]; self.restore_recycle_view()
+    DisplayStats:
+        id: displaystats_screen
+        on_enter: root.check_in_names(self.name)
+    DisplayByGame:
+        id: displaybygame_screen
+        on_enter: root.check_in_names(self.name)
