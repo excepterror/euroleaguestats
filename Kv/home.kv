@@ -1,6 +1,17 @@
 <Home>:
     name: 'home'
-    Image:
-        source: 'Images/Loading.jpg'
-        fit_mode: 'fill'
-        on_size: root.allow_intro_image_display()
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .2
+            source: 'Images/000.png'
+            on_size: root.allow_intro_image_display()
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/001.jpg'
