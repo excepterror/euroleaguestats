@@ -1,11 +1,17 @@
+### Screen to display options for Average and Total stats, as well as Stats by game. ###
+
 #:import RVMod Widgets.rv_stats_by_game
 
 <Stats>:
     name: 'stats'
     recycle_view_mod: recycle_view_mod
-    Image:
-        source: 'Images/Cross-Screen.jpg'
-        fit_mode: 'fill'
+    float_layout: float_layout
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     RoundedRectLabelBtn:
         text: 'Click me'
         font_name: 'MyriadPro'
@@ -26,83 +32,78 @@
                 pos: self.pos
                 size: self.size
         on_press: root.call_teams_screen()
-    Label:
-        text: '[i]' + root.player_name + '[/i]'
-        font_name: 'MyriadPro'
-        pos_hint: {'center_x': .5, 'center_y': .77}
-        font_size: sp(50)
-        size_hint: 1, None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        markup: True
-    Label:
-        text: '[i]' + root.text_1 + '[/i]'
-        font_name: 'MyriadPro'
-        pos_hint: {'center_x': .5, 'center_y': .71}
-        font_size: sp(35)
-        size_hint: 1, None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        markup: True
-    Label:
-        text: '[i]' + root.text_2 + '[/i]'
-        font_name: 'MyriadPro'
-        pos_hint: {'center_x': .5, 'center_y': .66}
-        font_size: sp(20)
-        size_hint: 1, None
-        text_size: self.width, None
-        height: self.texture_size[1]
-        halign: 'center'
-        valign: 'middle'
-        markup: True
-    RoundedRectLabelBtn:
-        text: 'Average Stats'
-        font_name: 'MyriadPro'
-        font_size: sp(18)
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .47, None
-        height: dp(50)
-        pos_hint: {'center_x': .26, 'center_y': .56}
-        color: 1, 1, 1, 1
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, .2
-            RoundedRectangle:
-                segments: 70
-                radius: dp(15), dp(0), dp(0), dp(15)
-                pos: self.pos
-                size: self.size
-        on_press: root.animate_on_push(self)
-    RoundedRectLabelBtn:
-        text: 'Total Stats'
-        font_name: 'MyriadPro'
-        font_size: sp(18)
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .47, None
-        height: dp(50)
-        pos_hint: {'center_x': .74, 'center_y': .56}
-        color: 1, 1, 1, 1
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, .2
-            RoundedRectangle:
-                segments: 70
-                radius: dp(0), dp(15), dp(15), dp(0)
-                pos: self.pos
-                size: self.size
-        on_press: root.animate_on_push(self)
-    RVMod:
-        id: recycle_view_mod
-        pos_hint: {'center_x': .5, 'center_y': .265}
-        size_hint: .98, .5
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            id: float_layout
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/005.jpg'
+            Label:
+                text: '[i]' + root.player_name + '[/i]'
+                font_name: 'MyriadPro'
+                pos_hint: {'center_x': .5, 'center_y': .91}
+                font_size: sp(45)
+                size_hint: 1, None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: 'center'
+                valign: 'middle'
+                markup: True
+            Label:
+                text: '[i]' + root.text_1 + '[/i]'
+                font_name: 'MyriadPro'
+                pos_hint: {'center_x': .5, 'center_y': .85}
+                font_size: sp(30)
+                size_hint: 1, None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: 'center'
+                valign: 'middle'
+                markup: True
+            Label:
+                text: '[i]' + root.text_2 + '[/i]'
+                font_name: 'MyriadPro'
+                pos_hint: {'center_x': .5, 'center_y': .8}
+                font_size: sp(20)
+                size_hint: 1, None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: 'center'
+                valign: 'middle'
+                markup: True
+            RoundedRectLabelBtn:
+                text: 'Average & Total Stats'
+                font_name: 'MyriadPro'
+                font_size: sp(18)
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                size_hint: .96, None
+                height: dp(50)
+                pos_hint: {'center_x': .5, 'center_y': .7}
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, .2
+                    RoundedRectangle:
+                        segments: 70
+                        radius: dp(15), dp(15), dp(15), dp(15)
+                        pos: self.pos
+                        size: self.size
+                on_press: root.animate_on_push(self)
+            RVMod:
+                id: recycle_view_mod
+                pos_hint: {'center_x': .5, 'center_y': .33}
+                size_hint: .98, .64
 
 <RVMod>:
     viewclass: 'SelectableLabel'
@@ -138,26 +139,3 @@
             radius: [dp(15), dp(15), dp(15), dp(15)]
             pos: self.pos
             size: self.size
-
-<RV>:
-    viewclass: 'StatisticsLabel'
-    RecycleBoxLayout:
-        default_size: None, dp(46)
-        default_size_hint: 1, None
-        size_hint_y: None
-        height: self.minimum_height
-        size_hint_x: None
-        width: root.width
-        orientation: 'vertical'
-        bar_pos_y: 'right'
-        bar_color: .2, .6, .8, 1
-        bar_margin: -dp(6)
-        bar_width: dp(2)
-
-<StatisticsLabel@Label>:
-    text_size: self.width, None
-    font_name: 'MyriadPro'
-    font_size: sp(18)
-    halign: 'center'
-    valign: 'middle'
-    markup: True
