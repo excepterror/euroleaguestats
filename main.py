@@ -15,7 +15,7 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, DictProperty, ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
-from kivy.metrics import sp
+from kivy.metrics import sp, dp
 
 from Py.standings import fetch_standings
 from Py.extract_bio_stats import extract_players_data, download_photos
@@ -23,11 +23,24 @@ from Py.fetch_trees import fetch_trees
 from Py.extract_game_stats import update_dict
 from Py.webview import WebViewInModal
 
-from Widgets.popups import MessagePopup, NotesPopup, DisplayStats
-from Widgets.rv_stats import RV
+from Widgets.popups import MessagePopup, NotesPopup
 from Widgets.widgets import PlayersImageWithLabel
 
 __version__ = '24.04.2'
+
+
+class DisplayByGame(Screen):
+    game_info = StringProperty('')
+    player = StringProperty('')
+    stats_by_game = DictProperty({})
+    recycle_view = ObjectProperty(None)
+
+
+class DisplayStats(Screen):
+    games = ObjectProperty(None)
+    games_started = ObjectProperty(None)
+    player_name = StringProperty('')
+    recycle_view = ObjectProperty(None)
 
 
 class Stats(Screen):
@@ -42,6 +55,13 @@ class Stats(Screen):
     display_stats = ObjectProperty(None)
     rv = ObjectProperty(None)
     display_stats_title = StringProperty('')
+    float_layout = ObjectProperty(None)
+    games = ObjectProperty(None)
+    games_started = ObjectProperty(None)
+    combined_dicts = DictProperty({})
+    game_info = StringProperty('')
+    player = StringProperty('')
+    stats_by_game = DictProperty({})
 
     def on_player_tree_data(self, *args):
         try:
@@ -52,7 +72,8 @@ class Stats(Screen):
             try:
                 self.recycle_view_mod.perf_data = self.player_tree_data[4]
             except TypeError as value_error:
-                self.remove_widget(self.recycle_view_mod)
+                """Remove recycleview widget if :list: player_tree_data is empty."""
+                self.float_layout.remove_widget(self.recycle_view_mod)
                 logging.warning('Type error [performance data] occurred [main.py]: {}'.format(value_error))
             try:
                 self.text_1 = self.player_tree_data[3]
@@ -66,26 +87,56 @@ class Stats(Screen):
                 logging.warning('Value error occurred [missing data] [main.py]: {}'.format(value_error))
             self.call_this_screen()
 
+    def show_stats(self, instance, *args):
+        dummy_dict, average_stats_dict, total_stats_dict = dict(), dict(), dict()
+        if instance.text == 'Average & Total Stats':
+            try:
+                average_stats_dict = update_dict(self.player_tree_data[1])
+                total_stats_dict = update_dict(self.player_tree_data[0])
+
+                """These keys will not be included in :dict: combined_dicts and they will not display in \
+                 in the recycleview in :cls: DisplayStats."""
+                self.games = total_stats_dict['Games:']
+                self.games_started = total_stats_dict['Games Started:']
+
+                """Combine the two dictionaries. Only identical keys are included."""
+                dicts = [average_stats_dict, total_stats_dict]
+                for key in average_stats_dict.keys():
+                    dummy_dict[key] = tuple(d[key] for d in dicts)
+                self.combined_dicts = dummy_dict
+
+                Clock.schedule_once(self.call_displaystats_screen, 0)
+
+            except IndexError as idx_error:
+                logging.warning('Index error [average_stats_dict] occurred [main.py]: {}'.format(idx_error))
+                App.get_running_app().root.transition = SlideTransition(direction='left')
+                App.get_running_app().root.current = 'displaystats'
+
+            except KeyError as key_error:
+                logging.warning('Key error [self.games] occurred [main.py]: {}'.format(key_error))
+                App.get_running_app().root.transition = SlideTransition(direction='left')
+                App.get_running_app().root.current = 'displaystats'
+
+            except AttributeError as attribute_error:
+                logging.warning('Attribute error [performance data] occurred [main.py]: {}'.format(attribute_error))
+                self.open_popup()
+
     @staticmethod
     def call_this_screen(*args):
-        App.get_running_app().root.transition = SlideTransition(duration=.5)
+        App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'stats'
 
-    def show_stats(self, instance, *args):
-        self.display_stats = DisplayStats()
-        self.display_stats_title = instance.text + ' for ' + self.player_name
-        if instance.text == 'Average Stats':
-            try:
-                self.rv = RV(update_dict(self.player_tree_data[1]))
-            except AttributeError as attribute_error:
-                logging.warning('Attribute error [performance data] occurred [main.py]: {}'.format(attribute_error))
-                self.open_popup()
-        elif instance.text == 'Total Stats':
-            try:
-                self.rv = RV(update_dict(self.player_tree_data[0]))
-            except AttributeError as attribute_error:
-                logging.warning('Attribute error [performance data] occurred [main.py]: {}'.format(attribute_error))
-                self.open_popup()
+    def call_displaystats_screen(*args):
+        App.get_running_app().root.transition = SlideTransition(direction='left')
+        App.get_running_app().root.current = 'displaystats'
+
+    def call_display_by_game_screen(self, player_name, game_info, stats_by_game):
+        """Pass player's name, opponent's name and game stats to :cls: DisplayByGame."""
+        self.player = player_name
+        self.game_info = game_info
+        self.stats_by_game = stats_by_game
+        App.get_running_app().root.transition = SlideTransition(direction='left')
+        App.get_running_app().root.current = 'displaybygame'
 
     def open_popup(self, *args):
         self.message = MessagePopup(on_open=self.dismiss_text)
@@ -96,26 +147,21 @@ class Stats(Screen):
         Clock.schedule_once(self.message.dismiss, 1.5)
 
     def animate_on_push(self, instance, *args):
-        anim = Animation(size_hint_x=.45, font_size=sp(17), duration=.2)
-        anim &= Animation(height=sp(40), duration=.2)
+        anim = Animation(size_hint_x=.93, font_size=sp(16), duration=.2)
+        anim &= Animation(height=dp(40), duration=.2)
         anim.start(instance)
         anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.47, font_size=sp(20), duration=.1)
-        anim &= Animation(height=sp(50), duration=.1)
+        anim = Animation(size_hint_x=.96, font_size=sp(18), duration=.1)
+        anim &= Animation(height=dp(50), duration=.1)
         anim.start(instance)
         anim.on_complete(Clock.schedule_once(partial(self.show_stats, instance), .2))
 
-    def on_rv(self, *args):
-        self.display_stats.content = self.rv
-        self.display_stats.title = self.display_stats_title
-        self.display_stats.open()
-
     def restore_recycle_view(self):
-        children = self.children
-        if self.recycle_view_mod not in children:
-            self.add_widget(self.recycle_view_mod)
+        """Restore recycleview if it had previously been removed in :def: on_player_tree_data."""
+        if self.recycle_view_mod not in self.float_layout.children:
+            self.float_layout.add_widget(self.recycle_view_mod)
 
     @staticmethod
     def call_teams_screen(*args):
@@ -213,14 +259,13 @@ class Teams(Screen):
     idx = NumericProperty()
     grid_teams = ObjectProperty(None)
 
-    @staticmethod
-    def call_please_wait_screen(*args):
+    def call_please_wait_screen(self, *args):
+        App.get_running_app().root.wait_screen.team = self.grid_teams.selected_team
         App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'wait'
 
 
 class Standings(Screen):
-    standings = DictProperty({})
     recycle_view = ObjectProperty(None)
 
 
@@ -353,6 +398,8 @@ class ELSScreenManager(ScreenManager):
     roster_screen = ObjectProperty(None)
     standing_screen = ObjectProperty(None)
     stats_screen = ObjectProperty(None)
+    displaystats_screen = ObjectProperty(None)
+    displaybygame_screen = ObjectProperty(None)
     screens_visited = ListProperty([])
 
     def __init__(self):
@@ -362,7 +409,8 @@ class ELSScreenManager(ScreenManager):
 
     def android_back_click(self, window, key, *largs):
         screens_resolution_order = (('teams', 'menu'), ('standings', 'menu'), ('changelog', 'menu'),
-                                    ('roster', 'teams'), ('stats', 'roster'))
+                                    ('roster', 'teams'), ('stats', 'roster'), ('displaystats', 'stats'),
+                                    ('displaybygame', 'stats'))
 
         if key in (27, 1001):
             if self.screens_visited[-1] not in 'menu':
@@ -395,7 +443,7 @@ class ELSScreenManager(ScreenManager):
 
 class EuroLeagueStatsApp(App):
     def build(self):
-        Window.clearcolor = (0, 0, 0, 1)
+        Window.clearcolor = (1, 1, 1, 1)
         return ELSScreenManager()
 
     def on_stop(self):
