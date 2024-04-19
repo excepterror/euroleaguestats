@@ -23,7 +23,7 @@ from Py.fetch_trees import fetch_trees
 from Py.extract_game_stats import update_dict
 from Py.webview import WebViewInModal
 
-from Widgets.popups import MessagePopup, NotesPopup
+from Widgets.popups import MessagePopup
 from Widgets.widgets import PlayersImageWithLabel
 
 __version__ = '24.04.2'
