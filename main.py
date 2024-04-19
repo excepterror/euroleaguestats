@@ -5,7 +5,7 @@ import threading
 
 from functools import partial
 
-# from android.permissions import request_permissions, Permission
+from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
 from kivy.app import App
@@ -21,7 +21,7 @@ from Py.standings import fetch_standings
 from Py.extract_bio_stats import extract_players_data, download_photos
 from Py.fetch_trees import fetch_trees
 from Py.extract_game_stats import update_dict
-# from Py.webview import WebViewInModal
+from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup, NotesPopup
 from Widgets.widgets import PlayersImageWithLabel
@@ -59,11 +59,8 @@ class Stats(Screen):
     games = ObjectProperty(None)
     games_started = ObjectProperty(None)
     combined_dicts = DictProperty({})
-    game_info = StringProperty('')
-    player = StringProperty('')
-    stats_by_game = DictProperty({})
 
-    def on_player_tree_data(self, *args):
+    def stats_options(self, *args):
         try:
             self.notification = self.player_tree_data[5]
         except IndexError:
@@ -126,17 +123,10 @@ class Stats(Screen):
         App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'stats'
 
+    @staticmethod
     def call_displaystats_screen(*args):
         App.get_running_app().root.transition = SlideTransition(direction='left')
         App.get_running_app().root.current = 'displaystats'
-
-    def call_display_by_game_screen(self, player_name, game_info, stats_by_game):
-        """Pass player's name, opponent's name and game stats to :cls: DisplayByGame."""
-        self.player = player_name
-        self.game_info = game_info
-        self.stats_by_game = stats_by_game
-        App.get_running_app().root.transition = SlideTransition(direction='left')
-        App.get_running_app().root.current = 'displaybygame'
 
     def open_popup(self, *args):
         self.message = MessagePopup(on_open=self.dismiss_text)
@@ -162,12 +152,6 @@ class Stats(Screen):
         """Restore recycleview if it had previously been removed in :def: on_player_tree_data."""
         if self.recycle_view_mod not in self.float_layout.children:
             self.float_layout.add_widget(self.recycle_view_mod)
-
-    @staticmethod
-    def call_teams_screen(*args):
-        del App.get_running_app().root.screens_visited[1:]
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
-        App.get_running_app().root.current = 'teams'
 
 
 class Roster(Screen):
@@ -235,12 +219,6 @@ class Roster(Screen):
     @staticmethod
     def time_out_popup(conn, *args):
         App.get_running_app().root.show_popup(conn)
-
-    @staticmethod
-    def call_teams_screen(*args):
-        del App.get_running_app().root.screens_visited[1:]
-        App.get_running_app().root.transition = FadeTransition(duration=.5)
-        App.get_running_app().root.current = 'teams'
 
 
 class Wait(Screen):
@@ -319,7 +297,6 @@ class Menu(Screen):
 
 
 class Changelog(Screen):
-    notes = ObjectProperty(None)
     privacy_policy = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
