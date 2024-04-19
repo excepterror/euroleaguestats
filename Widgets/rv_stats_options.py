@@ -8,6 +8,9 @@ from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.app import App
+from kivy.uix.screenmanager import SlideTransition
+from kivy.clock import Clock
 
 from Py.extract_game_stats import update_dict
 
@@ -65,16 +68,18 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
 
             stats_by_game = update_dict(stats_per_game)
 
-            game_info = self.text
-            player_name = rv.perf_data[2]
-            stats_by_game = stats_by_game
-            self.parent.parent.call_display_by_game(player_name, game_info, stats_by_game)
+            rv.stats_by_game = stats_by_game
+            rv.player_name = rv.perf_data[2]
+            rv.game_info = self.text
+
+            rv.update_game_data()
 
 
 class RVMod(RecycleView):
     """The RecycleView Widget. Used for presenting stats by game."""
 
     perf_data = ListProperty([])
+    game_info = StringProperty('')
     player_name = StringProperty()
     stats_by_game = DictProperty({})
 
@@ -87,7 +92,15 @@ class RVMod(RecycleView):
                        {'text': 'Round ' + num + ': ' + ' ' + opp} for num, opp in self.perf_data[0].items()]
             self.data = data_rs
         except IndexError as idx_error:
-            logging.warning('Index error [perf_data] occurred [rv_stats_by_game.py]: {}'.format(idx_error))
+            logging.warning('Index error [perf_data] occurred [rv_stats_options.py]: {}'.format(idx_error))
 
-    def call_display_by_game(self, player_name, game_info, stats_by_game):
-        self.parent.parent.parent.call_display_by_game_screen(player_name, game_info, stats_by_game)
+    def update_game_data(self):
+        App.get_running_app().root.displaybygame_screen.recycle_view.stats_by_game_dict = self.stats_by_game
+        App.get_running_app().root.displaybygame_screen.player = self.player_name
+        App.get_running_app().root.displaybygame_screen.game_info = self.game_info
+        Clock.schedule_once(self.call_displaybygame_screen, 0)
+
+    @staticmethod
+    def call_displaybygame_screen(self):
+        App.get_running_app().root.transition = SlideTransition(direction='left')
+        App.get_running_app().root.current = 'displaybygame'
