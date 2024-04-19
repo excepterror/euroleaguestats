@@ -1,31 +1,9 @@
 <Changelog>:
     name: 'changelog'
-    notes: notes
     privacy_policy: privacy_policy
     Image:
         source: 'Images/About.jpg'
         fit_mode: 'fill'
-    RoundedRectLabelBtn:
-        id: notes
-        text: '[i]' + 'VIEW NOTES' + '[/i]'
-        markup: True
-        font_name: 'MyriadPro'
-        font_size: sp(48)
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        size_hint: .88, .08
-        color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .45}
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, .2
-            RoundedRectangle:
-                segments: 70
-                radius: dp(15), dp(15), dp(15), dp(15)
-                pos: self.pos
-                size: self.size
-        on_press: root.stats_animate_on_push(self)
     RoundedRectLabelBtn:
         id: privacy_policy
         text: '[i]' + 'PRIVACY POLICY' + '[/i]'
@@ -37,7 +15,7 @@
         valign: 'center'
         size_hint: .88, .08
         color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .35}
+        pos_hint: {'center_x': .5, 'center_y': .45}
         canvas.before:
             Color:
                 rgba: 1, 1, 1, .2
