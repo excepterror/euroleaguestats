@@ -51,7 +51,3 @@ Builder.load_string("""
 
 class MessagePopup(Popup):
     notification = ObjectProperty(None)
-
-
-class NotesPopup(Popup):
-    text_1 = StringProperty('Press the logo on top of the screen to go back to Screen Teams.')
