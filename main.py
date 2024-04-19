@@ -310,9 +310,7 @@ class Changelog(Screen):
         anim.on_complete(Clock.schedule_once(partial(self.selection, instance), .2))
 
     def selection(self, instance, *args):
-        if instance is self.notes:
-            self.view_notes()
-        elif instance is self.privacy_policy:
+        if instance is self.privacy_policy:
             self.view_privacy_policy()
 
     @staticmethod
