@@ -421,9 +421,11 @@ class ELSScreenManager(ScreenManager):
 
 class EuroLeagueStatsApp(App):
     def build(self):
-        self.set_cutout_mode()
         Window.clearcolor = (1, 1, 1, 1)
         return ELSScreenManager()
+
+    def on_start(self):
+        Clock.schedule_once(self.set_cutout_mode, 0)
 
     @staticmethod
     def set_cutout_mode():
