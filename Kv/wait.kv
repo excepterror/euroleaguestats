@@ -1,15 +1,28 @@
 <Wait>:
     name: 'wait'
     please_wait: please_wait
-    Image:
-        source: 'Images/004.jpg'
-    Image:
-        source: 'Images/006.png'
-        pos_hint: {'center_x': .5, 'center_y': .6}
-    Label:
-        id: please_wait
-        text: 'Waiting for {}'.format(root.team)
-        font_name: 'MyriadPro'
-        font_size: dp(20)
-        color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .3}
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/004.jpg'
+            Label:
+                id: please_wait
+                text: '[i]' + 'WAITING FOR...\n{}'.format(root.team) + '[/i]'
+                font_name: 'MyriadPro'
+                font_size: sp(45)
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                color: 1, 1, 1, 1
+                pos_hint: {'center_x': .5, 'center_y': .45}
+                markup: True

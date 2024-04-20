@@ -19,65 +19,65 @@
                     size: self.size
                     radius: dp(15), dp(15), 0, 0
                     source: 'Images/002.jpg'
-            RoundedRectLabelBtn:
-                id: current
-                text: '[i]' + 'TEAMS' + '[/i]'
-                font_name: 'MyriadPro'
-                font_size: sp(48)
-                text_size: self.size
-                halign: 'center'
-                valign: 'middle'
-                size_hint: .88, .08
-                color: 1, 1, 1, 1
-                pos_hint: {'center_x': .5, 'center_y': .45}
-                markup: True
-                canvas.before:
-                    Color:
-                        rgba: 1 ,1 ,1, .2
-                    RoundedRectangle:
-                        segments: 70
-                        radius: dp(15), dp(15), dp(15), dp(15)
-                        pos: self.pos
-                        size: self.size
-                on_press: root.stats_animate_on_push(self)
-            RoundedRectLabelBtn:
-                id: standings
-                text: '[i]' + 'STANDINGS' + '[/i]'
-                font_name: 'MyriadPro'
-                font_size: sp(48)
-                text_size: self.size
-                halign: 'center'
-                valign: 'middle'
-                size_hint: .88, .08
-                color: 1, 1, 1, 1
-                pos_hint: {'center_x': .5, 'center_y': .35}
-                markup: True
-                canvas.before:
-                    Color:
-                        rgba: 1 ,1 ,1, .2
-                    RoundedRectangle:
-                        segments: 70
-                        radius: dp(15), dp(15), dp(15), dp(15)
-                        pos: self.pos
-                        size: self.size
-                on_press: root.stats_animate_on_push(self)
-            RoundedRectLabelBtn:
-                id: about
-                text: 'About the app'
-                font_name: 'MyriadPro'
-                font_size: sp(15)
-                text_size: self.size
-                halign: 'center'
-                valign: 'middle'
-                size_hint: .4, .06
-                color: 1 ,1 ,1, 1
-                pos_hint: {'center_x': .5, 'center_y': .1}
-                canvas.before:
-                    Color:
-                        rgba: 1, 1, 1, .2
-                    RoundedRectangle:
-                        segments: 70
-                        radius: dp(15), dp(15), dp(15), dp(15)
-                        pos: self.pos
-                        size: self.size
-                on_press: root.about_animate_on_push(self)
+    RoundedRectLabelBtn:
+        id: current
+        text: '[i]' + 'TEAMS' + '[/i]'
+        font_name: 'MyriadPro'
+        font_size: sp(48)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .88, .08
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .45}
+        markup: True
+        canvas.before:
+            Color:
+                rgba: 1 ,1 ,1, .2
+            RoundedRectangle:
+                segments: 70
+                radius: dp(15), dp(15), dp(15), dp(15)
+                pos: self.pos
+                size: self.size
+        on_press: root.stats_animate_on_push(self)
+    RoundedRectLabelBtn:
+        id: standings
+        text: '[i]' + 'STANDINGS' + '[/i]'
+        font_name: 'MyriadPro'
+        font_size: sp(48)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .88, .08
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': .5, 'center_y': .35}
+        markup: True
+        canvas.before:
+            Color:
+                rgba: 1 ,1 ,1, .2
+            RoundedRectangle:
+                segments: 70
+                radius: dp(15), dp(15), dp(15), dp(15)
+                pos: self.pos
+                size: self.size
+        on_press: root.stats_animate_on_push(self)
+    RoundedRectLabelBtn:
+        id: about
+        text: 'About the app'
+        font_name: 'MyriadPro'
+        font_size: sp(15)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        size_hint: .4, .06
+        color: 1 ,1 ,1, 1
+        pos_hint: {'center_x': .5, 'center_y': .1}
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, .2
+            RoundedRectangle:
+                segments: 70
+                radius: dp(15), dp(15), dp(15), dp(15)
+                pos: self.pos
+                size: self.size
+        on_press: root.about_animate_on_push(self)
