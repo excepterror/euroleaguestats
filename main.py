@@ -26,6 +26,9 @@ from Py.webview import WebViewInModal
 from Widgets.popups import MessagePopup
 from Widgets.widgets import PlayersImageWithLabel
 
+from jnius import autoclass, cast
+
+
 __version__ = '24.04.2'
 
 
@@ -418,8 +421,20 @@ class ELSScreenManager(ScreenManager):
 
 class EuroLeagueStatsApp(App):
     def build(self):
+        self.set_cutout_mode()
         Window.clearcolor = (1, 1, 1, 1)
         return ELSScreenManager()
+
+    @staticmethod
+    def set_cutout_mode():
+        activity = autoclass('org.kivy.android.PythonActivity').mActivity
+        WindowManagerLayoutParams = autoclass('android.view.WindowManager$LayoutParams')
+
+        """Set the layout in display cutout mode to never."""
+        layout_params = cast('android.view.WindowManager$LayoutParams', activity.getWindow().getAttributes())
+        layout_params.layoutInDisplayCutoutMode = WindowManagerLayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER
+        activity.getWindow().setAttributes(layout_params)
+        logging.info("Layout in display cutout mode set to NEVER")
 
     def on_stop(self):
         suffixes = '.png'
