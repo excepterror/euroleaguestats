@@ -27,7 +27,7 @@ from Widgets.popups import MessagePopup
 from Widgets.widgets import PlayersImageWithLabel
 
 
-__version__ = '24.04.2'
+__version__ = '24.04.3'
 
 
 class DisplayByGame(Screen):
