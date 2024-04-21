@@ -5,7 +5,7 @@ import threading
 
 from functools import partial
 
-# from android.permissions import request_permissions, Permission
+from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
 from kivy.app import App
@@ -21,7 +21,7 @@ from Py.standings import fetch_standings
 from Py.extract_bio_stats import extract_players_data, download_photos
 from Py.fetch_trees import fetch_trees
 from Py.extract_game_stats import update_dict
-# from Py.webview import WebViewInModal
+from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup
 from Widgets.widgets import PlayersImageWithLabel
