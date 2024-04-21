@@ -5,9 +5,7 @@ import threading
 
 from functools import partial
 
-from android.permissions import request_permissions, Permission
-from android.runnable import run_on_ui_thread
-from jnius import autoclass, cast
+# from android.permissions import request_permissions, Permission
 
 from kivy.utils import platform
 from kivy.app import App
@@ -23,7 +21,7 @@ from Py.standings import fetch_standings
 from Py.extract_bio_stats import extract_players_data, download_photos
 from Py.fetch_trees import fetch_trees
 from Py.extract_game_stats import update_dict
-from Py.webview import WebViewInModal
+# from Py.webview import WebViewInModal
 
 from Widgets.popups import MessagePopup
 from Widgets.widgets import PlayersImageWithLabel
@@ -317,11 +315,6 @@ class Changelog(Screen):
             self.view_privacy_policy()
 
     @staticmethod
-    def view_notes():
-        notes = NotesPopup()
-        notes.open()
-
-    @staticmethod
     def view_privacy_policy(*args):
         view = WebViewInModal()
         view.open_web_view()
@@ -421,21 +414,8 @@ class ELSScreenManager(ScreenManager):
 
 class EuroLeagueStatsApp(App):
     def build(self):
-        self.set_cutout_mode()
         Window.clearcolor = (1, 1, 1, 1)
         return ELSScreenManager()
-
-    @staticmethod
-    @run_on_ui_thread
-    def set_cutout_mode(*args):
-        activity = autoclass('org.kivy.android.PythonActivity').mActivity
-        WindowManagerLayoutParams = autoclass('android.view.WindowManager$LayoutParams')
-
-        """Set the layout in display cutout mode to never."""
-        layout_params = cast('android.view.WindowManager$LayoutParams', activity.getWindow().getAttributes())
-        layout_params.layoutInDisplayCutoutMode = WindowManagerLayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER
-        activity.getWindow().setAttributes(layout_params)
-        logging.info("Layout in display cutout mode set to NEVER")
 
     def on_stop(self):
         suffixes = '.png'
