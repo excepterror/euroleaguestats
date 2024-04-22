@@ -1,9 +1,29 @@
 <Changelog>:
     name: 'changelog'
     privacy_policy: privacy_policy
-    Image:
-        source: 'Images/About.jpg'
-        fit_mode: 'fill'
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/006.jpg'
+            Label:
+                text: 'Thank you for downloading ELS.\n\nELS is an Android application that allows you to view performance data for all players in the\nEuroleague basketball club competition.'
+                font_name: 'MyriadPro'
+                font_size: sp(18)
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                color: 1, 1, 1, 1
+                pos_hint: {'center_x': .5, 'center_y': .86}
     RoundedRectLabelBtn:
         id: privacy_policy
         text: '[i]' + 'PRIVACY POLICY' + '[/i]'
@@ -15,7 +35,7 @@
         valign: 'center'
         size_hint: .88, .08
         color: 1, 1, 1, 1
-        pos_hint: {'center_x': .5, 'center_y': .45}
+        pos_hint: {'center_x': .5, 'center_y': .35}
         canvas.before:
             Color:
                 rgba: 1, 1, 1, .2
