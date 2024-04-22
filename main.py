@@ -326,7 +326,6 @@ class Home(Screen):
     standings = DictProperty({})
 
     def allow_intro_image_display(self, *args):
-        # Clock.schedule_once(self.call_menu_screen, .1)
         Clock.schedule_once(self.import_global_values_file, 0)
 
     def import_global_values_file(self, *args):
@@ -358,14 +357,6 @@ class Home(Screen):
     def time_out_popup(conn, *args):
         App.get_running_app().root.show_popup(conn)
         Clock.schedule_once(App.get_running_app().stop, 4)
-
-    # @staticmethod
-    # def call_menu_screen(self, *args):
-    #     Clock.schedule_once(self.import_global_values_file, .5)
-
-    # def call_menu_screen(self, *args):
-    #     App.get_running_app().root.transition = SlideTransition(direction='left')
-    #     App.get_running_app().root.current = 'menu'
 
 
 class ELSScreenManager(ScreenManager):
