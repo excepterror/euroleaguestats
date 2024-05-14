@@ -1,0 +1,107 @@
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager
+from kivy.uix.screenmanager import FallOutTransition
+from kivy.lang import Builder
+from kivy.core.text import LabelBase
+from kivy.utils import platform
+from kivy.core.window import Window
+from kivy.clock import Clock
+
+from View.screens import screens
+
+from Widgets.popups import MessagePopup
+
+import os
+import logging
+
+
+class ScreenManagement(ScreenManager):
+    def __init__(self):
+        super().__init__()
+
+        Window.bind(on_keyboard=self.android_back_click)
+
+    def android_back_click(self, window, key, *largs):
+        if key in (27, 1001):
+            if self.current == "menu screen":
+                Clock.schedule_once(self.exit_app, .5)
+                return True
+            else:
+                name = screens[self.current]["on back-click screen transition"]
+                if name is None:
+                    pass
+                else:
+                    App.get_running_app().set_current_screen(name, switch=False)
+                return True
+
+    @staticmethod
+    def exit_app(*args):
+        App.get_running_app().stop()
+
+
+class EuroLeagueStatsApp(App):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Window.clearcolor = (1, 1, 1, 1)
+        self.root = ScreenManagement()
+        self.set_current_screen(name="home screen")
+
+    def set_current_screen(self, name, switch=True):
+        if not self.root.has_screen(name):
+            Builder.load_file(screens[name]["kv"])
+            self.root.add_widget(screens[name]["view"]())
+            if name == "standings screen":
+                """Set data for RVStandings recycleview."""
+                self.root.get_screen(name).recycle_view.data = self.root.get_screen("home screen").data_from_dataset()
+            if name == "teams screen":
+                self.root.get_screen(name).grid_teams.rosters = self.root.get_screen("home screen").rosters_of_teams()
+        if name == "wait screen":
+            self.root.get_screen(name).team_selected = self.root.get_screen("teams screen").grid_teams.selected_team
+        if name == "roster screen":
+            self.root.get_screen(name).list_of_players = self.root.get_screen("teams screen").list_of_players
+            self.root.get_screen(name).trees = self.root.get_screen("teams screen").trees
+            self.root.get_screen(name).roster_selected = self.root.get_screen("teams screen").roster_selected
+        if name == "statistics screen":
+            self.root.get_screen(name).player_tree_data = self.root.get_screen("roster screen").assert_tree_return
+            self.root.get_screen(name).player_name = self.root.get_screen("roster screen").assert_tree_return[6]
+        if name == "display statistics screen":
+            self.root.get_screen(name).games = self.root.get_screen("statistics screen").games
+            self.root.get_screen(name).games_started = self.root.get_screen("statistics screen").games_started
+            self.root.get_screen(name).recycle_view.combined_dicts = self.root.get_screen("statistics screen").combined_dicts
+            self.root.get_screen(name).player_name = self.root.get_screen("statistics screen").player_name
+        if name == "display statistics by game screen":
+            self.root.get_screen(name).recycle_view.statistics_by_game_dict = self.root.get_screen("statistics screen").recycle_view_mod.statistics_by_game
+            self.root.get_screen(name).player = self.root.get_screen("statistics screen").recycle_view_mod.player_name
+            self.root.get_screen(name).game_info = self.root.get_screen("statistics screen").recycle_view_mod.game_info
+        if switch:
+            self.root.transition = FallOutTransition()
+            self.root.current = name
+        if not switch:
+            self.root.transition = FallOutTransition()
+            self.root.current = name
+
+    @staticmethod
+    def show_popup(text_to_display):
+        message = MessagePopup()
+        message.notification.text = text_to_display
+        message.open()
+
+    def on_stop(self):
+        suffixes = '.png'
+        for file_name in os.listdir(os.getcwd()):
+            if file_name.endswith(suffixes):
+                try:
+                    os.remove(file_name)
+                except OSError as os_error:
+                    logging.warning('OS error occurred: {}'.format(os_error))
+
+
+if __name__ == '__main__':
+    if platform == "android":
+        request_permissions(
+            [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
+    LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
+                       fn_bold='Fonts/MyriadPro-BoldCondensedItalic.ttf',
+                       fn_italic='Fonts/MyriadPro-BlackCondensedItalic.ttf')
+    EuroLeagueStatsApp().run()

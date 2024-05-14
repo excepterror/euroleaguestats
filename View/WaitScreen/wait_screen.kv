@@ -1,0 +1,36 @@
+<WaitScreenView>:
+    name: "wait screen"
+    on_pre_enter: self.animate_please_wait_message()
+    on_leave: self.anim.stop(self.please_wait); self.please_wait.opacity = 1
+    please_wait: please_wait
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/004.jpg'
+            Label:
+                id: please_wait
+                text: '[i]' + 'Waiting for\n{}'.format(root.team_selected) + '[/i]'
+                font_name: 'MyriadPro'
+                font_size: sp(45)
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                color: 1, 1, 1, 1
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                markup: True

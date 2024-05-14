@@ -1,0 +1,98 @@
+### Screen to display Average and Total stats. ###
+
+#:import RVDisplayStatistics Widgets.rv_display
+#:import StatsLabel Widgets.widgets
+
+<DisplayStatisticsScreenView>:
+    name: "display statistics screen"
+    recycle_view: recycle_view
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/003.jpg'
+            Label:
+                text: '[i]' + root.player_name + '[/i]'
+                font_name: 'MyriadPro'
+                pos_hint: {'center_x': .5, 'center_y': .92}
+                font_size: sp(43)
+                size_hint: 1, None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: 'center'
+                valign: 'middle'
+                markup: True
+            Label:
+                text: '[i]' + 'Games: {0} | Games started: {1}'.format(root.games, root.games_started) + '[/i]'
+                font_name: 'MyriadPro'
+                pos_hint: {'center_x': .5, 'center_y': .85}
+                font_size: sp(22)
+                size_hint: 1, None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: 'center'
+                valign: 'middle'
+                markup: True
+            RVDisplayStatistics:
+                id: recycle_view
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, .2
+                    RoundedRectangle:
+                        segments: 70
+                        radius: [dp(20), dp(20), dp(20), dp(20)] # Half of RVSt.RecycleBoxLayout.default_size_y
+                        size: self.size
+                        pos: self.pos
+                pos_hint: {'center_x': .5, 'center_y': .41}
+                size_hint: .95, .78
+
+<RVDisplayStatistics>:
+    viewclass: 'DisplayTemplate'
+    bar_color: 1, 1, 1, 0
+    bar_margin: -dp(10)
+    bar_inactive_color: 1, 1, 1, 0
+    smooth_scroll_end: 10
+    scroll_type: ['bars', 'content']
+    RecycleBoxLayout:
+        default_size: None, dp(40)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<StatsLabel>:
+    color: 1, 1, 1, 1
+    font_name: 'MyriadPro'
+    font_size: sp(18)
+
+<DisplayTemplate>:
+    statistical_category: 'None'
+    average_stats: 'None'
+    total_stats: 'None'
+    StatsLabel:
+        text: ''
+        size_hint_x: .6
+    StatsLabel:
+        text: root.statistical_category
+    StatsLabel:
+        text: ''
+        size_hint_x: .5
+    StatsLabel:
+        text: root.average_stats
+    StatsLabel:
+        text: root.total_stats

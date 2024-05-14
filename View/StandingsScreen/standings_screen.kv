@@ -1,0 +1,122 @@
+#:import RVStandings Widgets.rv_standings
+#:import StandingsLabel Widgets.widgets
+
+<StandingsScreenView>:
+    name: "standings screen"
+    recycle_view: recycle_view
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/003.jpg'
+            StandingsTemplate:
+                alpha: 0
+                font_size: sp(18)
+                pos_hint: {'center_x': .5, 'center_y': .95}
+                size_hint: .95, None
+                height: dp(40)
+                on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
+            RVStandings:
+                id: recycle_view
+                pos_hint: {'center_x': .5, 'center_y': .46}
+                size_hint: .95, .89
+
+<RVStandings>:
+    viewclass: 'StandingsTemplate'
+    bar_color: 1, 1, 1, 0
+    bar_margin: -dp(10)
+    bar_inactive_color: 1, 1, 1, 0
+    smooth_scroll_end: 10
+    scroll_type: ['bars', 'content']
+    RecycleBoxLayout:
+        default_size: None, dp(40)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        spacing: dp(5)
+        orientation: 'vertical'
+
+<StandingsLabel>:
+    color: 1, 1, 1, 1
+    font_name: 'MyriadPro'
+    font_size: sp(14)
+    size_hint: .1, None
+    text_size: self.width, None
+    height: dp(25)
+    halign: 'center'
+    markup: True
+
+<StandingsTemplate>:
+    team_image: ''
+    ranking: 'None'
+    games_played: 'None'
+    wins: 'None'
+    losses: 'None'
+    wins_percentage: 'None'
+    points_plus: 'None'
+    points_minus: 'None'
+    points_diff: 'None'
+    alpha: .2
+    rank: rank
+    logo:logo
+    gp: gp
+    w: w
+    los: los
+    wp:wp
+    pp: pp
+    pm: pm
+    pd: pd
+    padding: [dp(10), dp(0), dp(10), dp(7.5)]
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, root.alpha
+        RoundedRectangle:
+            segments: 70
+            radius: [dp(20), dp(20), dp(20), dp(20)] # Half of RVSt.RecycleBoxLayout.default_size_y
+            size: self.size
+            pos: self.pos
+    StandingsLabel:
+        id: rank
+        text: root.ranking
+    Image:
+        id: logo
+        source: root.team_image
+        size_hint: None, None
+        size: dp(23), dp(23)
+        pos: self.pos
+    StandingsLabel:
+        id: gp
+        text: root.games_played
+    StandingsLabel:
+        id: w
+        text: root.wins
+    StandingsLabel:
+        id: los
+        text: root.losses
+    StandingsLabel:
+        id: wp
+        text: root.wins_percentage
+    StandingsLabel:
+        id: pp
+        text: root.points_plus
+    StandingsLabel:
+        id: pm
+        text: root.points_minus
+    StandingsLabel:
+        id: pd
+        text: root.points_diff

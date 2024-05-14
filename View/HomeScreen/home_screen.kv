@@ -1,0 +1,26 @@
+#:import clock kivy.clock.Clock
+
+<HomeScreenView>:
+    name: 'home screen'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    on_standings: app.set_current_screen("menu screen")
+    BoxLayout:
+        orientation: 'vertical'
+        Image:
+            size_hint: 1, .25
+            source: 'Images/000.png'
+            on_size: root.allow_intro_image_display()
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: dp(15), dp(15), 0, 0
+                    source: 'Images/001.jpg'
