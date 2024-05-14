@@ -7,6 +7,8 @@ from kivy.utils import platform
 from kivy.core.window import Window
 from kivy.clock import Clock
 
+from android.permissions import request_permissions, Permission
+
 from View.screens import screens
 
 from Widgets.popups import MessagePopup
