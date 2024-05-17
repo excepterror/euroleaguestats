@@ -47,7 +47,9 @@ class EuroLeagueStatsApp(App):
         super().__init__(**kwargs)
         self.root = ScreenManagement()
         self.set_current_screen(name="home screen")
-        for screen in ("welcome screen", "teams screen", "standings screen"):
+
+    def load_screens(self, *args):
+        for screen in ("welcome screen", "teams screen", "standings screen", "roster screen"):
             Builder.load_file(screens[screen]["kv"])
             self.root.add_widget(screens[screen]["view"]())
 
