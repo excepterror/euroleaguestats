@@ -54,6 +54,6 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
             except ValueError:
                 pass
             Clock.schedule_once(self.parent.push_selected_roster, 0)
-            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .4)
+            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .5)
             return True
         return False
