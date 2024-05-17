@@ -13,8 +13,12 @@ class HomeScreenView(Screen):
     rosters_reg = DictProperty({})
     standings = DictProperty({})
 
-    def allow_intro_image_display(self, *args):
-        Clock.schedule_once(self.import_global_values_file, 0)
+    def load_screens(self, *args):
+        App.get_running_app().load_screens()
+        Clock.schedule_once(self.import_global_values_file, .0)
+
+    # def allow_intro_image_display(self, *args):
+    #     Clock.schedule_once(self.import_global_values_file, 0)
 
     def import_global_values_file(self, *args):
         try:
