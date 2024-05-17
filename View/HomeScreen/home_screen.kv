@@ -2,6 +2,7 @@
 
 <HomeScreenView>:
     name: 'home screen'
+    on_enter: clock.schedule_once(root.load_screens, 2)
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
@@ -14,7 +15,7 @@
         Image:
             size_hint: 1, .25
             source: 'Images/000.png'
-            on_size: root.allow_intro_image_display()
+            # on_size: root.allow_intro_image_display(); print('ok')
         FloatLayout:
             canvas.before:
                 Color:
