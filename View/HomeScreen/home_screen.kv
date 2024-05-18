@@ -4,7 +4,7 @@
     name: "home screen"
     on_enter: self.flag = True
     on_flag: clock.schedule_once(root.allow_intro_image_display, 0)
-    on_standings: app.set_current_screen("menu screen")# ; clock.schedule_once(app.do_stuff, 2)
+    on_standings: app.set_current_screen("menu screen")
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
