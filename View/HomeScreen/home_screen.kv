@@ -1,10 +1,11 @@
 #:import clock kivy.clock.Clock
+#:import partial functools.partial
 
 <HomeScreenView>:
     name: "home screen"
     on_enter: self.flag = True
     on_flag: clock.schedule_once(root.allow_intro_image_display, 0)
-    on_standings: app.set_current_screen("menu screen")
+    on_standings: app.load_kv_files(); clock.schedule_once(partial(app.set_current_screen, "menu screen"), 2)
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
