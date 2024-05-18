@@ -2,7 +2,7 @@ import logging
 import json
 
 from kivy.uix.screenmanager import Screen
-from kivy.properties import DictProperty
+from kivy.properties import DictProperty, BooleanProperty
 from kivy.app import App
 from kivy.clock import Clock
 
@@ -12,6 +12,7 @@ from PyCoreFiles.standings import fetch_standings
 class HomeScreenView(Screen):
     rosters_reg = DictProperty({})
     standings = DictProperty({})
+    flag = BooleanProperty(False)
 
     def allow_intro_image_display(self, *args):
         Clock.schedule_once(self.import_global_values_file, 0)

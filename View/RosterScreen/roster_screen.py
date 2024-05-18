@@ -3,6 +3,7 @@ from kivy.properties import DictProperty, NumericProperty, ListProperty, ObjectP
 from kivy.app import App
 
 import os
+import logging
 
 from PyCoreFiles.extract_bio_stats import extract_players_data
 
@@ -29,6 +30,8 @@ class RosterScreenView(Screen):
         '''Check if NoImage.png has been used instead of the actual player image, thus :def: fetch_tree [
         fetch_trees.py] and :def: fetch_a_photo [extract_bio_stats.py] have thrown errors.'''
         if count == len(roster):
+            logging.warning("Counter value is not equal to length of  :dict: roster in :def: populate_photos"
+                            " [roster_screen.py]")
             self.time_out_popup('Error while fetching data!')
 
     def assert_tree(self, player_name, *args):

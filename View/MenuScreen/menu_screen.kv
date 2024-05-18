@@ -1,7 +1,9 @@
 #:import RoundedRectLabelBtn Widgets.widgets
+#:import clock kivy.clock.Clock
 
 <MenuScreenView>:
     name: "menu screen"
+    on_enter: clock.schedule_once(app.load_kv_files, 0)
     teams: teams
     standings: standings
     about: about
