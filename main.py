@@ -66,11 +66,6 @@ class EuroLeagueStatsApp(App):
         if not self.root.has_screen(name):
             Builder.load_file(screens[name]["kv"])
             self.root.add_widget(screens[name]["view"]())
-        # if name == "standings screen":
-        #     """Set data for RVStandings recycleview."""
-        #     self.root.get_screen(name).recycle_view.data = self.root.get_screen("home screen").data_from_dataset()
-        # if name == "teams screen":
-        #     self.root.get_screen(name).grid_teams.rosters = self.root.get_screen("home screen").rosters_of_teams()
         if name == "wait screen":
             self.root.get_screen(name).team_selected = self.root.get_screen("teams screen").grid_teams.selected_team
         if name == "roster screen":

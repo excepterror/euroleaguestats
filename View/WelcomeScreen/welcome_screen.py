@@ -4,7 +4,7 @@ from kivy.clock import Clock
 
 from functools import partial
 
-from PyCoreFiles.webview import WebViewInModal
+# from PyCoreFiles.webview import WebViewInModal
 
 
 class WelcomeScreenView(Screen):
