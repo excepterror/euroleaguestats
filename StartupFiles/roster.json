@@ -264,7 +264,7 @@
         ],
         "Shabazz Napier": [
             "https://www.euroleaguebasketball.net/euroleague/players/shabazz-napier/011224/",
-            ""
+            "https://media-cdn.incrowdsports.com/cb98052f-b440-4c88-8a90-975de0df4824.png?width=320&resizeType=fill&format=png"
         ],
         "Alex Poythress": [
             "https://www.euroleaguebasketball.net/euroleague/players/alex-poythress/009960/",
@@ -324,8 +324,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/vanja-marinkovic/004761/",
             "https://media-cdn.incrowdsports.com/9ba1a789-9eeb-4ef0-a714-df7f0699472a.png?width=320&resizeType=fill&format=png"
         ],
-        "Codi Miller Mcintyre": [
-            "https://www.euroleaguebasketball.net/euroleague/players/codi-miller-mcintyre/009048/",
+        "Mcintyre Miller Codi": [
+            "https://www.euroleaguebasketball.net/euroleague/players/mcintyre-miller-codi/009048/",
             "https://media-cdn.incrowdsports.com/d063a5f7-3186-4014-b300-3e78cadd4615.png?width=320&resizeType=fill&format=png"
         ],
         "Chima Moneke": [
@@ -370,8 +370,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/dejan-davidovac/007960/",
             "https://media-cdn.incrowdsports.com/b4c2dfdc-3e90-4285-b765-5f45242464f5.png?width=320&resizeType=fill&format=png"
         ],
-        "Yago Dos Santos": [
-            "https://www.euroleaguebasketball.net/euroleague/players/yago-dos-santos/012044/",
+        "Santos Dos Yago": [
+            "https://www.euroleaguebasketball.net/euroleague/players/santos-dos-yago/012044/",
             "https://media-cdn.incrowdsports.com/e44c9861-4a02-461c-9b9c-ff546198f719.png?width=320&resizeType=fill&format=png"
         ],
         "Rokas Giedraitis": [
@@ -414,6 +414,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/milos-teodosic/JDR/",
             "https://media-cdn.incrowdsports.com/d3a9b88c-cfa4-4981-bd7c-78b1a3fe70f6.png?width=320&resizeType=fill&format=png"
         ],
+        "Trey Thompkins": [
+            "https://www.euroleaguebasketball.net/euroleague/players/trey-thompkins/005836/",
+            ""
+        ],
         "Mike Tobey": [
             "https://www.euroleaguebasketball.net/euroleague/players/mike-tobey/008966/",
             "https://media-cdn.incrowdsports.com/285a8390-a408-4bad-a9ac-4475d28e007c.png?width=320&resizeType=fill&format=png"
@@ -436,8 +440,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/bruno-caboclo/012096/",
             "https://media-cdn.incrowdsports.com/f4cd2069-f78e-4376-8163-e3f78bd1e941.png?width=320&resizeType=fill&format=png"
         ],
-        "Perry Dozier Jr": [
-            "https://www.euroleaguebasketball.net/euroleague/players/perry-dozier-jr/012742/",
+        "Jr Dozier Perry": [
+            "https://www.euroleaguebasketball.net/euroleague/players/jr-dozier-perry/012742/",
             "https://media-cdn.incrowdsports.com/4997cc73-0024-4ac2-a1f4-cb1768ba12f2.png?width=320&resizeType=fill&format=png"
         ],
         "Savo Drezgic": [
@@ -483,10 +487,6 @@
         "Uros Trifunovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/uros-trifunovic/007673/",
             "https://media-cdn.incrowdsports.com/f2bf047c-f206-4645-b830-44caa9be8ed2.png?width=320&resizeType=fill&format=png"
-        ],
-        "Tristan Vukcevic": [
-            "https://www.euroleaguebasketball.net/euroleague/players/tristan-vukcevic/009212/",
-            "https://media-cdn.incrowdsports.com/16d5d50d-7aa5-4fb2-8fcc-32b610acd93b.png?width=320&resizeType=fill&format=png"
         ]
     },
     "FC Barcelona": {
@@ -498,12 +498,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/dario-brizuela/009992/",
             "https://media-cdn.incrowdsports.com/63de8e61-84bc-4a4e-b511-870931c39392.png?width=320&resizeType=fill&format=png"
         ],
-        "Michael Caicedo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/michael-caicedo/009132/",
-            "https://media-cdn.incrowdsports.com/86bfa41c-30b3-4bfc-b9b5-04a408a90a1c.png?width=320&resizeType=fill&format=png"
-        ],
-        "Oscar Da Silva": [
-            "https://www.euroleaguebasketball.net/euroleague/players/oscar-da-silva/011244/",
+        "Silva Da Oscar": [
+            "https://www.euroleaguebasketball.net/euroleague/players/silva-da-oscar/011244/",
             "https://media-cdn.incrowdsports.com/3bcb4aee-7afe-4520-9995-117fdb9ff929.png?width=320&resizeType=fill&format=png"
         ],
         "Willy Hernangomez": [
@@ -542,9 +538,13 @@
             "https://www.euroleaguebasketball.net/euroleague/players/joel-parra/007464/",
             "https://media-cdn.incrowdsports.com/5c82eee3-bae2-4f20-b3ab-1340de83634c.png?width=320&resizeType=fill&format=png"
         ],
-        "Pauli": [
-            "https://www.euroleaguebasketball.net/euroleague/players/pauli/003204/",
+        "Oriol Pauli": [
+            "https://www.euroleaguebasketball.net/euroleague/players/oriol-pauli/003204/",
             "https://media-cdn.incrowdsports.com/98fcf674-d6ef-4421-aff8-b60acec6d051.png?width=320&resizeType=fill&format=png"
+        ],
+        "Ricky Rubio": [
+            "https://www.euroleaguebasketball.net/euroleague/players/ricky-rubio/LFW/",
+            "https://media-cdn.incrowdsports.com/80e65726-8f2c-4933-b67a-fb7652045221.png?width=320&resizeType=fill&format=png"
         ],
         "Dame Sarr": [
             "https://www.euroleaguebasketball.net/euroleague/players/dame-sarr/011666/",
@@ -616,8 +616,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/nelson-weidemann/006245/",
             "https://media-cdn.incrowdsports.com/0ca4ba6b-ed6c-4a90-a49b-46bcc1deb8aa.png?width=320&resizeType=fill&format=png"
         ],
-        "Nick Weiler Babb": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nick-weiler-babb/010391/",
+        "Babb Weiler Nick": [
+            "https://www.euroleaguebasketball.net/euroleague/players/babb-weiler-nick/010391/",
             "https://media-cdn.incrowdsports.com/27d89a7b-3dfe-4c55-9c3b-11219a9ac033.png?width=320&resizeType=fill&format=png"
         ],
         "Niklas Wimberg": [
@@ -642,12 +642,16 @@
             "https://www.euroleaguebasketball.net/euroleague/players/tyler-dorsey/009849/",
             "https://media-cdn.incrowdsports.com/88e73e31-c7d4-401e-9064-c96bd0dc46d6.png?width=320&resizeType=fill&format=png"
         ],
+        "Mert Eksioglu": [
+            "https://www.euroleaguebasketball.net/euroleague/players/mert-eksioglu/008174/",
+            ""
+        ],
         "Marko Guduric": [
             "https://www.euroleaguebasketball.net/euroleague/players/marko-guduric/004004/",
             "https://media-cdn.incrowdsports.com/bea99e3f-f43c-4e69-b51e-51fb76f122eb.png?width=320&resizeType=fill&format=png"
         ],
-        "Nigel Hayes Davis": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nigel-hayes-davis/008962/",
+        "Davis Hayes Nigel": [
+            "https://www.euroleaguebasketball.net/euroleague/players/davis-hayes-nigel/008962/",
             "https://media-cdn.incrowdsports.com/0bc1ddee-384f-44e8-ae99-c37eb0653e58.png?width=320&resizeType=fill&format=png"
         ],
         "Sehmus Hazer": [
@@ -696,12 +700,8 @@
         ]
     },
     "LDLC ASVEL Villeurbanne": {
-        "Boris Dallo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/boris-dallo/003274/",
-            "https://media-cdn.incrowdsports.com/7c9a1819-6962-465f-afa3-5d418e451295.png?width=320&resizeType=fill&format=png"
-        ],
-        "Nando De Colo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nando-de-colo/002100/",
+        "Colo De Nando": [
+            "https://www.euroleaguebasketball.net/euroleague/players/colo-de-nando/002100/",
             "https://media-cdn.incrowdsports.com/c950270a-5c1e-4002-988f-06524bf28997.png?width=320&resizeType=fill&format=png"
         ],
         "Youssoupha Fall": [
@@ -728,9 +728,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/david-lighty/003526/",
             "https://media-cdn.incrowdsports.com/2e9e5402-78b9-4cdc-8bce-516365be2af9.png?width=320&resizeType=fill&format=png"
         ],
-        "Timothe Luwawu Cabarrot": [
-            "https://www.euroleaguebasketball.net/euroleague/players/timothe-luwawu-cabarrot/012080/",
-            ""
+        "Cabarrot Luwawu Timothe": [
+            "https://www.euroleaguebasketball.net/euroleague/players/cabarrot-luwawu-timothe/012080/",
+            "https://media-cdn.incrowdsports.com/cbe1ddf4-6919-4eb7-ae7b-d79dbf72a3e5.png?width=320&resizeType=fill&format=png"
         ],
         "Mbaye Ndiaye": [
             "https://www.euroleaguebasketball.net/euroleague/players/mbaye-ndiaye/012731/",
@@ -750,8 +750,8 @@
         ]
     },
     "Maccabi Playtika Tel Aviv": {
-        "Wade Baldwin IV": [
-            "https://www.euroleaguebasketball.net/euroleague/players/wade-baldwin-iv/009863/",
+        "Iv Baldwin Wade": [
+            "https://www.euroleaguebasketball.net/euroleague/players/iv-baldwin-wade/009863/",
             "https://media-cdn.incrowdsports.com/d154726f-c893-45bd-bb9b-c4a84c4f0eb4.png?width=320&resizeType=fill&format=png"
         ],
         "Tamir Blatt": [
@@ -802,8 +802,12 @@
             "https://www.euroleaguebasketball.net/euroleague/players/roman-sorkin/011219/",
             "https://media-cdn.incrowdsports.com/1fa51223-ddd5-4f2f-8739-e5b9ff3d5234.png?width=320&resizeType=fill&format=png"
         ],
-        "James Webb III": [
-            "https://www.euroleaguebasketball.net/euroleague/players/james-webb-iii/011971/",
+        "Joe Thomasson": [
+            "https://www.euroleaguebasketball.net/euroleague/players/joe-thomasson/012095/",
+            "https://media-cdn.incrowdsports.com/d823e4c2-2e56-4dae-8b31-60edd5a2d26f.png?width=320&resizeType=fill&format=png"
+        ],
+        "IIIWebb James": [
+            "https://www.euroleaguebasketball.net/euroleague/players/iiiwebb-james/011971/",
             "https://media-cdn.incrowdsports.com/5db88293-4b27-4ff9-883f-ef8cc7bae695.png?width=320&resizeType=fill&format=png"
         ]
     },
@@ -840,8 +844,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/nikola-milutinov/003941/",
             "https://media-cdn.incrowdsports.com/e24fce28-f9b5-453b-9359-bb7f7cab656b.png?width=320&resizeType=fill&format=png"
         ],
-        "Naz Mitrou Long": [
-            "https://www.euroleaguebasketball.net/euroleague/players/naz-mitrou-long/011965/",
+        "Long Mitrou Naz": [
+            "https://www.euroleaguebasketball.net/euroleague/players/long-mitrou-naz/011965/",
             "https://media-cdn.incrowdsports.com/05cecc0e-b5ef-44a4-b9e0-d4616e9e7af2.png?width=320&resizeType=fill&format=png"
         ],
         "Kostas Papanikolaou": [
@@ -872,8 +876,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/thomas-walkup/008855/",
             "https://media-cdn.incrowdsports.com/3b49acd3-17db-414c-92ee-e13ed1ca8c1d.png?width=320&resizeType=fill&format=png"
         ],
-        "Nigel Williams Goss": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nigel-williams-goss/007982/",
+        "Goss Williams Nigel": [
+            "https://www.euroleaguebasketball.net/euroleague/players/goss-williams-nigel/007982/",
             "https://media-cdn.incrowdsports.com/ef5c945e-8fdf-4a80-af5b-35e5cddff238.png?width=320&resizeType=fill&format=png"
         ],
         "Moses Wright": [
@@ -1030,8 +1034,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/brandon-davies/007870/",
             "https://media-cdn.incrowdsports.com/f1d1b6b1-7997-40da-bbf6-c8d5efdee40c.png?width=320&resizeType=fill&format=png"
         ],
-        "Sergio De Larrea": [
-            "https://www.euroleaguebasketball.net/euroleague/players/sergio-de-larrea/010750/",
+        "Larrea De Sergio": [
+            "https://www.euroleaguebasketball.net/euroleague/players/larrea-de-sergio/010750/",
             "https://media-cdn.incrowdsports.com/e95ee234-21b5-4e40-bf9b-f6dfe67d9fc6.png?width=320&resizeType=fill&format=png"
         ],
         "Jared Harper": [
@@ -1050,8 +1054,8 @@
             "https://www.euroleaguebasketball.net/euroleague/players/stefan-jovic/004863/",
             "https://media-cdn.incrowdsports.com/28d9716f-a9dc-4746-880a-7ce068ff9edd.png?width=320&resizeType=fill&format=png"
         ],
-        "Xabi Lopez Arostegui": [
-            "https://www.euroleaguebasketball.net/euroleague/players/xabi-lopez-arostegui/005356/",
+        "Arostegui Lopez Xabi": [
+            "https://www.euroleaguebasketball.net/euroleague/players/arostegui-lopez-xabi/005356/",
             "https://media-cdn.incrowdsports.com/3460a4f8-7046-4217-a0f6-0a248458712b.png?width=320&resizeType=fill&format=png"
         ],
         "Lucas Mari": [
@@ -1124,6 +1128,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/lukas-lekavicius/003210/",
             "https://media-cdn.incrowdsports.com/c434bebd-36d7-492d-949f-15d3907085cd.png?width=320&resizeType=fill&format=png"
         ],
+        "Karolis Lukosiunas": [
+            "https://www.euroleaguebasketball.net/euroleague/players/karolis-lukosiunas/006158/",
+            "https://media-cdn.incrowdsports.com/779c02b4-a7aa-4c4d-9a14-321766098ce0.png?width=320&resizeType=fill&format=png"
+        ],
         "Brady Manek": [
             "https://www.euroleaguebasketball.net/euroleague/players/brady-manek/012715/",
             "https://media-cdn.incrowdsports.com/559d1f9f-d51c-43a2-afc7-22058fd024d8.png?width=320&resizeType=fill&format=png"
@@ -1185,10 +1193,6 @@
         "Bruno Mascolo": [
             "https://www.euroleaguebasketball.net/euroleague/players/bruno-mascolo/012713/",
             "https://media-cdn.incrowdsports.com/04c7e15a-0de1-4f47-abe7-6f42a117faf4.png?width=320&resizeType=fill&format=png"
-        ],
-        "Leo Menalo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/leo-menalo/008296/",
-            "https://media-cdn.incrowdsports.com/fdaabae6-142a-4c0f-9976-8bbb5cd0b6d7.png?width=320&resizeType=fill&format=png"
         ],
         "Jordan Mickey": [
             "https://www.euroleaguebasketball.net/euroleague/players/jordan-mickey/008847/",
