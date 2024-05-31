@@ -103,6 +103,7 @@ class EuroLeagueStatsApp(App):
             if file_name.endswith(suffixes):
                 try:
                     os.remove(file_name)
+                    logging.info('Image {} removed'.format(file_name))
                 except OSError as os_error:
                     logging.warning('OS error occurred: {}'.format(os_error))
 
