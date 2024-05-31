@@ -35,8 +35,9 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
             touch.grab(self)
+            self.ripple_duration_in = .5
+            self.ripple_duration_out = .4
             self.ripple_show(touch)
-            """Call :cls: WaitScreenView."""
             return True
         return False
 
@@ -54,6 +55,6 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
             except ValueError:
                 pass
             Clock.schedule_once(self.parent.push_selected_roster, 0)
-            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .5)
+            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .6)
             return True
         return False
