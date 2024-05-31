@@ -9,7 +9,7 @@ class WaitScreenView(Screen):
     team_selected = StringProperty('')
 
     def animate_please_wait_message(self, *args):
-        self.anim = Animation(opacity=0, duration=1)
-        self.anim += Animation(opacity=1, duration=1)
+        self.anim = Animation(opacity=0, duration=1, step=1/30)
+        self.anim += Animation(opacity=1, duration=1, step=1/30)
         self.anim.repeat = True
         self.anim.start(self.please_wait)
