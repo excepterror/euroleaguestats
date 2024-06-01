@@ -90,122 +90,176 @@ def access_per_game_stats(tree, name):
         regular_games_counter = len(rounds_played_by_player) - (play_in_counter + playoff_games_counter + semifinal_games_counter)
 
         if playoff_games_counter == 0 and semifinal_games_counter == 0:
-            if play_in_counter == 0:
-                min_ft = stats_by_game_min_ft[:-10]
-                odt = stats_by_game_odt[:-6]
-                as_to = stats_by_game_as_to[:-6]
-                fv_ag = stats_by_game_fv_ag[:-4]
-                cm_rv = stats_by_game_cm_rv[:-4]
-                pir = stats_by_game_pir[:-2]
+            min_ft = stats_by_game_min_ft[:5 * regular_games_counter]
+            odt = stats_by_game_odt[:3 * regular_games_counter]
+            as_to = stats_by_game_as_to[:3 * regular_games_counter]
+            fv_ag = stats_by_game_fv_ag[:2 * regular_games_counter]
+            cm_rv = stats_by_game_cm_rv[:2 * regular_games_counter]
+            pir = stats_by_game_pir[:1 * regular_games_counter]
 
-            """Check if the player has participated in a play-in game."""
+            if play_in_counter == 0:
+                """Players who have not qualified for the playoffs AND the play-in games."""
+                pass
+
             if play_in_counter != 0:
-                min_ft = stats_by_game_min_ft[:5 * regular_games_counter]
+                """Players who have not qualified for the playoffs BUT HAVE PLAYED play-in games."""
                 del stats_by_game_min_ft[:5 * regular_games_counter + 10]
                 min_ft.extend(stats_by_game_min_ft[:5 * play_in_counter])
 
-                odt = stats_by_game_odt[:3 * regular_games_counter]
                 del stats_by_game_odt[:3 * regular_games_counter + 6]
                 odt.extend(stats_by_game_odt[:3 * play_in_counter])
 
-                as_to = stats_by_game_as_to[:3 * regular_games_counter]
                 del stats_by_game_as_to[:3 * regular_games_counter + 6]
                 as_to.extend(stats_by_game_as_to[:3 * play_in_counter])
 
-                fv_ag = stats_by_game_fv_ag[:2 * regular_games_counter]
                 del stats_by_game_fv_ag[:2 * regular_games_counter + 4]
                 fv_ag.extend(stats_by_game_fv_ag[:2 * play_in_counter])
 
-                cm_rv = stats_by_game_cm_rv[:2 * regular_games_counter]
                 del stats_by_game_cm_rv[:2 * regular_games_counter + 4]
                 cm_rv.extend(stats_by_game_cm_rv[:2 * play_in_counter])
 
-                pir = stats_by_game_pir[:1 * regular_games_counter]
                 del stats_by_game_pir[:1 * regular_games_counter + 2]
                 pir.extend(stats_by_game_pir[:1 * play_in_counter])
 
-        if playoff_games_counter != 0:
-            if semifinal_games_counter == 0:
+        if playoff_games_counter != 0 and semifinal_games_counter == 0:
+            """Players who have qualified for the PLAYOFFS but NOT for the semifinals..."""
 
-                min_ft = stats_by_game_min_ft[:5 * regular_games_counter]
-                del stats_by_game_min_ft[:5 * regular_games_counter + 10]
+            min_ft = stats_by_game_min_ft[:5 * regular_games_counter]
+            del stats_by_game_min_ft[:5 * regular_games_counter + 10]
+
+            odt = stats_by_game_odt[:3 * regular_games_counter]
+            del stats_by_game_odt[:3 * regular_games_counter + 6]
+
+            as_to = stats_by_game_as_to[:3 * regular_games_counter]
+            del stats_by_game_as_to[:3 * regular_games_counter + 6]
+
+            fv_ag = stats_by_game_fv_ag[:2 * regular_games_counter]
+            del stats_by_game_fv_ag[:2 * regular_games_counter + 4]
+
+            cm_rv = stats_by_game_cm_rv[:2 * regular_games_counter]
+            del stats_by_game_cm_rv[:2 * regular_games_counter + 4]
+
+            pir = stats_by_game_pir[:1 * regular_games_counter]
+            del stats_by_game_pir[:1 * regular_games_counter + 2]
+
+            if play_in_counter == 0:
+                """...AND haven't played any play-in games."""
+
+                min_ft.extend(stats_by_game_min_ft[:5 * playoff_games_counter])
+                odt.extend(stats_by_game_odt[:3 * playoff_games_counter])
+                as_to.extend(stats_by_game_as_to[:3 * playoff_games_counter])
+                fv_ag.extend(stats_by_game_fv_ag[:2 * playoff_games_counter])
+                cm_rv.extend(stats_by_game_cm_rv[:2 * playoff_games_counter])
+                pir.extend(stats_by_game_pir[:1 * playoff_games_counter])
+
+            """...AND have played play-in games."""
+            if play_in_counter != 0:
+
                 min_ft.extend(stats_by_game_min_ft[:5 * play_in_counter])
                 del stats_by_game_min_ft[:5 * play_in_counter + 10]
                 min_ft.extend(stats_by_game_min_ft[:5 * playoff_games_counter])
 
-                odt = stats_by_game_odt[:3 * regular_games_counter]
-                del stats_by_game_odt[:3 * regular_games_counter + 6]
-                odt.extend(stats_by_game_min_ft[:3 * play_in_counter])
+                odt.extend(stats_by_game_odt[:3 * play_in_counter])
                 del stats_by_game_odt[:3 * play_in_counter + 6]
                 odt.extend(stats_by_game_odt[:3 * playoff_games_counter])
 
-                as_to = stats_by_game_as_to[:3 * regular_games_counter]
-                del stats_by_game_as_to[:3 * regular_games_counter + 6]
                 as_to.extend(stats_by_game_as_to[:3 * play_in_counter])
                 del stats_by_game_as_to[:3 * play_in_counter + 6]
                 as_to.extend(stats_by_game_as_to[:3 * playoff_games_counter])
 
-                fv_ag = stats_by_game_fv_ag[:2 * regular_games_counter]
-                del stats_by_game_fv_ag[:2 * regular_games_counter + 4]
                 fv_ag.extend(stats_by_game_fv_ag[:2 * play_in_counter])
                 del stats_by_game_fv_ag[:2 * play_in_counter + 4]
                 fv_ag.extend(stats_by_game_fv_ag[:2 * playoff_games_counter])
 
-                cm_rv = stats_by_game_cm_rv[:2 * regular_games_counter]
-                del stats_by_game_cm_rv[:2 * regular_games_counter + 4]
                 cm_rv.extend(stats_by_game_cm_rv[:2 * play_in_counter])
                 del stats_by_game_cm_rv[:2 * play_in_counter + 4]
                 cm_rv.extend(stats_by_game_cm_rv[:2 * playoff_games_counter])
 
-                pir = stats_by_game_pir[:1 * regular_games_counter]
-                del stats_by_game_pir[:1 * regular_games_counter + 2]
                 pir.extend(stats_by_game_pir[:1 * play_in_counter])
                 del stats_by_game_pir[:1 * play_in_counter + 2]
                 pir.extend(stats_by_game_pir[:1 * playoff_games_counter])
 
-            if semifinal_games_counter != 0:
-                min_ft = stats_by_game_min_ft[:5 * regular_games_counter]
-                del stats_by_game_min_ft[:5 * regular_games_counter + 10]
+        if playoff_games_counter != 0 and semifinal_games_counter != 0:
+            """Players who have qualified for the PLAYOFFS AND for the semifinals..."""
+
+            min_ft.extend(stats_by_game_min_ft[:5 * regular_games_counter])
+            del stats_by_game_min_ft[:5 * regular_games_counter + 10]
+
+            odt.extend(stats_by_game_odt[:3 * regular_games_counter])
+            del stats_by_game_odt[:3 * regular_games_counter + 6]
+
+            as_to.extend(stats_by_game_as_to[:3 * regular_games_counter])
+            del stats_by_game_as_to[:3 * regular_games_counter + 6]
+
+            fv_ag.extend(stats_by_game_fv_ag[:2 * regular_games_counter])
+            del stats_by_game_fv_ag[:2 * regular_games_counter + 4]
+
+            cm_rv.extend(stats_by_game_cm_rv[:2 * regular_games_counter])
+            del stats_by_game_cm_rv[:2 * regular_games_counter + 4]
+
+            pir.extend(stats_by_game_pir[:1 * regular_games_counter])
+            del stats_by_game_pir[:1 * regular_games_counter + 2]
+
+            if play_in_counter == 0:
+                """...AND haven't played any play-in games."""
+
+                min_ft.extend(stats_by_game_min_ft[:5 * playoff_games_counter])
+                del stats_by_game_min_ft[:5 * playoff_games_counter + 10]
+                min_ft.extend(stats_by_game_min_ft[:5 * semifinal_games_counter])
+
+                odt.extend(stats_by_game_odt[:3 * playoff_games_counter])
+                del stats_by_game_odt[:3 * playoff_games_counter + 6]
+                odt.extend(stats_by_game_odt[:3 * semifinal_games_counter])
+
+                as_to.extend(stats_by_game_as_to[:3 * playoff_games_counter])
+                del stats_by_game_as_to[:3 * playoff_games_counter + 6]
+                as_to.extend(stats_by_game_as_to[:3 * semifinal_games_counter])
+
+                fv_ag.extend(stats_by_game_fv_ag[:2 * playoff_games_counter])
+                del stats_by_game_fv_ag[:2 * playoff_games_counter + 4]
+                fv_ag.extend(stats_by_game_fv_ag[:2 * semifinal_games_counter])
+
+                cm_rv.extend(stats_by_game_cm_rv[:2 * playoff_games_counter])
+                del stats_by_game_cm_rv[:2 * playoff_games_counter + 4]
+                cm_rv.extend(stats_by_game_cm_rv[:2 * semifinal_games_counter])
+
+                pir.extend(stats_by_game_pir[:1 * playoff_games_counter])
+                del stats_by_game_pir[:1 * playoff_games_counter + 2]
+                pir.extend(stats_by_game_pir[:1 * semifinal_games_counter])
+
+            """...AND have played play-in games."""
+            if play_in_counter != 0:
+
                 min_ft.extend(stats_by_game_min_ft[:5 * play_in_counter])
                 del stats_by_game_min_ft[:5 * play_in_counter + 10]
                 min_ft.extend(stats_by_game_min_ft[:5 * playoff_games_counter])
                 del stats_by_game_min_ft[:5 * playoff_games_counter + 10]
                 min_ft.extend(stats_by_game_min_ft[:5 * semifinal_games_counter])
 
-                odt = stats_by_game_odt[:3 * regular_games_counter]
-                del stats_by_game_odt[:3 * regular_games_counter + 6]
-                odt.extend(stats_by_game_min_ft[:3 * play_in_counter])
+                odt.extend(stats_by_game_odt[:3 * play_in_counter])
                 del stats_by_game_odt[:3 * play_in_counter + 6]
                 odt.extend(stats_by_game_odt[:3 * playoff_games_counter])
                 del stats_by_game_odt[:3 * playoff_games_counter + 6]
                 odt.extend(stats_by_game_odt[:3 * semifinal_games_counter])
 
-                as_to = stats_by_game_as_to[:3 * regular_games_counter]
-                del stats_by_game_as_to[:3 * regular_games_counter + 6]
                 as_to.extend(stats_by_game_as_to[:3 * play_in_counter])
                 del stats_by_game_as_to[:3 * play_in_counter + 6]
                 as_to.extend(stats_by_game_as_to[:3 * playoff_games_counter])
                 del stats_by_game_as_to[:3 * playoff_games_counter + 6]
                 as_to.extend(stats_by_game_as_to[:3 * semifinal_games_counter])
 
-                fv_ag = stats_by_game_fv_ag[:2 * regular_games_counter]
-                del stats_by_game_fv_ag[:2 * regular_games_counter + 4]
                 fv_ag.extend(stats_by_game_fv_ag[:2 * play_in_counter])
                 del stats_by_game_fv_ag[:2 * play_in_counter + 4]
                 fv_ag.extend(stats_by_game_fv_ag[:2 * playoff_games_counter])
                 del stats_by_game_fv_ag[:2 * playoff_games_counter + 4]
                 fv_ag.extend(stats_by_game_fv_ag[:2 * semifinal_games_counter])
 
-                cm_rv = stats_by_game_cm_rv[:2 * regular_games_counter]
-                del stats_by_game_cm_rv[:2 * regular_games_counter + 4]
                 cm_rv.extend(stats_by_game_cm_rv[:2 * play_in_counter])
                 del stats_by_game_cm_rv[:2 * play_in_counter + 4]
                 cm_rv.extend(stats_by_game_cm_rv[:2 * playoff_games_counter])
                 del stats_by_game_cm_rv[:2 * playoff_games_counter + 4]
                 cm_rv.extend(stats_by_game_cm_rv[:2 * semifinal_games_counter])
 
-                pir = stats_by_game_pir[:1 * regular_games_counter]
-                del stats_by_game_pir[:1 * regular_games_counter + 2]
                 pir.extend(stats_by_game_pir[:1 * play_in_counter])
                 del stats_by_game_pir[:1 * play_in_counter + 2]
                 pir.extend(stats_by_game_pir[:1 * playoff_games_counter])
