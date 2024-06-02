@@ -90,6 +90,7 @@ def access_per_game_stats(tree, name):
         regular_games_counter = len(rounds_played_by_player) - (play_in_counter + playoff_games_counter + semifinal_games_counter)
 
         if playoff_games_counter == 0 and semifinal_games_counter == 0:
+            """Players who have not qualified for the playoffs AND the play-in games."""
             min_ft = stats_by_game_min_ft[:5 * regular_games_counter]
             odt = stats_by_game_odt[:3 * regular_games_counter]
             as_to = stats_by_game_as_to[:3 * regular_games_counter]
@@ -98,11 +99,11 @@ def access_per_game_stats(tree, name):
             pir = stats_by_game_pir[:1 * regular_games_counter]
 
             if play_in_counter == 0:
-                """Players who have not qualified for the playoffs AND the play-in games."""
+                """Players who have not qualified for the play-in games."""
                 pass
 
             if play_in_counter != 0:
-                """Players who have not qualified for the playoffs BUT HAVE PLAYED play-in games."""
+                """Players who have the play-in games."""
                 del stats_by_game_min_ft[:5 * regular_games_counter + 10]
                 min_ft.extend(stats_by_game_min_ft[:5 * play_in_counter])
 
@@ -143,7 +144,7 @@ def access_per_game_stats(tree, name):
             del stats_by_game_pir[:1 * regular_games_counter + 2]
 
             if play_in_counter == 0:
-                """...AND haven't played any play-in games."""
+                """...AND have NOT played any play-in games."""
 
                 min_ft.extend(stats_by_game_min_ft[:5 * playoff_games_counter])
                 odt.extend(stats_by_game_odt[:3 * playoff_games_counter])
@@ -152,7 +153,7 @@ def access_per_game_stats(tree, name):
                 cm_rv.extend(stats_by_game_cm_rv[:2 * playoff_games_counter])
                 pir.extend(stats_by_game_pir[:1 * playoff_games_counter])
 
-            """...AND have played play-in games."""
+            """...AND HAVE played play-in games."""
             if play_in_counter != 0:
 
                 min_ft.extend(stats_by_game_min_ft[:5 * play_in_counter])
@@ -201,7 +202,7 @@ def access_per_game_stats(tree, name):
             del stats_by_game_pir[:1 * regular_games_counter + 2]
 
             if play_in_counter == 0:
-                """...AND haven't played any play-in games."""
+                """...AND have NOT played any play-in games."""
 
                 min_ft.extend(stats_by_game_min_ft[:5 * playoff_games_counter])
                 del stats_by_game_min_ft[:5 * playoff_games_counter + 10]
@@ -227,7 +228,7 @@ def access_per_game_stats(tree, name):
                 del stats_by_game_pir[:1 * playoff_games_counter + 2]
                 pir.extend(stats_by_game_pir[:1 * semifinal_games_counter])
 
-            """...AND have played play-in games."""
+            """...AND HAVE played play-in games."""
             if play_in_counter != 0:
 
                 min_ft.extend(stats_by_game_min_ft[:5 * play_in_counter])
