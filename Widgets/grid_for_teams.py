@@ -18,7 +18,7 @@ class TeamsLabelGrid(GridLayout):
         for team, urls in self.rosters.items():
             team_label = TeamsLabel()
             team_label.text = team
-            team_label.im.source = 'Images/' + team + '.png'
+            team_label.im.source = 'Assets/' + team + '.png'
             self.add_widget(team_label)
 
     def push_selected_roster(self, *args):

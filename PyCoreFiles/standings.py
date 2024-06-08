@@ -49,8 +49,8 @@ def fetch_standings():
 
         for item in listing:
             if item[0] in standings:
-                standings['Images/' + item[1] + '.png'] = item[1]
+                standings['Assets/' + item[1] + '.png'] = item[1]
             else:
-                standings['Images/' + item[1] + '.png'] = item[0], raw_data[i: i + 7]
+                standings['Assets/' + item[1] + '.png'] = item[0], raw_data[i: i + 7]
                 i += num_of_total_stat_cats
         return standings

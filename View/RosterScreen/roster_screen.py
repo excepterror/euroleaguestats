@@ -23,7 +23,7 @@ class RosterScreenView(Screen):
         for player in self.list_of_players:
             source = player + '.png'
             if not os.path.isfile('./' + player + '.png'):
-                source = 'Images/NoImage.png'
+                source = 'Assets/NoImage.png'
                 count += 1
             player_image = PlayersImageWithLabel(player=player, source=source)
             self.grid.add_widget(player_image)
