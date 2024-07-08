@@ -52,9 +52,17 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
                         self.parent.selected_roster = dict_with_urls
                         '''Pass selected team to the :gridlayout: TeamsLabelGrid.'''
                         self.parent.selected_team = team
+                if self.parent.selected_roster == {}:
+                    conn = "{}\'s roster has not been finalised yet!".format(self.text)
+                    self.time_out_popup(conn)
+                else:
+                    Clock.schedule_once(self.parent.push_selected_roster, 0)
+                    Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .6)
             except ValueError:
                 pass
-            Clock.schedule_once(self.parent.push_selected_roster, 0)
-            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .6)
             return True
         return False
+
+    @staticmethod
+    def time_out_popup(conn, *args):
+        App.get_running_app().show_popup(conn)
