@@ -10,7 +10,7 @@ Builder.load_string("""
     title_font: 'MyriadPro'
     title_color: 1, .4, 0, 1
     separator_color: 1, .4, 0, 0
-    size_hint: .6, .3
+    size_hint: .9, .3
     pos_hint: {'center_x': .5, 'center_y': .5}
     overlay_color: 0, 0, 0, .85
     auto_dismiss: True
