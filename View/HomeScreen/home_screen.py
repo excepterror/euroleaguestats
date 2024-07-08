@@ -8,6 +8,8 @@ from kivy.clock import Clock
 
 from PyCoreFiles.standings import fetch_standings
 
+from functools import partial
+
 
 class HomeScreenView(Screen):
     rosters_reg = DictProperty({})
@@ -34,6 +36,12 @@ class HomeScreenView(Screen):
         _standings = fetch_standings()
         if isinstance(_standings, str):
             self.time_out_popup(_standings)
+            Clock.schedule_once(App.get_running_app().stop, 4)
+        elif _standings == {}:
+            conn = "The content is partially unavailable as Euroleague is making changes to their website for the upcoming season!"
+            self.time_out_popup(conn)
+            App.get_running_app().load_kv_files()
+            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 1.5)
         else:
             self.standings = _standings
 
@@ -66,4 +74,3 @@ class HomeScreenView(Screen):
     @staticmethod
     def time_out_popup(conn, *args):
         App.get_running_app().show_popup(conn)
-        Clock.schedule_once(App.get_running_app().stop, 4)
