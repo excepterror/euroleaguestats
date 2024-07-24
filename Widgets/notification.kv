@@ -13,8 +13,8 @@
         RoundedRectangle:
             size: self.size
             radius: dp(15), dp(15), dp(15), dp(15)
-    size_hint: .9, .15
-    pos_hint: {'center_x': .5, 'center_y': 1 + dp(self.height) / 2 / 100}
+    size_hint: 0, 0
+    pos_hint: {'center_x': .5, 'center_y': .9}
     BoxLayout:
         orientation: 'horizontal'
         Image:
@@ -27,9 +27,9 @@
             id: label
             text: ""
             font_name: "MyriadPro"
-            font_size: sp(17)
+            font_size: sp(0)
             pos_hint: {'center_x': .5, 'center_y': .5}
             text_size: self.size
             halign: 'center'
             valign: 'center'
-            color: 0,0,0,1
+            color: 0,0,0,0
