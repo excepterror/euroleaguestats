@@ -11,7 +11,6 @@ from android.permissions import request_permissions, Permission
 
 from View.screens import screens
 
-from Widgets.popups import MessagePopup
 
 import os
 import logging
@@ -66,8 +65,6 @@ class EuroLeagueStatsApp(App):
         if not self.root.has_screen(name):
             Builder.load_file(screens[name]["kv"])
             self.root.add_widget(screens[name]["view"]())
-        if name == "wait screen":
-            self.root.get_screen(name).team_selected = self.root.get_screen("teams screen").grid_teams.selected_team
         if name == "roster screen":
             self.root.get_screen(name).list_of_players = self.root.get_screen("teams screen").list_of_players
             self.root.get_screen(name).trees = self.root.get_screen("teams screen").trees
@@ -90,12 +87,6 @@ class EuroLeagueStatsApp(App):
         if not switch:
             self.root.transition = FallOutTransition()
             self.root.current = name
-
-    @staticmethod
-    def show_popup(text_to_display):
-        message = MessagePopup()
-        message.notification.text = text_to_display
-        message.open()
 
     def on_stop(self):
         suffixes = '.png'
