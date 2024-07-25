@@ -7,7 +7,7 @@ from kivy.utils import platform
 from kivy.core.window import Window
 from kivy.clock import Clock
 
-from android.permissions import request_permissions, Permission
+# from android.permissions import request_permissions, Permission
 
 from View.screens import screens
 
@@ -32,7 +32,7 @@ class ScreenManagement(ScreenManager):
                 if name is None:
                     pass
                 else:
-                    App.get_running_app().set_current_screen(name, switch=False)
+                    App.get_running_app().set_current_screen(name)
                 return True
 
     @staticmethod
@@ -61,7 +61,7 @@ class EuroLeagueStatsApp(App):
             Builder.load_file(screens["roster screen"]["kv"])
             self.root.add_widget(screens["roster screen"]["view"]())
 
-    def set_current_screen(self, name, switch=True):
+    def set_current_screen(self, name, *args):
         if not self.root.has_screen(name):
             Builder.load_file(screens[name]["kv"])
             self.root.add_widget(screens[name]["view"]())
@@ -81,12 +81,8 @@ class EuroLeagueStatsApp(App):
             self.root.get_screen(name).recycle_view.statistics_by_game_dict = self.root.get_screen("statistics screen").recycle_view_mod.statistics_by_game
             self.root.get_screen(name).player = self.root.get_screen("statistics screen").recycle_view_mod.player_name
             self.root.get_screen(name).game_info = self.root.get_screen("statistics screen").recycle_view_mod.game_info
-        if switch:
-            self.root.transition = FallOutTransition()
-            self.root.current = name
-        if not switch:
-            self.root.transition = FallOutTransition()
-            self.root.current = name
+        self.root.transition = FallOutTransition()
+        self.root.current = name
 
     def on_stop(self):
         suffixes = '.png'
