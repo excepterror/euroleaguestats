@@ -46,7 +46,7 @@ def extract_players_data(player_tree, player_name):
     """Extract player's info, average and total stats"""
     if player_tree is not None:
         "Extract info"
-        text_1, text_2, notification = StringProperty(''), StringProperty(''), ''
+        text_1, text_2, error_message = StringProperty(''), StringProperty(''), ''
         data = DictProperty([])
 
         pos = player_tree.xpath(
@@ -86,7 +86,7 @@ def extract_players_data(player_tree, player_name):
             data = access_per_game_stats(player_tree, player_name)
         else:
             text = 'No games played by ' + player_name + ' yet!'
-            notification = text
-        return total_stats, average_stats, text_2, text_1, data, notification, player_name
+            error_message = text
+        return total_stats, average_stats, text_2, text_1, data, error_message, player_name
     else:
         return []

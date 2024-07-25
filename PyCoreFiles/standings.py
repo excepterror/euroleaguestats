@@ -17,16 +17,16 @@ def fetch_standings():
         logging.warning('g1, g2, g3 values are not defined: {}'.format(error))
     except requests.exceptions.HTTPError as http_error:
         logging.warning('standings.py HTTP error occurred: {}'.format(http_error))
-        conn = 'Response from server failed!'
-        return conn
+        notification_content = 'Response from server failed!'
+        return notification_content
     except requests.exceptions.Timeout as timeout:
         logging.warning('standings.py Timeout error occurred: {}'.format(timeout))
-        conn = 'Response is taking too long!'
-        return conn
+        notification_content = 'Response is taking too long!'
+        return notification_content
     except requests.exceptions.ConnectionError as conn_error:
         logging.warning('standings.py Connection error occurred: {}'.format(conn_error))
-        conn = 'No internet connection!'
-        return conn
+        notification_content = 'No internet connection!'
+        return notification_content
     else:
         standings = dict()
         a = 0

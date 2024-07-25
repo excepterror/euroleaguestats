@@ -37,8 +37,8 @@ def fetch_trees(roster):
             trees = executor.map(fetch_tree, players_urls, timeout=30)
     except concurrent.futures.TimeoutError as timeout_error:
         logging.warning('Timeout error occurred: {}'.format(timeout_error))
-        conn = 'Error while fetching data!'
-        return conn
+        notification_content = 'Error while fetching data!'
+        return notification_content
     else:
         for name, tree, url in zip(names, trees, photo_urls):
             if name in temp_dict:
