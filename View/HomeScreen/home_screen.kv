@@ -1,11 +1,15 @@
 #:import clock kivy.clock.Clock
+
 #:import partial functools.partial
+
+#:import NotificationWidget Widgets.notification
 
 <HomeScreenView>:
     name: "home screen"
     on_enter: self.flag = True
     on_flag: clock.schedule_once(root.allow_intro_image_display, 0)
     on_standings: app.load_kv_files(); clock.schedule_once(partial(app.set_current_screen, "menu screen"), 1.5)
+    notification: notification
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
@@ -26,3 +30,5 @@
                     size: self.size
                     radius: dp(15), dp(15), 0, 0
                     source: 'Assets/001.jpg'
+    NotificationWidget:
+        id: notification

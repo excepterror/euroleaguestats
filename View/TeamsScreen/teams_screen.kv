@@ -8,6 +8,7 @@
     on_idx: self.roster_selected=self.grid_teams.selected_roster; self.start_second_thread()
     grid_teams: grid_teams
     idx: self.grid_teams._idx
+    notification: notification
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
@@ -47,6 +48,8 @@
                     height: self.minimum_height
                     spacing: dp(10)
                     padding: dp(7)
+    NotificationWidget:
+        id: notification
 
 <TeamsLabel>:
     im: im

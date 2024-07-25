@@ -5,6 +5,7 @@
     num_players: self.num_players
     grid: grid
     scroll_roster: scroll_roster
+    notification: notification
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
@@ -43,6 +44,8 @@
                     row_force_default: True
                     row_default_height: dp(240)
                     spacing: 0, dp(5)
+    NotificationWidget:
+        id: notification
 
 <PlayersImageWithLabel>:
     orientation: 'vertical'

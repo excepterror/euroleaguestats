@@ -2,7 +2,7 @@ import logging
 import json
 
 from kivy.uix.screenmanager import Screen
-from kivy.properties import DictProperty, BooleanProperty
+from kivy.properties import DictProperty, BooleanProperty, ObjectProperty
 from kivy.app import App
 from kivy.clock import Clock
 
@@ -15,6 +15,7 @@ class HomeScreenView(Screen):
     rosters_reg = DictProperty({})
     standings = DictProperty({})
     flag = BooleanProperty(False)
+    notification = ObjectProperty(None)
 
     def allow_intro_image_display(self, *args):
         Clock.schedule_once(self.import_global_values_file, 0)
@@ -35,13 +36,16 @@ class HomeScreenView(Screen):
     def on_rosters_reg(self, *args):
         _standings = fetch_standings()
         if isinstance(_standings, str):
-            self.time_out_popup(_standings)
-            Clock.schedule_once(App.get_running_app().stop, 4)
+            notification_content = _standings
+            source = "Assets/error_24dp.png"
+            self.call_notification_popup(source, notification_content, timeout=2)
+            Clock.schedule_once(App.get_running_app().stop, 3)
         elif _standings == {}:
-            conn = "The content is partially unavailable as Euroleague is making changes to their website for the upcoming season!"
-            self.time_out_popup(conn)
+            notification_content = "The content is partially unavailable as Euroleague is making changes to their website for the upcoming season!"
+            source = "Assets/notification_important_24dp.png"
+            self.call_notification_popup(source, notification_content, timeout=6)
             App.get_running_app().load_kv_files()
-            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 1.5)
+            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 7)
         else:
             self.standings = _standings
 
@@ -71,6 +75,7 @@ class HomeScreenView(Screen):
         rosters_of_teams = self.rosters_reg
         return rosters_of_teams
 
-    @staticmethod
-    def time_out_popup(conn, *args):
-        App.get_running_app().show_popup(conn)
+    def call_notification_popup(self, source, notification_content, timeout, *args):
+        self.notification.ids.image.source = source
+        self.notification.ids.label.text = notification_content
+        self.notification.animate_widget(timeout)

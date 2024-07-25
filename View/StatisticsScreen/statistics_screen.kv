@@ -8,6 +8,7 @@
     on_leave: self.restore_recycle_view()
     recycle_view_mod: recycle_view_mod.__self__
     float_layout: float_layout
+    notification: notification
     canvas.before:
         Color:
             rgba: 1, 1, 1, 1
@@ -86,6 +87,8 @@
                 id: recycle_view_mod
                 pos_hint: {'center_x': .5, 'center_y': .33}
                 size_hint: .98, .63
+    NotificationWidget:
+        id: notification
 
 <RVDisplayByGame>:
     viewclass: 'SelectableLabel'

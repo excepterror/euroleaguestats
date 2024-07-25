@@ -3,9 +3,6 @@ from kivy.properties import StringProperty, DictProperty, NumericProperty, Objec
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.behaviors import TouchRippleButtonBehavior
-from kivy.app import App
-
-from functools import partial
 
 
 class TeamsLabelGrid(GridLayout):
@@ -23,6 +20,15 @@ class TeamsLabelGrid(GridLayout):
 
     def push_selected_roster(self, *args):
         self._idx += 1
+        source = "Assets/notification_important_24dp.png"
+        notification_content = "Waiting for {}".format(self.selected_team)
+        self.call_notification_popup(source, notification_content, timeout=100)
+
+    def call_notification_popup(self, source, notification_content, timeout, *args):
+        teams_screen_instance = self.parent.parent.parent.parent
+        teams_screen_instance.notification.ids.image.source = source
+        teams_screen_instance.notification.ids.label.text = notification_content
+        teams_screen_instance.notification.animate_widget(timeout)
 
 
 class TeamsLabel(TouchRippleButtonBehavior, Label):
@@ -53,16 +59,13 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
                         '''Pass selected team to the :gridlayout: TeamsLabelGrid.'''
                         self.parent.selected_team = team
                 if self.parent.selected_roster == {}:
-                    conn = "{}\'s roster has not been finalised yet!".format(self.text)
-                    self.time_out_popup(conn)
+                    source = "Assets/error_24dp.png"
+                    notification_content = "{}\'s roster has not been finalised yet!".format(self.text)
+                    teams_screen_instance = self.parent.parent.parent.parent.parent
+                    teams_screen_instance.call_notification_popup(source, notification_content, timeout=2)
                 else:
                     Clock.schedule_once(self.parent.push_selected_roster, 0)
-                    Clock.schedule_once(partial(App.get_running_app().set_current_screen, "wait screen"), .6)
             except ValueError:
                 pass
             return True
         return False
-
-    @staticmethod
-    def time_out_popup(conn, *args):
-        App.get_running_app().show_popup(conn)

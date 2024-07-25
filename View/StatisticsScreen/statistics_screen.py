@@ -11,13 +11,11 @@ from functools import partial
 
 from PyCoreFiles.extract_game_stats import update_dict
 
-from Widgets.popups import MessagePopup
-
 
 class StatisticsScreenView(Screen):
     player_tree_data = ListProperty([])
     player_name = StringProperty('')
-    notification = StringProperty('')
+    error_message = StringProperty('')
     recycle_view_mod = ObjectProperty(None)
     float_layout = ObjectProperty(None)
     text_1 = StringProperty('')
@@ -25,11 +23,11 @@ class StatisticsScreenView(Screen):
     games = ObjectProperty(None)
     games_started = ObjectProperty(None)
     combined_dicts = DictProperty({})
-    message = ObjectProperty(None)
+    notification = ObjectProperty(None)
 
     def statistics_options(self, *args):
         try:
-            self.notification = self.player_tree_data[5]
+            self.error_message = self.player_tree_data[5]
         except IndexError:
             pass
         else:
@@ -90,19 +88,18 @@ class StatisticsScreenView(Screen):
                 self.call_display_statistics_screen()
             except AttributeError as attribute_error:
                 logging.warning('Attribute error [performance data] occurred [statistics_screen.py]: {}'.format(attribute_error))
-                self.open_popup()
+                source = "Assets/error_24dp.png"
+                notification_content = self.error_message
+                self.call_notification_popup(source, notification_content, timeout=2)
 
     @staticmethod
     def call_display_statistics_screen(*args):
         App.get_running_app().set_current_screen("display statistics screen")
 
-    def open_popup(self, *args):
-        self.message = MessagePopup(on_open=self.dismiss_text)
-        self.message.notification.text = self.notification
-        self.message.open()
-
-    def dismiss_text(self, *args):
-        Clock.schedule_once(self.message.dismiss, 1.5)
+    def call_notification_popup(self, source, notification_content, timeout, *args):
+        self.notification.ids.image.source = source
+        self.notification.ids.label.text = notification_content
+        self.notification.animate_widget(timeout)
 
     def restore_recycle_view(self):
         """Restore recycleview if it had previously been removed in :def: statistics_options."""
