@@ -9,6 +9,7 @@ from kivy.clock import Clock
 from PyCoreFiles.standings import fetch_standings
 
 from functools import partial
+from datetime import datetime
 
 
 class HomeScreenView(Screen):
@@ -40,8 +41,8 @@ class HomeScreenView(Screen):
             source = "Assets/error_24dp.png"
             self.call_notification_popup(source, notification_content, timeout=2)
             Clock.schedule_once(App.get_running_app().stop, 3)
-        elif _standings == {}:
-            notification_content = "The content is partially unavailable as Euroleague is making changes to their website for the upcoming season!"
+        elif datetime.today().month in range(6, 10):
+            notification_content = "The content is partially unavailable as Euroleague are still making changes to their website for the upcoming season!"
             source = "Assets/notification_important_24dp.png"
             self.call_notification_popup(source, notification_content, timeout=6)
             App.get_running_app().load_kv_files()
