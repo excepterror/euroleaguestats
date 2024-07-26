@@ -32,7 +32,6 @@ teams_codes = {'BER': 'ALBA Berlin',
                'PAO': 'Panathinaikos AKTOR Athens',
                'PRS': 'Paris Basketball',
                'RMB': 'Real Madrid',
-               'VBC': 'Valencia Basket',
                'ZAL': 'Zalgiris Kaunas',
                'VIR': 'Virtus Segafredo Bologna'}
 
