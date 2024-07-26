@@ -8,7 +8,6 @@
     name: "home screen"
     on_enter: self.flag = True
     on_flag: clock.schedule_once(root.allow_intro_image_display, 0)
-    on_standings: app.load_kv_files(); clock.schedule_once(partial(app.set_current_screen, "menu screen"), 1.5)
     notification: notification
     canvas.before:
         Color:

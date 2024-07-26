@@ -42,13 +42,16 @@ class HomeScreenView(Screen):
             self.call_notification_popup(source, notification_content, timeout=2)
             Clock.schedule_once(App.get_running_app().stop, 3)
         elif datetime.today().month in range(6, 10):
+            self.standings = _standings
+            App.get_running_app().load_kv_files()
             notification_content = "The content is partially unavailable as Euroleague are still making changes to their website for the upcoming season!"
             source = "Assets/notification_important_24dp.png"
             self.call_notification_popup(source, notification_content, timeout=6)
-            App.get_running_app().load_kv_files()
             Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 7)
         else:
             self.standings = _standings
+            App.get_running_app().load_kv_files()
+            App.get_running_app().set_current_screen("menu screen")
 
     def data_from_dataset(self):
         """Form data for RVStandings recycleview. Called by :def: set_current_screen in main.py."""
