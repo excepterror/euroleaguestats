@@ -60,9 +60,9 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
                         self.parent.selected_team = team
                 if self.parent.selected_roster == {}:
                     source = "Assets/error_24dp.png"
-                    notification_content = "{}\'s roster has not been finalised yet!".format(self.text)
+                    notification_content = "{}\'s roster is not finalised yet!".format(self.text)
                     teams_screen_instance = self.parent.parent.parent.parent.parent
-                    teams_screen_instance.call_notification_popup(source, notification_content, timeout=2)
+                    teams_screen_instance.call_notification_popup(source, notification_content, timeout=3)
                 else:
                     Clock.schedule_once(self.parent.push_selected_roster, 0)
             except ValueError:

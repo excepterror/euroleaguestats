@@ -90,7 +90,7 @@ class StatisticsScreenView(Screen):
                 logging.warning('Attribute error [performance data] occurred [statistics_screen.py]: {}'.format(attribute_error))
                 source = "Assets/error_24dp.png"
                 notification_content = self.error_message
-                self.call_notification_popup(source, notification_content, timeout=2)
+                self.call_notification_popup(source, notification_content, timeout=3)
 
     @staticmethod
     def call_display_statistics_screen(*args):

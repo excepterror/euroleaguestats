@@ -39,8 +39,8 @@ class HomeScreenView(Screen):
         if isinstance(_standings, str):
             notification_content = _standings
             source = "Assets/error_24dp.png"
-            self.call_notification_popup(source, notification_content, timeout=2)
-            Clock.schedule_once(App.get_running_app().stop, 3)
+            self.call_notification_popup(source, notification_content, timeout=3)
+            Clock.schedule_once(App.get_running_app().stop, 4)
         elif datetime.today().month in range(6, 10):
             self.standings = _standings
             App.get_running_app().load_kv_files()

@@ -22,6 +22,9 @@ class NotificationWidget(RelativeLayout):
 
     def set_font(self, *args):
         self.label.font_size = sp(17)
+        Clock.schedule_once(self.set_color, .7)
+
+    def set_color(self, *args):
         self.label.color = (0, 0, 0, 1)
 
     def remove_notification(self, *args):

@@ -34,7 +34,7 @@ class RosterScreenView(Screen):
                             " [roster_screen.py]")
             source = "Assets/error_24dp.png"
             notification_content = "Error while fetching data!"
-            self.call_notification_popup(source, notification_content, timeout=1)
+            self.call_notification_popup(source, notification_content, timeout=3)
 
     def assert_tree(self, player_name, *args):
         """Called from :def: on_touch_down in :cls: PlayersImageWithLabel in Widgets.widgets.py."""
@@ -45,7 +45,7 @@ class RosterScreenView(Screen):
         if len(self.assert_tree_return) == 0:
             source = "Assets/error_24dp.png"
             notification_content = "Error while fetching data!"
-            self.call_notification_popup(source, notification_content, timeout=1)
+            self.call_notification_popup(source, notification_content, timeout=3)
         else:
             self.selection_flag += 1
 
