@@ -44,7 +44,7 @@ class HomeScreenView(Screen):
         elif datetime.today().month in range(6, 10):
             self.standings = _standings
             App.get_running_app().load_kv_files()
-            notification_content = "The content is partially unavailable as Euroleague are still making changes to their website for the upcoming season!"
+            notification_content = "The content is partially unavailable as Euroleague are still making changes to their website!"
             source = "Assets/notification_important_24dp.png"
             self.call_notification_popup(source, notification_content, timeout=6)
             Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 7)
