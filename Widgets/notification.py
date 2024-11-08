@@ -17,7 +17,7 @@ class NotificationWidget(RelativeLayout):
     def animate_widget(self, timeout):
         anim = Animation(size_hint=[.9, .15], duration=1, step=1 / 30, t='out_back')
         anim.start(self)
-        Clock.schedule_once(self.set_font, .5)
+        Clock.schedule_once(self.set_font, 0)
         anim.on_complete(Clock.schedule_once(self.remove_notification, timeout))
 
     def set_font(self, *args):
