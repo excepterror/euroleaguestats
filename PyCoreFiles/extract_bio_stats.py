@@ -50,16 +50,16 @@ def extract_players_data(player_tree, player_name):
         data = DictProperty([])
 
         pos = player_tree.xpath(
-            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
-            '//div[@class="hero-info_position__GDXbP"]/text()')
+            '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
+            '//div[@class="hero-info_position__lF64l"]/text()')
         info_1 = player_tree.xpath(
-            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
-            '//ul[@class="hero-info_dataList__kKi0z"]//li[@class="hero-info_dataItem__UbJZU"]'
-            '//span[@class="hero-info_key__Pcrzp"]/text()')
+            '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
+            '//ul[@class="hero-info_dataList__0qv4h"]//li[@class="hero-info_dataItem__Y2xZN"]'
+            '//span[@class="hero-info_key__ZcDGE"]/text()')
         info_2 = player_tree.xpath(
-            '//div[@class="player-hero_inner__rwwR_ side-gaps_sectionSideGaps__v5CKj"]'
-            '//ul[@class="hero-info_dataList__kKi0z"]//li[@class="hero-info_dataItem__UbJZU"]'
-            '//b[@class="hero-info_value__XFJeE"]/text()')
+            '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
+            '//ul[@class="hero-info_dataList__0qv4h"]//li[@class="hero-info_dataItem__Y2xZN"]'
+            '//b[@class="hero-info_value__zklni"]/text()')
 
         info = list()
         for i, j, in zip(info_1, info_2):
@@ -75,12 +75,15 @@ def extract_players_data(player_tree, player_name):
         "Extract average, total stats. Extract stats by game."
 
         average_stats = player_tree.xpath(
-            '//div[@class="tab-season_seasonTableWrap__I0CUd"]//div[@class="stats-table_table__dpgY7"]'
-            '//div[@class="stats-table_row__ttfiG"][3]//div[@class="stats-table_cell__hdmqc"]/text()')
+            '//div[@class="tab-season_seasonTableWrap__ahJrw"]//div[@class="stats-table_table__cD0GH"]'
+            '//div[@class="stats-table_row__wEFis"][3]//div[@class="stats-table_cell___AWMd"]/text()')
+        print(average_stats)
         total_stats = player_tree.xpath(
-            '//div[@class="tab-season_seasonTableWrap__I0CUd"]//div[@class="stats-table_table__dpgY7"]'
-            '//div[@class="stats-table_row__ttfiG"][2]//div[@class="stats-table_cell__hdmqc"]/text()')
-        opponents = player_tree.xpath('//div[@class="stats-table_table__dpgY7"]')
+            '//div[@class="tab-season_seasonTableWrap__ahJrw"]//div[@class="stats-table_table__cD0GH"]'
+            '//div[@class="stats-table_row__wEFis"][2]//div[@class="stats-table_cell___AWMd"]/text()')
+        print(total_stats)
+        opponents = player_tree.xpath('//div[@class="stats-table_table__cD0GH"]')
+        print(opponents)
 
         if len(average_stats) and len(total_stats) and len(opponents) != 0:
             data = access_per_game_stats(player_tree, player_name)
