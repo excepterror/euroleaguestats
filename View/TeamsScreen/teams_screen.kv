@@ -31,7 +31,7 @@
                     source: 'Assets/004.jpg'
             ScrollView:
                 pos_hint: {'center_x': .5, 'center_y': .49}
-                size_hint: .98, .95
+                size_hint: .98, 1
                 do_scroll_x: False
                 bar_color: 1, 1, 1, 0
                 bar_inactive_color: 1, 1, 1, 0
@@ -43,7 +43,7 @@
                     id: grid_teams
                     cols: 3
                     row_force_default: True
-                    row_default_height: dp(self.parent.height / 6 - 10)
+                    row_default_height: dp(100)
                     size_hint: 1, None
                     height: self.minimum_height
                     spacing: dp(10)
