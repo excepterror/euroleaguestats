@@ -9,7 +9,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 def fetch_standings():
-    url = 'https://www.euroleaguebasketball.net/euroleague/standings/'
+    url = 'https://www.euroleaguebasketball.net/en/euroleague/standings/'
     try:
         response = requests.get(url, timeout=(30, 30))
         logging.info('standings.py status_code: {}'.format(response.status_code))
