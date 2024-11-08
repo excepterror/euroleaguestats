@@ -77,13 +77,10 @@ def extract_players_data(player_tree, player_name):
         average_stats = player_tree.xpath(
             '//div[@class="tab-season_seasonTableWrap__ahJrw"]//div[@class="stats-table_table__cD0GH"]'
             '//div[@class="stats-table_row__wEFis"][3]//div[@class="stats-table_cell___AWMd"]/text()')
-        print(average_stats)
         total_stats = player_tree.xpath(
             '//div[@class="tab-season_seasonTableWrap__ahJrw"]//div[@class="stats-table_table__cD0GH"]'
             '//div[@class="stats-table_row__wEFis"][2]//div[@class="stats-table_cell___AWMd"]/text()')
-        print(total_stats)
         opponents = player_tree.xpath('//div[@class="stats-table_table__cD0GH"]')
-        print(opponents)
 
         if len(average_stats) and len(total_stats) and len(opponents) != 0:
             data = access_per_game_stats(player_tree, player_name)
