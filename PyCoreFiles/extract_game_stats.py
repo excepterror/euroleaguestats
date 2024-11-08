@@ -30,7 +30,7 @@ teams_codes = {'BER': 'ALBA Berlin',
                'MTA': 'Maccabi Playtika Tel Aviv',
                'OLY': 'Olympiacos Piraeus',
                'PAO': 'Panathinaikos AKTOR Athens',
-               'PRS': 'Paris Basketball',
+               'PBB': 'Paris Basketball',
                'RMB': 'Real Madrid',
                'ZAL': 'Zalgiris Kaunas',
                'VIR': 'Virtus Segafredo Bologna'}
