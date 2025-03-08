@@ -3,18 +3,20 @@
 G1 = '//div[@class="complex-stat-table_body__UF_OT"]' \
      '//div[@class="complex-stat-table_row__XPRhI complex-stat-table__standingRow__bPVTR complex-stat-table__euroLeagueNewSystem__Y6qYU complex-stat-table__euroleague__z1bG4"]' \
      '//div[@class="complex-stat-table_sticky__KBwSE"]' \
-     '//span[@class="complex-stat-table_mainClubName__drf8e" or @class="complex-stat-table_mainClubName__drf8e complex-stat-table__long__BrSna"]' \
+     '//p[@class="font-modelica text-primary text-base font-normal complex-stat-table_mainClubName__drf8e w-72 md:w-auto flex flex-row items-center gap-1"]' \
      '/text()'
 
 G2 = '//div[@class="complex-stat-table_body__UF_OT"]' \
      '//div[@class="complex-stat-table_row__XPRhI complex-stat-table__standingRow__bPVTR complex-stat-table__euroLeagueNewSystem__Y6qYU complex-stat-table__euroleague__z1bG4"]' \
      '//div[@class="complex-stat-table_sticky__KBwSE"]' \
      '//div[@class="complex-stat-table_cell__XIEO5 complex-stat-table__right__ge6x9"]' \
-     '//span/text()'
+     '//p[@class="font-modelica text-primary text-base font-normal"]' \
+     '/text()'
 
 G3 = '//div[@class="complex-stat-table_body__UF_OT"]' \
      '//div[@class="complex-stat-table_row__XPRhI complex-stat-table__standingRow__bPVTR complex-stat-table__euroLeagueNewSystem__Y6qYU complex-stat-table__euroleague__z1bG4"]' \
-     '//div[@class="complex-stat-table_cell__XIEO5"]/text()'
+     '//p[@class="font-modelica text-primary text-sm font-normal complex-stat-table_cell__XIEO5"]' \
+     '/text()'
 
 
 """Constant Variables in stats.py"""
