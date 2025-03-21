@@ -37,13 +37,18 @@ def fetch_standings():
 
         teams_and_ranking = tree.xpath(G1)
         for item in teams_and_ranking:
-            if len(item) == 1:
+            if item == ' (Q)':
                 teams_and_ranking.remove(item)
 
         ranking = tree.xpath(G2)
-        while a < len(teams_and_ranking):
-            listing.append((ranking[a], teams_and_ranking[a]))
-            a += 1
+        try:
+            while a < len(teams_and_ranking):
+                listing.append((ranking[a], teams_and_ranking[a]))
+                a += 1
+        except IndexError as index_error:
+            logging.warning('standings.py Index error occurred: {}'.format(index_error))
+            notification_content = 'Download error occurred! Fix is on its way!'
+            return notification_content
 
         raw_data = tree.xpath(G3)
 
