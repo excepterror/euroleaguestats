@@ -6,8 +6,6 @@ from kivy.properties import DictProperty, BooleanProperty, ObjectProperty
 from kivy.app import App
 from kivy.clock import Clock
 
-from PyCoreFiles.standings import fetch_standings
-
 from functools import partial
 from datetime import datetime
 
@@ -18,40 +16,55 @@ class HomeScreenView(Screen):
     flag = BooleanProperty(False)
     notification = ObjectProperty(None)
 
-    def allow_intro_image_display(self, *args):
+    def schedule_intro_image_display(self, *args):
         Clock.schedule_once(self.import_global_values_file, 0)
 
     def import_global_values_file(self, *args):
         try:
             from StartupFiles import global_values
-        except ModuleNotFoundError as error:
-            logging.warning('globals.py is missing: {}'.format(error))
+        except ImportError as error:
+            logging.warning(f'File globals.py is missing: {error}')
+            self.critical_error_and_exit(message="Critical file not found!")
         else:
             self.create_dict_with_rosters()
 
     def create_dict_with_rosters(self, *args):
-        with open('StartupFiles/roster.json') as json_file:
-            data = json.load(json_file)
-        self.rosters_reg = data
+        try:
+            with open('StartupFiles/roster.json') as json_file:
+                data = json.load(json_file)
+            self.rosters_reg = data
+        except FileNotFoundError:
+            logging.warning(f'File roster.json is missing!')
+            self.critical_error_and_exit()
+        except json.JSONDecodeError as error:
+            logging.warning(f'Error reading roster.json: {error}')
+            self.critical_error_and_exit()
 
     def on_rosters_reg(self, *args):
+        from PyCoreFiles.standings import fetch_standings
+
+        app = App.get_running_app()
+
         _standings = fetch_standings()
         if isinstance(_standings, str):
-            notification_content = _standings
-            source = "Assets/error_24dp.png"
-            self.call_notification_popup(source, notification_content, timeout=3)
-            Clock.schedule_once(App.get_running_app().stop, 4)
+            self.critical_error_and_exit(message=_standings)
         elif datetime.today().month in range(6, 10):
+            logging.info("Running the app after season, i.e. June onwards.")
             self.standings = _standings
-            App.get_running_app().load_kv_files()
-            notification_content = "The content is partially unavailable as Euroleague are still making changes to their website!"
-            source = "Assets/notification_important_24dp.png"
-            self.call_notification_popup(source, notification_content, timeout=6)
-            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 7)
+            app.load_kv_files()
+            self.call_notification_popup(source="Assets/notification_important_24dp.png",
+                                         notification_content="The content is partially unavailable as Euroleague are still making changes to their website!",
+                                         timeout=6)
+            Clock.schedule_once(partial(app.set_current_screen, "menu screen"), 7)
         else:
+            logging.info("Rosters and standings loaded successfully.")
             self.standings = _standings
-            App.get_running_app().load_kv_files()
-            App.get_running_app().set_current_screen("menu screen")
+            app.load_kv_files()
+            app.set_current_screen("menu screen")
+
+    def critical_error_and_exit(self, image='Assets/error_24dp.png', message="Critical file not found!", exit_delay=3):
+        self.call_notification_popup(image, message, exit_delay)
+        Clock.schedule_once(App.get_running_app().stop, exit_delay + 1)
 
     def data_from_dataset(self):
         """Form data for RVStandings recycleview. Called by :def: set_current_screen in main.py."""
@@ -76,8 +89,7 @@ class HomeScreenView(Screen):
         return dataset
 
     def rosters_of_teams(self):
-        rosters_of_teams = self.rosters_reg
-        return rosters_of_teams
+        return self.rosters_reg
 
     def call_notification_popup(self, source, notification_content, timeout, *args):
         self.notification.ids.image.source = source

@@ -7,7 +7,7 @@
 <HomeScreenView>:
     name: "home screen"
     on_enter: self.flag = True
-    on_flag: clock.schedule_once(root.allow_intro_image_display, 0)
+    on_flag: clock.schedule_once(root.schedule_intro_image_display, 0)
     notification: notification
     canvas.before:
         Color:
