@@ -23,8 +23,8 @@ class HomeScreenView(Screen):
         try:
             from StartupFiles import global_values
         except ImportError as error:
-            logging.warning(f'File globals.py is missing: {error}')
-            self.critical_error_and_exit(message="Critical file not found!")
+            logging.warning(f'[home_screen.py] File globals.py is missing: {error}')
+            self.critical_error_and_exit(message="[home_screen.py] Critical file not found!")
         else:
             self.create_dict_with_rosters()
 
@@ -34,10 +34,10 @@ class HomeScreenView(Screen):
                 data = json.load(json_file)
             self.rosters_reg = data
         except FileNotFoundError:
-            logging.warning(f'File roster.json is missing!')
+            logging.warning(f'[home_screen.py] File roster.json is missing!')
             self.critical_error_and_exit()
         except json.JSONDecodeError as error:
-            logging.warning(f'Error reading roster.json: {error}')
+            logging.warning(f'[home_screen.py] Error reading roster.json: {error}')
             self.critical_error_and_exit()
 
     def on_rosters_reg(self, *args):
@@ -49,7 +49,7 @@ class HomeScreenView(Screen):
         if isinstance(_standings, str):
             self.critical_error_and_exit(message=_standings)
         elif datetime.today().month in range(6, 10):
-            logging.info("Running the app after season, i.e. June onwards.")
+            logging.info("[home_screen.py] Running the app after season, i.e. June onwards.")
             self.standings = _standings
             app.load_kv_files()
             self.call_notification_popup(source="Assets/notification_important_24dp.png",
@@ -57,7 +57,7 @@ class HomeScreenView(Screen):
                                          timeout=6)
             Clock.schedule_once(partial(app.set_current_screen, "menu screen"), 7)
         else:
-            logging.info("Rosters and standings loaded successfully.")
+            logging.info("[home_screen.py] Rosters and standings loaded successfully!")
             self.standings = _standings
             app.load_kv_files()
             app.set_current_screen("menu screen")

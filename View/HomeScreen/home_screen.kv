@@ -4,9 +4,11 @@
 
 #:import NotificationWidget Widgets.notification
 
+#:import logging logging
+
 <HomeScreenView>:
     name: "home screen"
-    on_enter: self.flag = True
+    on_enter: self.flag = True; logging.info("[home_screen.kv] HomeScreen flag triggered!")
     on_flag: clock.schedule_once(root.schedule_intro_image_display, 0)
     notification: notification
     canvas.before:
