@@ -7,8 +7,6 @@ from kivy.app import App
 
 import logging
 
-from functools import partial
-
 from PyCoreFiles.extract_game_stats import update_dict
 
 
