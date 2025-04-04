@@ -36,29 +36,29 @@ class StatisticsScreenView(Screen):
             except TypeError as value_error:
                 """Remove recycleview widget if :list: player_tree_data is empty."""
                 self.float_layout.remove_widget(self.recycle_view_mod)
-                logging.warning('Type error [performance data] occurred [statistics_screen.py]: {}'.format(value_error))
+                logging.warning(f'Type error [performance data] occurred [statistics_screen.py]: {value_error}')
             try:
                 self.text_1 = self.player_tree_data[3]
             except ValueError as value_error:
                 self.text_1 = '{Missing data}'
-                logging.warning('Value error occurred [missing data] [statistics_screen.py]: {}'.format(value_error))
+                logging.warning(f'Value error occurred [missing data] [statistics_screen.py]: {value_error}')
             try:
                 self.text_2 = self.player_tree_data[2]
             except ValueError as value_error:
                 self.text_2 = '{Missing data}'
-                logging.warning('Value error occurred [missing data] [statistics_screen.py]: {}'.format(value_error))
+                logging.warning(f'Value error occurred [missing data] [statistics_screen.py]: {value_error}')
 
     def animate_on_push(self, instance, *args):
         anim = Animation(size_hint_x=.93, font_size=sp(16), duration=.2)
         anim &= Animation(height=dp(40), duration=.2)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.stats_reverse_animate, instance), .2))
+        anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
 
     def stats_reverse_animate(self, instance, *args):
         anim = Animation(size_hint_x=.96, font_size=sp(18), duration=.1)
         anim &= Animation(height=dp(50), duration=.1)
         anim.start(instance)
-        anim.on_complete(Clock.schedule_once(partial(self.show_statistics, instance), .2))
+        anim.bind(on_complete=lambda *args: self.show_statistics(instance))
 
     def show_statistics(self, instance, *args):
         dummy_dict, average_stats_dict, total_stats_dict = dict(), dict(), dict()
@@ -81,13 +81,13 @@ class StatisticsScreenView(Screen):
                 Clock.schedule_once(self.call_display_statistics_screen, 0)
 
             except IndexError as idx_error:
-                logging.warning('Index error [average_stats_dict] occurred [statistics_screen.py]: {}'.format(idx_error))
+                logging.warning(f'Index error [average_stats_dict] occurred [statistics_screen.py]: {idx_error}')
                 self.call_display_statistics_screen()
             except KeyError as key_error:
-                logging.warning('Key error [self.games] occurred [statistics_screen.py]: {}'.format(key_error))
+                logging.warning(f'Key error [self.games] occurred [statistics_screen.py]: {key_error}')
                 self.call_display_statistics_screen()
             except AttributeError as attribute_error:
-                logging.warning('Attribute error [performance data] occurred [statistics_screen.py]: {}'.format(attribute_error))
+                logging.warning(f'Attribute error [performance data] occurred [statistics_screen.py]: {attribute_error}')
                 source = "Assets/error_24dp.png"
                 notification_content = self.error_message
                 self.call_notification_popup(source, notification_content, timeout=3)
