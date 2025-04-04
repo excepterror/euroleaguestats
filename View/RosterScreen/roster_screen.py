@@ -32,9 +32,7 @@ class RosterScreenView(Screen):
         if count == len(roster):
             logging.warning("Counter value is not equal to length of  :dict: roster in :def: populate_photos"
                             " [roster_screen.py]")
-            source = "Assets/error_24dp.png"
-            notification_content = "Error while fetching data!"
-            self.call_notification_popup(source, notification_content, timeout=3)
+            self.call_notification_popup()
 
     def assert_tree(self, player_name, *args):
         """Called from :def: on_touch_down in :cls: PlayersImageWithLabel in Widgets.widgets.py."""
@@ -43,9 +41,7 @@ class RosterScreenView(Screen):
                 player_tree = self.trees[name][0]
                 self.assert_tree_return = extract_players_data(player_tree, name)
         if len(self.assert_tree_return) == 0:
-            source = "Assets/error_24dp.png"
-            notification_content = "Error while fetching data!"
-            self.call_notification_popup(source, notification_content, timeout=3)
+            self.call_notification_popup()
         else:
             self.selection_flag += 1
 
@@ -53,10 +49,10 @@ class RosterScreenView(Screen):
     def on_selection_flag(*args):
         App.get_running_app().set_current_screen("statistics screen")
 
-    def call_notification_popup(self, source, notification_content, timeout, *args):
-        self.notification.ids.image.source = source
-        self.notification.ids.label.text = notification_content
-        self.notification.animate_widget(timeout)
+    def call_notification_popup(self,*args):
+        self.notification.ids.image.source = "Assets/error_24dp.png"
+        self.notification.ids.label.text = "Error while fetching data!"
+        self.notification.animate_widget(timeout=3)
 
     def on_enter(self, *args):
         App.get_running_app().root.get_screen("teams screen").list_of_players = []
