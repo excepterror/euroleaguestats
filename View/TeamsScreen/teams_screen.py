@@ -20,27 +20,27 @@ class TeamsScreenView(Screen):
     notification = ObjectProperty(None)
 
     def start_second_thread(self, *args):
-        threading.Thread(target=self.extract_trees).start()
+        threading.Thread(target=self.extract_trees, daemon=True).start()
 
     def extract_trees(self, *args):
-        roster = self.roster_selected
-        t = fetch_trees(roster)
-        '''Check if ThreadPool executor [fetch_trees.py] has thrown a timeout error.'''
         try:
-            self.trees = t
+            roster = self.roster_selected
+            trees = fetch_trees(roster)
+            '''Check if ThreadPool executor [fetch_trees.py] has thrown a timeout error.'''
+            if not trees:
+                raise ValueError("No trees were fetched.")
+            self.trees = trees
             '''Download photos, if not present. :def: fetch_a_photo [extract_bio_stats] checks if photos are present.'''
             self.list_of_players = download_photos(roster)
         except ValueError as val_error:
-            logging.warning("Value error occurred. ThreadPool executor [fetch_trees.py] has thrown a timeout error: {}".format(val_error))
+            logging.warning(f"[teams_screen.py] Value error occurred. ThreadPool executor [fetch_trees.py] has thrown a timeout error: {val_error}")
             """Update message and go to menu screen."""
             self.notification.ids.label.text = "Response is taking too long!"
             Clock.schedule_once(self.notification.remove_notification, 2)
             Clock.schedule_once(partial(App.get_running_app().set_current_screen, "menu screen"), 3)
 
     def on_list_of_players(self, *args):
-        if App.get_running_app().root.current == "roster screen":
-            pass
-        else:
+        if App.get_running_app().root.current != "roster screen":
             self.notification.remove_notification()
             Clock.schedule_once(partial(App.get_running_app().set_current_screen, "roster screen"), 1)
 
