@@ -7,7 +7,7 @@ from kivy.utils import platform
 from kivy.core.window import Window
 from kivy.clock import Clock
 
-# from android.permissions import request_permissions, Permission
+from android.permissions import request_permissions, Permission
 
 from View.screens import screens
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     if platform == "android":
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
-    LabelBase.register(name='MyriadPro', fn_regular='Fonts/MyriadPro-Regular.ttf',
-                       fn_bold='Fonts/MyriadPro-BoldCondensedItalic.ttf',
-                       fn_italic='Fonts/MyriadPro-BlackCondensedItalic.ttf')
+    LabelBase.register(name='MyriadPro', fn_regular=os.path.join('Fonts', 'MyriadPro-Regular.ttf'),
+                                         fn_bold=os.path.join('Fonts', 'MyriadPro-BoldCondensedItalic.ttf'),
+                                         fn_italic=os.path.join('Fonts', 'MyriadPro-BlackCondensedItalic.ttf'))
     EuroLeagueStatsApp().run()

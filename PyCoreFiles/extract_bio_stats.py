@@ -4,23 +4,22 @@ import requests
 import logging
 import concurrent.futures
 
-from kivy.properties import StringProperty, DictProperty
-
 from PyCoreFiles.extract_game_stats import access_per_game_stats
 
 
 def fetch_a_photo(url, player_name):
-    if os.path.isfile('./' + player_name + '.png'):
+    file_path = os.path.join('.', f"{player_name}.png")
+    if os.path.isfile(file_path):
         '''Check if photos are already present'''
         pass
     else:
         try:
             response = requests.get(url)
-            logging.info('extract_bio_stats.py status_code | player_name | url: {} | {} | {}'.format(response.status_code, player_name, url))
+            logging.info(f'extract_bio_stats.py status_code | player_name | url: {response.status_code} | {player_name} | {url}')
         except requests.exceptions.Timeout as timeout_error:
-            logging.warning('extract_bio_stats.py The request timed out: {}'.format(timeout_error))
+            logging.warning(f'extract_bio_stats.py The request timed out: {timeout_error}')
         except requests.exceptions.ConnectionError as conn_error:
-            logging.warning('extract_bio_stats.py Connection error occurred: {}'.format(conn_error))
+            logging.warning(f'extract_bio_stats.py Connection error occurred: {conn_error}')
         else:
             player_photo = player_name + '.png'
             with open(player_photo, 'wb') as f:
@@ -29,16 +28,13 @@ def fetch_a_photo(url, player_name):
 
 
 def download_photos(grid_roster):
-    photo_urls = list()
-    urls = list(grid_roster.values())
-    for _ in urls:
-        photo_urls.append(_[1])
+    photo_urls = [info[1] for info in grid_roster.values()]
     players_names = list(grid_roster.keys())
     try:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             executor.map(fetch_a_photo, photo_urls, players_names)
     except TimeoutError as timeout_error:
-        logging.warning('Timeout error occurred: {}'.format(timeout_error))
+        logging.warning(f'Timeout error occurred: {timeout_error}')
     return players_names
 
 
@@ -46,8 +42,8 @@ def extract_players_data(player_tree, player_name):
     """Extract player's info, average and total stats"""
     if player_tree is not None:
         "Extract info"
-        text_1, text_2, error_message = StringProperty(''), StringProperty(''), ''
-        data = DictProperty([])
+        text_1, text_2, error_message = '', '', ''
+        data = {}
 
         pos = player_tree.xpath(
             '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
@@ -70,7 +66,7 @@ def extract_players_data(player_tree, player_name):
             text_1 = pos[0]
             text_2 = info[0][12:] + ' | ' + info[1][7:] + ' cm' + ' | ' + info[2][5:]
         except IndexError as index_error:
-            logging.warning('Index error occurred [extract_bio_stats.py]: {}'.format(index_error))
+            logging.warning(f'Index error occurred [extract_bio_stats.py]: {index_error}')
 
         "Extract average, total stats. Extract stats by game."
 

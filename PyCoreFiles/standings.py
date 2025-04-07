@@ -13,18 +13,19 @@ def fetch_standings():
     try:
         response = requests.get(url, timeout=(30, 30))
         logging.info('standings.py status_code: {}'.format(response.status_code))
-    except NameError as error:
-        logging.warning('g1, g2, g3 values are not defined: {}'.format(error))
+        if not all([G1, G2, G3]):
+            logging.warning("G1, G2, or G3 is missing or empty.")
+            return "Internal error – missing configuration."
     except requests.exceptions.HTTPError as http_error:
-        logging.warning('standings.py HTTP error occurred: {}'.format(http_error))
+        logging.warning(f'standings.py HTTP error occurred: {http_error}')
         notification_content = 'Response from server failed!'
         return notification_content
     except requests.exceptions.Timeout as timeout:
-        logging.warning('standings.py Timeout error occurred: {}'.format(timeout))
+        logging.warning(f'standings.py Timeout error occurred: {timeout}')
         notification_content = 'Response is taking too long!'
         return notification_content
     except requests.exceptions.ConnectionError as conn_error:
-        logging.warning('standings.py Connection error occurred: {}'.format(conn_error))
+        logging.warning(f'standings.py Connection error occurred: {conn_error}')
         notification_content = 'No internet connection!'
         return notification_content
     else:
@@ -36,9 +37,7 @@ def fetch_standings():
         tree = etree.HTML(response.content)
 
         teams_and_ranking = tree.xpath(G1)
-        for item in teams_and_ranking:
-            if item == ' (Q)':
-                teams_and_ranking.remove(item)
+        teams_and_ranking = [item for item in teams_and_ranking if item != ' (Q)']
 
         ranking = tree.xpath(G2)
         try:
@@ -46,8 +45,8 @@ def fetch_standings():
                 listing.append((ranking[a], teams_and_ranking[a]))
                 a += 1
         except IndexError as index_error:
-            logging.warning('standings.py Index error occurred: {}'.format(index_error))
-            notification_content = 'Download error occurred! Fix is on its way!'
+            logging.warning(f'standings.py Index error occurred: {index_error}')
+            notification_content = 'Download error occurred!'
             return notification_content
 
         raw_data = tree.xpath(G3)
