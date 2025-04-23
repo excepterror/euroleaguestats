@@ -11,7 +11,6 @@ from android.permissions import request_permissions, Permission
 
 from View.screens import screens
 
-
 import os
 import logging
 
@@ -34,6 +33,7 @@ class ScreenManagement(ScreenManager):
                 else:
                     App.get_running_app().set_current_screen(name)
                 return True
+        return True
 
     @staticmethod
     def exit_app(*args):
@@ -52,11 +52,13 @@ class EuroLeagueStatsApp(App):
         if not self.root.has_screen("standings screen"):
             Builder.load_file(screens["standings screen"]["kv"])
             self.root.add_widget(screens["standings screen"]["view"]())
-            self.root.get_screen("standings screen").recycle_view.data = self.root.get_screen("home screen").data_from_dataset()
+            self.root.get_screen("standings screen").recycle_view.data = self.root.get_screen(
+                "home screen").data_from_dataset()
         if not self.root.has_screen("teams screen"):
             Builder.load_file(screens["teams screen"]["kv"])
             self.root.add_widget(screens["teams screen"]["view"]())
-            self.root.get_screen("teams screen").grid_teams.rosters = self.root.get_screen("home screen").rosters_of_teams()
+            self.root.get_screen("teams screen").grid_teams.rosters = self.root.get_screen(
+                "home screen").rosters_of_teams()
         if not self.root.has_screen("roster screen"):
             Builder.load_file(screens["roster screen"]["kv"])
             self.root.add_widget(screens["roster screen"]["view"]())
@@ -75,10 +77,12 @@ class EuroLeagueStatsApp(App):
         if name == "display statistics screen":
             self.root.get_screen(name).games = self.root.get_screen("statistics screen").games
             self.root.get_screen(name).games_started = self.root.get_screen("statistics screen").games_started
-            self.root.get_screen(name).recycle_view.combined_dicts = self.root.get_screen("statistics screen").combined_dicts
+            self.root.get_screen(name).recycle_view.combined_dicts = self.root.get_screen(
+                "statistics screen").combined_dicts
             self.root.get_screen(name).player_name = self.root.get_screen("statistics screen").player_name
         if name == "display statistics by game screen":
-            self.root.get_screen(name).recycle_view.statistics_by_game_dict = self.root.get_screen("statistics screen").recycle_view_mod.statistics_by_game
+            self.root.get_screen(name).recycle_view.statistics_by_game_dict = self.root.get_screen(
+                "statistics screen").recycle_view_mod.statistics_by_game
             self.root.get_screen(name).player = self.root.get_screen("statistics screen").recycle_view_mod.player_name
             self.root.get_screen(name).game_info = self.root.get_screen("statistics screen").recycle_view_mod.game_info
         self.root.transition = FallOutTransition()
@@ -100,6 +104,6 @@ if __name__ == '__main__':
         request_permissions(
             [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
     LabelBase.register(name='MyriadPro', fn_regular=os.path.join('Fonts', 'MyriadPro-Regular.ttf'),
-                                         fn_bold=os.path.join('Fonts', 'MyriadPro-BoldCondensedItalic.ttf'),
-                                         fn_italic=os.path.join('Fonts', 'MyriadPro-BlackCondensedItalic.ttf'))
+                       fn_bold=os.path.join('Fonts', 'MyriadPro-BoldCondensedItalic.ttf'),
+                       fn_italic=os.path.join('Fonts', 'MyriadPro-BlackCondensedItalic.ttf'))
     EuroLeagueStatsApp().run()
