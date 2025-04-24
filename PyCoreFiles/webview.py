@@ -21,6 +21,7 @@ class KeyListener(PythonJavaClass):
         key_event = autoclass('android.view.KeyEvent')
         if event.getAction() == key_event.ACTION_DOWN and key_code == key_event.KEYCODE_BACK:
             return self.listener()
+        return True
 
 
 class WebViewInModal(ModalView):
@@ -50,7 +51,7 @@ class WebViewInModal(ModalView):
 
         layout = linear_layout(activity)
         layout.setOrientation(linear_layout.VERTICAL)
-        layout.addView(webview, self.width, self.height)
+        layout.addView(webview, layout_params(-1, -1))
         activity.addContentView(layout, layout_params(-1, -1))
 
         webview.setOnKeyListener(KeyListener(self._back_pressed))
