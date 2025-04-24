@@ -1,7 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivy.animation import Animation
 
-# from PyCoreFiles.webview import WebViewInModal
+from PyCoreFiles.webview import WebViewInModal
 
 
 class WelcomeScreenView(Screen):
