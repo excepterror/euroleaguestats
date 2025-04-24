@@ -20,6 +20,7 @@ class PlayersImageWithLabel(BoxLayout):
         if self.collide_point(*touch.pos):
             self.parent.parent.parent.parent.parent.assert_tree(self.player)
             return super().on_touch_down(touch)
+        return True
 
 
 class StatsLabel(Label):
