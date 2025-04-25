@@ -40,7 +40,7 @@ class RosterScreenView(Screen):
             if name == player_name:
                 player_tree = self.trees[name][0]
                 self.assert_tree_return = extract_players_data(player_tree, name)
-        if len(self.assert_tree_return) == 0:
+        if len(self.assert_tree_return[0]) == 0:
             self.call_notification_popup()
         else:
             self.selection_flag += 1
@@ -51,7 +51,7 @@ class RosterScreenView(Screen):
 
     def call_notification_popup(self,*args):
         self.notification.ids.image.source = "Assets/error_24dp.png"
-        self.notification.ids.label.text = "Error while fetching data!"
+        self.notification.ids.label.text = self.assert_tree_return[5]
         self.notification.animate_widget(timeout=3)
 
     def on_enter(self, *args):
