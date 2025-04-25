@@ -26,6 +26,11 @@ class StatisticsScreenView(Screen):
     def statistics_options(self, *args):
         try:
             self.error_message = self.player_tree_data[5]
+            """This makes sure that the RV widget will be removed if the user picks a player with no data, after having
+            viewed another's player data. Otherwise, the player's dataset will be carried to the Statistics Screen of the
+            player who has no data."""
+            if len(self.error_message) > 0:
+                self.float_layout.remove_widget(self.recycle_view_mod)
         except IndexError:
             pass
         else:
