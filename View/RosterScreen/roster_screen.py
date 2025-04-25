@@ -40,7 +40,9 @@ class RosterScreenView(Screen):
             if name == player_name:
                 player_tree = self.trees[name][0]
                 self.assert_tree_return = extract_players_data(player_tree, name)
-        if len(self.assert_tree_return[0]) == 0:
+        if len(self.assert_tree_return) == 0:
+            """if len(self.assert_tree_return[0]) == 0 is set, app will NOT enter Statistics Screen;
+            the 'no game played by the player' message will pop up, instead."""
             self.call_notification_popup()
         else:
             self.selection_flag += 1
