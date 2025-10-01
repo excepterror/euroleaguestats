@@ -25,7 +25,7 @@ class TeamsLabelGrid(GridLayout):
         self.call_notification_popup(source, notification_content, timeout=2100)
 
     def call_notification_popup(self, source, notification_content, timeout, *args):
-        teams_screen_instance = self.parent.parent.parent.parent
+        teams_screen_instance = self.parent.parent.parent
         teams_screen_instance.notification.ids.image.source = source
         teams_screen_instance.notification.ids.label.text = notification_content
         teams_screen_instance.notification.animate_widget(timeout)
