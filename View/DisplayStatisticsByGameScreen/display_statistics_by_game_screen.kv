@@ -6,60 +6,54 @@
 <DisplayStatisticsByGameScreenView>:
     name: "display statistics by game screen"
     recycle_view: recycle_view
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    BoxLayout:
-        orientation: 'vertical'
+    FloatLayout:
         Image:
-            size_hint: 1, .25
-            source: 'Assets/000.png'
-        FloatLayout:
             canvas.before:
                 Color:
-                    rgba: 1, 1, 1, 1
-                RoundedRectangle:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
                     pos: self.pos
                     size: self.size
-                    radius: dp(15), dp(15), 0, 0
-                    source: 'Assets/004.jpg'
-            Label:
-                text: '[i]' + root.player + '[/i]'
-                font_name: 'MyriadPro'
-                pos_hint: {'center_x': .5, 'center_y': .92}
-                font_size: sp(43)
-                size_hint: 1, None
-                text_size: self.width, None
-                height: self.texture_size[1]
-                halign: 'center'
-                valign: 'middle'
-                markup: True
-            Label:
-                text: '[i]' + root.game_info + '[/i]'
-                font_name: 'MyriadPro'
-                pos_hint: {'center_x': .5, 'center_y': .85}
-                font_size: sp(22)
-                size_hint: 1, None
-                text_size: self.width, None
-                height: self.texture_size[1]
-                halign: 'center'
-                valign: 'middle'
-                markup: True
-            RVDisplayStatisticsByGame:
-                id: recycle_view
-                canvas.before:
-                    Color:
-                        rgba: 1, 1, 1, .2
-                    RoundedRectangle:
-                        segments: 70
-                        radius: [dp(20), dp(20), dp(20), dp(20)] # Half of RVSt.RecycleBoxLayout.default_size_y
-                        size: self.size
-                        pos: self.pos
-                pos_hint: {'center_x': .5, 'center_y': .41}
-                size_hint: .95, .78
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoAnimTransWhite.png"
+        GradientWidgetRedArc:
+            size_hint: 1, .75
+            pos_hint: {"x": 0, "y": 0}
+        Label:
+            text: '[i]' + root.player + '[/i]'
+            font_name: 'MyriadPro'
+            pos_hint: {'center_x': .5, 'center_y': .7}
+            font_size: sp(43)
+            size_hint: 1, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+        Label:
+            text: '[i]' + root.game_info + '[/i]'
+            font_name: 'MyriadPro'
+            pos_hint: {'center_x': .5, 'center_y': .65}
+            font_size: sp(22)
+            size_hint: 1, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+        RVDisplayStatisticsByGame:
+            id: recycle_view
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .2
+                RoundedRectangle:
+                    segments: 70
+                    radius: [dp(20), dp(20), dp(20), dp(20)] # Half of RVSt.RecycleBoxLayout.default_size_y
+                    size: self.size
+                    pos: self.pos
+            pos_hint: {'center_x': .5, 'center_y': .31}
+            size_hint: .95, .6
 
 <RVDisplayStatisticsByGame>:
     viewclass: "DisplayStatisticsByGameTemplate"

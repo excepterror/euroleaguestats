@@ -1,40 +1,35 @@
 #:import RVStandings Widgets.rv_standings
 #:import StandingsLabel Widgets.widgets
+#:import GradientWidgetBlueArc Widgets.widgets
 
 <StandingsScreenView>:
     name: "standings screen"
     recycle_view: recycle_view
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    BoxLayout:
-        orientation: 'vertical'
+    FloatLayout:
         Image:
-            size_hint: 1, .25
-            source: 'Assets/000.png'
-        FloatLayout:
             canvas.before:
                 Color:
-                    rgba: 1, 1, 1, 1
-                RoundedRectangle:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
                     pos: self.pos
                     size: self.size
-                    radius: dp(15), dp(15), 0, 0
-                    source: 'Assets/003.jpg'
-            StandingsTemplate:
-                alpha: 0
-                font_size: sp(18)
-                pos_hint: {'center_x': .5, 'center_y': .95}
-                size_hint: .95, None
-                height: dp(40)
-                on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
-            RVStandings:
-                id: recycle_view
-                pos_hint: {'center_x': .5, 'center_y': .46}
-                size_hint: .95, .89
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoAnimTransWhite.png"
+        GradientWidgetBlueArc:
+            size_hint: 1, .75
+            pos_hint: {"x": 0, "y": 0}
+        StandingsTemplate:
+            alpha: 0
+            font_size: sp(18)
+            pos_hint: {'center_x': .5, 'center_y': .71}
+            size_hint: .95, None
+            height: dp(40)
+            on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
+        RVStandings:
+            id: recycle_view
+            pos_hint: {'center_x': .5, 'center_y': .35}
+            size_hint: .95, .68
 
 <RVStandings>:
     viewclass: 'StandingsTemplate'

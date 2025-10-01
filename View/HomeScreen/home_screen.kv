@@ -1,7 +1,5 @@
 #:import clock kivy.clock.Clock
 
-#:import partial functools.partial
-
 #:import NotificationWidget Widgets.notification
 
 #:import logging logging
@@ -13,23 +11,13 @@
     notification: notification
     canvas.before:
         Color:
-            rgba: 1, 1, 1, 1
+            rgba: 0.961, 1.0, 0.980, 1.0 # mint cream
         Rectangle:
             pos: self.pos
             size: self.size
-    BoxLayout:
-        orientation: 'vertical'
-        Image:
-            size_hint: 1, .25
-            source: 'Assets/000.png'
-        FloatLayout:
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                RoundedRectangle:
-                    pos: self.pos
-                    size: self.size
-                    radius: dp(15), dp(15), 0, 0
-                    source: 'Assets/001.jpg'
+    Image:
+        size_hint: 1, .25
+        pos_hint: {'center_x':.5, "center_y": .2}
+        source: 'Assets/000.png'
     NotificationWidget:
         id: notification

@@ -1,4 +1,5 @@
 #:import TeamsLabelGrid Widgets.grid_for_teams
+#:import GradientWidgetRedArc Widgets.widgets
 
 #:import clock kivy.clock.Clock
 
@@ -9,44 +10,38 @@
     grid_teams: grid_teams
     idx: self.grid_teams._idx
     notification: notification
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    BoxLayout:
-        orientation: 'vertical'
+    FloatLayout:
         Image:
-            size_hint: 1, .25
-            source: 'Assets/000.png'
-        FloatLayout:
             canvas.before:
                 Color:
-                    rgba: 1, 1, 1, 1
-                RoundedRectangle:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
                     pos: self.pos
                     size: self.size
-                    radius: dp(15), dp(15), 0, 0
-                    source: 'Assets/004.jpg'
-            ScrollView:
-                pos_hint: {'center_x': .5, 'center_y': .49}
-                size_hint: .98, 1
-                do_scroll_x: False
-                bar_color: 1, 1, 1, 0
-                bar_inactive_color: 1, 1, 1, 0
-                bar_pos_y: 'right'
-                bar_margin: -dp(3)
-                bar_width: dp(2)
-                TeamsLabelGrid:
-                    id: grid_teams
-                    cols: 3
-                    row_force_default: True
-                    row_default_height: dp(100)
-                    size_hint: 1, None
-                    height: self.minimum_height
-                    spacing: dp(10)
-                    padding: dp(7)
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoAnimTransWhite.png"
+        GradientWidgetRedArc:
+            size_hint: 1, .75
+            pos_hint: {"x": 0, "y": 0}
+        ScrollView:
+            pos_hint: {'center_x': .5, 'center_y': .37}
+            size_hint: .98, .73
+            do_scroll_x: False
+            bar_color: 1, 1, 1, 0
+            bar_inactive_color: 1, 1, 1, 0
+            bar_pos_y: 'right'
+            bar_margin: -dp(3)
+            bar_width: dp(2)
+            TeamsLabelGrid:
+                id: grid_teams
+                cols: 3
+                row_force_default: True
+                row_default_height: dp(100)
+                size_hint: 1, None
+                height: self.minimum_height
+                spacing: dp(10)
+                padding: dp(7)
     NotificationWidget:
         id: notification
 
