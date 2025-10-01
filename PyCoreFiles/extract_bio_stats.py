@@ -10,7 +10,7 @@ from PyCoreFiles.extract_game_stats import access_per_game_stats
 def fetch_a_photo(url, player_name):
     file_path = os.path.join('.', f"{player_name}.png")
     if os.path.isfile(file_path):
-        '''Check if photos are already present'''
+        '''Check if photos are already present.'''
         pass
     else:
         try:
@@ -44,27 +44,37 @@ def extract_players_data(player_tree, player_name):
         "Extract info"
         text_1, text_2, error_message = '', '', ''
         data = {}
+        #
+        # info_1 = player_tree.xpath(
+        #     '//div[@class="flex flex-row flex-wrap gap-y-3 gap-x-3 md:gap-x-16"]'
+        #     '//p')
+        # print(info_1)
 
-        pos = player_tree.xpath(
-            '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
-            '//div[@class="hero-info_position__lF64l"]/text()')
-        info_1 = player_tree.xpath(
-            '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
-            '//ul[@class="hero-info_dataList__0qv4h"]//li[@class="hero-info_dataItem__Y2xZN"]'
-            '//span[@class="hero-info_key__ZcDGE"]/text()')
-        info_2 = player_tree.xpath(
-            '//div[@class="player-hero_inner__xxqLy side-gaps_sectionSideGaps__8hmjO"]'
-            '//ul[@class="hero-info_dataList__0qv4h"]//li[@class="hero-info_dataItem__Y2xZN"]'
-            '//b[@class="hero-info_value__zklni"]/text()')
+        # assuming 'elements' is your list of <p> elements
+        number = player_tree.xpath('//p[contains(text(), "#")]/text()')[0]
+        position = player_tree.xpath('//p[text()="Guard" or text()="Forward" or text()="Center"]/text()')
+        position = position[0] if position else None
+        labels = player_tree.xpath('//div[@class="flex flex-col gap-2"]/p[1]/text()')
+        values = player_tree.xpath('//div[@class="flex flex-col gap-2"]/p[2]/text()')
 
-        info = list()
-        for i, j, in zip(info_1, info_2):
-            s = i + ': ' + j
-            info.append(s)
+        details = {}
+
+        if number:
+            details['Number'] = number
+        if position:
+            details['Position'] = position
+        for label, value in zip(labels, values):
+            details[label.strip()] = value.strip()
+        print("Details:", details)
+
+        # info = list()
+        # for i, j, in zip(info_1, info_2):
+        #     s = i + ': ' + j
+        #     info.append(s)
 
         try:
-            text_1 = pos[0]
-            text_2 = info[0][12:] + ' | ' + info[1][7:] + ' cm' + ' | ' + info[2][5:]
+            text_1 = details['Number'] + ' | ' + details['Position']
+            text_2 = details['Nationality'] + ' | ' + details['Height']
         except IndexError as index_error:
             logging.warning(f'Index error occurred [extract_bio_stats.py]: {index_error}')
 
