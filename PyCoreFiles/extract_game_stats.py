@@ -16,24 +16,26 @@ template_2 = {'Minutes:': [3], 'Points:': [4], '2-Point Field Goals:': [5], '3-P
               'Blocks in Favour:': [14], 'Blocks Against:': [15], 'Fouls Committed:': [16], 'Fouls Drawn:': [17],
               'Point Index Rating:': [18]}
 
-teams_codes = {'BER': 'ALBA Berlin',
-               'EFS': 'Anadolu Efes Istanbul',
+teams_codes = {'EFS': 'Anadolu Efes Istanbul',
                'ASM': 'AS Monaco',
-               'EA7': 'EA7 Emporio Armani Milan',
                'BKN': 'Baskonia Vitoria-Gasteiz',
                'CZV': 'Crvena Zvezda Meridianbet Belgrade',
-               'PAR': 'Partizan Mozzart Bet Belgrade',
+               'DUB': 'Dubai Basketball',
+               'EA7': 'EA7 Emporio Armani Milan',
                'BAR': 'FC Barcelona',
                'BAY': 'FC Bayern Munich',
                'FBB': 'Fenerbahce Beko Istanbul',
+               'HTA': 'Hapoel IBI Tel Aviv',
                'ASV': 'LDLC ASVEL Villeurbanne',
-               'MTA': 'Maccabi Playtika Tel Aviv',
+               'MTA': 'Maccabi Rapyd Tel Aviv',
                'OLY': 'Olympiacos Piraeus',
                'PAO': 'Panathinaikos AKTOR Athens',
                'PBB': 'Paris Basketball',
+               'PAR': 'Partizan Mozzart Bet Belgrade',
                'RMB': 'Real Madrid',
-               'ZAL': 'Zalgiris Kaunas',
-               'VIR': 'Virtus Segafredo Bologna'}
+               'VBC': 'Valencia Basket',
+               'VIR': 'Virtus Bologna',
+               'ZAL': 'Zalgiris Kaunas'}
 
 
 def update_dict(stats, j=0, dict_with_stats=None):
