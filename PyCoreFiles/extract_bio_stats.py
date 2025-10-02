@@ -42,15 +42,6 @@ def extract_players_data(player_tree, player_name):
     """Extract player's info, average and total stats"""
     if player_tree is not None:
         "Extract info"
-        text_1, text_2, error_message = '', '', ''
-        data = {}
-        #
-        # info_1 = player_tree.xpath(
-        #     '//div[@class="flex flex-row flex-wrap gap-y-3 gap-x-3 md:gap-x-16"]'
-        #     '//p')
-        # print(info_1)
-
-        # assuming 'elements' is your list of <p> elements
         number = player_tree.xpath('//p[contains(text(), "#")]/text()')[0]
         position = player_tree.xpath('//p[text()="Guard" or text()="Forward" or text()="Center"]/text()')
         position = position[0] if position else None
@@ -65,12 +56,8 @@ def extract_players_data(player_tree, player_name):
             details['Position'] = position
         for label, value in zip(labels, values):
             details[label.strip()] = value.strip()
-        print("Details:", details)
 
-        # info = list()
-        # for i, j, in zip(info_1, info_2):
-        #     s = i + ': ' + j
-        #     info.append(s)
+        text_1, text_2, error_message = '', '', ''
 
         try:
             text_1 = details['Number'] + ' | ' + details['Position']
@@ -87,6 +74,8 @@ def extract_players_data(player_tree, player_name):
             '//div[@class="tab-season_seasonTableWrap__ahJrw"]//div[@class="stats-table_table__cD0GH"]'
             '//div[@class="stats-table_row__wEFis"][2]//div[@class="stats-table_cell___AWMd"]/text()')
         opponents = player_tree.xpath('//div[@class="stats-table_table__cD0GH"]')
+
+        data = {}
 
         if len(average_stats) and len(total_stats) and len(opponents) != 0:
             data = access_per_game_stats(player_tree, player_name)
