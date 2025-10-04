@@ -55,7 +55,7 @@ class HomeScreenView(Screen):
         today = datetime.today()
         year = today.year
         start_date = datetime(year, 6, 15)
-        end_date = datetime(year, 10, 15)
+        end_date = datetime(year, 9, 30)
 
         if isinstance(_standings, str):
             self.critical_error_and_exit(message=_standings)
