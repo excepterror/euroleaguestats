@@ -1,6 +1,7 @@
 #:import RoundedRectLabelBtn Widgets.widgets
 #:import clock kivy.clock.Clock
-#:import GradientWidgetRedArc Widgets.widgets
+
+#:import RoundedWidget Widgets.widgets
 
 <MenuScreenView>:
     name: "menu screen"
@@ -18,9 +19,9 @@
             size_hint: 1, .25
             pos_hint: {"x": 0, "top": 1}
             source: "Assets/LogoWhite.png"
-        GradientWidgetRedArc:
-            size_hint: 1, .75
-            pos_hint: {"x": 0, "y": 0}
+        RoundedWidget:
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
         RoundedRectLabelBtn:
             id: teams
             text: "[i]TEAMS[/i]"
