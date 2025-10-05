@@ -17,19 +17,27 @@
             size_hint: 1, .25
             pos_hint: {"x": 0, "top": 1}
             source: "Assets/LogoWhite.png"
+        RoundedWidget:
+            r: .961
+            g: 1
+            b: .98
+            a: 1
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
         Label:
             text: '[i]' + root.player + '[/i]'
+            color: 0,0,0,1
             font_name: 'MyriadPro'
             pos_hint: {'center_x': .5, 'center_y': .7}
             font_size: sp(43)
             size_hint: 1, None
-            text_size: self.width, None
-            height: self.texture_size[1]
+            text_size: self.size
             halign: 'center'
             valign: 'middle'
             markup: True
         Label:
             text: '[i]' + root.game_info + '[/i]'
+            color: 0,0,0,1
             font_name: 'MyriadPro'
             pos_hint: {'center_x': .5, 'center_y': .65}
             font_size: sp(22)
@@ -67,7 +75,7 @@
         orientation: 'vertical'
 
 <DisplayStatisticsByGameLabel>:
-    color: 1, 1, 1, 1
+    color: 0,0,0,1
     font_name: 'MyriadPro'
     font_size: sp(18)
 
@@ -76,6 +84,8 @@
     game_stat: 'None'
     DisplayStatisticsByGameLabel:
         text: root.statistical_category
+        color: 0,0,0,1
     DisplayStatisticsByGameLabel:
         text: root.game_stat
+        color: 0,0,0,1
         size_hint_x: .5
