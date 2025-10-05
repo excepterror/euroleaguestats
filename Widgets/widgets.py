@@ -53,7 +53,7 @@ class LoadingMessage(BoxLayout):
     def repeat_animations(label, delay):
 
         def start_animation(*args):
-            anim = Animation(opacity=1, font_size=sp(120), duration=.5) + Animation(font_size=sp(100), duration=.25)
+            anim = Animation(opacity=1, font_size=sp(120), duration=.5) + Animation(font_size=sp(80), duration=.25)
             anim.start(label)
 
         Clock.schedule_once(start_animation, delay)
