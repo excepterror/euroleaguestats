@@ -7,6 +7,7 @@ from kivy.animation import Animation
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, RoundedRectangle
 from kivy.properties import NumericProperty
+from kivy.metrics import sp
 
 class RoundedRectLabelBtn(ButtonBehavior, Label):
     pass
@@ -52,7 +53,7 @@ class LoadingMessage(BoxLayout):
     def repeat_animations(label, delay):
 
         def start_animation(*args):
-            anim = Animation(opacity=1, font_size=120, duration=.5) + Animation(font_size=74, duration=.25)
+            anim = Animation(opacity=1, font_size=sp(120), duration=.5) + Animation(font_size=sp(100), duration=.25)
             anim.start(label)
 
         Clock.schedule_once(start_animation, delay)
