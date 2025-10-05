@@ -5,7 +5,8 @@ from kivy.properties import StringProperty
 from kivy.clock import Clock
 from kivy.animation import Animation
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, RoundedRectangle, Line
+from kivy.graphics import Color, RoundedRectangle
+from kivy.properties import NumericProperty
 
 class RoundedRectLabelBtn(ButtonBehavior, Label):
     pass
@@ -64,6 +65,10 @@ class LoadingMessage(BoxLayout):
 
 class RoundedWidget(Widget):
     corner_radius = 30  # corner radius
+    r = NumericProperty(1)
+    g = NumericProperty(1)
+    b = NumericProperty(1)
+    a = NumericProperty(1)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -75,32 +80,8 @@ class RoundedWidget(Widget):
         cr = self.corner_radius
 
         with self.canvas.before:
-            Color(.54, .64, .68, 1)  #soft grey
+            Color(self.r, self.g, self.b, self.a)
             RoundedRectangle(
                 pos=self.pos,
                 size=self.size,
                 radius=[(cr, cr), (cr, cr), 0,0])
-
-            # --- Diagonal lines ---
-            Color(0, 0, 0, 1)
-            dash_length, gap_length = 1, 10
-            total = dash_length + gap_length
-
-            for start_y in range(int(self.y - self.height), int(self.y + self.height), total):
-                for i in range(0, int(self.width), total):
-                    x_start = self.x + i
-                    y_start = start_y + i
-                    x_end = x_start + dash_length
-                    y_end = y_start + dash_length
-
-                    # Clip horizontal to widget
-                    if x_end > self.x + self.width:
-                        x_end = self.x + self.width
-
-                    # Clip vertical to widget height (including curved corners)
-                    if y_end > self.y + self.height:
-                        y_end = self.y + self.height
-                    if y_start > self.y + self.height:
-                        continue  # skip lines starting above widget
-
-                    Line(points=[x_start, y_start, x_end, y_end], width=1)
