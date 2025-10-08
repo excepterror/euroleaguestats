@@ -5,9 +5,9 @@ from kivy.properties import StringProperty
 from kivy.clock import Clock
 from kivy.animation import Animation
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, RoundedRectangle
+from kivy.graphics import Color, RoundedRectangle, Ellipse
 from kivy.properties import NumericProperty
-from kivy.metrics import sp
+from kivy.metrics import sp, dp
 
 class RoundedRectLabelBtn(ButtonBehavior, Label):
     pass
@@ -53,7 +53,7 @@ class LoadingMessage(BoxLayout):
     def repeat_animations(label, delay):
 
         def start_animation(*args):
-            anim = Animation(opacity=1, font_size=sp(120), duration=.5) + Animation(font_size=sp(80), duration=.25)
+            anim = Animation(opacity=1, font_size=sp(120), duration=.5) + Animation(font_size=sp(65), duration=.25)
             anim.start(label)
 
         Clock.schedule_once(start_animation, delay)
@@ -65,24 +65,43 @@ class LoadingMessage(BoxLayout):
             delay += .08
 
 class RoundedWidget(Widget):
-    corner_radius = 30  # corner radius
-    r = NumericProperty(1)
-    g = NumericProperty(1)
-    b = NumericProperty(1)
-    a = NumericProperty(1)
+    r0 = NumericProperty(1)
+    g0 = NumericProperty(1)
+    b0 = NumericProperty(1)
+    a0 = NumericProperty(1)
+    r1 = NumericProperty(1)
+    g1 = NumericProperty(1)
+    b1 = NumericProperty(1)
+    a1 = NumericProperty(1)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bind(size=self.draw_bg, pos=self.draw_bg)
-        self.draw_bg()
+        self.bg = None
+        self.bind(pos=self.update_canvas, size=self.update_canvas)
 
-    def draw_bg(self, *args):
+    def update_canvas(self, *args):
         self.canvas.before.clear()
-        cr = self.corner_radius
+        self.canvas.after.clear()
 
         with self.canvas.before:
-            Color(self.r, self.g, self.b, self.a)
-            RoundedRectangle(
-                pos=self.pos,
-                size=self.size,
-                radius=[(cr, cr), (cr, cr), 0,0])
+            '''Coloured background.'''
+            Color(self.r0, self.g0, self.b0, self.a0)
+            radius = [dp(30), dp(30), 0, 0]
+            self.bg = RoundedRectangle(pos=self.pos, size=self.size, radius=radius)
+
+        with self.canvas.after:
+            '''Dots scaled relative to widget size.'''
+            Color(self.r1, self.g1, self.b1, self.a1)
+
+            '''Tweak the number of dots (density).'''
+            num_cols = 20
+            num_rows = 20
+
+            dot_size = min(self.width / (num_cols * 8), self.height / (num_rows * 8))
+
+            for i in range(num_cols):
+                for j in range(num_rows):
+                    '''Evenly spaced positions.'''
+                    x = self.x + (i + 0.5) * (self.width / num_cols) - dot_size / 2
+                    y = self.y + (j + 0.5) * (self.height / num_rows) - dot_size / 2
+                    Ellipse(pos=(x, y), size=(dot_size, dot_size))
