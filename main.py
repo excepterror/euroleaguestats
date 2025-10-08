@@ -14,7 +14,7 @@ from View.screens import screens
 import os
 import logging
 
-__version__ = 25.10
+__version__ = "25.10.1"
 
 class ScreenManagement(ScreenManager):
     def __init__(self):
