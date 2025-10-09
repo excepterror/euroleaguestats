@@ -7,12 +7,12 @@ from PyCoreFiles.webview import WebViewInModal
 class WelcomeScreenView(Screen):
 
     def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.86, .06], duration=.2)
+        anim = Animation(size_hint=[.86, .06], duration=.1)
         anim.start(instance)
         anim.bind(on_complete=self.stats_reverse_animate(instance))
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.88, .08], duration=.1)
+        anim = Animation(size_hint=[.88, .08], duration=.05)
         anim.start(instance)
         anim.bind(on_complete=self.selection(instance))
 
