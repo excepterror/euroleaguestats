@@ -10,7 +10,7 @@ class MenuScreenView(Screen):
     about = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.86, .06], duration=.05)
+        anim = Animation(size_hint=[.86, .06], duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
@@ -20,7 +20,7 @@ class MenuScreenView(Screen):
         anim.start(instance)
 
     def about_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.38, .04], duration=.05)
+        anim = Animation(size_hint=[.38, .04], duration=.1)
         anim.bind(on_complete=lambda *args: self.about_reverse_animate(instance))
         anim.start(instance)
 
