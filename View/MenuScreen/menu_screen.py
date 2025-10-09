@@ -10,22 +10,22 @@ class MenuScreenView(Screen):
     about = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.86, .06], duration=.1)
+        anim = Animation(size_hint=[.86, .06], duration=.05)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.88, .08], duration=.1)
+        anim = Animation(size_hint=[.88, .08], duration=.05)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
     def about_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.38, .04], duration=.1)
+        anim = Animation(size_hint=[.38, .04], duration=.05)
         anim.bind(on_complete=lambda *args: self.about_reverse_animate(instance))
         anim.start(instance)
 
     def about_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.4, .06], duration=.1)
+        anim = Animation(size_hint=[.4, .06], duration=.05)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
