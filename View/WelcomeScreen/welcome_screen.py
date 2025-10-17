@@ -1,5 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.animation import Animation
+from kivy.clock import Clock
 
 from PyCoreFiles.webview import WebViewInModal
 
@@ -18,7 +19,7 @@ class WelcomeScreenView(Screen):
 
     def selection(self, instance, *args):
         if instance is self.privacy_policy:
-            self.view_privacy_policy()
+            Clock.schedule_once(self.view_privacy_policy, .06)
 
     @staticmethod
     def view_privacy_policy(*args):
