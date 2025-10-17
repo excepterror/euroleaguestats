@@ -19,7 +19,7 @@ class TeamsScreenView(Screen):
     roster_selected = DictProperty({})
     notification = ObjectProperty(None)
 
-    def start_second_thread(self, *args):
+    def extract_trees_photos_on_thread(self, *args):
         threading.Thread(target=self.extract_trees, daemon=True).start()
 
     def extract_trees(self, *args):
