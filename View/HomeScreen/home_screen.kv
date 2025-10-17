@@ -9,7 +9,7 @@
     on_enter: self.flag = True; logging.info("[home_screen.kv] HomeScreen flag triggered!")
     on_flag: clock.schedule_once(root.schedule_intro_image_display, 0)
     notification: notification
-    '''Mint cream background.'''
+    # Mint cream background.
     canvas.before:
         Color:
             rgba: 0.961, 1.0, 0.980, 1.0
