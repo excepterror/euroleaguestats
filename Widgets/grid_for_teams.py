@@ -22,13 +22,8 @@ class TeamsLabelGrid(GridLayout):
         self._idx += 1
         source = "Assets/notification_important_24dp.png"
         notification_content = "Waiting for {}".format(self.selected_team)
-        self.call_notification_popup(source, notification_content, timeout=2100)
-
-    def call_notification_popup(self, source, notification_content, timeout, *args):
         teams_screen_instance = self.parent.parent.parent
-        teams_screen_instance.notification.ids.image.source = source
-        teams_screen_instance.notification.ids.label.text = notification_content
-        teams_screen_instance.notification.animate_widget(timeout)
+        teams_screen_instance.call_notification_popup(source, notification_content, timeout=2100)
 
 
 class TeamsLabel(TouchRippleButtonBehavior, Label):
