@@ -5,7 +5,7 @@
 <TeamsScreenView>:
     name: "teams screen"
     # Initiate download of players data and their photos for the selected team
-    on_idx: self.roster_selected=self.grid_teams.selected_roster; self.start_second_thread()
+    on_idx: self.roster_selected=self.grid_teams.selected_roster; self.extract_trees_photos_on_thread()
     grid_teams: grid_teams
     idx: self.grid_teams._idx
     notification: notification
