@@ -74,7 +74,7 @@
                  android:launchMode="{% if args.activity_launch_mode %}{{ args.activity_launch_mode }}{% else %}singleTask{% endif %}"
                  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale|uiMode{% if args.min_sdk_version >= 8 %}|uiMode{% endif %}{% if args.min_sdk_version >= 13 %}|screenSize|smallestScreenSize{% endif %}{% if args.min_sdk_version >= 17 %}|layoutDirection{% endif %}{% if args.min_sdk_version >= 24 %}|density{% endif %}"
                  android:windowSoftInputMode="adjustResize"
-                 android:screenOrientation="unspecified">
+                 android:screenOrientation="fullUser">
                  {% if args.activity_launch_mode %}
                  android:launchMode="{{ args.activity_launch_mode }}"
                  {% endif %}
