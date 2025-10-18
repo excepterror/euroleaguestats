@@ -1,3 +1,6 @@
+import os
+import logging
+
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import FallOutTransition
@@ -6,15 +9,60 @@ from kivy.core.text import LabelBase
 from kivy.utils import platform
 from kivy.core.window import Window
 from kivy.clock import Clock
-
-from android.permissions import request_permissions, Permission
+from kivy import __version__ as kivy_version
 
 from View.screens import screens
 
-import os
-import logging
-
 __version__ = "25.10.2"
+
+logging.info(f"App version {__version__}, Kivy {kivy_version}")
+
+"""Handle orientation dynamically (Android 16+ friendly).
+"""
+def set_orientation():
+    """
+    Lock portrait on phones, allow rotation on tablets/foldables.
+    Safe for Android 14+ and multi-window mode.
+    """
+    if platform != "android":
+        return
+
+    from jnius import autoclass, cast
+
+    activity = autoclass("org.kivy.android.PythonActivity").mActivity
+    resources = activity.getResources()
+    configuration = resources.getConfiguration()
+
+    """Check screen width in dp (smallest dimension across orientations).
+    """
+    smallest_width = configuration.smallestScreenWidthDp
+
+    is_multiwindow = activity.isInMultiWindowMode()
+
+    """Android 14+ orientation constants.
+    """
+    SCREEN_ORIENTATION_UNSPECIFIED = 4
+    SCREEN_ORIENTATION_PORTRAIT = 1
+
+    try:
+        if is_multiwindow:
+            """Do not force orientation in multi-window mode (Android 12+ rule).
+            """
+            activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
+            return
+
+        if smallest_width < 600:
+            """Phones: lock portrait.
+            """
+            activity.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT)
+        else:
+            """Tablets/foldables: allow rotation/resizing.
+            """
+            activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
+    except Exception as e:
+        import logging
+        logging.warning(f"Orientation set failed: {e}")
+
 
 class ScreenManagement(ScreenManager):
     def __init__(self):
@@ -34,7 +82,7 @@ class ScreenManagement(ScreenManager):
                 else:
                     App.get_running_app().set_current_screen(name)
                 return True
-        return True
+        return self.current != "menu screen"
 
     @staticmethod
     def exit_app(*args):
@@ -102,8 +150,13 @@ class EuroLeagueStatsApp(App):
 
 if __name__ == '__main__':
     if platform == "android":
-        request_permissions(
-            [Permission.READ_EXTERNAL_STORAGE, Permission.INTERNET, Permission.ACCESS_NETWORK_STATE])
+        from android.permissions import request_permissions, Permission
+        request_permissions([
+            Permission.READ_EXTERNAL_STORAGE,
+            Permission.INTERNET,
+            Permission.ACCESS_NETWORK_STATE
+        ])
+        Clock.schedule_once(lambda dt: set_orientation(), 0.5)
     LabelBase.register(name='MyriadPro', fn_regular=os.path.join('Fonts', 'MyriadPro-Regular.ttf'),
                        fn_bold=os.path.join('Fonts', 'MyriadPro-BoldCondensedItalic.ttf'),
                        fn_italic=os.path.join('Fonts', 'MyriadPro-BlackCondensedItalic.ttf'))
