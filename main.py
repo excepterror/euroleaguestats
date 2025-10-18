@@ -60,7 +60,6 @@ def set_orientation():
             """
             activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
     except Exception as e:
-        import logging
         logging.warning(f"Orientation set failed: {e}")
 
 
