@@ -17,51 +17,34 @@ __version__ = "25.10.2"
 
 logging.info(f"App version {__version__}, Kivy {kivy_version}")
 
-"""Handle orientation dynamically (Android 16+ friendly).
-"""
-def set_orientation():
+def unlock_orientation_if_needed():
     """
-    Lock portrait on phones, allow rotation on tablets/foldables.
-    Safe for Android 14+ and multi-window mode.
+    Unlock orientation on tablets/foldables after startup.
+    Keeps portrait on phones.
     """
     if platform != "android":
         return
 
-    from jnius import autoclass, cast
-
+    from jnius import autoclass
     activity = autoclass("org.kivy.android.PythonActivity").mActivity
     resources = activity.getResources()
-    configuration = resources.getConfiguration()
+    config = resources.getConfiguration()
+    smallest_width = config.smallestScreenWidthDp
 
-    """Check screen width in dp (smallest dimension across orientations).
-    """
-    smallest_width = configuration.smallestScreenWidthDp
-
-    is_multiwindow = activity.isInMultiWindowMode()
-
-    """Android 14+ orientation constants.
-    """
-    SCREEN_ORIENTATION_UNSPECIFIED = 4
+    # Orientation constants
     SCREEN_ORIENTATION_PORTRAIT = 1
+    SCREEN_ORIENTATION_UNSPECIFIED = 4
 
     try:
-        if is_multiwindow:
-            """Do not force orientation in multi-window mode (Android 12+ rule).
-            """
+        if smallest_width >= 600:
+            # Tablets/foldables → allow rotation
             activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
-            return
-
-        if smallest_width < 600:
-            """Phones: lock portrait.
-            """
-            activity.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT)
         else:
-            """Tablets/foldables: allow rotation/resizing.
-            """
-            activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
+            # Phones → stay portrait
+            activity.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT)
     except Exception as e:
-        logging.warning(f"Orientation set failed: {e}")
-
+        import logging
+        logging.warning(f"Orientation adjustment failed: {e}")
 
 class ScreenManagement(ScreenManager):
     def __init__(self):
@@ -155,7 +138,7 @@ if __name__ == '__main__':
             Permission.INTERNET,
             Permission.ACCESS_NETWORK_STATE
         ])
-        Clock.schedule_once(lambda dt: set_orientation(), 0.5)
+        Clock.schedule_once(lambda dt: unlock_orientation_if_needed(), 1.5)
     LabelBase.register(name='MyriadPro', fn_regular=os.path.join('Fonts', 'MyriadPro-Regular.ttf'),
                        fn_bold=os.path.join('Fonts', 'MyriadPro-BoldCondensedItalic.ttf'),
                        fn_italic=os.path.join('Fonts', 'MyriadPro-BlackCondensedItalic.ttf'))
