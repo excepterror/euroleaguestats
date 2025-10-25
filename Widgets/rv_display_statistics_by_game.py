@@ -1,7 +1,7 @@
 """RecycleView Widget in :cls: DisplayStatisticsByGameScreenView
 in DisplayStatisticsByGameScreen.display_statistics_by_game_screen.py."""
 
-from kivy.properties import DictProperty, ListProperty, ObjectProperty
+from kivy.properties import DictProperty, ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
