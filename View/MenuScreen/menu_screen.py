@@ -2,7 +2,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.animation import Animation
 from kivy.app import App
 from kivy.properties import ObjectProperty
+from kivy.metrics import dp
 
+from utils.ui_helpers import adaptive_height
 
 class MenuScreenView(Screen):
     teams = ObjectProperty(None)
@@ -10,22 +12,22 @@ class MenuScreenView(Screen):
     about = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.86, .06], duration=.1)
+        anim = Animation(size_hint_x=.86, height=adaptive_height(scale=0.06, max_height=dp(80)), duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.88, .08], duration=.05)
+        anim = Animation(size_hint_x=.88, height=adaptive_height(scale=0.08, max_height=dp(80)), duration=.05)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
     def about_animate_on_push(self, instance):
-        anim = Animation(size_hint=[.38, .04], duration=.1)
+        anim = Animation(size_hint_x=.38, height=adaptive_height(scale=0.04, max_height=dp(68)), duration=.1)
         anim.bind(on_complete=lambda *args: self.about_reverse_animate(instance))
         anim.start(instance)
 
     def about_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint=[.4, .06], duration=.05)
+        anim = Animation(size_hint_x=.4, height=adaptive_height(scale=0.06, max_height=dp(68)), duration=.05)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
