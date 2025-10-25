@@ -1,7 +1,8 @@
 #:import RoundedRectLabelBtn Widgets.widgets
-#:import clock kivy.clock.Clock
-
 #:import RoundedWidget Widgets.widgets
+#:import adaptive_height utils.ui_helpers.adaptive_height
+
+#:import clock kivy.clock.Clock
 
 <MenuScreenView>:
     name: "menu screen"
@@ -32,13 +33,14 @@
             size_hint:  1, .75
         RoundedRectLabelBtn:
             id: teams
-            text: "[i]TEAMS[/i]"
+            text: '[i]' + 'TEAMS' + '[/i]'
             font_name: "MyriadPro"
-            font_size: sp(48)
+            font_size: app.font_scale * sp(48)
             text_size: self.size
             halign: "center"
             valign: "middle"
-            size_hint: .88, .08
+            size_hint: .88, None
+            height: adaptive_height(scale=0.08, max_height=dp(80))
             pos_hint: {"center_x": .5, "center_y": .5}
             color: 1, 1, 1, 1
             markup: True
@@ -55,11 +57,12 @@
             id: standings
             text: '[i]' + 'STANDINGS' + '[/i]'
             font_name: 'MyriadPro'
-            font_size: sp(48)
+            font_size: app.font_scale * sp(48)
             text_size: self.size
             halign: 'center'
             valign: 'middle'
-            size_hint: .88, .08
+            size_hint: .88, None
+            height: adaptive_height(scale=0.08, max_height=dp(80))
             color: 1, 1, 1, 1
             pos_hint: {'center_x': .5, 'center_y': .38}
             markup: True
@@ -76,11 +79,12 @@
             id: about
             text: 'About the app'
             font_name: 'MyriadPro'
-            font_size: sp(15)
+            font_size: app.font_scale * sp(15)
             text_size: self.size
             halign: 'center'
             valign: 'middle'
-            size_hint: .4, .06
+            size_hint: .4, None
+            height: adaptive_height(scale=0.06, max_height=dp(68))
             color: 1 ,1 ,1, 1
             pos_hint: {'center_x': .5, 'center_y': .1}
             canvas.before:

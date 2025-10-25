@@ -32,17 +32,18 @@
             valign: 'middle'
             color: 1, 1, 1, 1
             pos_hint: {'center_x': .5, 'center_y': .63}
-            size_hint_x: .9
+            size_hint: .9, 1
         RoundedRectLabelBtn:
             id: privacy_policy
             text: '[i]' + 'PRIVACY POLICY' + '[/i]'
             markup: True
             font_name: 'MyriadPro'
-            font_size: sp(48)
+            font_size: app.font_scale * sp(48)
             text_size: self.size
             halign: 'center'
             valign: 'center'
-            size_hint: .88, .08
+            size_hint: .88, None
+            height: adaptive_height(scale=0.08, max_height=dp(80))
             color: 1, 1, 1, 1
             pos_hint: {'center_x': .5, 'center_y': .38}
             canvas.before:
@@ -57,7 +58,7 @@
         Label:
             text: "ELS v25.10.2"
             font_name: 'MyriadPro'
-            font_size: sp(14)
+            font_size: app.font_scale * sp(14)
             text_size: self.size
             halign: 'center'
             valign: 'middle'
