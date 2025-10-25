@@ -19,7 +19,7 @@ class HomeScreenView(Screen):
 
     def schedule_intro_image_display(self, *args):
         Clock.schedule_once(self.play_loading_message, 0)
-        Clock.schedule_once(self.import_global_values_file, 2)
+        Clock.schedule_once(self.import_global_values_file, 3)
 
     def play_loading_message(self, *args):
         self.add_widget(LoadingMessage())
