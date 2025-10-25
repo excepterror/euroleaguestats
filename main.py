@@ -134,7 +134,6 @@ if __name__ == '__main__':
             Permission.INTERNET,
             Permission.ACCESS_NETWORK_STATE
         ])
-        Clock.schedule_once(lambda dt: unlock_orientation_if_needed(), 1.5)
     LabelBase.register(name='MyriadPro', fn_regular=os.path.join('Fonts', 'MyriadPro-Regular.ttf'),
                        fn_bold=os.path.join('Fonts', 'MyriadPro-BoldCondensedItalic.ttf'),
                        fn_italic=os.path.join('Fonts', 'MyriadPro-BlackCondensedItalic.ttf'))
