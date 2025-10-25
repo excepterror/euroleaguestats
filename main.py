@@ -13,38 +13,11 @@ from kivy import __version__ as kivy_version
 
 from View.screens import screens
 
-__version__ = "25.10.2"
+__version__ = "25.10.3"
 
 logging.info(f"App version {__version__}, Kivy {kivy_version}")
 
-def unlock_orientation_if_needed():
-    """
-    Unlock orientation on tablets/foldables after startup.
-    Keeps portrait on phones.
-    """
-    if platform != "android":
-        return
-
-    from jnius import autoclass
-    activity = autoclass("org.kivy.android.PythonActivity").mActivity
-    resources = activity.getResources()
-    config = resources.getConfiguration()
-    smallest_width = config.smallestScreenWidthDp
-
-    # Orientation constants
-    SCREEN_ORIENTATION_PORTRAIT = 1
-    SCREEN_ORIENTATION_UNSPECIFIED = 4
-
-    try:
-        if smallest_width >= 600:
-            # Tablets/foldables → allow rotation
-            activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
-        else:
-            # Phones → stay portrait
-            activity.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT)
-    except Exception as e:
-        import logging
-        logging.warning(f"Orientation adjustment failed: {e}")
+font_scale = 1.0
 
 class ScreenManagement(ScreenManager):
     def __init__(self):
@@ -77,6 +50,29 @@ class EuroLeagueStatsApp(App):
         super().__init__(**kwargs)
         self.root = ScreenManagement()
         self.set_current_screen(name="home screen")
+
+    def on_start(self):
+        global font_scale
+        width, height = Window.size
+        dpi = Window.dpi
+        diagonal_in = ((width / dpi) ** 2 + (height / dpi) ** 2) ** 0.5
+        '''Lock portrait on phones.'''
+        if platform == "android":
+            from jnius import autoclass
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            activity = PythonActivity.mActivity
+            if diagonal_in < 7:
+                font_scale = 1.0
+                '''Treat as phone: portrait.'''
+                activity.setRequestedOrientation(1)
+            else:
+                font_scale = 1.4
+                '''Treat as tablet/foldable: auto-rotate.'''
+                activity.setRequestedOrientation(-1)
+
+    @property
+    def font_scale(self):
+        return font_scale
 
     def load_kv_files(self, *args):
         """Load kv files for Standings, Teams and Roster screen and add their classes."""
