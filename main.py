@@ -59,7 +59,7 @@ class EuroLeagueStatsApp(App):
         '''Clamp values to avoid extremes.'''
         diagonal_in = max(4.5, min(diagonal_in, 12))
         '''Linear interpolation between 6" = 1.0 and 10" = 1.3.'''
-        font_scale = 1.0 + 0.075 * (diagonal_in - 6)
+        font_scale = 1.0 + 0.02 * (diagonal_in - 6)
         '''Cap font_scale.'''
         font_scale =  min(font_scale, 1.3)
         '''Lock portrait on phones.'''
