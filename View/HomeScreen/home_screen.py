@@ -28,7 +28,7 @@ class HomeScreenView(Screen):
         try:
             from StartupFiles import global_values
         except ImportError as error:
-            logging.warning(f'[home_screen.py] File globals.py is missing: {error}')
+            logging.warning(f'[home_screen.py ] File globals.py is missing: {error}')
             self.critical_error_and_exit(message="[home_screen.py] Critical file not found!")
         else:
             self.create_dict_with_rosters()
