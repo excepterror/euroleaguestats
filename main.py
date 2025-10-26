@@ -13,9 +13,9 @@ from kivy import __version__ as kivy_version
 
 from View.screens import screens
 
-__version__ = "25.10.3"
+__version__ = "25.10.2"
 
-logging.info(f"App version {__version__}, Kivy {kivy_version}")
+logging.info(f"[main.py     ] App version {__version__}, Kivy {kivy_version}")
 
 font_scale = 1.0
 
@@ -56,19 +56,24 @@ class EuroLeagueStatsApp(App):
         width, height = Window.size
         dpi = Window.dpi
         diagonal_in = ((width / dpi) ** 2 + (height / dpi) ** 2) ** 0.5
+        '''Clamp values to avoid extremes.'''
+        diagonal_in = max(4.5, min(diagonal_in, 12))
+        '''Linear interpolation between 6" = 1.0 and 10" = 1.3.'''
+        font_scale = 1.0 + 0.075 * (diagonal_in - 6)
+        '''Cap font_scale.'''
+        font_scale =  min(font_scale, 1.3)
         '''Lock portrait on phones.'''
         if platform == "android":
             from jnius import autoclass
             PythonActivity = autoclass('org.kivy.android.PythonActivity')
             activity = PythonActivity.mActivity
-            if diagonal_in < 7:
-                font_scale = 1.0
+            if diagonal_in <= 7:
                 '''Treat as phone: portrait.'''
                 activity.setRequestedOrientation(1)
             else:
-                font_scale = 1.4
                 '''Treat as tablet/foldable: auto-rotate.'''
                 activity.setRequestedOrientation(-1)
+            logging.info(f"[main.py] Device diagonal in inches is {diagonal_in} and font_scale is {font_scale}.")
 
     @property
     def font_scale(self):
