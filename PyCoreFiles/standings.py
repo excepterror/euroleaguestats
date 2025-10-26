@@ -12,7 +12,7 @@ def fetch_standings():
     url = 'https://www.euroleaguebasketball.net/en/euroleague/standings/'
     try:
         response = requests.get(url, timeout=(30, 30))
-        logging.info('standings.py status_code: {}'.format(response.status_code))
+        logging.info('[standings.py] {}'.format(response.status_code))
         if not all([G1, G2, G3]):
             logging.warning("G1, G2, or G3 is missing or empty.")
             return "Internal error – missing configuration."
