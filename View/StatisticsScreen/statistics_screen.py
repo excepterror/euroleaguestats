@@ -8,6 +8,7 @@ from kivy.app import App
 import logging
 
 from PyCoreFiles.extract_game_stats import update_dict
+from utils.ui_helpers import adaptive_height
 
 
 class StatisticsScreenView(Screen):
@@ -52,16 +53,14 @@ class StatisticsScreenView(Screen):
                 logging.warning(f'Value error occurred [missing data] [statistics_screen.py]: {value_error}')
 
     def animate_on_push(self, instance, *args):
-        anim = Animation(size_hint_x=.93, font_size=sp(16), duration=.2)
-        anim &= Animation(height=dp(40), duration=.2)
-        anim.start(instance)
+        anim = Animation(size_hint_x=.93, height=adaptive_height(scale=0.02, max_height=dp(60)), duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
+        anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.96, font_size=sp(18), duration=.1)
-        anim &= Animation(height=dp(50), duration=.1)
-        anim.start(instance)
+        anim = Animation(size_hint_x=.96, height=adaptive_height(scale=0.0537, max_height=dp(60)), duration=.05)
         anim.bind(on_complete=lambda *args: self.show_statistics(instance))
+        anim.start(instance)
 
     def show_statistics(self, instance, *args):
         dummy_dict, average_stats_dict, total_stats_dict = dict(), dict(), dict()
