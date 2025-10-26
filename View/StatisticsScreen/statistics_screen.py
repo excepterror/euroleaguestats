@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty, ObjectProperty, StringProperty, DictProperty
 from kivy.clock import Clock
 from kivy.animation import Animation
-from kivy.metrics import sp, dp
+from kivy.metrics import dp
 from kivy.app import App
 
 import logging
