@@ -45,7 +45,7 @@
                 height: self.minimum_height
                 row_force_default: True
                 row_default_height: dp(240)
-                spacing: 0, dp(5)
+                spacing: 0, dp(5)* app.font_scale
     NotificationWidget:
         id: notification
 
@@ -57,9 +57,9 @@
             rgba: 0, 0, 0, 0.2
         BoxShadow:
             pos: self.pos
-            size: self.width - dp(5), self.height - dp(5)
-            blur_radius: 0
-            border_radius: dp(15), dp(15), dp(15), dp(15)
+            size: self.width - dp(5) * app.font_scale, self.height - dp(5) * app.font_scale
+            blur_radius: dp(2) * app.font_scale
+            border_radius: dp(15) * app.font_scale, dp(15) * app.font_scale, dp(15) * app.font_scale, dp(15) * app.font_scale
     Image:
         fit_mode: 'contain'
         source: root.source
