@@ -30,13 +30,13 @@
             alpha: 0
             font_size: app.font_scale * sp(17)
             pos_hint: {'center_x': .5, 'center_y': .71}
-            size_hint: .95, None
+            size_hint: .96, None
             height: dp(40)
-            on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='PTS+'; self.pm.text='PTS-'; self.pd.text='+/-'
+            on_size: self.logo.opacity = 0; self.rank.text='Rank'; self.gp.text='GP'; self.w.text='W'; self.los.text='L'; self.wp.text='Win%'; self.pp.text='  PTS+'; self.pm.text='  PTS-'; self.pd.text='+/-'
         RVStandings:
             id: recycle_view
             pos_hint: {'center_x': .5, 'center_y': .35}
-            size_hint: .95, .68
+            size_hint: .96, .68
 
 <RVStandings>:
     viewclass: 'StandingsTemplate'
