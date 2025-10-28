@@ -12,8 +12,9 @@ from kivy.clock import Clock
 from kivy import __version__ as kivy_version
 
 from View.screens import screens
+from utils.ui_helpers import get_screen_diagonal_in
 
-__version__ = "25.10.3"
+__version__ = "25.10.4"
 
 logging.info(f"[main.py     ] App version {__version__}, Kivy {kivy_version}")
 
@@ -53,11 +54,9 @@ class EuroLeagueStatsApp(App):
 
     def on_start(self):
         global font_scale
-        width, height = Window.size
-        dpi = Window.dpi
-        diagonal_in = ((width / dpi) ** 2 + (height / dpi) ** 2) ** 0.5
-        '''Clamp values to avoid extremes.'''
-        diagonal_in = max(4.5, min(diagonal_in, 12))
+
+        diagonal_in = get_screen_diagonal_in()
+
         '''Linear interpolation between 6" = 1.0 and 10" = 1.3.'''
         font_scale = 1.0 + 0.02 * (diagonal_in - 6)
         '''Cap font_scale.'''
@@ -73,7 +72,7 @@ class EuroLeagueStatsApp(App):
             else:
                 '''Treat as tablet/foldable: auto-rotate.'''
                 activity.setRequestedOrientation(-1)
-            logging.info(f"[main.py] Device diagonal in inches is {diagonal_in} and font_scale is {font_scale}.")
+        logging.info(f"[main.py] Screen diagonal in inches is {round(diagonal_in,3)} and font_scale is {round(font_scale,3)}.")
 
     @property
     def font_scale(self):
