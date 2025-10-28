@@ -13,7 +13,7 @@ from kivy import __version__ as kivy_version
 
 from View.screens import screens
 
-__version__ = "25.10.2"
+__version__ = "25.10.3"
 
 logging.info(f"[main.py     ] App version {__version__}, Kivy {kivy_version}")
 
