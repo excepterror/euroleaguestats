@@ -73,7 +73,7 @@
             halign: 'center'
             valign: 'middle'
             size_hint: .98, None
-            height: adaptive_height(scale=0.0537, max_height=dp(60)) # 0.0537 is equivalent to dp(50).
+            height: adaptive_height(scale=0.0537, max_height=dp(60), font_scale=app.font_scale) # 0.0537 is equivalent to dp(50).
             pos_hint: {'center_x': .5, 'center_y': .54}
             color: 1, 1, 1, 1
             canvas.before:

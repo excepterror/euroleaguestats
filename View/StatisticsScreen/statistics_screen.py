@@ -53,12 +53,12 @@ class StatisticsScreenView(Screen):
                 logging.warning(f'Value error occurred [missing data] [statistics_screen.py]: {value_error}')
 
     def animate_on_push(self, instance, *args):
-        anim = Animation(size_hint_x=.93, height=adaptive_height(scale=0.02, max_height=dp(60)), duration=.1)
+        anim = Animation(size_hint_x=.93, height=adaptive_height(scale=0.02, max_height=dp(60), font_scale=App.get_running_app().font_scale), duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.96, height=adaptive_height(scale=0.0537, max_height=dp(60)), duration=.05)
+        anim = Animation(size_hint_x=.96, height=adaptive_height(scale=0.0537, max_height=dp(60), font_scale=App.get_running_app().font_scale), duration=.05)
         anim.bind(on_complete=lambda *args: self.show_statistics(instance))
         anim.start(instance)
 
