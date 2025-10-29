@@ -12,7 +12,7 @@ from kivy.clock import Clock
 from kivy import __version__ as kivy_version
 
 from View.screens import screens
-from utils.ui_helpers import get_screen_diagonal_in
+from utils.ui_helpers import get_screen_diagonal_in, compute_font_scale
 
 __version__ = "25.10.4"
 
@@ -56,11 +56,8 @@ class EuroLeagueStatsApp(App):
         global font_scale
 
         diagonal_in = get_screen_diagonal_in()
+        font_scale = compute_font_scale(diagonal_in)
 
-        '''Linear interpolation between 6" = 1.0 and 10" = 1.3.'''
-        font_scale = 1.0 + 0.02 * (diagonal_in - 6)
-        '''Cap font_scale.'''
-        font_scale =  min(font_scale, 1.3)
         '''Lock portrait on phones.'''
         if platform == "android":
             from jnius import autoclass
