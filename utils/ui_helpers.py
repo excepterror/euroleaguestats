@@ -1,48 +1,69 @@
 from kivy.core.window import Window
 from math import sqrt
-import sys
+from kivy.utils import platform as kivy_platform
 
 def get_screen_diagonal_in():
     """
-    Returns the approximate physical screen diagonal in inches.
-    Uses Android API if on Android, otherwise falls back to Kivy's Window.dpi.
+    Returns the physical screen diagonal in inches.
+    Uses WindowManager.getCurrentWindowMetrics() for API >= 30,
+    and Display.getRealMetrics() for older Android versions.
+    Falls back to Kivy Window metrics on other platforms.
     """
-    '''Android platform.'''
-    if sys.platform == 'android':
+    from kivy.core.window import Window
+
+    if kivy_platform == 'android':
         try:
             from jnius import autoclass
+
             PythonActivity = autoclass('org.kivy.android.PythonActivity')
-            DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            Context = autoclass('android.content.Context')
+            VERSION = autoclass('android.os.Build$VERSION')
 
             activity = PythonActivity.mActivity
-            metrics = DisplayMetrics()
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics)
+            window_manager = activity.getSystemService(Context.WINDOW_SERVICE)
 
-            width_px = metrics.widthPixels
-            height_px = metrics.heightPixels
-            xdpi = metrics.xdpi
-            ydpi = metrics.ydpi
+            if VERSION.SDK_INT >= 30:
+                # Android 11+ modern method
+                metrics = window_manager.getCurrentWindowMetrics()
+                bounds = metrics.getBounds()
 
+                width_px = bounds.width()
+                height_px = bounds.height()
+
+                display_metrics = activity.getResources().getDisplayMetrics()
+                xdpi = display_metrics.xdpi
+                ydpi = display_metrics.ydpi
+
+                print(f"[API>=30] width={width_px}, height={height_px}, xdpi={xdpi}, ydpi={ydpi}")
+
+            else:
+                # Legacy Android 10 and below
+                DisplayMetrics = autoclass('android.util.DisplayMetrics')
+                display_metrics = DisplayMetrics()
+                display = window_manager.getDefaultDisplay()
+                display.getRealMetrics(display_metrics)
+
+                width_px = display_metrics.widthPixels
+                height_px = display_metrics.heightPixels
+                xdpi = display_metrics.xdpi
+                ydpi = display_metrics.ydpi
+
+                print(f"[Legacy API] width={width_px}, height={height_px}, xdpi={xdpi}, ydpi={ydpi}")
+
+            # Compute physical diagonal
             diagonal_in = sqrt((width_px / xdpi) ** 2 + (height_px / ydpi) ** 2)
-            return diagonal_in
-        except Exception as e:
-            print("Warning: Android API failed, fallback to Kivy Window.dpi:", e)
+            return round(diagonal_in, 3)
 
-    '''Non-Android fallback (desktop or other platforms)'''
+        except Exception as e:
+            print("Android API metrics failed:", e)
+
+    # Fallback for non-Android platforms
     width_px, height_px = Window.size
-    '''default mdpi fallback.'''
     dpi = getattr(Window, 'dpi', 160)
     density = getattr(Window, 'density', 1)
-    if dpi <= 0:
-        dpi = 160
-    dpi *= density
-
+    dpi = dpi * density if dpi > 0 else 160
     diagonal_in = sqrt((width_px / dpi) ** 2 + (height_px / dpi) ** 2)
-
-    '''Clamp to a reasonable range.'''
-    diagonal_in = max(4.5, min(diagonal_in, 12))
-
-    return diagonal_in
+    return round(diagonal_in, 3)
 
 
 def adaptive_height(scale, max_height, font_scale):
