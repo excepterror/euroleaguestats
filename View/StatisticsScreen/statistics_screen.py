@@ -58,7 +58,7 @@ class StatisticsScreenView(Screen):
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.96, height=adaptive_height(scale=0.0452, max_height=dp(60), font_scale=App.get_running_app().font_scale), duration=.05)
+        anim = Animation(size_hint_x=.98, height=adaptive_height(scale=0.0452, max_height=dp(60), font_scale=App.get_running_app().font_scale), duration=.05)
         anim.bind(on_complete=lambda *args: self.show_statistics(instance))
         anim.start(instance)
 
