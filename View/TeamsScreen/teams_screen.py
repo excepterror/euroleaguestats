@@ -42,7 +42,7 @@ class TeamsScreenView(Screen):
     def on_list_of_players(self, *args):
         if App.get_running_app().root.current != "roster screen":
             self.notification.remove_notification()
-            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "roster screen"), 1)
+            Clock.schedule_once(partial(App.get_running_app().set_current_screen, "roster screen"), 1.1)
 
     def call_notification_popup(self, source, notification_content, timeout, *args):
         self.notification.ids.image.source = source
