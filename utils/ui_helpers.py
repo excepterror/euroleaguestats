@@ -63,10 +63,8 @@ def get_screen_diagonal_in():
     width_px, height_px = Window.size
     dpi = getattr(Window, 'dpi', 160)
     density = getattr(Window, 'density', 1)
-    if dpi <= 0:
-        dpi = 160
-    effective_dpi = dpi * (density if density > 0 else 1)
-    diagonal_in = sqrt((width_px / effective_dpi) ** 2 + (height_px / effective_dpi) ** 2)
+    dpi = dpi * density if dpi > 0 else 160
+    diagonal_in = sqrt((width_px / dpi) ** 2 + (height_px / dpi) ** 2)
     return round(diagonal_in, 3)
 
 
@@ -118,83 +116,24 @@ def get_screen_height_px():
     return getattr(Window, "height", 0)
 
 
-def get_screen_dpi():
-    """
-    Returns the approximate screen DPI (dots per inch).
-
-    - On Android: uses DisplayMetrics (legacy) or WindowMetrics (API >= 30).
-    - On desktop platforms: falls back to Kivy's Window.dpi and density.
-    """
-    if kivy_platform == 'android':
-        try:
-            from jnius import autoclass
-
-            PythonActivity = autoclass('org.kivy.android.PythonActivity')
-            Context = autoclass('android.content.Context')
-            VERSION = autoclass('android.os.Build$VERSION')
-
-            activity = PythonActivity.mActivity
-            wm = activity.getSystemService(Context.WINDOW_SERVICE)
-
-            '''Modern method for Android 11+ (API 30+).'''
-            if VERSION.SDK_INT >= 30:
-                display_metrics = activity.getResources().getDisplayMetrics()
-                xdpi = display_metrics.xdpi
-                ydpi = display_metrics.ydpi
-
-            else:
-                '''Legacy Android 10 and below.'''
-                DisplayMetrics = autoclass('android.util.DisplayMetrics')
-                dm = DisplayMetrics()
-                display = wm.getDefaultDisplay()
-                display.getRealMetrics(dm)
-
-                xdpi = dm.xdpi
-                ydpi = dm.ydpi
-
-            '''Average DPI.'''
-            if xdpi > 0 and ydpi > 0:
-                dpi = (xdpi + ydpi) / 2.0
-            elif xdpi > 0:
-                dpi = xdpi
-            elif ydpi > 0:
-                dpi = ydpi
-            else:
-                dpi = 160.0
-
-            logging.info(f"[ui_helpers.py] Android screen DPI: {dpi:.2f} (xdpi={xdpi:.2f}, ydpi={ydpi:.2f})")
-            return round(dpi, 2)
-
-        except Exception as e:
-            logging.warning("[ui_helpers.py] get_screen_dpi() failed: %s", e)
-
-    '''Fallback for non-Android platforms.'''
-    dpi = getattr(Window, 'dpi', 160)
-    density = getattr(Window, 'density', 1)
-    if dpi <= 0:
-        dpi = 160
-    effective_dpi = dpi * (density if density > 0 else 1)
-    return round(effective_dpi, 2)
-
-
 def adaptive_height(scale, max_height, font_scale):
     """
-    Adaptive height scaled by screen height and DPI (for consistent physical size).
+    Return a safe adaptive height value that scales with screen size and diagonal.
+    Uses Android APIs for accurate height on real devices.
     """
     try:
         height = get_screen_height_px()
 
+        '''Handle case where Window or metrics not ready yet.'''
         if not height or height <= 0:
             return max_height
 
-        dpi = get_screen_dpi()
+        '''Apply scaling.'''
+        value = height * scale * font_scale
 
-        ref_dpi = 160
-        dpi_scale = ref_dpi / dpi if dpi > 0 else 1.0
-
-        value = height * scale * font_scale * dpi_scale
+        '''Clamp to avoid absurdly large values.'''
         return min(value, max_height * font_scale)
 
     except Exception as e:
-        logging.warning("[ui_helpers.py] adaptive_height() fallback due to error: %s", e)
+        logging.warning("[ui_helpers.py] adaptive_height() fallback due to error:", e)
         return max_height
