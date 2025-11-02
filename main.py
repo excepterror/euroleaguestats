@@ -14,7 +14,7 @@ from kivy import __version__ as kivy_version
 from View.screens import screens
 from utils.ui_helpers import get_screen_diagonal_in, compute_font_scale
 
-__version__ = "25.10.4"
+__version__ = "25.11"
 
 logging.info(f"[main.py     ] App version {__version__}, Kivy {kivy_version}")
 

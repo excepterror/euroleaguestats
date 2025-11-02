@@ -12,22 +12,22 @@ class MenuScreenView(Screen):
     about = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
-        anim = Animation(size_hint_x=.86, height=adaptive_height(scale=0.06, max_height=dp(80), font_scale=App.get_running_app().font_scale), duration=.1)
+        anim = Animation(size_hint_x=.86, height=adaptive_height(scale=0.028, max_height=dp(80), font_scale=App.get_running_app().font_scale), duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.88, height=adaptive_height(scale=0.08, max_height=dp(80), font_scale=App.get_running_app().font_scale), duration=.05)
+        anim = Animation(size_hint_x=.88, height=adaptive_height(scale=0.048, max_height=dp(80), font_scale=App.get_running_app().font_scale), duration=.05)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
     def about_animate_on_push(self, instance):
-        anim = Animation(size_hint_x=.38, height=adaptive_height(scale=0.04, max_height=dp(68), font_scale=App.get_running_app().font_scale), duration=.1)
+        anim = Animation(size_hint_x=.38, height=adaptive_height(scale=0.016, max_height=dp(68), font_scale=App.get_running_app().font_scale), duration=.1)
         anim.bind(on_complete=lambda *args: self.about_reverse_animate(instance))
         anim.start(instance)
 
     def about_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.4, height=adaptive_height(scale=0.06, max_height=dp(68), font_scale=App.get_running_app().font_scale), duration=.05)
+        anim = Animation(size_hint_x=.4, height=adaptive_height(scale=0.036, max_height=dp(68), font_scale=App.get_running_app().font_scale), duration=.05)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
