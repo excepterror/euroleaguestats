@@ -73,8 +73,9 @@
             halign: 'center'
             valign: 'middle'
             size_hint: .98, None
-            height: adaptive_height(scale=0.0452, max_height=dp(60), font_scale=app.font_scale)
-            pos_hint: {'center_x': .5, 'center_y': .54}
+            height: adaptive_height(dp_base=50, font_scale=app.font_scale)
+            on_size: print(self.height)
+            pos_hint: {'center_x': .5, 'center_y': .53}
             color: 1, 1, 1, 1
             canvas.before:
                 Color:
@@ -87,7 +88,7 @@
             on_press: root.animate_on_push(self)
         RVDisplayByGame:
             id: recycle_view_mod
-            size_hint: .98, .5
+            size_hint: .98, .47
             pos: self.x, dp(2.5) * app.font_scale
     NotificationWidget:
         id: notification
@@ -100,7 +101,7 @@
     bar_inactive_color: 1, 1, 1, 0
     smooth_scroll_end: 10
     SelectableRecycleBoxLayout:
-        default_size: None, dp(50)
+        default_size: None, adaptive_height(dp_base=50, font_scale=app.font_scale)
         default_size_hint: 1, None
         size_hint_y: None
         height: self.minimum_height
@@ -117,6 +118,7 @@
     font_name: 'MyriadPro'
     halign: 'center'
     valign: 'middle'
+    on_size: print(self.height)
     color: (0, 0, 0, 1) if self.selected else (1, 1, 1, 1)
     canvas.before:
         Color:

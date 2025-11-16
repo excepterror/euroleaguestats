@@ -12,7 +12,7 @@ from kivy.clock import Clock
 from kivy import __version__ as kivy_version
 
 from View.screens import screens
-from utils.ui_helpers import get_screen_diagonal_in, compute_font_scale
+from utils.ui_helpers import get_screen_diagonal_in, compute_font_scale, print_display_metrics_and_size
 
 __version__ = "25.11"
 
@@ -57,6 +57,7 @@ class EuroLeagueStatsApp(App):
 
         diagonal_in = get_screen_diagonal_in()
         font_scale = compute_font_scale(diagonal_in)
+        print_display_metrics_and_size(50)
 
         '''Lock portrait on phones.'''
         if platform == "android":
