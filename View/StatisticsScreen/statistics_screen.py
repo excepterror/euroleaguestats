@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty, ObjectProperty, StringProperty, DictProperty
 from kivy.clock import Clock
 from kivy.animation import Animation
-from kivy.metrics import dp
+from kivy.metrics import sp
 from kivy.app import App
 
 import logging
@@ -53,12 +53,12 @@ class StatisticsScreenView(Screen):
                 logging.warning(f'Value error occurred [missing data] [statistics_screen.py]: {value_error}')
 
     def animate_on_push(self, instance, *args):
-        anim = Animation(size_hint_x=.93, height=adaptive_height(dp_base=30, font_scale=App.get_running_app().font_scale), duration=.1)
+        anim = Animation(size_hint_x=.86, height=adaptive_height(dp_base=30, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(8), duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.98, height=adaptive_height(dp_base=50, font_scale=App.get_running_app().font_scale), duration=.05)
+        anim = Animation(size_hint_x=.98, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(17),duration=.05)
         anim.bind(on_complete=lambda *args: self.show_statistics(instance))
         anim.start(instance)
 

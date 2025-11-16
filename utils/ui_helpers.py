@@ -1,6 +1,7 @@
 from kivy.core.window import Window
 from kivy.utils import platform as kivy_platform
 from math import sqrt
+
 import logging
 
 # -------------------------------
@@ -179,7 +180,7 @@ def print_display_metrics_and_size(widget_dp=None):
     }
 
     if widget_dp is not None:
-        px_value = widget_dp * density
+        px_value = widget_dp * density * font_scale
         mm_value = (px_value / ydpi) * 25.4
 
         print(f"Widget logical dp: {widget_dp}")
