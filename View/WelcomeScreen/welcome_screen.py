@@ -14,7 +14,7 @@ class WelcomeScreenView(Screen):
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.88, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(45), duration=.05)
+        anim = Animation(size_hint_x=.88, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(45), duration=.1)
         anim.bind(on_complete=lambda *a: self.selection(instance))
         anim.start(instance)
 

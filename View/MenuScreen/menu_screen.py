@@ -4,7 +4,7 @@ from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.metrics import sp
 
-from utils.ui_helpers import adaptive_height, print_display_metrics_and_size
+from utils.ui_helpers import adaptive_height
 
 class MenuScreenView(Screen):
     teams = ObjectProperty(None)
@@ -12,13 +12,12 @@ class MenuScreenView(Screen):
     about = ObjectProperty(None)
 
     def stats_animate_on_push(self, instance):
-        print_display_metrics_and_size(62)
         anim = Animation(size_hint_x=.7, height=adaptive_height(dp_base=30, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(20), duration=.1)
         anim.bind(on_complete=lambda *args: self.stats_reverse_animate(instance))
         anim.start(instance)
 
     def stats_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.88, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(45), duration=.05)
+        anim = Animation(size_hint_x=.88, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(45), duration=.1)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
@@ -28,7 +27,7 @@ class MenuScreenView(Screen):
         anim.start(instance)
 
     def about_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.4, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(16), duration=.05)
+        anim = Animation(size_hint_x=.4, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(16), duration=.1)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
