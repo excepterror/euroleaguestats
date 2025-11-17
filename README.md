@@ -10,4 +10,4 @@ to those who wish to have access to statistical data with regard to the performa
 of all professional basketball players who participate in Euroleague, the annual top European basketball competition.</p>
 
 ### Features
-The current release features a screenmanager, customised sliding labels and more! For more info, please visit [the app on Google store](https://play.google.com/store/apps/details?id=org.euroleaguestats.euroleaguestats). 
+For a detailed description and more info, please visit [the app on Google store](https://play.google.com/store/apps/details?id=org.euroleaguestats.euroleaguestats). 
