@@ -1,4 +1,4 @@
-## EuroLeagueStats
+## EuroLeagueStats (ELS)
 <img align="right" width="256" height="256" alt="Logo" src="https://github.com/user-attachments/assets/4452e256-d2f6-4dcf-b7f5-09100f450694" />
 EuroLeagueStats
 is an application for Android devices.
