@@ -76,17 +76,6 @@ def get_screen_diagonal_in():
     return round(diagonal_in, 3)
 
 
-def get_screen_height_px():
-    """
-    Returns screen height in pixels.
-    Uses Android API if available, otherwise Kivy Window height.
-    """
-    metrics = get_android_display_metrics()
-    if metrics:
-        return metrics["height_px"]
-    return getattr(Window, "height", 0)
-
-
 def compute_font_scale(diagonal_in):
     """
     Compute perceptual font scale based on diagonal screen size.
