@@ -21,7 +21,7 @@ class NotificationWidget(RelativeLayout):
         anim.on_complete(Clock.schedule_once(self.remove_notification, timeout))
 
     def set_font(self, *args):
-        self.label.font_size = sp(17)
+        self.label.font_size = sp(19)
         Clock.schedule_once(self.set_color, .7)
 
     def set_color(self, *args):
