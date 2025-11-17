@@ -27,7 +27,7 @@ class MenuScreenView(Screen):
         anim.start(instance)
 
     def about_reverse_animate(self, instance, *args):
-        anim = Animation(size_hint_x=.4, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(16), duration=.1)
+        anim = Animation(size_hint_x=.4, height=adaptive_height(dp_base=62, font_scale=App.get_running_app().font_scale), font_size=App.get_running_app().font_scale * sp(18), duration=.1)
         anim.bind(on_complete=lambda *args: self.screen_selection(instance))
         anim.start(instance)
 
