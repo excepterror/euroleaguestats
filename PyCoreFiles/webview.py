@@ -19,10 +19,10 @@ class KeyListener(PythonJavaClass):
     @java_method('(Landroid/view/View;ILandroid/view/KeyEvent;)Z')
     def onKey(self, v, key_code, event):
         KeyEvent = autoclass('android.view.KeyEvent')
-        # Only on ACTION_DOWN and BACK key do our custom action
+        '''Only on ACTION_DOWN and BACK key do our custom action.'''
         if event.getAction() == KeyEvent.ACTION_DOWN and key_code == KeyEvent.KEYCODE_BACK:
             return self.listener()
-        # Return False to allow propagation when not handled (optional)
+        '''Return False to allow propagation when not handled (optional).'''
         return False
 
 
@@ -31,7 +31,7 @@ class WebViewInModal(ModalView):
     webview = ObjectProperty(None)
     layout = ObjectProperty(None)
 
-    # Keep strong references here
+    '''Keep strong references here.'''
     _key_listener = None
 
     def open_web_view(self):
@@ -59,11 +59,11 @@ class WebViewInModal(ModalView):
         layout.addView(webview, LayoutParams(-1, -1))
         activity.addContentView(layout, LayoutParams(-1, -1))
 
-        # keep a strong reference to the listener to avoid GC + crash
+        '''keep a strong reference to the listener to avoid garbage collection + crash.'''
         self._key_listener = KeyListener(self._back_pressed)
         webview.setOnKeyListener(self._key_listener)
 
-        # assign the instance (not the autoclass)
+        '''Assign the instance (not the autoclass).'''
         self.webview = webview
         self.layout = layout
 
@@ -100,10 +100,10 @@ class WebViewInModal(ModalView):
             if parent is not None:
                 parent.removeView(self.layout)
 
-            # cleanup listener (unset) and webview properly
+            '''Cleanup listener (unset) and webview properly.'''
             if self.webview:
                 try:
-                    # Remove listener to avoid further Java callbacks
+                    '''Remove listener to avoid further Java callbacks.'''
                     self.webview.setOnKeyListener(None)
                 except Exception:
                     pass
@@ -117,7 +117,7 @@ class WebViewInModal(ModalView):
                 finally:
                     self.webview = None
 
-            # drop our strong reference
+            '''Drop our strong reference.'''
             self._key_listener = None
 
     def _back_pressed(self):
