@@ -3,7 +3,7 @@
 EuroLeagueStats
 is an application for Android devices.
 
-The code is written in Python 3.12 and the UI is designed with [kivy](https://kivy.org/#home). 
+The code is written in Python 3.13 and the UI is designed with [kivy v2.3.1](https://kivy.org/#home). 
 
 <p>The purpose of the application is to provide a fast & elegant alternative
 to those who wish to have access to statistical data with regard to the performance
