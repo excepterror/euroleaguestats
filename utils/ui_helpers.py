@@ -84,7 +84,7 @@ def compute_font_scale(diagonal_in):
     diagonal_in = max(4.5, min(diagonal_in, 12.0))
     exponent = 0.6
     ratio = (diagonal_in / 6.0) ** exponent
-    font_scale = max(0.95, min(ratio, 1.3))
+    font_scale = max(0.95, min(ratio, 1.4))
     return round(font_scale, 3)
 
 
@@ -107,7 +107,7 @@ def adaptive_height(dp_base, font_scale=1.0, max_dp=None):
 
     dp_value = dp_base * font_scale
     if max_dp is not None:
-        dp_value = min(dp_value, max_dp * font_scale)
+        dp_value = min(dp_value, max_dp)
 
     return dp_value * density
 
