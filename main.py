@@ -14,7 +14,7 @@ from kivy import __version__ as kivy_version
 from View.screens import screens
 from utils.ui_helpers import get_screen_diagonal_in, compute_font_scale
 
-__version__ = "25.11.1"
+__version__ = "25.11.2"
 
 logging.info(f"[main.py     ] App version {__version__}, Kivy {kivy_version}")
 
@@ -27,18 +27,25 @@ class ScreenManagement(ScreenManager):
         Window.bind(on_keyboard=self.android_back_click)
 
     def android_back_click(self, window, key, *largs):
-        if key in (27, 1001):
-            if self.current == "menu screen":
-                Clock.schedule_once(self.exit_app, .5)
-                return True
-            else:
-                name = screens[self.current]["on back-click screen transition"]
-                if name is None:
-                    pass
-                else:
-                    App.get_running_app().set_current_screen(name)
-                return True
-        return self.current != "menu screen"
+        """Revised Android back-button functionality.
+        """
+
+        '''Android back button codes: 27 (Escape) or 1001 (Android back).'''
+        if key not in (27, 1001):
+            return self.current != "menu screen"
+
+        '''Case 1: user is already on the menu screen.'''
+        if self.current == "menu screen":
+            Clock.schedule_once(self.exit_app, 0.5)
+            return True
+
+        '''Case 2: user is on another screen → navigate to designated back-screen.'''
+        back_target = screens[self.current].get("on back-click screen transition")
+
+        if back_target:
+            App.get_running_app().set_current_screen(back_target)
+
+        return True
 
     @staticmethod
     def exit_app(*args):
