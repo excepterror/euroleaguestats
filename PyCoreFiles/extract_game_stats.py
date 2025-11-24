@@ -18,7 +18,7 @@ template_2 = {'Minutes:': [3], 'Points:': [4], '2-Point Field Goals:': [5], '3-P
 
 teams_codes = {'EFS': 'Anadolu Efes Istanbul',
                'ASM': 'AS Monaco',
-               'BKN': 'Kosner Baskonia Vitoria-Gasteiz',
+               'KBA': 'Kosner Baskonia Vitoria-Gasteiz',
                'CZV': 'Crvena Zvezda Meridianbet Belgrade',
                'DUB': 'Dubai Basketball',
                'EA7': 'EA7 Emporio Armani Milan',
