@@ -1,9 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivy.properties import DictProperty, NumericProperty, ListProperty, ObjectProperty
 from kivy.app import App
-
-import os
-import logging
+from PIL import Image
 
 from PyCoreFiles.extract_bio_stats import extract_players_data
 
@@ -18,21 +16,14 @@ class RosterScreenView(Screen):
     grid = ObjectProperty(None)
 
     def populate_photos(self):
-        count = 0
-        roster = self.roster_selected
         for player in self.list_of_players:
             source = player + '.png'
-            if not os.path.isfile('./' + player + '.png'):
+            im = Image.open(source)
+            width, height = im.size
+            if (width, height) != (750, 1000):
                 source = 'Assets/NoImage.png'
-                count += 1
             player_image = PlayersImageWithLabel(player=player, source=source)
             self.grid.add_widget(player_image)
-        '''Check if NoImage.png has been used instead of the actual player image, thus :def: fetch_tree [
-        fetch_trees.py] and :def: fetch_a_photo [extract_bio_stats.py] have thrown errors.'''
-        if count == len(roster):
-            logging.warning("Counter value is not equal to length of  :dict: roster in :def: populate_photos"
-                            " [roster_screen.py]")
-            self.call_notification_popup()
 
     def assert_tree(self, player_name, *args):
         """Called from :def: on_touch_down in :cls: PlayersImageWithLabel in Widgets.widgets.py."""
