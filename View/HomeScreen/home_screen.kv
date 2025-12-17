@@ -1,0 +1,24 @@
+#:import clock kivy.clock.Clock
+
+#:import NotificationWidget Widgets.notification
+
+#:import logging logging
+
+<HomeScreenView>:
+    name: "home screen"
+    on_enter: self.flag = True; logging.info("[home_screen.kv] HomeScreen flag triggered!")
+    on_flag: clock.schedule_once(root.schedule_intro_image_display, 0)
+    notification: notification
+    # Mint cream background.
+    canvas.before:
+        Color:
+            rgba: 0.961, 1.0, 0.980, 1.0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Image:
+        size_hint: 1, .2
+        pos_hint: {'center_x':.5, "center_y": .2}
+        source: 'Assets/LogoBlack.png'
+    NotificationWidget:
+        id: notification

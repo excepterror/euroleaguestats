@@ -1,0 +1,35 @@
+<NotificationWidget>:
+    image: image
+    label: label
+    canvas.before:
+        Color:
+            rgba: 0,0,0,.3
+        BoxShadow:
+            size: self.size
+            offset: 0, -5
+            border_radius: dp(15), dp(15), dp(15), dp(15)
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            size: self.size
+            radius: dp(15), dp(15), dp(15), dp(15)
+    size_hint: 0, 0
+    pos_hint: {'center_x': .5, 'center_y': .89}
+    BoxLayout:
+        orientation: 'horizontal'
+        Image:
+            id: image
+            source: ""
+            size_hint_x: .2
+            size_hint_y: .6
+            pos_hint: {'center_x': .5, 'center_y': .5}
+        Label:
+            id: label
+            text: ""
+            font_name: "MyriadPro"
+            font_size: sp(0)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            text_size: self.size
+            halign: 'center'
+            valign: 'center'
+            color: 0,0,0,0

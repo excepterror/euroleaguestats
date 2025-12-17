@@ -1,0 +1,66 @@
+<WelcomeScreenView>:
+    name: "welcome screen"
+    privacy_policy: privacy_policy
+    FloatLayout:
+        Image:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoWhite.png"
+        RoundedWidget:
+            r0: .42
+            g0: .52
+            b0: .62
+            a0: 1
+            r1: .28
+            g1: .35
+            b1: .42
+            a1: .9
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
+        Label:
+            text: "Thank you for downloading ELS.\n\nELS, is a sophisticated Android application,\ngraciously presenting you the statistical\nprowess of every contender within the\nesteemed arena of the Euroleague\nbasketball club competition."
+            font_name: 'MyriadPro'
+            font_size: app.font_scale * sp(17)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .63}
+            size_hint: .9, 1
+        RoundedRectLabelBtn:
+            id: privacy_policy
+            text: '[i]' + 'PRIVACY POLICY' + '[/i]'
+            markup: True
+            font_name: 'MyriadPro'
+            font_size: app.font_scale * sp(45)
+            text_size: self.size
+            halign: 'center'
+            valign: 'center'
+            size_hint: .88, None
+            height: adaptive_height(dp_base=62, font_scale=app.font_scale)
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .38}
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .2
+                RoundedRectangle:
+                    segments: 70
+                    radius: dp(15), dp(15), dp(15), dp(15)
+                    pos: self.pos
+                    size: self.size
+            on_press: root.stats_animate_on_push(self)
+        Label:
+            text: "ELS v25.12.0"
+            font_name: 'MyriadPro'
+            font_size: app.font_scale * sp(13)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .02}

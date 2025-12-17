@@ -1,8 +1,6 @@
 from kivy.clock import Clock
 from kivy.properties import StringProperty, DictProperty, NumericProperty, ObjectProperty, ListProperty
 from kivy.uix.gridlayout import GridLayout
-from PIL import Image, ImageDraw, ImageFilter
-from kivy.graphics.texture import Texture
 from kivy.uix.label import Label
 from kivy.uix.behaviors import TouchRippleButtonBehavior
 
@@ -11,16 +9,21 @@ class TeamsLabelGrid(GridLayout):
     rosters = DictProperty({})
     _idx = NumericProperty(0)
     selected_roster = DictProperty({})
+    selected_team = StringProperty('')
 
     def on_rosters(self, *args):
         for team, urls in self.rosters.items():
             team_label = TeamsLabel()
             team_label.text = team
-            team_label.im.source = 'Images/' + team + '.png'
+            team_label.im.source = 'Assets/' + team + '.png'
             self.add_widget(team_label)
 
     def push_selected_roster(self, *args):
         self._idx += 1
+        source = "Assets/notification_important_24dp.png"
+        notification_content = "Waiting for {}".format(self.selected_team)
+        teams_screen_instance = self.parent.parent.parent
+        teams_screen_instance.call_notification_popup(source, notification_content, timeout=300)
 
 
 class TeamsLabel(TouchRippleButtonBehavior, Label):
@@ -30,63 +33,11 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
     team = StringProperty()
     im = ObjectProperty()
 
-    def __init__(self, **kwargs):
-        super().__init__()
-
-        self.update_shadow = Clock.create_trigger(self.create_shadow)
-
-    def on_size(self, *args, **kwargs):
-        self.create_shadow()
-
-    def on_pos(self, *args, **kwargs):
-        self.create_shadow()
-
-    def create_shadow(self, *args):
-        # Increase blur_radius to increase blur blur_radius
-        blur_radius = 25
-        # Increase alpha to increase blur intensity
-        alpha = .7
-
-        width = self.size[0] + blur_radius * 6.
-        height = self.size[1] + blur_radius * 6.
-        offset_y = 1
-
-        shadow_texture = self.create_shadow_background(blur_radius, alpha)
-        self.shadow_texture = shadow_texture
-
-        self.shadow_size = width, height
-
-        self.shadow_pos = self.x - (width - self.size[0]) / 2.1, self.y - (height - self.size[1]) / 1.9 - offset_y
-
-    def create_shadow_background(self, blur_radius, alpha):
-        width = int(self.size[0] + blur_radius * 6.)
-        height = int(self.size[1] + blur_radius * 6.)
-
-        # create texture
-        texture = Texture.create(size=(width, height), colorfmt='rgba')
-
-        # make a blank image for the text, initialized to transparent text color
-        im = Image.new('RGBA', (width, height), color=(1, 1, 1, 0))
-
-        # get a drawing context
-        draw = ImageDraw.Draw(im)
-
-        # define the bounding box
-        x0, y0 = (width - self.size[0]) / 2., (height - self.size[1]) / 2.
-        x1, y1 = x0 + self.size[0] - 1, y0 + self.size[1] - 1
-        draw.rectangle((x0, y0, x1, y1), fill=(0, 0, 0, int(255 * alpha)))
-
-        # blurs the image with a sequence of extended box filters, which approximates a Gaussian kernel
-        im = im.filter(ImageFilter.GaussianBlur(blur_radius * .25))
-
-        # blit blurred image to texture
-        texture.blit_buffer(im.tobytes(), colorfmt='rgba',  bufferfmt='ubyte')
-
-        return texture
-
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
             touch.grab(self)
+            self.ripple_duration_in = .5
+            self.ripple_duration_out = .4
             self.ripple_show(touch)
             return True
         return False
@@ -98,9 +49,18 @@ class TeamsLabel(TouchRippleButtonBehavior, Label):
             try:
                 for team, dict_with_urls in self.parent.rosters.items():
                     if self.text == team:
+                        '''Pass selected roster to the :gridlayout: TeamsLabelGrid.'''
                         self.parent.selected_roster = dict_with_urls
+                        '''Pass selected team to the :gridlayout: TeamsLabelGrid.'''
+                        self.parent.selected_team = team
+                if self.parent.selected_roster == {}:
+                    source = "Assets/error_24dp.png"
+                    notification_content = "{}\'s roster is not finalised yet!".format(self.text)
+                    teams_screen_instance = self.parent.parent.parent.parent.parent
+                    teams_screen_instance.call_notification_popup(source, notification_content, timeout=3)
+                else:
+                    Clock.schedule_once(self.parent.push_selected_roster, 0)
             except ValueError:
                 pass
-            Clock.schedule_once(self.parent.push_selected_roster, .8)
             return True
         return False

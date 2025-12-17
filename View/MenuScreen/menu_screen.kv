@@ -1,0 +1,98 @@
+#:import RoundedRectLabelBtn Widgets.widgets
+#:import RoundedWidget Widgets.widgets
+#:import adaptive_height utils.ui_helpers.adaptive_height
+
+#:import clock kivy.clock.Clock
+
+<MenuScreenView>:
+    name: "menu screen"
+    teams: teams
+    standings: standings
+    about: about
+    FloatLayout:
+        Image:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoWhite.png"
+        RoundedWidget:
+            r0: .54
+            g0: .64
+            b0: .68
+            a0: 1
+            r1: .3
+            g1: .5
+            b1: .4
+            a1: 1
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
+        RoundedRectLabelBtn:
+            id: teams
+            text: '[i]' + 'TEAMS' + '[/i]'
+            font_name: "MyriadPro"
+            font_size: app.font_scale * sp(45)
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            size_hint: .88, None
+            height: adaptive_height(dp_base=62, font_scale=app.font_scale)
+            pos_hint: {"center_x": .5, "center_y": .5}
+            color: 1, 1, 1, 1
+            markup: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .2
+                RoundedRectangle:
+                    segments: 70
+                    radius: [dp(15)]*4
+                    pos: self.pos
+                    size: self.size
+            on_release: root.stats_animate_on_push(self)
+        RoundedRectLabelBtn:
+            id: standings
+            text: '[i]' + 'STANDINGS' + '[/i]'
+            font_name: 'MyriadPro'
+            font_size: app.font_scale * sp(45)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            size_hint: .88, None
+            height: adaptive_height(dp_base=62, font_scale=app.font_scale)
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .38}
+            markup: True
+            canvas.before:
+                Color:
+                    rgba: 1 ,1 ,1, .2
+                RoundedRectangle:
+                    segments: 70
+                    radius: dp(15), dp(15), dp(15), dp(15)
+                    pos: self.pos
+                    size: self.size
+            on_release: root.stats_animate_on_push(self)
+        RoundedRectLabelBtn:
+            id: about
+            text: 'About the app'
+            font_name: 'MyriadPro'
+            font_size: app.font_scale * sp(18)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            size_hint: .4, None
+            height: adaptive_height(dp_base=62, font_scale=app.font_scale)
+            color: 1 ,1 ,1, 1
+            pos_hint: {'center_x': .5, 'center_y': .1}
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .2
+                RoundedRectangle:
+                    segments: 70
+                    radius: dp(15), dp(15), dp(15), dp(15)
+                    pos: self.pos
+                    size: self.size
+            on_release: root.about_animate_on_push(self)

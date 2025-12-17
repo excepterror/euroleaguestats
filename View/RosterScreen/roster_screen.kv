@@ -1,0 +1,83 @@
+<RosterScreenView>:
+    name: "roster screen"
+    on_pre_enter: self.populate_photos()
+    on_leave: self.grid.clear_widgets() if app.root.current == "teams screen" else None
+    num_players: self.num_players
+    grid: grid
+    scroll_roster: scroll_roster
+    notification: notification
+    FloatLayout:
+        Image:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoWhite.png"
+        RoundedWidget:
+            r0: .85
+            g0: .85
+            b0: .85
+            a0: 1
+            r1: .25
+            g1: .25
+            b1: .25
+            a1: 1
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
+        ScrollView:
+            id: scroll_roster
+            pos_hint: {'center_x': .5, 'center_y': .37}
+            size_hint: .98, .73
+            do_scroll_x: False
+            bar_pos_y: 'right'
+            bar_color: 1, 1, 1, 0
+            bar_inactive_color: 1, 1, 1, 0
+            bar_margin: -dp(3)
+            bar_width: dp(2)
+            GridLayout:
+                id: grid
+                cols: 2
+                size_hint: 1, None
+                height: self.minimum_height
+                row_force_default: True
+                row_default_height: dp(240)
+                spacing: 0, dp(5) * app.font_scale
+    NotificationWidget:
+        id: notification
+
+<PlayersImageWithLabel>:
+    orientation: 'vertical'
+    label: label
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.2
+        BoxShadow:
+            pos: self.pos
+            size: self.width - dp(5) * app.font_scale, self.height - dp(5) * app.font_scale
+            blur_radius: dp(2) * app.font_scale
+            border_radius: dp(15) * app.font_scale, dp(15) * app.font_scale, dp(15) * app.font_scale, dp(15) * app.font_scale
+    Image:
+        fit_mode: 'contain'
+        source: root.source
+        size_hint: 1, None
+        height: dp(200)
+    Label:
+        id: label
+        text: root.player
+        font_name: 'MyriadPro'
+        font_size: app.font_scale * sp(17)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, .8
+            RoundedRectangle:
+                pos: root.x, root.y
+                size: root.width - dp(7), dp(40)
+                segments: 70
+                radius: dp(0), dp(0), dp(15) * app.font_scale, dp(15) * app.font_scale

@@ -1,0 +1,95 @@
+### Screen to display Stats by game. ###
+
+#:import RVDisplayStatisticsByGame Widgets.rv_display_statistics_by_game
+#:import DisplayStatisticsByGameLabel Widgets.widgets
+
+<DisplayStatisticsByGameScreenView>:
+    name: "display statistics by game screen"
+    recycle_view: recycle_view
+    FloatLayout:
+        Image:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoWhite.png"
+        RoundedWidget:
+            r0: .961
+            g0: 1
+            b0: .98
+            a0: 1
+            r1: .25
+            g1: .55
+            b1: .5
+            a1: 1
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
+        Label:
+            text: '[i]' + root.player + '[/i]'
+            color: 0,0,0,1
+            font_name: 'MyriadPro'
+            pos_hint: {'center_x': .5, 'center_y': .7}
+            font_size: app.font_scale * sp(40)
+            size_hint: 1, None
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+        Label:
+            text: '[i]' + root.game_info + '[/i]'
+            color: 0,0,0,1
+            font_name: 'MyriadPro'
+            pos_hint: {'center_x': .5, 'center_y': .65}
+            font_size: app.font_scale * sp(20)
+            size_hint: 1, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+        RVDisplayStatisticsByGame:
+            id: recycle_view
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, .2
+                RoundedRectangle:
+                    segments: 70
+                    radius: [dp(20), dp(20), dp(20), dp(20)] # Half of RVSt.RecycleBoxLayout.default_size_y
+                    size: self.size
+                    pos: self.pos
+            pos_hint: {'center_x': .5, 'center_y': .31}
+            size_hint: .95, .6
+
+<RVDisplayStatisticsByGame>:
+    viewclass: "DisplayStatisticsByGameTemplate"
+    bar_color: 1, 1, 1, 0
+    bar_margin: -dp(10)
+    bar_inactive_color: 1, 1, 1, 0
+    smooth_scroll_end: 10
+    scroll_type: ['bars', 'content']
+    RecycleBoxLayout:
+        default_size: None, dp(40)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<DisplayStatisticsByGameLabel>:
+    color: 0,0,0,1
+    font_name: 'MyriadPro'
+    font_size: app.font_scale * sp(19)
+
+<DisplayStatisticsByGameTemplate>:
+    statistical_category: 'None'
+    game_stat: 'None'
+    DisplayStatisticsByGameLabel:
+        text: root.statistical_category
+        color: 0,0,0,1
+    DisplayStatisticsByGameLabel:
+        text: root.game_stat
+        color: 0,0,0,1
+        size_hint_x: .5

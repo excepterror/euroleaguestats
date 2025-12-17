@@ -1,0 +1,78 @@
+#:import TeamsLabelGrid Widgets.grid_for_teams
+#:import adaptive_height utils.ui_helpers.adaptive_height
+#:import clock kivy.clock.Clock
+
+<TeamsScreenView>:
+    name: "teams screen"
+    # Initiate download of players data and their photos for the selected team
+    on_idx: self.roster_selected=self.grid_teams.selected_roster; self.extract_trees_photos_on_thread()
+    grid_teams: grid_teams
+    idx: self.grid_teams._idx
+    notification: notification
+    FloatLayout:
+        Image:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint: 1, .25
+            pos_hint: {"x": 0, "top": 1}
+            source: "Assets/LogoWhite.png"
+        RoundedWidget:
+            r0: .85
+            g0: .85
+            b0: .85
+            a0: 1
+            r1: .25
+            g1: .25
+            b1: .25
+            a1: 1
+            pos_hint: {'x': 0, 'y':0}
+            size_hint:  1, .75
+        ScrollView:
+            pos_hint: {'center_x': .5, 'center_y': .36}
+            size_hint: .98, .72
+            do_scroll_x: False
+            bar_color: 1, 1, 1, 0
+            bar_inactive_color: 1, 1, 1, 0
+            bar_pos_y: 'right'
+            bar_margin: -dp(3)
+            bar_width: dp(2)
+            TeamsLabelGrid:
+                id: grid_teams
+                cols: 3
+                row_force_default: True
+                row_default_height: dp(100)
+                size_hint: 1, None
+                height: self.minimum_height
+                spacing: dp(10) * app.font_scale
+                padding: dp(7) * app.font_scale
+    NotificationWidget:
+        id: notification
+
+<TeamsLabel>:
+    im: im
+    font_name: 'MyriadPro'
+    font_size: sp(17)
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    color: 0, 0, 0, 0
+    ripple_color: 0, 0, 0, 1
+    ripple_scale: 2
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, .9
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            segments: 70
+            radius: dp(15), dp(15), dp(15), dp(15)
+    Image:
+        id: im
+        fit_mode: 'contain'
+        size_hint: None, None
+        size: root.width * .65, root.height * .65
+        pos: root.x + root.width / 2 - self.width / 2, root.y + root.height / 2  - self.height / 2
