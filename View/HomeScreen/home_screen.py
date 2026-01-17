@@ -35,14 +35,14 @@ class HomeScreenView(Screen):
 
     def create_dict_with_rosters(self, *args):
         try:
-            with open('StartupFiles/roster.json') as json_file:
+            with open('StartupFiles/roster_.json') as json_file:
                 data = json.load(json_file)
             self.rosters_reg = data
         except FileNotFoundError:
-            logging.warning(f'[home_screen.py] File roster.json is missing!')
+            logging.warning(f'[home_screen.py] File roster_.json is missing!')
             self.critical_error_and_exit()
         except json.JSONDecodeError as error:
-            logging.warning(f'[home_screen.py] Error reading roster.json: {error}')
+            logging.warning(f'[home_screen.py] Error reading roster_.json: {error}')
             self.critical_error_and_exit()
 
     def on_rosters_reg(self, *args):
