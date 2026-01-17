@@ -39,7 +39,7 @@ class ScreenManagement(ScreenManager):
             Clock.schedule_once(self.exit_app, 0.5)
             return True
 
-        '''Case 2: user is on another screen → navigate to designated back-screen.'''
+        '''Case 2: user is on another screen, so navigate to designated back-screen.'''
         back_target = screens[self.current].get("on back-click screen transition")
 
         if back_target:
