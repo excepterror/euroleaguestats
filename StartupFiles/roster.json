@@ -16,6 +16,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/pj-dozier/012742/",
             "https://media-cdn.cortextech.io/ac43e15a-c08d-42ed-a896-599ef9c4c3fc.png"
         ],
+        "Ruzgar Fenemen": [
+            "https://www.euroleaguebasketball.net/euroleague/players/ruzgar-fenemen/013422/",
+            "https://media-cdn.cortextech.io/d508fd95-92a2-4090-82f2-5709a03857dc.png"
+        ],
         "Sehmus Hazer": [
             "https://www.euroleaguebasketball.net/euroleague/players/sehmus-hazer/011201/",
             "https://media-cdn.cortextech.io/4ddb1fa4-97c7-4e34-9d0b-eaf23f9bf632.png"
@@ -27,6 +31,10 @@
         "Shane Larkin": [
             "https://www.euroleaguebasketball.net/euroleague/players/shane-larkin/007200/",
             "https://media-cdn.cortextech.io/8ad5b8f2-3bf2-4ae4-9a49-91160d75f3bb.png"
+        ],
+        "Saben Lee": [
+            "https://www.euroleaguebasketball.net/euroleague/players/saben-lee/013389/",
+            "https://media-cdn.cortextech.io/d016faea-5855-43c3-9ee3-0377a97cf60b.png"
         ],
         "Jordan Loyd": [
             "https://www.euroleaguebasketball.net/euroleague/players/jordan-loyd/009754/",
@@ -44,6 +52,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/georgios-papagiannis/005844/",
             "https://media-cdn.cortextech.io/7410bb12-8f97-491b-96e4-264f048acc27.png"
         ],
+        "Vincent Poirier": [
+            "https://www.euroleaguebasketball.net/euroleague/players/vincent-poirier/004887/",
+            "https://media-cdn.cortextech.io/bce92ebe-03e1-4588-9235-65b7e965b4e4.png"
+        ],
         "Rolands Smits": [
             "https://www.euroleaguebasketball.net/euroleague/players/rolands-smits/007109/",
             "https://media-cdn.cortextech.io/d4e2115d-e8a8-497e-9522-f11f7d7d0336.png"
@@ -55,6 +67,10 @@
         "Nick Weiler Babb": [
             "https://www.euroleaguebasketball.net/euroleague/players/nick-weiler-babb/010391/",
             "https://media-cdn.cortextech.io/e23682a9-5374-4706-b343-36f49f61236d.png"
+        ],
+        "Burakcan Yildizli": [
+            "https://www.euroleaguebasketball.net/euroleague/players/burakcan-yildizli/004093/",
+            "https://media-cdn.cortextech.io/b63152ad-12f4-415d-9487-d049e95a2828.png"
         ],
         "Erkan Yilmaz": [
             "https://www.euroleaguebasketball.net/euroleague/players/erkan-yilmaz/006372/",
@@ -69,10 +85,6 @@
         "Jaron Blossomgame": [
             "https://www.euroleaguebasketball.net/euroleague/players/jaron-blossomgame/011231/",
             "https://media-cdn.cortextech.io/47740cf2-cdbf-4529-9cbe-3954f423f542.png"
-        ],
-        "Nick Calathes": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nick-calathes/001932/",
-            "https://media-cdn.cortextech.io/55e7d560-4582-4f48-b8ff-28c18b539d34.png"
         ],
         "Alpha Diallo": [
             "https://www.euroleaguebasketball.net/euroleague/players/alpha-diallo/011226/",
@@ -132,10 +144,6 @@
             "https://www.euroleaguebasketball.net/euroleague/players/chiek-diallo/014104/",
             "https://media-cdn.cortextech.io/461738d7-abca-41b5-8b85-e605f0b900f7.png"
         ],
-        "Hamidou Diallo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/hamidou-diallo/014086/",
-            "https://media-cdn.cortextech.io/7db7148a-0fd4-4470-ae80-0e3684a2ee54.png"
-        ],
         "Khalifa Diop": [
             "https://www.euroleaguebasketball.net/euroleague/players/khalifa-diop/008072/",
             "https://media-cdn.cortextech.io/d78b882f-2f17-4f2a-8685-55cd7f75be1b.png"
@@ -176,21 +184,29 @@
             "https://www.euroleaguebasketball.net/euroleague/players/markquis-nowell/014119/",
             "https://media-cdn.cortextech.io/02c8c710-f160-471e-b241-e0c0e3a976a8.png"
         ],
+        "Eugene Omoruyi": [
+            "https://www.euroleaguebasketball.net/euroleague/players/eugene-omoruyi/014207/",
+            "https://media-cdn.cortextech.io/22e77d9a-90d9-49f1-9121-a7063fa9c19d.png"
+        ],
         "Joseba Querejeta": [
             "https://www.euroleaguebasketball.net/euroleague/players/joseba-querejeta/010788/",
             "https://media-cdn.cortextech.io/30e4f2ae-6d1d-480a-b72c-862f97987d05.png"
         ],
-        "Luka Samanic": [
-            "https://www.euroleaguebasketball.net/euroleague/players/luka-samanic/007579/",
-            "https://media-cdn.cortextech.io/f7d0ab59-0c76-4125-a864-cce8c4b24906.png"
+        "Gytis Radzevicius": [
+            "https://www.euroleaguebasketball.net/euroleague/players/gytis-radzevicius/014190/",
+            "https://media-cdn.cortextech.io/7745b1f2-e6a5-462d-8d7c-54ae6f3bbc8b.png"
         ],
         "Tadas Sedekerskis": [
             "https://www.euroleaguebasketball.net/euroleague/players/tadas-sedekerskis/007230/",
             "https://media-cdn.cortextech.io/06b5ca08-62cf-4401-96f6-1b8aca1750e5.png"
         ],
+        "Kobi Simmons": [
+            "https://www.euroleaguebasketball.net/euroleague/players/kobi-simmons/014152/",
+            "https://media-cdn.cortextech.io/61bf398e-c801-4969-b965-7f0d3eba8c63.png"
+        ],
         "Pedro Souza": [
             "https://www.euroleaguebasketball.net/euroleague/players/pedro-souza/014103/",
-            "https://media-cdn.cortextech.io/e40f0d3b-53d5-4924-b2e6-6197b065cced.png"
+            "https://media-cdn.cortextech.io/5ccb154e-0f4c-4df3-8376-784b27a05971.png"
         ],
         "Matteo Spagnolo": [
             "https://www.euroleaguebasketball.net/euroleague/players/matteo-spagnolo/008173/",
@@ -202,6 +218,14 @@
         ]
     },
     "Crvena Zvezda Meridianbet Belgrade": {
+        "Joel Bolomboy": [
+            "https://www.euroleaguebasketball.net/euroleague/players/joel-bolomboy/009035/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
+        "Jared Butler": [
+            "https://www.euroleaguebasketball.net/euroleague/players/jared-butler/014163/",
+            "https://media-cdn.cortextech.io/926f8dbb-c1ff-46cc-a86e-3a68f78a11f9.png"
+        ],
         "Isaiah Canaan": [
             "https://www.euroleaguebasketball.net/euroleague/players/isaiah-canaan/010612/",
             "https://media-cdn.cortextech.io/b6e0f4a8-c734-42b7-86d4-333594b9020b.png"
@@ -214,13 +238,17 @@
             "https://www.euroleaguebasketball.net/euroleague/players/dejan-davidovac/007960/",
             "https://media-cdn.cortextech.io/1f3790c6-a754-4e43-b322-9c50695d71d5.png"
         ],
+        "Sava Djuric": [
+            "https://www.euroleaguebasketball.net/euroleague/players/sava-djuric/013700/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
         "Ognjen Dobric": [
             "https://www.euroleaguebasketball.net/euroleague/players/ognjen-dobric/004007/",
             "https://media-cdn.cortextech.io/80c68581-78c5-44b8-b3ea-21555bfaff4f.png"
         ],
         "Yago Dos Santos": [
             "https://www.euroleaguebasketball.net/euroleague/players/yago-dos-santos/012044/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/e0f72d56-5553-431c-8cb8-b5db06684356.png"
         ],
         "Devonte Graham": [
             "https://www.euroleaguebasketball.net/euroleague/players/devonte-graham/014028/",
@@ -248,11 +276,11 @@
         ],
         "Donatas Motiejunas": [
             "https://www.euroleaguebasketball.net/euroleague/players/donatas-motiejunas/LCZ/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/b9453f11-74b4-498e-8490-e5cbc1b25255.png"
         ],
         "Aleksej Nedeljkovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/aleksej-nedeljkovic/012948/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/e5c63506-d3ff-42ea-b31e-0374be1c0eaf.png"
         ],
         "Jordan Nwora": [
             "https://www.euroleaguebasketball.net/euroleague/players/jordan-nwora/013363/",
@@ -261,6 +289,10 @@
         "Semi Ojeleye": [
             "https://www.euroleaguebasketball.net/euroleague/players/semi-ojeleye/011982/",
             "https://media-cdn.cortextech.io/e54b9baf-ae85-4aed-9ef7-da71859be0c3.png"
+        ],
+        "Novak Pavlovic": [
+            "https://www.euroleaguebasketball.net/euroleague/players/novak-pavlovic/012934/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
         ],
         "Uros Plavsic": [
             "https://www.euroleaguebasketball.net/euroleague/players/uros-plavsic/006240/",
@@ -273,6 +305,10 @@
         "Jasiel Rivero": [
             "https://www.euroleaguebasketball.net/euroleague/players/jasiel-rivero/011214/",
             "https://media-cdn.cortextech.io/c001336b-1258-48de-a38e-6bf07fd88b0b.png"
+        ],
+        "Ognjen Simjanovski": [
+            "https://www.euroleaguebasketball.net/euroleague/players/ognjen-simjanovski/014196/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
         ],
         "Lazar Stojkovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/lazar-stojkovic/013013/",
@@ -288,13 +324,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/justin-anderson/012795/",
             "https://media-cdn.cortextech.io/fe45bbed-041c-4077-a770-db8d3c0946f0.png"
         ],
-        "Danilo Andjusic": [
-            "https://www.euroleaguebasketball.net/euroleague/players/danilo-andjusic/000956/",
-            "https://media-cdn.cortextech.io/e64a983f-a641-4fbb-a4d6-c81b573a3845.png"
-        ],
         "Taran Armstrong": [
             "https://www.euroleaguebasketball.net/euroleague/players/taran-armstrong/014141/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/e45ca935-cc1b-4cc3-b538-5e1b7e81243e.png"
         ],
         "Aleksa Avramovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/aleksa-avramovic/003983/",
@@ -311,6 +343,10 @@
         "Nemanja Dangubic": [
             "https://www.euroleaguebasketball.net/euroleague/players/nemanja-dangubic/005942/",
             "https://media-cdn.cortextech.io/d79a6b0a-c9e6-45d7-b907-849e1ae9202f.png"
+        ],
+        "Boogie Ellis": [
+            "https://www.euroleaguebasketball.net/euroleague/players/boogie-ellis/014157/",
+            "https://media-cdn.cortextech.io/b2638a60-244f-4304-9294-16a4b3ecd667.png"
         ],
         "Mfiondu Kabengele": [
             "https://www.euroleaguebasketball.net/euroleague/players/mfiondu-kabengele/012796/",
@@ -340,9 +376,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/klemen-prepelic/002661/",
             "https://media-cdn.cortextech.io/71f285f4-996e-4f5c-b2e7-0b0a871e660b.png"
         ],
-        "Sertac Sanli": [
-            "https://www.euroleaguebasketball.net/euroleague/players/sertac-sanli/002968/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        "Matt Ryan": [
+            "https://www.euroleaguebasketball.net/euroleague/players/matt-ryan/014177/",
+            "https://media-cdn.cortextech.io/65a24105-fb31-48cd-829f-8a6f3526d91e.png"
         ],
         "Mckinley Wright IV": [
             "https://www.euroleaguebasketball.net/euroleague/players/mckinley-wright-iv/012606/",
@@ -366,9 +402,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/lorenzo-brown/009622/",
             "https://media-cdn.cortextech.io/8c072cdd-59ae-4c44-8388-6a1903cd239e.png"
         ],
-        "Vlatko Cancar": [
-            "https://www.euroleaguebasketball.net/euroleague/players/vlatko-cancar/005379/",
-            "https://media-cdn.cortextech.io/4ea25d61-eb52-4b27-9363-8b783d1277b4.png"
+        "Mattia Ceccato": [
+            "https://www.euroleaguebasketball.net/euroleague/players/mattia-ceccato/012925/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
         ],
         "Ousmane Diop": [
             "https://www.euroleaguebasketball.net/euroleague/players/ousmane-diop/013385/",
@@ -406,6 +442,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/giampaolo-ricci/001518/",
             "https://media-cdn.cortextech.io/f5767f49-5fc2-4639-95ef-06246240ca9b.png"
         ],
+        "Nathan Sestina": [
+            "https://www.euroleaguebasketball.net/euroleague/players/nathan-sestina/011980/",
+            "https://media-cdn.cortextech.io/f2592ecc-20e4-4c3a-932d-a8be75854127.png"
+        ],
         "Shavon Shields": [
             "https://www.euroleaguebasketball.net/euroleague/players/shavon-shields/007831/",
             "https://media-cdn.cortextech.io/fb96bfde-ab98-4253-9fd6-d3ea23b536fa.png"
@@ -417,12 +457,16 @@
         "Leonardo Tote": [
             "https://www.euroleaguebasketball.net/euroleague/players/leonardo-tote/006277/",
             "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
+        "Jacopo Vogogna": [
+            "https://www.euroleaguebasketball.net/euroleague/players/jacopo-vogogna/014209/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
         ]
     },
     "FC Barcelona": {
-        "Joaquim Boumtje": [
+        "Joaquim Boumtje Boumtje": [
             "https://www.euroleaguebasketball.net/euroleague/players/joaquim-boumtje-boumtje/014130/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/7c98507a-45bb-4e84-a9fb-590b84ed5a37.png"
         ],
         "Dario Brizuela": [
             "https://www.euroleaguebasketball.net/euroleague/players/dario-brizuela/009992/",
@@ -438,7 +482,7 @@
         ],
         "Mohamed Dabone": [
             "https://www.euroleaguebasketball.net/euroleague/players/mohamed-dabone/013155/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/c6831719-f974-4475-9d15-459553594b0e.png"
         ],
         "Youssoupha Fall": [
             "https://www.euroleaguebasketball.net/euroleague/players/youssoupha-fall/006568/",
@@ -446,11 +490,11 @@
         ],
         "Diego Ferreras": [
             "https://www.euroleaguebasketball.net/euroleague/players/diego-ferreras/014129/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/8d81e4f7-7f57-43ff-a52f-dbb019d111d9.png"
         ],
         "Daniel Gonzalez": [
             "https://www.euroleaguebasketball.net/euroleague/players/daniel-gonzalez/012884/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/de23499f-9a60-433f-8bfa-74b47b8bf7f6.png"
         ],
         "Willy Hernangomez": [
             "https://www.euroleaguebasketball.net/euroleague/players/willy-hernangomez/003196/",
@@ -462,7 +506,7 @@
         ],
         "Nikola Kusturica": [
             "https://www.euroleaguebasketball.net/euroleague/players/nikola-kusturica/014128/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/8cae0db7-8eed-4146-adef-1fd4ab8b4d32.png"
         ],
         "Nicolas Laprovittola": [
             "https://www.euroleaguebasketball.net/euroleague/players/nicolas-laprovittola/006435/",
@@ -510,6 +554,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/oscar-da-silva/011244/",
             "https://media-cdn.cortextech.io/1cd31b45-1360-4dc2-a279-504d2a1c44e8.png"
         ],
+        "Neno Dimitrijevic": [
+            "https://www.euroleaguebasketball.net/euroleague/players/neno-dimitrijevic/006085/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
         "Wenyen Gabriel": [
             "https://www.euroleaguebasketball.net/euroleague/players/wenyen-gabriel/013383/",
             "https://media-cdn.cortextech.io/b2a934ec-11e0-4328-b9e4-2fefc29b4578.png"
@@ -532,7 +580,7 @@
         ],
         "Stefan Jovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/stefan-jovic/004863/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/8f6a1334-5d45-4d52-bd52-665090df1438.png"
         ],
         "Leon Kratzer": [
             "https://www.euroleaguebasketball.net/euroleague/players/leon-kratzer/004512/",
@@ -544,7 +592,7 @@
         ],
         "David Mccormack": [
             "https://www.euroleaguebasketball.net/euroleague/players/david-mccormack/013386/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/e6d83e1c-82df-4d7b-8d94-6a7f0a037e60.png"
         ],
         "Isiaha Mike": [
             "https://www.euroleaguebasketball.net/euroleague/players/isiaha-mike/011836/",
@@ -553,10 +601,6 @@
         "Andreas Obst": [
             "https://www.euroleaguebasketball.net/euroleague/players/andreas-obst/004508/",
             "https://media-cdn.cortextech.io/d3d714e5-0b66-497b-afbd-2587ac9e856c.png"
-        ],
-        "Aleksa Radanov": [
-            "https://www.euroleaguebasketball.net/euroleague/players/aleksa-radanov/005683/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
         ],
         "Xavier Rathan Mayes": [
             "https://www.euroleaguebasketball.net/euroleague/players/xavier-rathan-mayes/013378/",
@@ -600,6 +644,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/bonzie-colson/009783/",
             "https://media-cdn.cortextech.io/3fa1da27-0721-4274-9d43-26910bec0f2d.png"
         ],
+        "Nando De Colo": [
+            "https://www.euroleaguebasketball.net/euroleague/players/nando-de-colo/002100/",
+            "https://media-cdn.cortextech.io/768e4710-28ed-4e85-b513-3b5f613b9eb2.png"
+        ],
         "Devon Hall": [
             "https://www.euroleaguebasketball.net/euroleague/players/devon-hall/011205/",
             "https://media-cdn.cortextech.io/691073bc-264c-4124-93e8-82c09abb8d5a.png"
@@ -620,6 +668,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/nicolo-melli/002849/",
             "https://media-cdn.cortextech.io/101176a1-0695-40e3-a635-b6ed80d17e6e.png"
         ],
+        "Chris Silva": [
+            "https://www.euroleaguebasketball.net/euroleague/players/chris-silva/014220/",
+            "https://media-cdn.cortextech.io/282b162d-60f8-401c-a735-7bd7fc990efc.png"
+        ],
         "Scottie Wilbekin": [
             "https://www.euroleaguebasketball.net/euroleague/players/scottie-wilbekin/006661/",
             "https://media-cdn.cortextech.io/cded951a-8867-4298-b0f2-38bbff80dbd6.png"
@@ -634,13 +686,13 @@
             "https://www.euroleaguebasketball.net/euroleague/players/antonio-blakeney/013402/",
             "https://media-cdn.cortextech.io/ea09b983-45e0-4140-a486-085bfe2cc4f6.png"
         ],
+        "Oz Blayzer": [
+            "https://www.euroleaguebasketball.net/euroleague/players/oz-blayzer/009877/",
+            "https://media-cdn.cortextech.io/e9b30d90-ed82-4e63-9cb1-c309dd03a016.png"
+        ],
         "Elijah Bryant": [
             "https://www.euroleaguebasketball.net/euroleague/players/elijah-bryant/009846/",
             "https://media-cdn.cortextech.io/c344f0a6-f545-4bfe-b59b-61f8ccce3c0e.png"
-        ],
-        "Bruno Caboclo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/bruno-caboclo/012096/",
-            "https://media-cdn.cortextech.io/f1198866-de1c-410e-b783-c8fb34720bff.png"
         ],
         "Tyler Ennis": [
             "https://www.euroleaguebasketball.net/euroleague/players/tyler-ennis/008858/",
@@ -682,6 +734,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/guy-palatin/013283/",
             "https://media-cdn.cortextech.io/259ecf62-d78e-412f-a32c-aabc255ca567.png"
         ],
+        "Itay Segev": [
+            "https://www.euroleaguebasketball.net/euroleague/players/itay-segev/004161/",
+            "https://media-cdn.cortextech.io/fbc4d2d8-b540-4b0a-aec2-0bd3c1333ea8.png"
+        ],
         "Bar Timor": [
             "https://www.euroleaguebasketball.net/euroleague/players/bar-timor/004846/",
             "https://media-cdn.cortextech.io/2a45b1ff-2027-467b-af40-560a7d406750.png"
@@ -700,9 +756,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/adam-atamna/012268/",
             "https://media-cdn.cortextech.io/c2ae0573-091b-4682-8a19-806b6fdc655f.png"
         ],
-        "Nando De Colo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nando-de-colo/002100/",
-            "https://media-cdn.cortextech.io/28e69311-7f90-4945-b5aa-10b966772678.png"
+        "Paul Eboua": [
+            "https://www.euroleaguebasketball.net/euroleague/players/paul-eboua/006725/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
         ],
         "Shaquille Harrison": [
             "https://www.euroleaguebasketball.net/euroleague/players/shaquille-harrison/013371/",
@@ -728,10 +784,6 @@
             "https://www.euroleaguebasketball.net/euroleague/players/mbaye-ndiaye/012731/",
             "https://media-cdn.cortextech.io/f5a73145-a679-43f2-992b-3caaeb9ac9cc.png"
         ],
-        "Mehdy Ngouama": [
-            "https://www.euroleaguebasketball.net/euroleague/players/mehdy-ngouama/009556/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
-        ],
         "Zachary Seljaas": [
             "https://www.euroleaguebasketball.net/euroleague/players/zachary-seljaas/014088/",
             "https://media-cdn.cortextech.io/dc020bbc-568f-482c-8e1a-070df69a0b83.png"
@@ -746,7 +798,7 @@
         ],
         "Marvyn Wade": [
             "https://www.euroleaguebasketball.net/euroleague/players/marvyn-wade/013016/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/4bd9fdff-c4a4-4f3b-a9e5-0e14cfb38eb6.png"
         ],
         "Glynn Watson": [
             "https://www.euroleaguebasketball.net/euroleague/players/glynn-watson/014013/",
@@ -758,9 +810,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/tamir-blatt/011193/",
             "https://media-cdn.cortextech.io/780f9309-2c9f-4a43-be7f-9f7a7182d133.png"
         ],
-        "O'Shae J Brissett": [
-            "https://www.euroleaguebasketball.net/euroleague/players/o-shae-j-brissett/014127/",
-            "https://media-cdn.cortextech.io/0490793f-09f7-42be-b351-2cd6543d1613.png"
+        "O'Shae J Brisset": [
+			"https://media-cdn.cortextech.io/0490793f-09f7-42be-b351-2cd6543d1613.png",
+            "https://www.euroleaguebasketball.net/euroleague/players/o-shae-j-brissett/014127/"
         ],
         "Jimmy Clark III": [
             "https://www.euroleaguebasketball.net/euroleague/players/jimmy-clark-iii/013699/",
@@ -774,6 +826,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/jeffrey-dowtin-jr/014123/",
             "https://media-cdn.cortextech.io/6976aa15-8d91-454e-987a-82f8e6059771.png"
         ],
+        "Zachary Hankins": [
+            "https://www.euroleaguebasketball.net/euroleague/players/zachary-hankins/013304/",
+            "https://media-cdn.cortextech.io/e6ee1582-9705-4702-a369-bc0e9c802b62.png"
+        ],
         "Jaylen Hoard": [
             "https://www.euroleaguebasketball.net/euroleague/players/jaylen-hoard/006835/",
             "https://media-cdn.cortextech.io/3fb1a66a-a679-4665-94d2-60192fcd7e16.png"
@@ -786,9 +842,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/tj-leaf/014012/",
             "https://media-cdn.cortextech.io/22442c98-f16f-4f19-ba82-b09e8aa7b367.png"
         ],
-        "Clifford Omoruyi": [
-            "https://www.euroleaguebasketball.net/euroleague/players/clifford-omoruyi/014121/",
-            "https://media-cdn.cortextech.io/7a660dd0-bcc7-4229-882c-a1e811a9de28.png"
+        "Iffe Lundberg": [
+            "https://www.euroleaguebasketball.net/euroleague/players/iffe-lundberg/010781/",
+            "https://media-cdn.cortextech.io/f0599430-9879-413d-962e-8c7aed154fa2.png"
         ],
         "William Rayman": [
             "https://www.euroleaguebasketball.net/euroleague/players/william-rayman/013381/",
@@ -802,27 +858,15 @@
             "https://www.euroleaguebasketball.net/euroleague/players/roman-sorkin/011219/",
             "https://media-cdn.cortextech.io/3b33706b-7e4e-4914-a4ff-074e7ffb43e1.png"
         ],
-        "Uros Trifunovic": [
-            "https://www.euroleaguebasketball.net/euroleague/players/uros-trifunovic/007673/",
-            "https://media-cdn.cortextech.io/46dde225-8c72-4091-8ff1-868f81df67aa.png"
-        ],
         "Lonnie Walker IV": [
             "https://www.euroleaguebasketball.net/euroleague/players/lonnie-walker-iv/013403/",
             "https://media-cdn.cortextech.io/596dc864-a996-4d21-8131-ea85deb006b7.png"
         ]
     },
     "Olympiacos Piraeus": {
-        "Kostas Antetokounmpo": [
-            "https://www.euroleaguebasketball.net/euroleague/players/kostas-antetokounmpo/011221/",
-            "https://media-cdn.cortextech.io/a79388a1-3448-4d34-96a8-0edbb5bece72.png"
-        ],
         "Tyler Dorsey": [
             "https://www.euroleaguebasketball.net/euroleague/players/tyler-dorsey/009849/",
             "https://media-cdn.cortextech.io/bc74ec12-71a8-425e-9ff8-e50eefec1f62.png"
-        ],
-        "Keenan Evans": [
-            "https://www.euroleaguebasketball.net/euroleague/players/keenan-evans/011218/",
-            "https://media-cdn.cortextech.io/e2db3a5f-1bc5-41f2-97a3-d640801e477e.png"
         ],
         "Evan Fournier": [
             "https://www.euroleaguebasketball.net/euroleague/players/evan-fournier/013380/",
@@ -832,13 +876,13 @@
             "https://www.euroleaguebasketball.net/euroleague/players/donta-hall/011196/",
             "https://media-cdn.cortextech.io/0d150885-9a59-4287-8f10-dfea2434ace6.png"
         ],
+        "Tyrique Jones": [
+            "https://www.euroleaguebasketball.net/euroleague/players/tyrique-jones/011981/",
+            "https://media-cdn.cortextech.io/a4d5dc10-f5f0-432a-82b0-f92a5171bea6.png"
+        ],
         "Giannoulis Larentzakis": [
             "https://www.euroleaguebasketball.net/euroleague/players/giannoulis-larentzakis/010392/",
             "https://media-cdn.cortextech.io/2737aa5a-4f3e-475f-b590-9d4a8aa3e069.png"
-        ],
-        "Saben Lee": [
-            "https://www.euroleaguebasketball.net/euroleague/players/saben-lee/013389/",
-            "https://media-cdn.cortextech.io/6209b937-6f46-4469-b227-5a07d79d8348.png"
         ],
         "Shaquielle Mckissic": [
             "https://www.euroleaguebasketball.net/euroleague/players/shaquielle-mckissic/007853/",
@@ -847,6 +891,10 @@
         "Nikola Milutinov": [
             "https://www.euroleaguebasketball.net/euroleague/players/nikola-milutinov/003941/",
             "https://media-cdn.cortextech.io/eaac00b9-51c3-4824-83b3-5d1c9ce00881.png"
+        ],
+        "Monte Morris": [
+            "https://www.euroleaguebasketball.net/euroleague/players/monte-morris/014212/",
+            "https://media-cdn.cortextech.io/60d224bb-40ab-4e0c-846f-9766a990146f.png"
         ],
         "Omiros Netzipoglou": [
             "https://www.euroleaguebasketball.net/euroleague/players/omiros-netzipoglou/014122/",
@@ -878,6 +926,10 @@
         ]
     },
     "Panathinaikos AKTOR Athens": {
+        "Kenneth Faried": [
+            "https://www.euroleaguebasketball.net/euroleague/players/kenneth-faried/011284/",
+            "https://media-cdn.cortextech.io/fbabd4a4-b08e-456e-b82a-c31a44ca371a.png"
+        ],
         "Jerian Grant": [
             "https://www.euroleaguebasketball.net/euroleague/players/jerian-grant/011204/",
             "https://media-cdn.cortextech.io/3ef4745b-bc65-45a0-b534-e5cea140604e.png"
@@ -897,10 +949,6 @@
         "Panagiotis Kalaitzakis": [
             "https://www.euroleaguebasketball.net/euroleague/players/panagiotis-kalaitzakis/011209/",
             "https://media-cdn.cortextech.io/370cc8f6-6da8-4a99-bf1c-d0390cf2f6fd.png"
-        ],
-        "Ioannis Kouzeloglou": [
-            "https://www.euroleaguebasketball.net/euroleague/players/ioannis-kouzeloglou/004451/",
-            "https://media-cdn.cortextech.io/eea6d015-55f5-4278-ac19-360451d3726c.png"
         ],
         "Mathias Lessort": [
             "https://www.euroleaguebasketball.net/euroleague/players/mathias-lessort/003842/",
@@ -948,10 +996,6 @@
             "https://www.euroleaguebasketball.net/euroleague/players/joel-ayayi/006904/",
             "https://media-cdn.cortextech.io/3db448b6-8ede-4921-9522-2a01b163c996.png"
         ],
-        "Ismael Bako": [
-            "https://www.euroleaguebasketball.net/euroleague/players/ismael-bako/004655/",
-            "https://media-cdn.cortextech.io/dda3acbe-edea-49ad-b244-5629d32faec4.png"
-        ],
         "Leopold Cavaliere": [
             "https://www.euroleaguebasketball.net/euroleague/players/leopold-cavaliere/013373/",
             "https://media-cdn.cortextech.io/1c8b9667-d931-4ace-ac5e-792f58d25cf4.png"
@@ -984,13 +1028,13 @@
             "https://www.euroleaguebasketball.net/euroleague/players/jeremy-morgan/010431/",
             "https://media-cdn.cortextech.io/20d0ed00-5f36-4168-8dca-e058f2835458.png"
         ],
-        "Ilian Moungalla": [
-            "https://www.euroleaguebasketball.net/euroleague/players/ilian-moungalla/013127/",
-            "https://media-cdn.cortextech.io/539d84de-c1d8-4112-b094-958ea732abdc.png"
-        ],
         "Yakuba Ouattara": [
             "https://www.euroleaguebasketball.net/euroleague/players/yakuba-ouattara/004197/",
             "https://media-cdn.cortextech.io/7a130397-0f2a-47a2-adc3-eed775bcbf37.png"
+        ],
+        "Jared Rhoden": [
+            "https://www.euroleaguebasketball.net/euroleague/players/jared-rhoden/014178/",
+            "https://media-cdn.cortextech.io/eddf4c2e-afca-47e3-93e4-a37966c1bd24.png"
         ],
         "Justin Robinson": [
             "https://www.euroleaguebasketball.net/euroleague/players/justin-robinson/014008/",
@@ -1022,13 +1066,25 @@
             "https://www.euroleaguebasketball.net/euroleague/players/sterling-brown/012720/",
             "https://media-cdn.cortextech.io/7e089e46-481e-44e5-9fa0-192215101609.png"
         ],
+        "Nick Calathes": [
+            "https://www.euroleaguebasketball.net/euroleague/players/nick-calathes/001932/",
+            "https://media-cdn.cortextech.io/485a2561-f9f3-4ba8-b5b8-1631294c4c99.png"
+        ],
+        "Uros Danilovic": [
+            "https://www.euroleaguebasketball.net/euroleague/players/uros-danilovic/012453/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
+        "Bruno Fernando": [
+            "https://www.euroleaguebasketball.net/euroleague/players/bruno-fernando/013667/",
+            "https://media-cdn.cortextech.io/771c73d1-4537-447b-b668-043882902961.png"
+        ],
+        "Tonye Jekiri": [
+            "https://www.euroleaguebasketball.net/euroleague/players/tonye-jekiri/009733/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
         "Carlik Jones": [
             "https://www.euroleaguebasketball.net/euroleague/players/carlik-jones/013369/",
             "https://media-cdn.cortextech.io/f2faab84-1d52-4418-9885-120b0abe192e.png"
-        ],
-        "Tyrique Jones": [
-            "https://www.euroleaguebasketball.net/euroleague/players/tyrique-jones/011981/",
-            "https://media-cdn.cortextech.io/a0a652d8-20c4-47b0-a673-b10abc48fff4.png"
         ],
         "Arijan Lakic": [
             "https://www.euroleaguebasketball.net/euroleague/players/arijan-lakic/007736/",
@@ -1040,7 +1096,7 @@
         ],
         "Uros Mijailovic": [
             "https://www.euroleaguebasketball.net/euroleague/players/uros-mijailovic/012943/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/60ac3650-bcab-4b20-9736-10a7ce5d5237.png"
         ],
         "Shake Milton": [
             "https://www.euroleaguebasketball.net/euroleague/players/shake-milton/014007/",
@@ -1048,7 +1104,7 @@
         ],
         "Miikka Muurinen": [
             "https://www.euroleaguebasketball.net/euroleague/players/miikka-muurinen/012997/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/536cabb5-2899-4ae3-88ae-920227449430.png"
         ],
         "Mario Nakic": [
             "https://www.euroleaguebasketball.net/euroleague/players/mario-nakic/007632/",
@@ -1061,6 +1117,10 @@
         "Jabari Parker": [
             "https://www.euroleaguebasketball.net/euroleague/players/jabari-parker/012745/",
             "https://media-cdn.cortextech.io/a3dfef1d-7e92-483c-9de7-0cd252e015fe.png"
+        ],
+        "Cameron Payne": [
+            "https://www.euroleaguebasketball.net/euroleague/players/cameron-payne/014213/",
+            "https://media-cdn.cortextech.io/c607d57e-0d0a-44b1-9664-4b16dceeec30.png"
         ],
         "Aleksej Pokusevski": [
             "https://www.euroleaguebasketball.net/euroleague/players/aleksej-pokusevski/008232/",
@@ -1082,7 +1142,7 @@
         ],
         "Egor Amosov": [
             "https://www.euroleaguebasketball.net/euroleague/players/egor-amosov/014118/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/501b0a80-3589-4616-9fd2-1296321059de.png"
         ],
         "Facundo Campazzo": [
             "https://www.euroleaguebasketball.net/euroleague/players/facundo-campazzo/005928/",
@@ -1096,17 +1156,13 @@
             "https://www.euroleaguebasketball.net/euroleague/players/andres-feliz/011247/",
             "https://media-cdn.cortextech.io/88b1e489-c8a9-4cd8-8137-db11145b579a.png"
         ],
-        "Bruno Fernando": [
-            "https://www.euroleaguebasketball.net/euroleague/players/bruno-fernando/013667/",
-            "https://media-cdn.cortextech.io/d2aed2b2-b9ec-49dc-b00b-9df25e84a2f7.png"
-        ],
         "Usman Garuba": [
             "https://www.euroleaguebasketball.net/euroleague/players/usman-garuba/007630/",
             "https://media-cdn.cortextech.io/fb919f50-9e7d-4bbf-af92-3763895ba6b7.png"
         ],
         "Gunars Grinvalds": [
             "https://www.euroleaguebasketball.net/euroleague/players/gunars-grinvalds/013555/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/68cdf052-4309-42cf-9de4-8da8bfe37dd7.png"
         ],
         "Mario Hezonja": [
             "https://www.euroleaguebasketball.net/euroleague/players/mario-hezonja/003108/",
@@ -1115,6 +1171,10 @@
         "David Kramer": [
             "https://www.euroleaguebasketball.net/euroleague/players/david-kramer/006482/",
             "https://media-cdn.cortextech.io/b6d2f733-3fda-4c65-a49b-aeee571c65c7.png"
+        ],
+        "Alex Len": [
+            "https://www.euroleaguebasketball.net/euroleague/players/alex-len/014169/",
+            "https://media-cdn.cortextech.io/4f3880c6-6b3b-4af7-bc52-2d721c68372e.png"
         ],
         "Sergio Llull": [
             "https://www.euroleaguebasketball.net/euroleague/players/sergio-llull/TGB/",
@@ -1162,13 +1222,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/sergio-de-larrea/010750/",
             "https://media-cdn.cortextech.io/5c52e29f-09dd-45b3-ae82-a839d68146f7.png"
         ],
-        "Nikola Dzepina": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nikola-dzepina/012972/",
-            "https://media-cdn.cortextech.io/907e39a0-58dd-4361-8742-65fd1cac456d.png"
-        ],
-        "Ike Iroegbu": [
-            "https://www.euroleaguebasketball.net/euroleague/players/ike-iroegbu/014133/",
-            "https://media-cdn.cortextech.io/8f22edf5-41f6-4579-a0db-707de7ab4862.png"
+        "Braxton Key": [
+            "https://www.euroleaguebasketball.net/euroleague/players/braxton-key/014168/",
+            "https://media-cdn.cortextech.io/88b953f4-530b-4ccb-8032-d25471bdc2b4.png"
         ],
         "Xabi Lopez Arostegui": [
             "https://www.euroleaguebasketball.net/euroleague/players/xabi-lopez-arostegui/005356/",
@@ -1202,13 +1258,9 @@
             "https://www.euroleaguebasketball.net/euroleague/players/neal-sako/010545/",
             "https://media-cdn.cortextech.io/78789f26-e267-40eb-94ad-d646e026f6f9.png"
         ],
-        "Nathan Sestina": [
-            "https://www.euroleaguebasketball.net/euroleague/players/nathan-sestina/011980/",
-            "https://media-cdn.cortextech.io/02801850-3aa4-43f0-995e-b7849bc450b1.png"
-        ],
         "Yankuba Sima": [
             "https://www.euroleaguebasketball.net/euroleague/players/yankuba-sima/005596/",
-            "https://media-cdn.cortextech.io/1f7f2803-48b3-4f1a-b6fe-13ee00d15a12.png"
+            "https://media-cdn.cortextech.io/a89a94a3-10ea-4492-9290-8fa5e73b65b4.png"
         ],
         "Tomas Talcis": [
             "https://www.euroleaguebasketball.net/euroleague/players/tomas-talcis/013530/",
@@ -1252,6 +1304,10 @@
             "https://www.euroleaguebasketball.net/euroleague/players/carsen-edwards/011987/",
             "https://media-cdn.cortextech.io/1f0da376-0fcd-4071-88cc-d7dc6ac40243.png"
         ],
+        "Francesco Ferrari": [
+            "https://www.euroleaguebasketball.net/euroleague/players/francesco-ferrari/014219/",
+            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+        ],
         "Daniel Hackett": [
             "https://www.euroleaguebasketball.net/euroleague/players/daniel-hackett/001844/",
             "https://media-cdn.cortextech.io/923cef2e-6352-41a8-8db1-791d21db3100.png"
@@ -1276,10 +1332,6 @@
             "https://www.euroleaguebasketball.net/euroleague/players/alen-smailagic/011051/",
             "https://media-cdn.cortextech.io/ae9cae56-3e7e-4f67-ad21-e0926b9f159b.png"
         ],
-        "Brandon Taylor": [
-            "https://www.euroleaguebasketball.net/euroleague/players/brandon-taylor/014004/",
-            "https://media-cdn.cortextech.io/a1e7d29a-9f61-49db-a8ca-5eb372aeaeaa.png"
-        ],
         "Luca Vildoza": [
             "https://www.euroleaguebasketball.net/euroleague/players/luca-vildoza/007947/",
             "https://media-cdn.cortextech.io/45cd50c3-c3b7-4cf6-92ee-f7955216e2da.png"
@@ -1294,13 +1346,13 @@
             "https://www.euroleaguebasketball.net/euroleague/players/ignas-brazdeikis/011983/",
             "https://media-cdn.cortextech.io/32aea757-dc80-4848-82f4-525b77e0eb0d.png"
         ],
-        "Dovydas Buika": [
-            "https://www.euroleaguebasketball.net/euroleague/players/dovydas-buika/011330/",
-            "https://media-cdn.cortextech.io/e413bde7-9f75-445c-b386-6757884bb936.png"
-        ],
         "Arnas Butkevicius": [
             "https://www.euroleaguebasketball.net/euroleague/players/arnas-butkevicius/002676/",
             "https://media-cdn.cortextech.io/141e5608-9388-4c11-96ed-fbe12fa4a1bf.png"
+        ],
+        "Dominykas Daubaris": [
+            "https://www.euroleaguebasketball.net/euroleague/players/dominykas-daubaris/012185/",
+            "https://media-cdn.cortextech.io/4b1cd7c8-4f09-413e-b9aa-39601dbc0f86.png"
         ],
         "Sylvain Francisco": [
             "https://www.euroleaguebasketball.net/euroleague/players/sylvain-francisco/007975/",
@@ -1316,7 +1368,7 @@
         ],
         "Kajus Mikalauskas": [
             "https://www.euroleaguebasketball.net/euroleague/players/kajus-mikalauskas/012977/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/2081580a-4c3b-4c90-8fee-027d7a5f492f.png"
         ],
         "Mantas Rubstavicius": [
             "https://www.euroleaguebasketball.net/euroleague/players/mantas-rubstavicius/009299/",
@@ -1332,7 +1384,7 @@
         ],
         "Ignas Stombergas": [
             "https://www.euroleaguebasketball.net/euroleague/players/ignas-stombergas/012981/",
-            "https://media-cdn.incrowdsports.com/5f998ba9-9307-4986-b5d0-946ed54e9c0e.png"
+            "https://media-cdn.cortextech.io/a89fefea-e8de-4f5d-9edb-3a0edeb163ad.png"
         ],
         "Azuolas Tubelis": [
             "https://www.euroleaguebasketball.net/euroleague/players/azuolas-tubelis/008192/",
